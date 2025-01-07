@@ -26,11 +26,11 @@
 
         public decimal PosicionY2 { get; set; }
 
-        public virtual Report ReportNavigation { get; set; }
+        public virtual required Report ReportNavigation { get; set; }
 
-        public virtual Section Section1Navigation { get; set; }
+        public virtual required Section Section1Navigation { get; set; }
 
-        public virtual Section Section2Navigation { get; set; }
+        public virtual required Section Section2Navigation { get; set; }
 
     }
 }

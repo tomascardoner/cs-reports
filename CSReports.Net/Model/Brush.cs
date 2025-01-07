@@ -53,7 +53,7 @@ namespace CSReports
 
         public decimal? RadiusEnd { get; set; }
 
-        public virtual Report ReportNavigation { get; set; }
+        public virtual required Report ReportNavigation { get; set; }
 
         public virtual ICollection<Rectangle> Rectangles { get; set; } = [];
 

@@ -47,8 +47,7 @@ namespace CSReports.Model
             }
         }
 
-
-        public virtual Report ReportNavigation { get; set; }
+        public virtual required Report ReportNavigation { get; set; }
 
         public virtual ICollection<Text> Texts { get; set; } = new List<Text>();
     }

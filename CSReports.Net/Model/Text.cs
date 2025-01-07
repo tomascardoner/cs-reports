@@ -152,12 +152,12 @@ namespace CSReports
 
         public decimal ParagraphIndent { get; set; }
 
-        public virtual Report ReportNavigation { get; set; }
+        public virtual required Report ReportNavigation { get; set; }
 
-        public virtual Brush BrushNavigation { get; set; }
+        public virtual required Brush BrushNavigation { get; set; }
 
-        public virtual Section SectionNavigation { get; set; }
+        public virtual required Section SectionNavigation { get; set; }
 
-        public virtual Font FontNavigation { get; set; }
+        public virtual required Font FontNavigation { get; set; }
     }
 }

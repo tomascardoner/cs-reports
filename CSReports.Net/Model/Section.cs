@@ -31,7 +31,7 @@ namespace CSReports
 
         public decimal Height { get; set; }
 
-        public virtual Report ReportNavigation { get; set; }
+        public virtual required Report ReportNavigation { get; set; }
 
         public virtual ICollection<Line> LinesNavigation { get; set; } = [];
 
