@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>CSReports</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>CSReports.Net</AssemblyName>
+    <AssemblyTitle>CS-Reports</AssemblyTitle>
+    <Company>Cardoner Sistemas</Company>
+    <Product>CS-Reports</Product>
+    <Description>Cardoner Sistemas report generator library for .Net</Description>
+    <Copyright>© 2025 Cardoner Sistemas. All rights reserved.</Copyright>
+    <Trademark>® CS-Reports</Trademark>
+    <Build>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_Now().get_Date()),$([System.DateTime]::new(2000,1,1))).get_TotalDays())</Build>
+    <Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
+    <Version>1.1.$(Build).$(Revision)</Version>
+    <Authors>Tomás A. Cardoner</Authors>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
+  </ItemGroup>
+</Project>
