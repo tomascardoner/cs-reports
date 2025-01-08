@@ -1,19 +1,27 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Text.Json.Serialization;
 
 namespace CSReports.Model
 {
     public class Font
     {
-        public short ReportId { get; set; }
+        public Font(Report report)
+        {
+            FontId = (short)(report.Fonts.Max(f => f.FontId) + 1);
+        }
 
-        public short FontId { get; set; }
+        public Font(short fontId)
+        {
+            FontId = fontId;
+        }
+
+        public short FontId { get; }
 
         public string Name { get; set; } = string.Empty;
 
         public decimal Size { get; set; }
 
-        public bool Boold { get; set; }
+        public bool Bold { get; set; }
 
         public bool Italic { get; set; }
 
@@ -21,13 +29,13 @@ namespace CSReports.Model
 
         public bool Strikethrough { get; set; }
 
-        [NotMapped]
+        [JsonIgnore]
         internal FontStyle Style
         {
             get
             {
                 FontStyle fontStyle = new();
-                if (Boold)
+                if (Bold)
                 {
                     fontStyle |= FontStyle.Bold;
                 }
@@ -46,9 +54,5 @@ namespace CSReports.Model
                 return fontStyle;
             }
         }
-
-        public virtual required Report ReportNavigation { get; set; }
-
-        public virtual ICollection<Text> Texts { get; set; } = new List<Text>();
     }
 }

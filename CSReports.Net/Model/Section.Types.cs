@@ -1,4 +1,4 @@
-﻿namespace CSReports
+﻿namespace CSReports.Model
 {
     public partial class Section
     {

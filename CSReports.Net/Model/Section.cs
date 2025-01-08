@@ -1,42 +1,40 @@
-﻿using CSReports.Model;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Text.Json.Serialization;
 
-namespace CSReports
+namespace CSReports.Model
 {
     public partial class Section
     {
-        public short ReportId { get; set; }
+        private readonly Report _Report;
 
-        public byte SectionId { get; set; }
-
-        public byte Type { get; set; }
-
-        [NotMapped]
-        public SectionTypes TipoEnumValue
+        public Section(Report report, SectionTypes type)
         {
-            get
-            {
-                if (Enum.IsDefined(typeof(SectionTypes), Type))
-                {
-                    return (SectionTypes)Type;
-                }
-                else
-                {
-                    return default;
-                }
-            }
+            _Report = report;
+            Type = type;
+            SectionId = (short)(report.Sections.Where(s => s.Type == type).Max(s => s.SectionId) + 1);
         }
+
+        public Section(Report report, SectionTypes type, short sectionId)
+        {
+            _Report = report;
+            Type = type;
+            SectionId = sectionId;
+        }
+
+        public short SectionId { get; }
+
+        public SectionTypes Type { get; }
 
         public byte Order { get; set; }
 
         public decimal Height { get; set; }
 
-        public virtual required Report ReportNavigation { get; set; }
+        [JsonIgnore]
+        public ICollection<Line> Lines => [.. _Report.Lines.Where(l => l.SectionId1 == SectionId || l.SectionId2 == SectionId)];
 
-        public virtual ICollection<Line> LinesNavigation { get; set; } = [];
+        [JsonIgnore]
+        public ICollection<Rectangle> Rectangles => [.. _Report.Rectangles.Where(r => r.SectionId1 == SectionId || r.SectionId2 == SectionId)];
 
-        public virtual ICollection<Rectangle> RectanglesNavigation { get; set; } = [];
-
-        public virtual ICollection<Text> TextsNavigation { get; set; } = [];
+        [JsonIgnore]
+        public ICollection<Text> TextsNavigation => [.. _Report.Texts.Where(t => t.SectionId == SectionId)];
     }
 }

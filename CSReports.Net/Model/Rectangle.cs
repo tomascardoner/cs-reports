@@ -1,10 +1,24 @@
-﻿namespace CSReports.Model
+﻿using System.Text.Json.Serialization;
+
+namespace CSReports.Model
 {
     public class Rectangle
     {
-        public short ReportId { get; set; }
+        private readonly Report _Report;
 
-        public short RectangleId { get; set; }
+        public Rectangle(Report report)
+        {
+            _Report = report;
+            RectangleId = (short)(report.Rectangles.Max(r => r.RectangleId) + 1);
+        }
+
+        public Rectangle(Report report, short rectangleId)
+        {
+            _Report = report;
+            RectangleId = rectangleId;
+        }
+
+        public short RectangleId { get; }
 
         public byte BorderColorRed { get; set; }
 
@@ -12,7 +26,7 @@
 
         public byte BorderColorBlue { get; set; }
 
-        public decimal BorderThikness { get; set; }
+        public decimal BorderThickness { get; set; }
 
         public short? BrushId { get; set; }
 
@@ -28,12 +42,13 @@
 
         public decimal PosicionY2 { get; set; }
 
-        public virtual required Report ReportNavigation { get; set; }
+        [JsonIgnore]
+        public Brush? Brush => _Report.Brushes.FirstOrDefault(b => b.BrushId == BrushId);
 
-        public virtual required Brush BrushNavigation { get; set; }
+        [JsonIgnore]
+        public Section? Section1 => _Report.Sections.FirstOrDefault(s => s.SectionId == SectionId1);
 
-        public virtual required Section Section1Navigation { get; set; }
-
-        public virtual required Section Section2Navigation { get; set; }
+        [JsonIgnore]
+        public Section? Section2 => _Report.Sections.FirstOrDefault(s => s.SectionId == SectionId2);
     }
 }

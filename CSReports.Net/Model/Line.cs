@@ -2,9 +2,16 @@
 {
     public class Line
     {
-        public short ReportId { get; set; }
+        public Line(Report report) {
+            LineId = (short)(report.Lines.Max(l => l.LineId) + 1);
+        }
 
-        public short LineId { get; set; }
+        public Line(short lineId)
+        {
+            LineId = lineId; 
+        }
+
+        public short LineId { get; }
 
         public byte ColorRed { get; set; }
 
@@ -14,23 +21,16 @@
 
         public decimal Thikness { get; set; }
 
-        public byte SectionId1 { get; set; }
+        public short SectionId1 { get; set; }
 
         public decimal PositionX1 { get; set; }
 
         public decimal PositionY1 { get; set; }
 
-        public byte SectionId2 { get; set; }
+        public short SectionId2 { get; set; }
 
         public decimal PosicionX2 { get; set; }
 
         public decimal PosicionY2 { get; set; }
-
-        public virtual required Report ReportNavigation { get; set; }
-
-        public virtual required Section Section1Navigation { get; set; }
-
-        public virtual required Section Section2Navigation { get; set; }
-
     }
 }

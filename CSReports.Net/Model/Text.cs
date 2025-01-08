@@ -1,50 +1,28 @@
-﻿using CSReports.Model;
-using System.ComponentModel.DataAnnotations.Schema;
-using static CSReports.Text;
+﻿using System.Text.Json.Serialization;
 
-namespace CSReports
+namespace CSReports.Model
 {
     public partial class Text
     {
-        public short ReportId { get; set; }
+        private readonly Report _Report;
 
-        public short TextId { get; set; }
-
-        public byte Type { get; set; }
-
-        [NotMapped]
-        internal TextTypes TextTypeEnumValue
+        public Text(Report report)
         {
-            get
-            {
-                if (Enum.IsDefined(typeof(TextTypes), Type))
-                {
-                    return (TextTypes)Type;
-                }
-                else
-                {
-                    return default;
-                }
-            }
+            _Report = report;
+            TextId = (short)(report.Texts.Max(t => t.TextId) + 1);
         }
 
-        public byte? FieldType { get; set; }
-
-        [NotMapped]
-        internal FieldTypes FieldTypeEnumValue
+        public Text(Report report, short textId)
         {
-            get
-            {
-                if (FieldType.HasValue && Enum.IsDefined(typeof(FieldTypes), FieldType))
-                {
-                    return (FieldTypes)FieldType;
-                }
-                else
-                {
-                    return default;
-                }
-            }
+            _Report = report;
+            TextId = textId;
         }
+
+        public short TextId { get; }
+
+        public TextTypes TextType { get; set; }
+
+        public FieldTypes? FieldType { get; set; }
 
         public string Value { get; set; } = string.Empty;
 
@@ -62,7 +40,7 @@ namespace CSReports
 
         public short BrushId { get; set; }
 
-        public byte SectionId { get; set; }
+        public short SectionId { get; set; }
 
         public decimal PositionX { get; set; }
 
@@ -72,59 +50,11 @@ namespace CSReports
 
         public decimal Height { get; set; }
 
-        public byte HorizontalAlignment { get; set; }
+        public HorizontalAlignments HorizontalAlignment { get; set; }
 
-        [NotMapped]
-        internal HorizontalAlignments HorizontalAlignmentEnumValue
-        {
-            get
-            {
-                if (Enum.IsDefined(typeof(HorizontalAlignments), HorizontalAlignment))
-                {
-                    return (HorizontalAlignments)HorizontalAlignment;
-                }
-                else
-                {
-                    return default;
-                }
-            }
-        }
+        public VerticalAlignments VerticalAlignment { get; set; }
 
-        public byte VerticalAlignment { get; set; }
-
-        [NotMapped]
-        internal VerticalAlignments VerticalAlignmentEnumValue
-        {
-            get
-            {
-                if (Enum.IsDefined(typeof(VerticalAlignments), VerticalAlignment))
-                {
-                    return (VerticalAlignments)VerticalAlignment;
-                }
-                else
-                {
-                    return default;
-                }
-            }
-        }
-
-        public byte WordWrapType { get; set; }
-
-        [NotMapped]
-        internal WordWrapTypes WordWrapTypeEnumValue
-        {
-            get
-            {
-                if (Enum.IsDefined(typeof(WordWrapTypes), WordWrapType))
-                {
-                    return (WordWrapTypes)WordWrapType;
-                }
-                else
-                {
-                    return default;
-                }
-            }
-        }
+        public WordWrapTypes WordWrapType { get; set; }
 
         public decimal CharacterSpacing { get; set; }
 
@@ -132,32 +62,17 @@ namespace CSReports
 
         public decimal LineSpacing { get; set; }
 
-        public byte SubSuperScript { get; set; }
-
-        [NotMapped]
-        internal SubSuperScripts SubSuperScriptEnumValue
-        {
-            get
-            {
-                if (Enum.IsDefined(typeof(SubSuperScripts), SubSuperScript))
-                {
-                    return (SubSuperScripts)SubSuperScript;
-                }
-                else
-                {
-                    return default;
-                }
-            }
-        }
+        public SubSuperScripts SubSuperScript { get; set; }
 
         public decimal ParagraphIndent { get; set; }
 
-        public virtual required Report ReportNavigation { get; set; }
+        [JsonIgnore]
+        public Brush? Brush => _Report.Brushes.FirstOrDefault(b => b.BrushId == BrushId);
 
-        public virtual required Brush BrushNavigation { get; set; }
+        [JsonIgnore]
+        public Section? Section => _Report.Sections.FirstOrDefault(s => s.SectionId == SectionId);
 
-        public virtual required Section SectionNavigation { get; set; }
-
-        public virtual required Font FontNavigation { get; set; }
+        [JsonIgnore]
+        public Font? Font => _Report.Fonts.FirstOrDefault(f => f.FontId == FontId);
     }
 }

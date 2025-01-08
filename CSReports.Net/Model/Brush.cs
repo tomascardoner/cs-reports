@@ -1,31 +1,20 @@
-﻿using CSReports.Model;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace CSReports
+﻿namespace CSReports.Model
 {
     public partial class Brush
     {
-        public short ReportId { get; set; }
-
-        public short BrushId { get; set; }
-
-        public byte Type { get; set; }
-
-        [NotMapped]
-        internal BrushTypes TypeEnumValue
+        public Brush(Report report)
         {
-            get
-            {
-                if (Enum.IsDefined(typeof(BrushTypes), Type))
-                {
-                    return (BrushTypes)Type;
-                }
-                else
-                {
-                    return default;
-                }
-            }
+            BrushId = (short)(report.Brushes.Max(b => b.BrushId) + 1);
         }
+
+        public Brush(short brushId)
+        {
+            BrushId = brushId;
+        }
+
+        public short BrushId {  get; }
+
+        public BrushTypes Type { get; set; }
 
         public byte Color1Red { get; set; }
 
@@ -52,11 +41,5 @@ namespace CSReports
         public decimal? RadiusStart { get; set; }
 
         public decimal? RadiusEnd { get; set; }
-
-        public virtual required Report ReportNavigation { get; set; }
-
-        public virtual ICollection<Rectangle> Rectangles { get; set; } = [];
-
-        public virtual ICollection<Text> Texts { get; set; } = [];
     }
 }

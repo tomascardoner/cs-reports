@@ -1,52 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace CSReports
+﻿namespace CSReports.Model
 {
     public partial class Report
     {
-        public short ReportId { get; set; }
+        public Report() {
+            ReportId = Guid.NewGuid();
+        }
+
+        public Report(Guid reportId)
+        {
+            ReportId = reportId;
+        }
+
+        public Guid ReportId { get; }
 
         public string Name { get; set; } = string.Empty;
 
         public string TemplateFilename { get; set; } = string.Empty;
 
-        public short? DatasourceId { get; set; }
+        public PageSizes PageSize {  get; set; }
 
-        public byte PageSize { get; set; }
-
-        [NotMapped]
-        public PageSizes PageSizeEnumValue
-        {
-            get
-            {
-                if (Enum.IsDefined(typeof(PageSizes), PageSize))
-                {
-                    return (PageSizes)PageSize;
-                }
-                else
-                {
-                    return default;
-                }
-            }
-        }
-
-        public byte PageOrientation { get; set; }
-
-        [NotMapped]
-        public PageOrientations PageOrientationEnumValue
-        {
-            get
-            {
-                if (Enum.IsDefined(typeof(PageOrientations), (int)PageOrientation))
-                {
-                    return (PageOrientations)PageOrientation;
-                }
-                else
-                {
-                    return default;
-                }
-            }
-        }
+        public PageOrientations PageOrientation { get; set; }
 
         public decimal PageMarginTop { get; set; }
 
@@ -56,6 +29,18 @@ namespace CSReports
 
         public decimal PageMarginBottom { get; set; }
 
-        public short? SectionDetailMaxRows { get; set; }
+        public Datasource? Datasource { get; set; }
+
+        public ICollection<Section> Sections { get; set; } = [];
+        
+        public ICollection<Font> Fonts { get; set; } = [];
+
+        public ICollection<Brush> Brushes { get; set; } = [];
+
+        public ICollection<Line> Lines { get; set; } = [];
+
+        public ICollection<Rectangle> Rectangles { get; set; } = [];
+
+        public ICollection<Text> Texts { get; set; } = [];
     }
 }
