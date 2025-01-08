@@ -20,5 +20,19 @@ namespace CSReports.Storage
                 return false;
             }
         }
+
+        internal static bool Deserialize(string reportSerial, out Model.Report? report)
+        {
+            try
+            {
+                report = JsonSerializer.Deserialize<Model.Report>(reportSerial);
+                return true;
+            }
+            catch (Exception)
+            {
+                report = null;
+                return false;
+            }
+        }
     }
 }

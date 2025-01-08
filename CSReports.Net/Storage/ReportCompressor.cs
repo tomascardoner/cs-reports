@@ -1,23 +1,41 @@
-﻿using System.Text;
+﻿using SharpCompress.Archives.GZip;
+using System.Text;
 
 namespace CSReports.Storage
 {
     internal static class ReportCompressor
     {
-        internal static bool CompressAndSaveFile(string reportSerial, string filePath)
+        internal static bool CompressAndSaveFile(string serializedReport, string filePath)
         {
             try
             {
-                Encoding encoding = Encoding.UTF8;
-                byte[] byteArray = encoding.GetBytes(reportSerial);
+                byte[] byteArray = Encoding.Unicode.GetBytes(serializedReport);
                 using MemoryStream memoryStream = new(byteArray);
-                using SharpCompress.Archives.GZip.GZipArchive archive = SharpCompress.Archives.GZip.GZipArchive.Create();
+                using GZipArchive archive = GZipArchive.Create();
                 archive.AddEntry("report", memoryStream);
                 archive.SaveTo(filePath);
                 return true;
             }
             catch (Exception)
             {
+                return false;
+            }
+        }
+
+        internal static bool LoadAndDecompressFile(string filePath, out string serializedReport)
+        {
+            try
+            {
+                using GZipArchive archive = GZipArchive.Open(filePath);
+                using Stream stream = archive.Entries.First().OpenEntryStream();
+                using MemoryStream memoryStream = new();
+                stream.CopyTo(memoryStream);
+                serializedReport = Encoding.Unicode.GetString(memoryStream.ToArray());
+                return true;
+            }
+            catch (Exception)
+            {
+                serializedReport = string.Empty;
                 return false;
             }
         }
