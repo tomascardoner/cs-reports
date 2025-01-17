@@ -17,7 +17,7 @@
 
         public string TemplateFilename { get; set; } = string.Empty;
 
-        public PageSizes PageSize {  get; set; }
+        public PageSizes PageSize { get; set; }
 
         public PageOrientations PageOrientation { get; set; }
 
@@ -28,6 +28,8 @@
         public decimal PageMarginRight { get; set; }
 
         public decimal PageMarginBottom { get; set; }
+
+        public short? DetailSectionMaxRowCount { get; set; }
 
         public Datasource? Datasource { get; set; }
 

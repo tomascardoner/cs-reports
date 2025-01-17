@@ -6,8 +6,7 @@
         {
             Solid,
             LinealGradient,
-            RadialGradient,
-            Repeater
+            RadialGradient
         }
     }
 }

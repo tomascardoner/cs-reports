@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using PdfSharp.Drawing;
+using System.Text.Json.Serialization;
 
 namespace CSReports.Model
 {
@@ -36,6 +37,9 @@ namespace CSReports.Model
 
         public byte BorderColorBlue { get; set; }
 
+        [JsonIgnore]
+        public XColor BorderColor => XColor.FromArgb(BorderColorRed, BorderColorGreen, BorderColorBlue);
+
         public decimal BorderThickness { get; set; }
 
         public short BrushId { get; set; }
@@ -52,7 +56,13 @@ namespace CSReports.Model
 
         public HorizontalAlignments HorizontalAlignment { get; set; }
 
+        [JsonIgnore]
+        public XStringAlignment StringAlignment => (XStringAlignment)HorizontalAlignment;
+
         public VerticalAlignments VerticalAlignment { get; set; }
+
+        [JsonIgnore]
+        public XLineAlignment LineAlignment => (XLineAlignment)VerticalAlignment;
 
         public WordWrapTypes WordWrapType { get; set; }
 

@@ -4,7 +4,7 @@
     {
         public enum SectionTypes : byte
         {
-            reportHeader,
+            ReportHeader,
             PageHeader,
             GroupHeader,
             Detail,

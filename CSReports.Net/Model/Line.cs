@@ -1,4 +1,7 @@
-﻿namespace CSReports.Model
+﻿using PdfSharp.Drawing;
+using System.Text.Json.Serialization;
+
+namespace CSReports.Model
 {
     public class Line
     {
@@ -19,7 +22,10 @@
 
         public byte ColorBlue { get; set; }
 
-        public decimal Thikness { get; set; }
+        [JsonIgnore]
+        public XColor Color => XColor.FromArgb(ColorRed, ColorGreen, ColorBlue);
+
+        public decimal Thickness { get; set; }
 
         public short SectionId1 { get; set; }
 
@@ -29,8 +35,8 @@
 
         public short SectionId2 { get; set; }
 
-        public decimal PosicionX2 { get; set; }
+        public decimal PositionX2 { get; set; }
 
-        public decimal PosicionY2 { get; set; }
+        public decimal PositionY2 { get; set; }
     }
 }

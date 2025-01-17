@@ -1,4 +1,7 @@
-﻿namespace CSReports.Model
+﻿using PdfSharp.Drawing;
+using System.Text.Json.Serialization;
+
+namespace CSReports.Model
 {
     public partial class Brush
     {
@@ -22,21 +25,36 @@
 
         public byte Color1Blue { get; set; }
 
+        [JsonIgnore]
+        public XColor Color1 => XColor.FromArgb(Color1Red, Color1Green, Color1Blue);
+
         public byte? Color2Red { get; set; }
 
         public byte? Color2Green { get; set; }
 
         public byte? Color2Blue { get; set; }
 
+        [JsonIgnore]
+        public XColor Color2 => Color2Red.HasValue && Color2Green.HasValue && Color2Blue.HasValue
+            ? XColor.FromArgb(Color2Red.Value, Color2Green.Value, Color2Blue.Value)
+            : XColor.Empty;
+
         public decimal? PositionX1 { get; set; }
 
         public decimal? PositionY1 { get; set; }
+
+        public XPoint Point1 => new((double)(PositionX1 ?? 0), (double)(PositionY1 ?? 0));
 
         public decimal? PositionX2 { get; set; }
 
         public decimal? PositionY2 { get; set; }
 
-        public decimal? Angle { get; set; }
+        public XPoint Point2 => new((double)(PositionX2 ?? 0), (double)(PositionY2 ?? 0));
+
+        [JsonIgnore]
+        public XRect Rectangle => new((double)(PositionX1 ?? 0), (double)(PositionY1 ?? 0), (double)(PositionX2 ?? 0), (double)(PositionY2 ?? 0));
+
+        public XLinearGradientMode LinearGradientMode { get; set; }
 
         public decimal? RadiusStart { get; set; }
 

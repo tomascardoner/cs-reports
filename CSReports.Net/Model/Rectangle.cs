@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using PdfSharp.Drawing;
+using System.Text.Json.Serialization;
 
 namespace CSReports.Model
 {
@@ -26,6 +27,9 @@ namespace CSReports.Model
 
         public byte BorderColorBlue { get; set; }
 
+        [JsonIgnore]
+        public XColor BorderColor => XColor.FromArgb(BorderColorRed, BorderColorGreen, BorderColorBlue);
+
         public decimal BorderThickness { get; set; }
 
         public short? BrushId { get; set; }
@@ -38,9 +42,9 @@ namespace CSReports.Model
 
         public byte SectionId2 { get; set; }
 
-        public decimal PosicionX2 { get; set; }
+        public decimal PositionX2 { get; set; }
 
-        public decimal PosicionY2 { get; set; }
+        public decimal PositionY2 { get; set; }
 
         [JsonIgnore]
         public Brush? Brush => _Report.Brushes.FirstOrDefault(b => b.BrushId == BrushId);

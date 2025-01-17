@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using PdfSharp.Drawing;
+using System.Drawing;
 using System.Text.Json.Serialization;
 
 namespace CSReports.Model
@@ -30,28 +31,31 @@ namespace CSReports.Model
         public bool Strikethrough { get; set; }
 
         [JsonIgnore]
-        internal FontStyle Style
+        internal XFontStyleEx Style
         {
             get
             {
-                FontStyle fontStyle = new();
+                if (Bold && Italic)
+                {
+                    return XFontStyleEx.BoldItalic;
+                }
                 if (Bold)
                 {
-                    fontStyle |= FontStyle.Bold;
+                    return XFontStyleEx.Bold;
                 }
                 if (Italic)
                 {
-                    fontStyle |= FontStyle.Italic;
+                    return XFontStyleEx.Italic;
                 }
                 if (Underline)
                 {
-                    fontStyle |= FontStyle.Underline;
+                    return XFontStyleEx.Underline;
                 }
                 if (Strikethrough)
                 {
-                    fontStyle |= FontStyle.Strikeout;
+                    return XFontStyleEx.Strikeout;
                 }
-                return fontStyle;
+                return XFontStyleEx.Regular;
             }
         }
     }
