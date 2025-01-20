@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace CSReports.Storage
+namespace CardonerSistemas.Reports.Net.Storage
 {
     internal static class ReportSerializer
     {

@@ -1,4 +1,4 @@
-﻿namespace CSReports.Storage
+﻿namespace CardonerSistemas.Reports.Net.Storage
 {
     public static class FileSystem
     {

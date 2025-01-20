@@ -1,4 +1,4 @@
-﻿namespace CSReports.Engine
+﻿namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class Units
     {

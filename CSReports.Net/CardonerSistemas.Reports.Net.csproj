@@ -1,16 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0-windows</TargetFramework>
-    <RootNamespace>CSReports</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>CSReports.Net</AssemblyName>
-    <AssemblyTitle>CS-Reports</AssemblyTitle>
+    <AssemblyTitle>CS-Reports.Net</AssemblyTitle>
     <Company>Cardoner Sistemas</Company>
-    <Product>CS-Reports</Product>
+    <Product>CS-Reports for .Net</Product>
     <Description>Cardoner Sistemas report generator library for .Net</Description>
     <Copyright>© 2025 Cardoner Sistemas. All rights reserved.</Copyright>
-    <Trademark>® CS-Reports</Trademark>
+    <Trademark>® CS-Reports.Net</Trademark>
     <Build>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_Now().get_Date()),$([System.DateTime]::new(2000,1,1))).get_TotalDays())</Build>
     <Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
     <Version>1.1.$(Build).$(Revision)</Version>

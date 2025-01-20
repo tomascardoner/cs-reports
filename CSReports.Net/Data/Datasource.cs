@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace CSReports.Data
+namespace CardonerSistemas.Reports.Net.Data
 {
     internal static class Datasource
     {
@@ -73,10 +73,10 @@ namespace CSReports.Data
         {
             if (report.Datasource is not null)
             {
-                DbConnection? dbConnection = Data.Datasource.CreateConnection(report.Datasource);
+                DbConnection? dbConnection = Datasource.CreateConnection(report.Datasource);
                 if (dbConnection is not null)
                 {
-                    dbDataReader = Data.Datasource.GetDataReader(dbConnection, report.Datasource);
+                    dbDataReader = Datasource.GetDataReader(dbConnection, report.Datasource);
                     if (dbDataReader is not null)
                     {
                         if (dbDataReader.HasRows)

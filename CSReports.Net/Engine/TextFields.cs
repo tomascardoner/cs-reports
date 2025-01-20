@@ -2,7 +2,7 @@
 using System.Data.Common;
 using System.Data;
 
-namespace CSReports.Engine
+namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class TextFields
     {

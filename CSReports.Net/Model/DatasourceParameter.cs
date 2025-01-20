@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace CSReports.Model
+namespace CardonerSistemas.Reports.Net.Model
 {
     public class DatasourceParameter
     {

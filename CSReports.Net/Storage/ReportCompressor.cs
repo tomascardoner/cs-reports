@@ -1,7 +1,7 @@
 ﻿using SharpCompress.Archives.GZip;
 using System.Text;
 
-namespace CSReports.Storage
+namespace CardonerSistemas.Reports.Net.Storage
 {
     internal static class ReportCompressor
     {

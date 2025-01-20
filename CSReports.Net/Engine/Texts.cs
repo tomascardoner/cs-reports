@@ -1,7 +1,7 @@
 ﻿using PdfSharp.Drawing;
 using System.Data.Common;
 
-namespace CSReports.Engine
+namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class Texts
     {

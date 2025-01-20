@@ -1,6 +1,6 @@
 ﻿using PdfSharp.Drawing;
 
-namespace CSReports.Engine
+namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class Brushes
     {

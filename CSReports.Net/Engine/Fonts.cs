@@ -1,10 +1,27 @@
 ﻿using PdfSharp.Drawing;
-using PdfSharp.Pdf.Advanced;
 
-namespace CSReports.Engine
+namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class Fonts
     {
+        private static XFont? Create(string name, double size, XFontStyleEx style)
+        {
+            try
+            {
+                return new(name, size, style);
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new("Arial", size, style);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         internal static Dictionary<short, XFont> Create(ICollection<Model.Font> fonts)
         {
             try
@@ -12,7 +29,11 @@ namespace CSReports.Engine
                 Dictionary<short, XFont> dictOfFonts = [];
                 foreach (Model.Font font in fonts)
                 {
-                    dictOfFonts.Add(font.FontId, new(font.Name, (double)font.Size, font.Style));
+                    XFont? xFont = Create(font.Name, (double)font.Size, font.Style);
+                    if (xFont is not null)
+                    {
+                        dictOfFonts.Add(font.FontId, xFont);
+                    }
                 }
                 return dictOfFonts;
             }

@@ -1,4 +1,4 @@
-﻿namespace CSReports.Model
+﻿namespace CardonerSistemas.Reports.Net.Model
 {
     public partial class Section
     {

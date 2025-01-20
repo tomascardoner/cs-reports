@@ -1,8 +1,6 @@
-﻿using CSReports.Model;
-using PdfSharp.Drawing;
-using System.Reflection;
+﻿using PdfSharp.Drawing;
 
-namespace CSReports.Engine
+namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class Rectangles
     {

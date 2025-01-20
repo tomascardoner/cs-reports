@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSReports.Net", "CSReports.Net\CSReports.Net.csproj", "{9084150B-2DB8-4121-9E3C-98FC4E3819B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardonerSistemas.Reports.Net", "CSReports.Net\CardonerSistemas.Reports.Net.csproj", "{9084150B-2DB8-4121-9E3C-98FC4E3819B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSReports.Net.WinformsViewer", "CSReports.Net.WinformsViewer\CSReports.Net.WinformsViewer.csproj", "{198098D0-30DA-489F-AF18-0F2F701E02DD}"
 EndProject
