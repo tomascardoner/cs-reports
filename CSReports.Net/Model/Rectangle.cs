@@ -19,6 +19,13 @@ namespace CardonerSistemas.Reports.Net.Model
             RectangleId = rectangleId;
         }
 
+        [JsonConstructor]
+        public Rectangle(short rectangleId)
+        {
+            _Report = new();
+            RectangleId = rectangleId;
+        }
+
         public short RectangleId { get; }
 
         public byte BorderColorRed { get; set; }

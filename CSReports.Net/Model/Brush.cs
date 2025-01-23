@@ -10,6 +10,7 @@ namespace CardonerSistemas.Reports.Net.Model
             BrushId = (short)(report.Brushes.Max(b => b.BrushId) + 1);
         }
 
+        [JsonConstructor]
         public Brush(short brushId)
         {
             BrushId = brushId;

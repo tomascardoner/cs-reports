@@ -49,7 +49,7 @@ namespace CardonerSistemas.Reports.Net.Engine
 
             // Detalles
             positionYStart = headersPositionYEnd;
-            for (int rowNumber = 1; rowNumber <= remainingRecordsCount && rowNumber <= (report.DetailSectionMaxRowCount ?? 0); rowNumber++)
+            for (int rowNumber = 1; rowNumber <= remainingRecordsCount && rowNumber <= (report.DetailSectionMaxRowCount ?? remainingRecordsCount); rowNumber++)
             {
                 if (detailsTotalHeight <= footersPositionYStart - positionYStart)
                 {

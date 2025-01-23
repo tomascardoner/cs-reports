@@ -9,6 +9,7 @@ namespace CardonerSistemas.Reports.Net.Model
             LineId = (short)(report.Lines.Max(l => l.LineId) + 1);
         }
 
+        [JsonConstructor]
         public Line(short lineId)
         {
             LineId = lineId; 

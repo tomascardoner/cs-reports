@@ -7,7 +7,7 @@ namespace CardonerSistemas.Reports.Net.Data
         // Given a provider name and connection string,
         // create the DbProviderFactory and DbConnection.
         // Returns a DbConnection on success; null on failure.
-        private static DbConnection? CreateConnection(Model.Datasource datasource)
+        private static DbConnection? CreateAndOpenConnection(Model.Datasource datasource)
         {
             ArgumentNullException.ThrowIfNull(datasource);
             ArgumentNullException.ThrowIfNullOrEmpty(datasource.ProviderName);
@@ -19,11 +19,13 @@ namespace CardonerSistemas.Reports.Net.Data
             // Create the DbProviderFactory and DbConnection.
             try
             {
+                DbProviderFactories.RegisterFactory("Microsoft.Data.SqlClient", Microsoft.Data.SqlClient.SqlClientFactory.Instance);
                 DbProviderFactory factory = DbProviderFactories.GetFactory(datasource.ProviderName);
                 dbConnection = factory.CreateConnection();
                 if (dbConnection is not null)
                 {
                     dbConnection.ConnectionString = datasource.ConnectionString;
+                    dbConnection.Open();
                 }
             }
             catch (Exception ex)
@@ -73,13 +75,13 @@ namespace CardonerSistemas.Reports.Net.Data
         {
             if (report.Datasource is not null)
             {
-                DbConnection? dbConnection = Datasource.CreateConnection(report.Datasource);
+                DbConnection? dbConnection = Datasource.CreateAndOpenConnection(report.Datasource);
                 if (dbConnection is not null)
                 {
                     dbDataReader = Datasource.GetDataReader(dbConnection, report.Datasource);
                     if (dbDataReader is not null)
                     {
-                        if (dbDataReader.HasRows)
+                        if (dbDataReader.Read())
                         {
                             try
                             {
@@ -92,15 +94,16 @@ namespace CardonerSistemas.Reports.Net.Data
                             {
                                 Console.WriteLine(ex.Message);
                                 dbDataReader = null;
+                                dbConnection.Close();
                             }
                         }
                         else
                         {
                             dbDataReader.Close();
                             dbDataReader = null;
+                            dbConnection.Close();
                         }
                     }
-                    dbConnection.Close();
                 }
             }
         }

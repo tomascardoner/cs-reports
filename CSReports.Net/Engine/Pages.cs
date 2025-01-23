@@ -6,21 +6,29 @@ namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class Pages
     {
-        internal static bool Create(Model.Report report, PdfDocument pdfDocument, Dictionary<short, XFont> fonts, Dictionary<short, XBrush> brushes, DbDataReader? dbDataReader, Dictionary<string, int> fieldsOrdinals)
+        internal static PdfPage CreateNewPage(PdfDocument pdfDocument, Model.Report report, int pageNumber, Dictionary<short, XBrush> brushes, Dictionary<short, XFont> fonts, DbDataReader? dbDataReader, Dictionary<string, int> fieldsOrdinals)
         {
-            decimal detailSectionsTotalHeight = Units.ConvertCentimetersToPoints(report.Sections.Where(s => s.Type == Model.Section.SectionTypes.Detail).Sum(s => s.Height));
+            ArgumentNullException.ThrowIfNull(report);
+            ArgumentOutOfRangeException.ThrowIfLessThan(pageNumber, 1);
 
             PdfPage pdfPage = pdfDocument.Pages.Add();
-            Dictionary<Tuple<short, int>, PageLayoutItem> pageLayoutItems = PageLayouts.Create(report, pdfDocument, pdfPage, detailSectionsTotalHeight, 100);
+            pdfPage.Size = (PdfSharp.PageSize)report.PageSize;
+            pdfPage.Orientation = (PdfSharp.PageOrientation)report.PageOrientation;
 
             // Get an XGraphics object for drawing on this page.
             using XGraphics xGraphics = XGraphics.FromPdfPage(pdfPage);
 
-            Lines.Create(xGraphics, pageLayoutItems, report.Lines);
-            Rectangles.Create(xGraphics, pageLayoutItems, report.Rectangles, brushes);
-            Texts.Create(xGraphics, pageLayoutItems, fonts, brushes, report.Texts, dbDataReader, fieldsOrdinals);
+            decimal sectionsPositionYStart = 0;
+            if (pageNumber == 1)
+            {
+                // Create report headers
+                Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.ReportHeader, brushes, fonts, dbDataReader, fieldsOrdinals, ref sectionsPositionYStart);
+            }
 
-            return true;
+            // Create page headers
+            Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.PageHeader, brushes, fonts, dbDataReader, fieldsOrdinals, ref sectionsPositionYStart);
+
+            return pdfPage;
         }
     }
 }

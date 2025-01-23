@@ -4,20 +4,18 @@ namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class Rectangles
     {
-        internal static void Create(XGraphics xGraphics, Dictionary<Tuple<short, int>, PageLayoutItem> pageLayoutItems, ICollection<Model.Rectangle> rectangles, Dictionary<short, XBrush> brushes)
+        internal static void Create(XGraphics xGraphics, IEnumerable<Model.Rectangle> rectangles, Dictionary<short, XBrush> brushes, decimal sectionPositionYStart)
         {
-            foreach (var (rectangle, positions) in from KeyValuePair<Tuple<short, int>, PageLayoutItem> pageLayoutItem in pageLayoutItems
-                                                   from Model.Rectangle rectangle in rectangles.Where(r => r.SectionId1 == pageLayoutItem.Key.Item1)
-                                                   let positions = Units.ConvertRelativeCentimetersToAbsolutePoints(pageLayoutItems[pageLayoutItem.Key], rectangle.PositionX1, rectangle.PositionY1, pageLayoutItems[pageLayoutItem.Key], rectangle.PositionX2, rectangle.PositionY2)
-                                                   select (rectangle, positions))
+            foreach (Model.Rectangle rectangle in rectangles)
             {
+                Tuple<decimal, decimal, decimal, decimal> positions = Units.ConvertRelativeCentimetersToAbsolutePoints(sectionPositionYStart, rectangle.PositionX1, rectangle.PositionY1, rectangle.PositionX2, rectangle.PositionY2);
                 if (rectangle.BrushId.HasValue)
                 {
-                    xGraphics.DrawRectangle(new XPen(rectangle.BorderColor, (double)rectangle.BorderThickness), brushes[rectangle.BrushId.Value], (float)positions.Item1, (float)positions.Item2, (float)(positions.Item3 - positions.Item1), (float)(positions.Item4 - positions.Item2));
+                    xGraphics.DrawRectangle(new XPen(rectangle.BorderColor, (double)rectangle.BorderThickness), brushes[rectangle.BrushId.Value], (double)positions.Item1, (double)positions.Item2, (double)(positions.Item3 - positions.Item1), (double)(positions.Item4 - positions.Item2));
                 }
                 else
                 {
-                    xGraphics.DrawRectangle(new XPen(rectangle.BorderColor, (double)rectangle.BorderThickness), (float)positions.Item1, (float)positions.Item2, (float)(positions.Item3 - positions.Item1), (float)(positions.Item4 - positions.Item2));
+                    xGraphics.DrawRectangle(new XPen(rectangle.BorderColor, (double)rectangle.BorderThickness), (double)positions.Item1, (double)positions.Item2, (double)(positions.Item3 - positions.Item1), (double)(positions.Item4 - positions.Item2));
                 }
             }
         }

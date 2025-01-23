@@ -38,7 +38,13 @@ namespace CardonerSistemas.Reports.Net.Engine
                     Dictionary<short, XBrush> brushes = Brushes.Create(report.Brushes);
 
                     // Generate report
-                    Pages.Create(report, pdfDocument, fonts, brushes, dbDataReader, fieldsOrdinals);
+                    Pages.CreateNewPage(pdfDocument, report, 1, brushes, fonts, dbDataReader, fieldsOrdinals);
+
+                    // Close the datasource
+                    if (dbDataReader is not null && !dbDataReader.IsClosed)
+                    {
+                        dbDataReader.Close();
+                    }
                 }
             }
             catch (Exception ex)
@@ -55,7 +61,7 @@ namespace CardonerSistemas.Reports.Net.Engine
             try
             {
                 // Save the document
-                string filename = PdfFileUtility.GetTempPdfFullFileName("CS-Reports.Net");
+                string filename = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".pdf");
                 pdfDocument.Save(filename);
                 PdfFileUtility.ShowDocument(filename);
             }

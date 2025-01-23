@@ -20,6 +20,14 @@ namespace CardonerSistemas.Reports.Net.Model
             SectionId = sectionId;
         }
 
+        [JsonConstructor]
+        public Section(SectionTypes type, short sectionId)
+        {
+            _Report = new();
+            Type = type;
+            SectionId = sectionId;
+        }
+
         public short SectionId { get; }
 
         public SectionTypes Type { get; }

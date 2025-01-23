@@ -1,4 +1,6 @@
-﻿namespace CardonerSistemas.Reports.Net.Model
+﻿using System.Text.Json.Serialization;
+
+namespace CardonerSistemas.Reports.Net.Model
 {
     public partial class Report
     {
@@ -6,6 +8,7 @@
             ReportId = Guid.NewGuid();
         }
 
+        [JsonConstructor]
         public Report(Guid reportId)
         {
             ReportId = reportId;

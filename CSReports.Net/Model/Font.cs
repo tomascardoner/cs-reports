@@ -11,6 +11,7 @@ namespace CardonerSistemas.Reports.Net.Model
             FontId = (short)(report.Fonts.Max(f => f.FontId) + 1);
         }
 
+        [JsonConstructor]
         public Font(short fontId)
         {
             FontId = fontId;

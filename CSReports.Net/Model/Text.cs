@@ -19,6 +19,13 @@ namespace CardonerSistemas.Reports.Net.Model
             TextId = textId;
         }
 
+        [JsonConstructor]
+        public Text(short textId)
+        {
+            _Report = new();
+            TextId = textId;
+        }
+
         public short TextId { get; }
 
         public TextTypes TextType { get; set; }

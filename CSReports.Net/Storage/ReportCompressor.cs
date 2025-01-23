@@ -9,10 +9,10 @@ namespace CardonerSistemas.Reports.Net.Storage
         {
             try
             {
-                byte[] byteArray = Encoding.Unicode.GetBytes(serializedReport);
+                byte[] byteArray = Encoding.UTF8.GetBytes(serializedReport);
                 using MemoryStream memoryStream = new(byteArray);
                 using GZipArchive archive = GZipArchive.Create();
-                archive.AddEntry("report", memoryStream);
+                archive.AddEntry("report.json", memoryStream);
                 archive.SaveTo(filePath);
                 return true;
             }
@@ -30,7 +30,7 @@ namespace CardonerSistemas.Reports.Net.Storage
                 using Stream stream = archive.Entries.First().OpenEntryStream();
                 using MemoryStream memoryStream = new();
                 stream.CopyTo(memoryStream);
-                serializedReport = Encoding.Unicode.GetString(memoryStream.ToArray());
+                serializedReport = Encoding.UTF8.GetString(memoryStream.ToArray());
                 return true;
             }
             catch (Exception)
