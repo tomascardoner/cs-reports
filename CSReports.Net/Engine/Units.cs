@@ -17,9 +17,9 @@
             return value / FactorPointsToCentimeter;
         }
 
-        internal static Tuple<decimal, decimal, decimal, decimal> ConvertRelativeCentimetersToAbsolutePoints(decimal startPositionY, decimal value1, decimal value2, decimal value3, decimal value4)
+        internal static Tuple<decimal, decimal, decimal, decimal> ConvertRelativeCentimetersToAbsolutePoints(decimal startPositionY, decimal valueX1, decimal valueY1, decimal valueX2, decimal valueY2)
         {
-            return Tuple.Create(ConvertCentimetersToPoints(value1), startPositionY + ConvertCentimetersToPoints(value2), ConvertCentimetersToPoints(value3), startPositionY + ConvertCentimetersToPoints(value4));
+            return Tuple.Create(ConvertCentimetersToPoints(valueX1), startPositionY + ConvertCentimetersToPoints(valueY1), ConvertCentimetersToPoints(valueX2), startPositionY + ConvertCentimetersToPoints(valueY2));
         }
     }
 }
