@@ -37,10 +37,17 @@ namespace CardonerSistemas.Reports.Net.Engine
             // Create details
             if (dbDataReader is not null)
             {
-                do
+                try
                 {
-                    Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.Detail, brushes, fonts, dbDataReader, fieldsOrdinals, ref sectionsPositionYStart);
-                } while (dbDataReader.Read());
+                    do
+                    {
+                        Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.Detail, brushes, fonts, dbDataReader, fieldsOrdinals, ref sectionsPositionYStart);
+                    } while (dbDataReader.Read());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
             // Create report footers
