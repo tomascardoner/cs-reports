@@ -1,5 +1,4 @@
-﻿using CardonerSistemas.Reports.Net.Data;
-using PdfSharp.Drawing;
+﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Quality;
 using System.Data.Common;
@@ -22,7 +21,7 @@ namespace CardonerSistemas.Reports.Net.Engine
                     // Open the datasource
                     DbDataReader? dbDataReader = null;
                     Dictionary<string, int> fieldsOrdinals = [];
-                    Datasource.GetDatasource(report, ref dbDataReader, fieldsOrdinals);
+                    Data.Datasource.GetDatasource(report, ref dbDataReader, fieldsOrdinals);
 
                     // Create a new PDF document
                     pdfDocument = new();

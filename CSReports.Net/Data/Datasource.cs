@@ -10,8 +10,6 @@ namespace CardonerSistemas.Reports.Net.Data
         private static DbConnection? CreateAndOpenConnection(Model.Datasource datasource)
         {
             ArgumentNullException.ThrowIfNull(datasource);
-            ArgumentNullException.ThrowIfNullOrEmpty(datasource.ProviderName);
-            ArgumentNullException.ThrowIfNullOrEmpty(datasource.ConnectionString);
 
             // Assume failure.
             DbConnection? dbConnection = null;
@@ -19,7 +17,26 @@ namespace CardonerSistemas.Reports.Net.Data
             // Create the DbProviderFactory and DbConnection.
             try
             {
-                DbProviderFactories.RegisterFactory("Microsoft.Data.SqlClient", Microsoft.Data.SqlClient.SqlClientFactory.Instance);
+                switch (datasource.Provider)
+                {
+                    case Model.Datasource.Providers.None:
+                        break;
+                    case Model.Datasource.Providers.SqlServer:
+                        DbProviderFactories.RegisterFactory(datasource.ProviderName, Microsoft.Data.SqlClient.SqlClientFactory.Instance);
+                        break;
+                    case Model.Datasource.Providers.OleDb:
+                        
+                        break;
+                    case Model.Datasource.Providers.Odbc:
+                        
+                        break;
+                    case Model.Datasource.Providers.Oracle:
+                        
+                        break;
+                    case Model.Datasource.Providers.DataSet:
+                        
+                        break;
+                }
                 DbProviderFactory factory = DbProviderFactories.GetFactory(datasource.ProviderName);
                 dbConnection = factory.CreateConnection();
                 if (dbConnection is not null)
@@ -73,12 +90,12 @@ namespace CardonerSistemas.Reports.Net.Data
 
         internal static void GetDatasource(Model.Report report, ref DbDataReader? dbDataReader, Dictionary<string, int> fieldsOrdinals)
         {
-            if (report.Datasource is not null)
+            if (report.Datasource is not null && report.Datasource.Provider != Model.Datasource.Providers.None && !string.IsNullOrEmpty(report.Datasource.ProviderName))
             {
-                DbConnection? dbConnection = Datasource.CreateAndOpenConnection(report.Datasource);
+                DbConnection? dbConnection = CreateAndOpenConnection(report.Datasource);
                 if (dbConnection is not null)
                 {
-                    dbDataReader = Datasource.GetDataReader(dbConnection, report.Datasource);
+                    dbDataReader = GetDataReader(dbConnection, report.Datasource);
                     if (dbDataReader is not null)
                     {
                         if (dbDataReader.Read())

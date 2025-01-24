@@ -1,8 +1,17 @@
 ﻿namespace CardonerSistemas.Reports.Net.Model
 {
-    public class Datasource
+    public partial class Datasource
     {
-        public string ProviderName { get; set; } = string.Empty;
+        public Providers Provider { get; set; } = Providers.None;
+
+        public string ProviderName => Provider switch
+        {
+            Providers.SqlServer => "Microsoft.Data.SqlClient",
+            Providers.OleDb => "System.Data.OleDb",
+            Providers.Odbc => "System.Data.Odbc",
+            Providers.DataSet => "System.Data.DataSet",
+            _ => string.Empty
+        };
 
         public string ConnectionString { get; set; } = string.Empty;
 
