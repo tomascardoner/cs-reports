@@ -20,5 +20,16 @@
         public string Text { get; set; } = string.Empty;
 
         public virtual ICollection<DatasourceParameter> Parameters { get; set; } = [];
+
+        public bool SetParameterValue(string parameterName, object? value)
+        {
+            DatasourceParameter? parameter = Parameters.FirstOrDefault(p => p.Name == parameterName);
+            if (parameter is not null)
+            {
+                parameter.Value = value;
+                return true;
+            }
+            return false;
+        }
     }
 }

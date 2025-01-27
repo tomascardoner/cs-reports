@@ -1,7 +1,7 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using PdfSharp.Quality;
 using System.Data.Common;
+using System.Diagnostics;
 
 namespace CardonerSistemas.Reports.Net.Engine
 {
@@ -53,7 +53,7 @@ namespace CardonerSistemas.Reports.Net.Engine
             return pdfDocument;
         }
 
-        private static void Preview(PdfDocument pdfDocument)
+        private static void SaveTempAndPreviewInDefaultApp(PdfDocument pdfDocument)
         {
             ArgumentNullException.ThrowIfNull(pdfDocument);
 
@@ -62,7 +62,8 @@ namespace CardonerSistemas.Reports.Net.Engine
                 // Save the document
                 string filename = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".pdf");
                 pdfDocument.Save(filename);
-                PdfFileUtility.ShowDocument(filename);
+                ProcessStartInfo startInfo = new(filename) { UseShellExecute = true };
+                Process.Start(startInfo);
             }
             catch (Exception ex)
             {
@@ -70,20 +71,20 @@ namespace CardonerSistemas.Reports.Net.Engine
             }
         }
 
-        public static bool Preview(Model.Report report, string language = "")
+        public static bool CreateSaveTempAndPreviewInDefaultApp(Model.Report report, string language = "")
         {
             ArgumentNullException.ThrowIfNull(report);
 
             using PdfDocument? pdfDocument = Create(report, language);
             if (pdfDocument is not null)
             {
-                Preview(pdfDocument);
+                SaveTempAndPreviewInDefaultApp(pdfDocument);
                 return true;
             }
             return false;
         }
 
-        public static bool Save(Model.Report report, string filename, string language = "")
+        public static bool CreateAndSave(Model.Report report, string filename, string language = "")
         {
             ArgumentNullException.ThrowIfNull(report);
             ArgumentNullException.ThrowIfNullOrEmpty(filename);
@@ -103,6 +104,18 @@ namespace CardonerSistemas.Reports.Net.Engine
                 return true;
             }
             return false;
+        }
+
+        public static string CreateAndSaveTemp(Model.Report report, string language = "")
+        {
+            ArgumentNullException.ThrowIfNull(report);
+
+            string filename = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".pdf");
+            if (CreateAndSave(report, filename, language))
+            {
+                return filename;
+            }
+            return string.Empty;
         }
     }
 }
