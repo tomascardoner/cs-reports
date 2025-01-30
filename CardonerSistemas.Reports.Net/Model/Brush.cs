@@ -27,6 +27,9 @@ namespace CardonerSistemas.Reports.Net.Model
         public byte Color1Blue { get; set; }
 
         [JsonIgnore]
+        public string Color1Hex => $"#{Color1Red:X2}{Color1Green:X2}{Color1Blue:X2}";
+
+        [JsonIgnore]
         public XColor Color1 => XColor.FromArgb(Color1Red, Color1Green, Color1Blue);
 
         public byte? Color2Red { get; set; }
@@ -34,6 +37,11 @@ namespace CardonerSistemas.Reports.Net.Model
         public byte? Color2Green { get; set; }
 
         public byte? Color2Blue { get; set; }
+
+        [JsonIgnore]
+        public string Color2Hex => Color2Red.HasValue && Color2Green.HasValue && Color2Blue.HasValue
+            ? $"#{Color2Red.Value:X2}{Color2Green.Value:X2}{Color2Blue.Value:X2}"
+            : string.Empty;
 
         [JsonIgnore]
         public XColor Color2 => Color2Red.HasValue && Color2Green.HasValue && Color2Blue.HasValue

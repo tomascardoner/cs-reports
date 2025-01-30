@@ -59,5 +59,8 @@ namespace CardonerSistemas.Reports.Net.Model
                 return XFontStyleEx.Regular;
             }
         }
+
+        [JsonIgnore]
+        public string Description => $"{Name} {Size}pt {Style}";
     }
 }

@@ -47,5 +47,9 @@ namespace CardonerSistemas.Reports.Net.Model
         public ICollection<Rectangle> Rectangles { get; set; } = [];
 
         public ICollection<Text> Texts { get; set; } = [];
+
+        [JsonIgnore]
+        public bool IsModified { get; set; }
+
     }
 }

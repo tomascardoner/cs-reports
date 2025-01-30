@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardonerSistemas.Reports.Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardonerSistemas.Reports.Net.WinformsViewer", "CardonerSistemas.Reports.Net.WinformsViewer\CardonerSistemas.Reports.Net.WinformsViewer.csproj", "{198098D0-30DA-489F-AF18-0F2F701E02DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardonerSistemas.Reports.Net.WinformsEditor", "CardonerSistemas.Reports.Net.WinformsEditor\CardonerSistemas.Reports.Net.WinformsEditor.csproj", "{AEA2BC61-1567-429A-B792-E429C7A83774}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardonerSistemas.Reports.Net.WinformsEditorApplication", "CardonerSistemas.Reports.Net.WinformsEditorApplication\CardonerSistemas.Reports.Net.WinformsEditorApplication.csproj", "{D9DE5F8D-9F26-4967-B577-2FFC25ADDB24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{198098D0-30DA-489F-AF18-0F2F701E02DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{198098D0-30DA-489F-AF18-0F2F701E02DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{198098D0-30DA-489F-AF18-0F2F701E02DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA2BC61-1567-429A-B792-E429C7A83774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA2BC61-1567-429A-B792-E429C7A83774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA2BC61-1567-429A-B792-E429C7A83774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA2BC61-1567-429A-B792-E429C7A83774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9DE5F8D-9F26-4967-B577-2FFC25ADDB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9DE5F8D-9F26-4967-B577-2FFC25ADDB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9DE5F8D-9F26-4967-B577-2FFC25ADDB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9DE5F8D-9F26-4967-B577-2FFC25ADDB24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
