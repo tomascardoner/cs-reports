@@ -124,6 +124,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to * New report *.
+        /// </summary>
+        internal static string StringReportNew {
+            get {
+                return ResourceManager.GetString("StringReportNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sections.
         /// </summary>
         internal static string StringSections {

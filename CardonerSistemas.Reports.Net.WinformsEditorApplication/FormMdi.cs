@@ -9,7 +9,7 @@
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            WinformsEditor.FormReportEditor formReportEditor = new(new())
+            WinformsEditor.FormReportEditor formReportEditor = new(new(), string.Empty)
             {
                 MdiParent = this,
                 WindowState = FormWindowState.Maximized
@@ -28,9 +28,9 @@
                 ValidateNames = true
             };
 
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK && Storage.FileSystem.Load(openFileDialog.FileName, out Model.Report report))
+            if (openFileDialog.ShowDialog(this) == DialogResult.OK && Storage.FileSystem.Load(openFileDialog.FileName, out Model.Report report) && report is not null)
             {
-                WinformsEditor.FormReportEditor formReportEditor = new(report)
+                WinformsEditor.FormReportEditor formReportEditor = new(report, openFileDialog.FileName)
                 {
                     MdiParent = this,
                     WindowState = FormWindowState.Maximized

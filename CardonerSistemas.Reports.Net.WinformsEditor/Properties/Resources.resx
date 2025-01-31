@@ -138,6 +138,9 @@
   <data name="StringRectangles" xml:space="preserve">
     <value>Rectangles</value>
   </data>
+  <data name="StringReportNew" xml:space="preserve">
+    <value>* New report *</value>
+  </data>
   <data name="StringSections" xml:space="preserve">
     <value>Sections</value>
   </data>
