@@ -117,19 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="StringDatasourceTypeStoredProcedureFriendlyName" xml:space="preserve">
-    <value>Stored procedure</value>
+  <data name="StringBrushes" xml:space="preserve">
+    <value>Brushes</value>
   </data>
-  <data name="StringDatasourceTypeTableDirectFriendlyName" xml:space="preserve">
-    <value>Table direct</value>
+  <data name="StringColor" xml:space="preserve">
+    <value>Color</value>
   </data>
-  <data name="StringDatasourceTypeTextFriendlyName" xml:space="preserve">
-    <value>Text</value>
+  <data name="StringDatasource" xml:space="preserve">
+    <value>Datasource</value>
   </data>
-  <data name="StringGeneralNo" xml:space="preserve">
-    <value>no</value>
+  <data name="StringEditorTitle" xml:space="preserve">
+    <value>Report editor</value>
   </data>
-  <data name="StringGeneralYes" xml:space="preserve">
-    <value>yes</value>
+  <data name="StringFonts" xml:space="preserve">
+    <value>Fonts</value>
+  </data>
+  <data name="StringLines" xml:space="preserve">
+    <value>Lines</value>
+  </data>
+  <data name="StringRectangles" xml:space="preserve">
+    <value>Rectangles</value>
+  </data>
+  <data name="StringSections" xml:space="preserve">
+    <value>Sections</value>
+  </data>
+  <data name="StringTexts" xml:space="preserve">
+    <value>Texts</value>
   </data>
 </root>

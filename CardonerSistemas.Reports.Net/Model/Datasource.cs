@@ -1,4 +1,6 @@
-﻿namespace CardonerSistemas.Reports.Net.Model
+﻿using System.Text.Json.Serialization;
+
+namespace CardonerSistemas.Reports.Net.Model
 {
     public partial class Datasource
     {
@@ -16,6 +18,15 @@
         public string ConnectionString { get; set; } = string.Empty;
 
         public System.Data.CommandType Type { get; set; }
+
+        [JsonIgnore]
+        public string TypeFriendlyName => Type switch
+        {
+            System.Data.CommandType.Text => Properties.Resources.StringDatasourceTypeTextFriendlyName,
+            System.Data.CommandType.StoredProcedure => Properties.Resources.StringDatasourceTypeStoredProcedureFriendlyName,
+            System.Data.CommandType.TableDirect => Properties.Resources.StringDatasourceTypeTableDirectFriendlyName,
+            _ => string.Empty
+        };
 
         public string Text { get; set; } = string.Empty;
 

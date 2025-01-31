@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CardonerSistemas.Reports.Net.Properties {
+namespace CardonerSistemas.Reports.Net.WinformsEditorApplication.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CardonerSistemas.Reports.Net.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardonerSistemas.Reports.Net.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardonerSistemas.Reports.Net.WinformsEditorApplication.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,11 @@ namespace CardonerSistemas.Reports.Net.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stored procedure.
+        ///   Looks up a localized string similar to Report files (*.csrpt)|*.csrpt|All files (*.*)|*.*.
         /// </summary>
-        internal static string StringDatasourceTypeStoredProcedureFriendlyName {
+        internal static string StringFileDialogFilter {
             get {
-                return ResourceManager.GetString("StringDatasourceTypeStoredProcedureFriendlyName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Table direct.
-        /// </summary>
-        internal static string StringDatasourceTypeTableDirectFriendlyName {
-            get {
-                return ResourceManager.GetString("StringDatasourceTypeTableDirectFriendlyName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Text.
-        /// </summary>
-        internal static string StringDatasourceTypeTextFriendlyName {
-            get {
-                return ResourceManager.GetString("StringDatasourceTypeTextFriendlyName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to no.
-        /// </summary>
-        internal static string StringGeneralNo {
-            get {
-                return ResourceManager.GetString("StringGeneralNo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to yes.
-        /// </summary>
-        internal static string StringGeneralYes {
-            get {
-                return ResourceManager.GetString("StringGeneralYes", resourceCulture);
+                return ResourceManager.GetString("StringFileDialogFilter", resourceCulture);
             }
         }
     }

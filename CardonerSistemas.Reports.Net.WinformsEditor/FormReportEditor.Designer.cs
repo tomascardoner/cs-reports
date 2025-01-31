@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReportEditor));
             SplitContainerMain = new SplitContainer();
             TreeViewReport = new TreeView();
             PanelSection = new Panel();
+            ImageListMain = new ImageList(components);
             ((System.ComponentModel.ISupportInitialize)SplitContainerMain).BeginInit();
             SplitContainerMain.Panel1.SuspendLayout();
             SplitContainerMain.Panel2.SuspendLayout();
@@ -51,15 +54,17 @@
             // 
             SplitContainerMain.Panel2.Controls.Add(PanelSection);
             SplitContainerMain.Size = new Size(1062, 661);
-            SplitContainerMain.SplitterDistance = 354;
+            SplitContainerMain.SplitterDistance = 250;
             SplitContainerMain.TabIndex = 0;
             // 
             // TreeViewReport
             // 
             TreeViewReport.Dock = DockStyle.Fill;
+            TreeViewReport.ItemHeight = 55;
             TreeViewReport.Location = new Point(0, 0);
             TreeViewReport.Name = "TreeViewReport";
-            TreeViewReport.Size = new Size(354, 661);
+            TreeViewReport.ShowRootLines = false;
+            TreeViewReport.Size = new Size(250, 661);
             TreeViewReport.TabIndex = 0;
             // 
             // PanelSection
@@ -67,8 +72,22 @@
             PanelSection.Dock = DockStyle.Fill;
             PanelSection.Location = new Point(0, 0);
             PanelSection.Name = "PanelSection";
-            PanelSection.Size = new Size(704, 661);
+            PanelSection.Size = new Size(808, 661);
             PanelSection.TabIndex = 0;
+            // 
+            // ImageListMain
+            // 
+            ImageListMain.ColorDepth = ColorDepth.Depth32Bit;
+            ImageListMain.ImageStream = (ImageListStreamer)resources.GetObject("ImageListMain.ImageStream");
+            ImageListMain.TransparentColor = Color.Transparent;
+            ImageListMain.Images.SetKeyName(0, "Report");
+            ImageListMain.Images.SetKeyName(1, "Datasource");
+            ImageListMain.Images.SetKeyName(2, "DatasourceParameter");
+            ImageListMain.Images.SetKeyName(3, "FontsFolder");
+            ImageListMain.Images.SetKeyName(4, "Font");
+            ImageListMain.Images.SetKeyName(5, "BrushesFolder");
+            ImageListMain.Images.SetKeyName(6, "Brush");
+            ImageListMain.Images.SetKeyName(7, "SectionsFolder");
             // 
             // FormReportEditor
             // 
@@ -76,9 +95,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1062, 661);
             Controls.Add(SplitContainerMain);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            MinimizeBox = false;
             Name = "FormReportEditor";
             Text = "Report editor";
             SplitContainerMain.Panel1.ResumeLayout(false);
@@ -93,5 +109,6 @@
         private SplitContainer SplitContainerMain;
         private TreeView TreeViewReport;
         private Panel PanelSection;
+        private ImageList ImageListMain;
     }
 }

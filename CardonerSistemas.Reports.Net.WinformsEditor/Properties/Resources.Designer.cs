@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CardonerSistemas.Reports.Net.Properties {
+namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CardonerSistemas.Reports.Net.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardonerSistemas.Reports.Net.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardonerSistemas.Reports.Net.WinformsEditor.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,83 @@ namespace CardonerSistemas.Reports.Net.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stored procedure.
+        ///   Looks up a localized string similar to Brushes.
         /// </summary>
-        internal static string StringDatasourceTypeStoredProcedureFriendlyName {
+        internal static string StringBrushes {
             get {
-                return ResourceManager.GetString("StringDatasourceTypeStoredProcedureFriendlyName", resourceCulture);
+                return ResourceManager.GetString("StringBrushes", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Table direct.
+        ///   Looks up a localized string similar to Color.
         /// </summary>
-        internal static string StringDatasourceTypeTableDirectFriendlyName {
+        internal static string StringColor {
             get {
-                return ResourceManager.GetString("StringDatasourceTypeTableDirectFriendlyName", resourceCulture);
+                return ResourceManager.GetString("StringColor", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text.
+        ///   Looks up a localized string similar to Datasource.
         /// </summary>
-        internal static string StringDatasourceTypeTextFriendlyName {
+        internal static string StringDatasource {
             get {
-                return ResourceManager.GetString("StringDatasourceTypeTextFriendlyName", resourceCulture);
+                return ResourceManager.GetString("StringDatasource", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to no.
+        ///   Looks up a localized string similar to Report editor.
         /// </summary>
-        internal static string StringGeneralNo {
+        internal static string StringEditorTitle {
             get {
-                return ResourceManager.GetString("StringGeneralNo", resourceCulture);
+                return ResourceManager.GetString("StringEditorTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to yes.
+        ///   Looks up a localized string similar to Fonts.
         /// </summary>
-        internal static string StringGeneralYes {
+        internal static string StringFonts {
             get {
-                return ResourceManager.GetString("StringGeneralYes", resourceCulture);
+                return ResourceManager.GetString("StringFonts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lines.
+        /// </summary>
+        internal static string StringLines {
+            get {
+                return ResourceManager.GetString("StringLines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rectangles.
+        /// </summary>
+        internal static string StringRectangles {
+            get {
+                return ResourceManager.GetString("StringRectangles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sections.
+        /// </summary>
+        internal static string StringSections {
+            get {
+                return ResourceManager.GetString("StringSections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Texts.
+        /// </summary>
+        internal static string StringTexts {
+            get {
+                return ResourceManager.GetString("StringTexts", resourceCulture);
             }
         }
     }
