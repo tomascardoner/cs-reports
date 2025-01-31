@@ -33,6 +33,17 @@
             SplitContainerMain = new SplitContainer();
             TreeViewReport = new TreeView();
             TableLayoutPanelReport = new TableLayoutPanel();
+            numericUpDownPageMarginBottom = new NumericUpDown();
+            numericUpDownPageMarginRight = new NumericUpDown();
+            numericUpDownPageMarginLeft = new NumericUpDown();
+            numericUpDownPageMarginTop = new NumericUpDown();
+            textBoxTemplateFileName = new TextBox();
+            labelDetailSectionMaxRowCount = new Label();
+            labelTemplateFileName = new Label();
+            labelPageMarginBottom = new Label();
+            labelPageMarginRight = new Label();
+            labelPageMarginLeft = new Label();
+            labelPageMarginTop = new Label();
             labelReportId = new Label();
             textBoxReportId = new TextBox();
             labelName = new Label();
@@ -41,12 +52,19 @@
             comboBoxPageSize = new ComboBox();
             labelPageOrientation = new Label();
             comboBoxPageOrientation = new ComboBox();
+            numericUpDownDetailSectionMaxRowCount = new NumericUpDown();
             ImageListMain = new ImageList(components);
+            toolTipMain = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)SplitContainerMain).BeginInit();
             SplitContainerMain.Panel1.SuspendLayout();
             SplitContainerMain.Panel2.SuspendLayout();
             SplitContainerMain.SuspendLayout();
             TableLayoutPanelReport.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginBottom).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginRight).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginLeft).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginTop).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownDetailSectionMaxRowCount).BeginInit();
             SuspendLayout();
             // 
             // SplitContainerMain
@@ -88,16 +106,33 @@
             TableLayoutPanelReport.Controls.Add(textBoxReportId, 2, 1);
             TableLayoutPanelReport.Controls.Add(labelName, 1, 2);
             TableLayoutPanelReport.Controls.Add(textBoxName, 2, 2);
-            TableLayoutPanelReport.Controls.Add(labelPageSize, 1, 3);
-            TableLayoutPanelReport.Controls.Add(comboBoxPageSize, 2, 3);
-            TableLayoutPanelReport.Controls.Add(labelPageOrientation, 1, 4);
-            TableLayoutPanelReport.Controls.Add(comboBoxPageOrientation, 2, 4);
+            TableLayoutPanelReport.Controls.Add(labelTemplateFileName, 1, 3);
+            TableLayoutPanelReport.Controls.Add(textBoxTemplateFileName, 2, 3);
+            TableLayoutPanelReport.Controls.Add(labelPageSize, 1, 4);
+            TableLayoutPanelReport.Controls.Add(comboBoxPageSize, 2, 4);
+            TableLayoutPanelReport.Controls.Add(labelPageOrientation, 1, 5);
+            TableLayoutPanelReport.Controls.Add(comboBoxPageOrientation, 2, 5);
+            TableLayoutPanelReport.Controls.Add(labelPageMarginTop, 1, 6);
+            TableLayoutPanelReport.Controls.Add(numericUpDownPageMarginTop, 2, 6);
+            TableLayoutPanelReport.Controls.Add(labelPageMarginLeft, 1, 7);
+            TableLayoutPanelReport.Controls.Add(numericUpDownPageMarginLeft, 2, 7);
+            TableLayoutPanelReport.Controls.Add(labelPageMarginRight, 1, 8);
+            TableLayoutPanelReport.Controls.Add(numericUpDownPageMarginRight, 2, 8);
+            TableLayoutPanelReport.Controls.Add(labelPageMarginBottom, 1, 9);
+            TableLayoutPanelReport.Controls.Add(numericUpDownPageMarginBottom, 2, 9);
+            TableLayoutPanelReport.Controls.Add(labelDetailSectionMaxRowCount, 1, 10);
+            TableLayoutPanelReport.Controls.Add(numericUpDownDetailSectionMaxRowCount, 2, 10);
             TableLayoutPanelReport.Dock = DockStyle.Fill;
             TableLayoutPanelReport.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             TableLayoutPanelReport.Location = new Point(0, 0);
             TableLayoutPanelReport.Name = "TableLayoutPanelReport";
-            TableLayoutPanelReport.RowCount = 7;
+            TableLayoutPanelReport.RowCount = 12;
             TableLayoutPanelReport.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            TableLayoutPanelReport.RowStyles.Add(new RowStyle());
+            TableLayoutPanelReport.RowStyles.Add(new RowStyle());
+            TableLayoutPanelReport.RowStyles.Add(new RowStyle());
+            TableLayoutPanelReport.RowStyles.Add(new RowStyle());
+            TableLayoutPanelReport.RowStyles.Add(new RowStyle());
             TableLayoutPanelReport.RowStyles.Add(new RowStyle());
             TableLayoutPanelReport.RowStyles.Add(new RowStyle());
             TableLayoutPanelReport.RowStyles.Add(new RowStyle());
@@ -108,13 +143,133 @@
             TableLayoutPanelReport.TabIndex = 0;
             TableLayoutPanelReport.Visible = false;
             // 
+            // numericUpDownPageMarginBottom
+            // 
+            numericUpDownPageMarginBottom.DecimalPlaces = 2;
+            numericUpDownPageMarginBottom.Location = new Point(322, 433);
+            numericUpDownPageMarginBottom.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+            numericUpDownPageMarginBottom.Name = "numericUpDownPageMarginBottom";
+            numericUpDownPageMarginBottom.Size = new Size(72, 27);
+            numericUpDownPageMarginBottom.TabIndex = 23;
+            numericUpDownPageMarginBottom.TextAlign = HorizontalAlignment.Right;
+            toolTipMain.SetToolTip(numericUpDownPageMarginBottom, "Set to zero for unlimited rows.");
+            // 
+            // numericUpDownPageMarginRight
+            // 
+            numericUpDownPageMarginRight.DecimalPlaces = 2;
+            numericUpDownPageMarginRight.Location = new Point(322, 400);
+            numericUpDownPageMarginRight.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+            numericUpDownPageMarginRight.Name = "numericUpDownPageMarginRight";
+            numericUpDownPageMarginRight.Size = new Size(72, 27);
+            numericUpDownPageMarginRight.TabIndex = 22;
+            numericUpDownPageMarginRight.TextAlign = HorizontalAlignment.Right;
+            toolTipMain.SetToolTip(numericUpDownPageMarginRight, "Set to zero for unlimited rows.");
+            // 
+            // numericUpDownPageMarginLeft
+            // 
+            numericUpDownPageMarginLeft.DecimalPlaces = 2;
+            numericUpDownPageMarginLeft.Location = new Point(322, 367);
+            numericUpDownPageMarginLeft.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+            numericUpDownPageMarginLeft.Name = "numericUpDownPageMarginLeft";
+            numericUpDownPageMarginLeft.Size = new Size(72, 27);
+            numericUpDownPageMarginLeft.TabIndex = 21;
+            numericUpDownPageMarginLeft.TextAlign = HorizontalAlignment.Right;
+            toolTipMain.SetToolTip(numericUpDownPageMarginLeft, "Set to zero for unlimited rows.");
+            // 
+            // numericUpDownPageMarginTop
+            // 
+            numericUpDownPageMarginTop.DecimalPlaces = 2;
+            numericUpDownPageMarginTop.Location = new Point(322, 334);
+            numericUpDownPageMarginTop.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+            numericUpDownPageMarginTop.Name = "numericUpDownPageMarginTop";
+            numericUpDownPageMarginTop.Size = new Size(72, 27);
+            numericUpDownPageMarginTop.TabIndex = 20;
+            numericUpDownPageMarginTop.TextAlign = HorizontalAlignment.Right;
+            toolTipMain.SetToolTip(numericUpDownPageMarginTop, "Set to zero for unlimited rows.");
+            // 
+            // textBoxTemplateFileName
+            // 
+            textBoxTemplateFileName.Dock = DockStyle.Fill;
+            textBoxTemplateFileName.Location = new Point(322, 233);
+            textBoxTemplateFileName.MaxLength = 255;
+            textBoxTemplateFileName.Name = "textBoxTemplateFileName";
+            textBoxTemplateFileName.Size = new Size(400, 27);
+            textBoxTemplateFileName.TabIndex = 18;
+            toolTipMain.SetToolTip(textBoxTemplateFileName, "Use fullpath or filename only if the template file is located in the same folder of the report file.");
+            // 
+            // labelDetailSectionMaxRowCount
+            // 
+            labelDetailSectionMaxRowCount.AutoSize = true;
+            labelDetailSectionMaxRowCount.Dock = DockStyle.Fill;
+            labelDetailSectionMaxRowCount.Location = new Point(86, 463);
+            labelDetailSectionMaxRowCount.Name = "labelDetailSectionMaxRowCount";
+            labelDetailSectionMaxRowCount.Size = new Size(230, 33);
+            labelDetailSectionMaxRowCount.TabIndex = 17;
+            labelDetailSectionMaxRowCount.Text = "Max. row count of detail sections:";
+            labelDetailSectionMaxRowCount.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // labelTemplateFileName
+            // 
+            labelTemplateFileName.AutoSize = true;
+            labelTemplateFileName.Dock = DockStyle.Fill;
+            labelTemplateFileName.Location = new Point(86, 230);
+            labelTemplateFileName.Name = "labelTemplateFileName";
+            labelTemplateFileName.Size = new Size(230, 33);
+            labelTemplateFileName.TabIndex = 16;
+            labelTemplateFileName.Text = "Template file:";
+            labelTemplateFileName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // labelPageMarginBottom
+            // 
+            labelPageMarginBottom.AutoSize = true;
+            labelPageMarginBottom.Dock = DockStyle.Fill;
+            labelPageMarginBottom.Location = new Point(86, 430);
+            labelPageMarginBottom.Name = "labelPageMarginBottom";
+            labelPageMarginBottom.Size = new Size(230, 33);
+            labelPageMarginBottom.TabIndex = 11;
+            labelPageMarginBottom.Text = "Page margin - bottom (cm):";
+            labelPageMarginBottom.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // labelPageMarginRight
+            // 
+            labelPageMarginRight.AutoSize = true;
+            labelPageMarginRight.Dock = DockStyle.Fill;
+            labelPageMarginRight.Location = new Point(86, 397);
+            labelPageMarginRight.Name = "labelPageMarginRight";
+            labelPageMarginRight.Size = new Size(230, 33);
+            labelPageMarginRight.TabIndex = 10;
+            labelPageMarginRight.Text = "Page margin - right (cm):";
+            labelPageMarginRight.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // labelPageMarginLeft
+            // 
+            labelPageMarginLeft.AutoSize = true;
+            labelPageMarginLeft.Dock = DockStyle.Fill;
+            labelPageMarginLeft.Location = new Point(86, 364);
+            labelPageMarginLeft.Name = "labelPageMarginLeft";
+            labelPageMarginLeft.Size = new Size(230, 33);
+            labelPageMarginLeft.TabIndex = 9;
+            labelPageMarginLeft.Text = "Page margin - left (cm):";
+            labelPageMarginLeft.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // labelPageMarginTop
+            // 
+            labelPageMarginTop.AutoSize = true;
+            labelPageMarginTop.Dock = DockStyle.Fill;
+            labelPageMarginTop.Location = new Point(86, 331);
+            labelPageMarginTop.Name = "labelPageMarginTop";
+            labelPageMarginTop.Size = new Size(230, 33);
+            labelPageMarginTop.TabIndex = 8;
+            labelPageMarginTop.Text = "Page margin - top (cm):";
+            labelPageMarginTop.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // labelReportId
             // 
             labelReportId.AutoSize = true;
             labelReportId.Dock = DockStyle.Fill;
-            labelReportId.Location = new Point(140, 263);
+            labelReportId.Location = new Point(86, 164);
             labelReportId.Name = "labelReportId";
-            labelReportId.Size = new Size(121, 33);
+            labelReportId.Size = new Size(230, 33);
             labelReportId.TabIndex = 0;
             labelReportId.Text = "Id:";
             labelReportId.TextAlign = ContentAlignment.MiddleLeft;
@@ -122,7 +277,7 @@
             // textBoxReportId
             // 
             textBoxReportId.Dock = DockStyle.Fill;
-            textBoxReportId.Location = new Point(267, 266);
+            textBoxReportId.Location = new Point(322, 167);
             textBoxReportId.Name = "textBoxReportId";
             textBoxReportId.ReadOnly = true;
             textBoxReportId.Size = new Size(400, 27);
@@ -133,9 +288,9 @@
             // 
             labelName.AutoSize = true;
             labelName.Dock = DockStyle.Fill;
-            labelName.Location = new Point(140, 296);
+            labelName.Location = new Point(86, 197);
             labelName.Name = "labelName";
-            labelName.Size = new Size(121, 33);
+            labelName.Size = new Size(230, 33);
             labelName.TabIndex = 2;
             labelName.Text = "Name:";
             labelName.TextAlign = ContentAlignment.MiddleLeft;
@@ -143,7 +298,8 @@
             // textBoxName
             // 
             textBoxName.Dock = DockStyle.Fill;
-            textBoxName.Location = new Point(267, 299);
+            textBoxName.Location = new Point(322, 200);
+            textBoxName.MaxLength = 100;
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(400, 27);
             textBoxName.TabIndex = 3;
@@ -152,9 +308,9 @@
             // 
             labelPageSize.AutoSize = true;
             labelPageSize.Dock = DockStyle.Fill;
-            labelPageSize.Location = new Point(140, 329);
+            labelPageSize.Location = new Point(86, 263);
             labelPageSize.Name = "labelPageSize";
-            labelPageSize.Size = new Size(121, 34);
+            labelPageSize.Size = new Size(230, 34);
             labelPageSize.TabIndex = 4;
             labelPageSize.Text = "Page size:";
             labelPageSize.TextAlign = ContentAlignment.MiddleLeft;
@@ -164,7 +320,7 @@
             comboBoxPageSize.Dock = DockStyle.Fill;
             comboBoxPageSize.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPageSize.FormattingEnabled = true;
-            comboBoxPageSize.Location = new Point(267, 332);
+            comboBoxPageSize.Location = new Point(322, 266);
             comboBoxPageSize.Name = "comboBoxPageSize";
             comboBoxPageSize.Size = new Size(400, 28);
             comboBoxPageSize.TabIndex = 6;
@@ -173,9 +329,9 @@
             // 
             labelPageOrientation.AutoSize = true;
             labelPageOrientation.Dock = DockStyle.Fill;
-            labelPageOrientation.Location = new Point(140, 363);
+            labelPageOrientation.Location = new Point(86, 297);
             labelPageOrientation.Name = "labelPageOrientation";
-            labelPageOrientation.Size = new Size(121, 34);
+            labelPageOrientation.Size = new Size(230, 34);
             labelPageOrientation.TabIndex = 5;
             labelPageOrientation.Text = "Page orientation:";
             labelPageOrientation.TextAlign = ContentAlignment.MiddleLeft;
@@ -184,10 +340,20 @@
             // 
             comboBoxPageOrientation.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPageOrientation.FormattingEnabled = true;
-            comboBoxPageOrientation.Location = new Point(267, 366);
+            comboBoxPageOrientation.Location = new Point(322, 300);
             comboBoxPageOrientation.Name = "comboBoxPageOrientation";
             comboBoxPageOrientation.Size = new Size(151, 28);
             comboBoxPageOrientation.TabIndex = 7;
+            // 
+            // numericUpDownDetailSectionMaxRowCount
+            // 
+            numericUpDownDetailSectionMaxRowCount.Location = new Point(322, 466);
+            numericUpDownDetailSectionMaxRowCount.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
+            numericUpDownDetailSectionMaxRowCount.Name = "numericUpDownDetailSectionMaxRowCount";
+            numericUpDownDetailSectionMaxRowCount.Size = new Size(54, 27);
+            numericUpDownDetailSectionMaxRowCount.TabIndex = 19;
+            numericUpDownDetailSectionMaxRowCount.TextAlign = HorizontalAlignment.Right;
+            toolTipMain.SetToolTip(numericUpDownDetailSectionMaxRowCount, "Set to zero for unlimited rows.");
             // 
             // ImageListMain
             // 
@@ -224,6 +390,11 @@
             SplitContainerMain.ResumeLayout(false);
             TableLayoutPanelReport.ResumeLayout(false);
             TableLayoutPanelReport.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginBottom).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginRight).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginLeft).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginTop).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownDetailSectionMaxRowCount).EndInit();
             ResumeLayout(false);
         }
 
@@ -241,5 +412,18 @@
         private Label labelPageSize;
         private ComboBox comboBoxPageOrientation;
         private ComboBox comboBoxPageSize;
+        private Label labelPageMarginBottom;
+        private Label labelPageMarginRight;
+        private Label labelPageMarginLeft;
+        private Label labelPageMarginTop;
+        private Label labelDetailSectionMaxRowCount;
+        private Label labelTemplateFileName;
+        private TextBox textBoxTemplateFileName;
+        private NumericUpDown numericUpDownDetailSectionMaxRowCount;
+        private ToolTip toolTipMain;
+        private NumericUpDown numericUpDownPageMarginTop;
+        private NumericUpDown numericUpDownPageMarginBottom;
+        private NumericUpDown numericUpDownPageMarginRight;
+        private NumericUpDown numericUpDownPageMarginLeft;
     }
 }

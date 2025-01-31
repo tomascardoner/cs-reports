@@ -1,7 +1,4 @@
-﻿using PdfSharp;
-using static CardonerSistemas.Reports.Net.Model.Report;
-
-namespace CardonerSistemas.Reports.Net.WinformsEditor
+﻿namespace CardonerSistemas.Reports.Net.WinformsEditor
 {
     public partial class FormReportEditor : Form
     {
@@ -26,6 +23,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private readonly Model.Report mReport;
         private string mFilePath;
+
+        internal string FilePath => mFilePath;
 
         #endregion Declarations
 
@@ -277,7 +276,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         private void TreeViewReport_AfterSelect(object sender, TreeViewEventArgs e)
         {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            string nodeType = e.Node.Tag.ToString().Substring(0, e.Node.Tag.ToString().IndexOf("@"));
+            string nodeType = e.Node.Tag.ToString()[..e.Node.Tag.ToString().IndexOf('@')];
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
             switch (nodeType)
             {
@@ -289,7 +288,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         #endregion Events
 
-        #region Display report element properties
+        #region Display report elements properties
 
         private void ShowReportProperties()
         {
@@ -297,8 +296,14 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
             textBoxReportId.Text = mReport.ReportId.ToString();
             textBoxName.Text = mReport.Name;
-            comboBoxPageSize.SelectedItem = mReport.PageSize;
+            textBoxTemplateFileName.Text = mReport.TemplateFileName;
+            comboBoxPageSize.SelectedIndex = (byte)mReport.PageSize;
             comboBoxPageOrientation.SelectedItem = mReport.PageOrientation;
+            numericUpDownPageMarginTop.Value = mReport.PageMarginTop;
+            numericUpDownPageMarginLeft.Value = mReport.PageMarginLeft;
+            numericUpDownPageMarginRight.Value = mReport.PageMarginRight;
+            numericUpDownPageMarginBottom.Value = mReport.PageMarginBottom;
+            numericUpDownDetailSectionMaxRowCount.Value = mReport.DetailSectionMaxRowCount;
 
             TableLayoutPanelReport.ResumeLayout();
             TableLayoutPanelReport.Visible = true;
@@ -308,49 +313,49 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         #region Extra stuff
 
-        private static string PageSizeFriendlyName(PageSizes pageSize)
+        private static string PageSizeFriendlyName(Model.Report.PageSizes pageSize)
         {
             return pageSize switch
             {
-                PageSizes.A0 => "A0",
-                PageSizes.A1 => "A1",
-                PageSizes.A2 => "A2",
-                PageSizes.A3 => "A3",
-                PageSizes.A4 => "A4",
-                PageSizes.A5 => "A5",
-                PageSizes.RA0 => "RA0",
-                PageSizes.RA1 => "RA1",
-                PageSizes.RA2 => "RA2",
-                PageSizes.RA3 => "RA3",
-                PageSizes.RA4 => "RA4",
-                PageSizes.RA5 => "RA5",
-                PageSizes.B0 => "B0",
-                PageSizes.B1 => "B1",
-                PageSizes.B2 => "B2",
-                PageSizes.B3 => "B3",
-                PageSizes.B4 => "B4",
-                PageSizes.B5 => "B5",
-                PageSizes.Quarto => "Quarto",
-                PageSizes.Foolscap => "Foolscap",
-                PageSizes.Executive => "Executive",
-                PageSizes.GovernmentLetter => "Government Letter",
-                PageSizes.Letter => "Letter",
-                PageSizes.Legal => "Legal",
-                PageSizes.Ledger => "Ledger",
-                PageSizes.Tabloid => "Tabloid",
-                PageSizes.Post => "Post",
-                PageSizes.Crown => "Crown",
-                PageSizes.LargePost => "Large Post",
-                PageSizes.Demy => "Demy",
-                PageSizes.Medium => "Medium",
-                PageSizes.Royal => "Royal",
-                PageSizes.Elephant => "Elephant",
-                PageSizes.DoubleDemy => "Double Demy",
-                PageSizes.QuadDemy => "Quad Demy",
-                PageSizes.STMT => "STMT",
-                PageSizes.Folio => "Folio",
-                PageSizes.Statement => "Statement",
-                PageSizes.Size10x14 => "10x14",
+                Model.Report.PageSizes.A0 => "A0",
+                Model.Report.PageSizes.A1 => "A1",
+                Model.Report.PageSizes.A2 => "A2",
+                Model.Report.PageSizes.A3 => "A3",
+                Model.Report.PageSizes.A4 => "A4",
+                Model.Report.PageSizes.A5 => "A5",
+                Model.Report.PageSizes.RA0 => "RA0",
+                Model.Report.PageSizes.RA1 => "RA1",
+                Model.Report.PageSizes.RA2 => "RA2",
+                Model.Report.PageSizes.RA3 => "RA3",
+                Model.Report.PageSizes.RA4 => "RA4",
+                Model.Report.PageSizes.RA5 => "RA5",
+                Model.Report.PageSizes.B0 => "B0",
+                Model.Report.PageSizes.B1 => "B1",
+                Model.Report.PageSizes.B2 => "B2",
+                Model.Report.PageSizes.B3 => "B3",
+                Model.Report.PageSizes.B4 => "B4",
+                Model.Report.PageSizes.B5 => "B5",
+                Model.Report.PageSizes.Quarto => "Quarto",
+                Model.Report.PageSizes.Foolscap => "Foolscap",
+                Model.Report.PageSizes.Executive => "Executive",
+                Model.Report.PageSizes.GovernmentLetter => "Government Letter",
+                Model.Report.PageSizes.Letter => "Letter",
+                Model.Report.PageSizes.Legal => "Legal",
+                Model.Report.PageSizes.Ledger => "Ledger",
+                Model.Report.PageSizes.Tabloid => "Tabloid",
+                Model.Report.PageSizes.Post => "Post",
+                Model.Report.PageSizes.Crown => "Crown",
+                Model.Report.PageSizes.LargePost => "Large Post",
+                Model.Report.PageSizes.Demy => "Demy",
+                Model.Report.PageSizes.Medium => "Medium",
+                Model.Report.PageSizes.Royal => "Royal",
+                Model.Report.PageSizes.Elephant => "Elephant",
+                Model.Report.PageSizes.DoubleDemy => "Double Demy",
+                Model.Report.PageSizes.QuadDemy => "Quad Demy",
+                Model.Report.PageSizes.STMT => "STMT",
+                Model.Report.PageSizes.Folio => "Folio",
+                Model.Report.PageSizes.Statement => "Statement",
+                Model.Report.PageSizes.Size10x14 => "10x14",
                 _ => "Undefined"
             };
         }
