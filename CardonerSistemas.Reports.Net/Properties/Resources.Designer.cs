@@ -61,33 +61,6 @@ namespace CardonerSistemas.Reports.Net.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stored procedure.
-        /// </summary>
-        internal static string StringDatasourceTypeStoredProcedureFriendlyName {
-            get {
-                return ResourceManager.GetString("StringDatasourceTypeStoredProcedureFriendlyName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Table direct.
-        /// </summary>
-        internal static string StringDatasourceTypeTableDirectFriendlyName {
-            get {
-                return ResourceManager.GetString("StringDatasourceTypeTableDirectFriendlyName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Text.
-        /// </summary>
-        internal static string StringDatasourceTypeTextFriendlyName {
-            get {
-                return ResourceManager.GetString("StringDatasourceTypeTextFriendlyName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to no.
         /// </summary>
         internal static string StringGeneralNo {

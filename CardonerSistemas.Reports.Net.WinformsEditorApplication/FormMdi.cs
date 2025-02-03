@@ -39,6 +39,16 @@
             }
         }
 
+        private void SaveToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild is null)
+            {
+                return;
+            }
+            WinformsEditor.FormReportEditor formReportEditor = (WinformsEditor.FormReportEditor)this.ActiveMdiChild;
+            formReportEditor.SaveReport();
+        }
+
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.ActiveMdiChild is null)
@@ -114,5 +124,6 @@
                 childForm.Close();
             }
         }
+
     }
 }

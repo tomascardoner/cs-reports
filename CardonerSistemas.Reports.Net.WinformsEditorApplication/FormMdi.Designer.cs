@@ -354,7 +354,7 @@
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(207, 26);
+            aboutToolStripMenuItem.Size = new Size(159, 26);
             aboutToolStripMenuItem.Text = "&About ... ...";
             // 
             // toolStrip
@@ -395,6 +395,7 @@
             saveToolStripButton.Name = "saveToolStripButton";
             saveToolStripButton.Size = new Size(29, 24);
             saveToolStripButton.Text = "Save";
+            saveToolStripButton.Click += SaveToolStripButton_Click;
             // 
             // toolStripSeparator1
             // 

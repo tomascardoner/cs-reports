@@ -117,15 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="StringDatasourceTypeStoredProcedureFriendlyName" xml:space="preserve">
-    <value>Stored procedure</value>
-  </data>
-  <data name="StringDatasourceTypeTableDirectFriendlyName" xml:space="preserve">
-    <value>Table direct</value>
-  </data>
-  <data name="StringDatasourceTypeTextFriendlyName" xml:space="preserve">
-    <value>Text</value>
-  </data>
   <data name="StringGeneralNo" xml:space="preserve">
     <value>no</value>
   </data>

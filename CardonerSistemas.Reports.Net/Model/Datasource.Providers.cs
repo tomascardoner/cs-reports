@@ -2,7 +2,7 @@
 {
     public partial class Datasource
     {
-        public enum Providers
+        public enum Providers : byte
         {
             None = 0,
             SqlServer = 1,

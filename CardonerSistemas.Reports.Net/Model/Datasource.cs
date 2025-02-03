@@ -6,6 +6,7 @@ namespace CardonerSistemas.Reports.Net.Model
     {
         public Providers Provider { get; set; } = Providers.None;
 
+        [JsonIgnore]
         public string ProviderName => Provider switch
         {
             Providers.SqlServer => "Microsoft.Data.SqlClient",
@@ -18,15 +19,6 @@ namespace CardonerSistemas.Reports.Net.Model
         public string ConnectionString { get; set; } = string.Empty;
 
         public System.Data.CommandType Type { get; set; }
-
-        [JsonIgnore]
-        public string TypeFriendlyName => Type switch
-        {
-            System.Data.CommandType.Text => Properties.Resources.StringDatasourceTypeTextFriendlyName,
-            System.Data.CommandType.StoredProcedure => Properties.Resources.StringDatasourceTypeStoredProcedureFriendlyName,
-            System.Data.CommandType.TableDirect => Properties.Resources.StringDatasourceTypeTableDirectFriendlyName,
-            _ => string.Empty
-        };
 
         public string Text { get; set; } = string.Empty;
 

@@ -126,8 +126,26 @@
   <data name="StringDatasource" xml:space="preserve">
     <value>Datasource</value>
   </data>
-  <data name="StringEditorTitle" xml:space="preserve">
-    <value>Report editor</value>
+  <data name="StringDatasourceProvidersSqlServer" xml:space="preserve">
+    <value>MS SQL Server</value>
+  </data>
+  <data name="StringDatasourceProvidersOracle" xml:space="preserve">
+    <value>Oracle</value>
+  </data>
+  <data name="StringDatasourceProvidersOdbc" xml:space="preserve">
+    <value>ODBC</value>
+  </data>
+  <data name="StringDatasourceProvidersOleDb" xml:space="preserve">
+    <value>OleDb</value>
+  </data>
+  <data name="StringDatasourceTypeStoredProcedure" xml:space="preserve">
+    <value>Stored procedure</value>
+  </data>
+  <data name="StringDatasourceTypeTableDirect" xml:space="preserve">
+    <value>Table direct</value>
+  </data>
+  <data name="StringDatasourceTypeText" xml:space="preserve">
+    <value>Text</value>
   </data>
   <data name="StringFonts" xml:space="preserve">
     <value>Fonts</value>
@@ -146,5 +164,14 @@
   </data>
   <data name="StringTexts" xml:space="preserve">
     <value>Texts</value>
+  </data>
+  <data name="StringDatasourceProvidersDataSet" xml:space="preserve">
+    <value>DataSet</value>
+  </data>
+  <data name="StringPageOrientationPortrait" xml:space="preserve">
+    <value>Portrait</value>
+  </data>
+  <data name="StringPageOrientationLandscape" xml:space="preserve">
+    <value>Landscape</value>
   </data>
 </root>

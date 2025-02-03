@@ -88,11 +88,74 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Report editor.
+        ///   Looks up a localized string similar to DataSet.
         /// </summary>
-        internal static string StringEditorTitle {
+        internal static string StringDatasourceProvidersDataSet {
             get {
-                return ResourceManager.GetString("StringEditorTitle", resourceCulture);
+                return ResourceManager.GetString("StringDatasourceProvidersDataSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ODBC.
+        /// </summary>
+        internal static string StringDatasourceProvidersOdbc {
+            get {
+                return ResourceManager.GetString("StringDatasourceProvidersOdbc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OleDb.
+        /// </summary>
+        internal static string StringDatasourceProvidersOleDb {
+            get {
+                return ResourceManager.GetString("StringDatasourceProvidersOleDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oracle.
+        /// </summary>
+        internal static string StringDatasourceProvidersOracle {
+            get {
+                return ResourceManager.GetString("StringDatasourceProvidersOracle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MS SQL Server.
+        /// </summary>
+        internal static string StringDatasourceProvidersSqlServer {
+            get {
+                return ResourceManager.GetString("StringDatasourceProvidersSqlServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stored procedure.
+        /// </summary>
+        internal static string StringDatasourceTypeStoredProcedure {
+            get {
+                return ResourceManager.GetString("StringDatasourceTypeStoredProcedure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table direct.
+        /// </summary>
+        internal static string StringDatasourceTypeTableDirect {
+            get {
+                return ResourceManager.GetString("StringDatasourceTypeTableDirect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        internal static string StringDatasourceTypeText {
+            get {
+                return ResourceManager.GetString("StringDatasourceTypeText", resourceCulture);
             }
         }
         
@@ -111,6 +174,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringLines {
             get {
                 return ResourceManager.GetString("StringLines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Landscape.
+        /// </summary>
+        internal static string StringPageOrientationLandscape {
+            get {
+                return ResourceManager.GetString("StringPageOrientationLandscape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Portrait.
+        /// </summary>
+        internal static string StringPageOrientationPortrait {
+            get {
+                return ResourceManager.GetString("StringPageOrientationPortrait", resourceCulture);
             }
         }
         

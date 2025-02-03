@@ -41,46 +41,107 @@
         private void InitializeForm()
         {
             this.Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNew : $"{mReport.Name} ({mFilePath})";
-            TreeViewReport.ImageList = ImageListMain;
-            ShowReport();
+            treeViewReport.ImageList = imageListMain;
+            CreateReportNode();
 
-            FillPageSizes();
-            FillPageOrientations();
-        }
+            // Report combo boxes
+            FillReportPageSizes();
+            FillReportPageOrientations();
 
-        private void FillPageSizes()
-        {
-            comboBoxPageSize.Items.Clear();
-            foreach (Model.Report.PageSizes pageSize in Enum.GetValues<Model.Report.PageSizes>())
-            {
-                comboBoxPageSize.Items.Add(PageSizeFriendlyName(pageSize));
-            }
-        }
-
-        private void FillPageOrientations()
-        {
-            comboBoxPageOrientation.Items.Clear();
-            foreach (Model.Report.PageOrientations pageOrientation in Enum.GetValues<Model.Report.PageOrientations>())
-            {
-                comboBoxPageOrientation.Items.Add(pageOrientation);
-            }
-        }
-
-        public bool SaveReport(string fileName)
-        {
-            return Storage.FileSystem.Save(mReport, fileName);
+            // Datasource combo boxes
+            FillDatasourceProviders();
+            FillDatasourceTypes();
         }
 
         #endregion Form stuff
 
-        #region Display report elements
+        #region Methods
 
-        private void ShowReport()
+        public bool SaveReport()
+        {
+            if (!string.IsNullOrEmpty(mFilePath))
+            {
+                return Storage.FileSystem.Save(mReport, mFilePath);
+            }
+            return false;
+        }
+
+        public bool SaveReport(string fileName)
+        {
+            if (Storage.FileSystem.Save(mReport, fileName))
+            {
+                mFilePath = fileName;
+                this.Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNew : $"{mReport.Name} ({mFilePath})";
+                return true;
+            }
+            return false;
+        }
+
+        #endregion Methods
+
+        #region Events
+
+        private void TreeViewReport_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            string nodeType = e.Node.Tag.ToString()[..e.Node.Tag.ToString().IndexOf('@')];
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+            tableLayoutPanelReport.Visible = false;
+            tableLayoutPanelDatasource.Visible = false;
+
+            switch (nodeType)
+            {
+                case ReportKey:
+                    ShowReportProperties();
+                    break;
+                case DatasourceKey:
+                    ShowDatasourceProperties();
+                    break;
+            }
+        }
+
+        private void TextBoxs_Enter(object sender, EventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                textBox.SelectAll();
+            }
+        }
+
+        #endregion Events
+
+        #region Report
+
+        private void FillReportPageSizes()
+        {
+            comboBoxReportPageSize.ValueMember = "Key";
+            comboBoxReportPageSize.DisplayMember = "Value";
+            ICollection<KeyValuePair<byte, string>> reportPageSizes = [];
+            foreach (Model.Report.PageSizes pageSize in Enum.GetValues<Model.Report.PageSizes>())
+            {
+                reportPageSizes.Add(new KeyValuePair<byte, string>((byte)pageSize, FriendlyNames.GetPageSize(pageSize)));
+            }
+            comboBoxReportPageSize.DataSource = reportPageSizes;
+        }
+
+        private void FillReportPageOrientations()
+        {
+            comboBoxReportPageOrientation.ValueMember = "Key";
+            comboBoxReportPageOrientation.DisplayMember = "Value";
+            ICollection<KeyValuePair<byte, string>> reportPageOrientations = [];
+            foreach (Model.Report.PageOrientations pageOrientation in Enum.GetValues<Model.Report.PageOrientations>())
+            {
+                reportPageOrientations.Add(new KeyValuePair<byte, string>((byte)pageOrientation, FriendlyNames.GetPageOrientation(pageOrientation)));
+            }
+            comboBoxReportPageOrientation.DataSource = reportPageOrientations;
+        }
+
+        private void CreateReportNode()
         {
             this.Cursor = Cursors.WaitCursor;
 
-            TreeViewReport.SuspendLayout();
-            TreeViewReport.Nodes.Clear();
+            treeViewReport.SuspendLayout();
+            treeViewReport.Nodes.Clear();
             if (mReport.Sections is not null)
             {
                 // Root node for the report
@@ -91,20 +152,82 @@
                     ImageKey = ReportKey,
                     SelectedImageKey = ReportKey
                 };
-                TreeViewReport.Nodes.Add(treeNodeReport);
+                treeViewReport.Nodes.Add(treeNodeReport);
                 treeNodeReport.Expand();
 
-                ShowDatasource(treeNodeReport);
-                ShowFonts(treeNodeReport);
-                ShowBrushes(treeNodeReport);
-                ShowSections(treeNodeReport);
+                CreateDatasourceNode(treeNodeReport);
+                CreateFontsNode(treeNodeReport);
+                CreateBrushesNode(treeNodeReport);
+                CreateSectionsNode(treeNodeReport);
             }
-            TreeViewReport.ResumeLayout();
+            treeViewReport.ResumeLayout();
 
             this.Cursor = Cursors.Default;
         }
 
-        private void ShowDatasource(TreeNode treeNodeParent)
+        private void ShowReportProperties()
+        {
+            textBoxReportId.Text = mReport.ReportId.ToString();
+            textBoxReportName.Text = mReport.Name;
+            textBoxReportTemplateFileName.Text = mReport.TemplateFileName;
+            comboBoxReportPageSize.SelectedIndex = (byte)mReport.PageSize;
+            comboBoxReportPageOrientation.SelectedItem = mReport.PageOrientation;
+            numericUpDownReportPageMarginTop.Value = mReport.PageMarginTop;
+            numericUpDownReportPageMarginLeft.Value = mReport.PageMarginLeft;
+            numericUpDownReportPageMarginRight.Value = mReport.PageMarginRight;
+            numericUpDownReportPageMarginBottom.Value = mReport.PageMarginBottom;
+            numericUpDownReportDetailSectionMaxRowCount.Value = mReport.DetailSectionMaxRowCount;
+
+            tableLayoutPanelReport.Visible = true;
+        }
+
+        private void ReportApplyChanges(object sender, EventArgs e)
+        {
+            mReport.Name = textBoxReportName.Text;
+            mReport.TemplateFileName = textBoxReportTemplateFileName.Text;
+            mReport.PageSize = (Model.Report.PageSizes)comboBoxReportPageSize.SelectedIndex;
+            mReport.PageOrientation = (Model.Report.PageOrientations)comboBoxReportPageOrientation.SelectedIndex;
+            mReport.PageMarginTop = numericUpDownReportPageMarginTop.Value;
+            mReport.PageMarginLeft = numericUpDownReportPageMarginLeft.Value;
+            mReport.PageMarginRight = numericUpDownReportPageMarginRight.Value;
+            mReport.PageMarginBottom = numericUpDownReportPageMarginBottom.Value;
+            mReport.DetailSectionMaxRowCount = (short)numericUpDownReportDetailSectionMaxRowCount.Value;
+        }
+
+        private void ReportResetChanges(object sender, EventArgs e)
+        {
+            ShowReportProperties();
+        }
+
+        #endregion Report
+
+        #region Datasource
+
+        private void FillDatasourceProviders()
+        {
+            comboBoxDatasourceProvider.ValueMember = "Key";
+            comboBoxDatasourceProvider.DisplayMember = "Value";
+            ICollection<KeyValuePair<byte, string>> datasourceProviders = [];
+            foreach (Model.Datasource.Providers provider in Enum.GetValues<Model.Datasource.Providers>())
+            {
+                datasourceProviders.Add(new KeyValuePair<byte, string>((byte)provider, FriendlyNames.GetDatasourceProvider(provider)));
+            }
+            comboBoxDatasourceProvider.DataSource = datasourceProviders;
+        }
+
+        private void FillDatasourceTypes()
+        {
+            comboBoxDatasourceType.ValueMember = "Key";
+            comboBoxDatasourceType.DisplayMember = "Value";
+            ICollection<KeyValuePair<short, string>> datasourceTypes = [];
+            foreach (System.Data.CommandType datasourceType in Enum.GetValues<System.Data.CommandType>())
+            {
+                datasourceTypes.Add(new KeyValuePair<short, string>((short)datasourceType, FriendlyNames.GetDatasourceType(datasourceType)));
+            }
+            comboBoxDatasourceType.DataSource = datasourceTypes;
+        }
+
+        private void CreateDatasourceNode(TreeNode treeNodeParent)
         {
             TreeNode treeNodeDatasource = new()
             {
@@ -119,7 +242,7 @@
             }
             else
             {
-                treeNodeDatasource.Text = mReport.Datasource.TypeFriendlyName + (mReport.Datasource.Type != System.Data.CommandType.Text ? " => " + mReport.Datasource.Text : string.Empty);
+                treeNodeDatasource.Text = FriendlyNames.GetDatasourceType(mReport.Datasource.Type) + (mReport.Datasource.Type != System.Data.CommandType.Text ? " => " + mReport.Datasource.Text : string.Empty);
                 foreach (string parameterName in mReport.Datasource.Parameters.OrderBy(p => p.Name).Select(p => p.Name))
                 {
                     treeNodeDatasource.Nodes.Add(new TreeNode()
@@ -133,7 +256,46 @@
             }
         }
 
-        private void ShowFonts(TreeNode treeNodeParent)
+        private void ShowDatasourceProperties()
+        {
+            tableLayoutPanelDatasource.SuspendLayout();
+            if (mReport.Datasource is null)
+            {
+                comboBoxDatasourceProvider.SelectedIndex = -1;
+                textBoxDatasourceConnectionString.Text = string.Empty;
+                comboBoxDatasourceType.SelectedIndex = -1;
+                textBoxDatasourceText.Text = string.Empty;
+            }
+            else
+            {
+                comboBoxDatasourceProvider.SelectedValue = (byte)mReport.Datasource.Provider;
+                textBoxDatasourceConnectionString.Text = mReport.Datasource.ConnectionString;
+                comboBoxDatasourceType.SelectedValue = (short)mReport.Datasource.Type;
+                textBoxDatasourceText.Text = mReport.Datasource.Text;
+            }
+            tableLayoutPanelDatasource.ResumeLayout();
+            tableLayoutPanelDatasource.Visible = true;
+        }
+
+        private void DatasourceApplyChanges(object sender, EventArgs e)
+        {
+            mReport.Datasource ??= new();
+            mReport.Datasource.Provider = (Model.Datasource.Providers)comboBoxDatasourceProvider.SelectedIndex;
+            mReport.Datasource.ConnectionString = textBoxDatasourceConnectionString.Text;
+            mReport.Datasource.Type = (System.Data.CommandType)comboBoxDatasourceType.SelectedIndex;
+            mReport.Datasource.Text = textBoxDatasourceText.Text;
+        }
+
+        private void DatasourceResetChanges(object sender, EventArgs e)
+        {
+            ShowDatasourceProperties();
+        }
+
+        #endregion Datasource
+
+        #region Fonts
+
+        private void CreateFontsNode(TreeNode treeNodeParent)
         {
             TreeNode treeNodeFonts = new(Properties.Resources.StringFonts)
             {
@@ -154,7 +316,11 @@
             }
         }
 
-        private void ShowBrushes(TreeNode treeNodeParent)
+        #endregion Fonts
+
+        #region Brushes
+
+        private void CreateBrushesNode(TreeNode treeNodeParent)
         {
             TreeNode treeNodeBrushes = new()
             {
@@ -176,7 +342,11 @@
             }
         }
 
-        private void ShowSections(TreeNode treeNodeParent)
+        #endregion Brushes
+
+        #region Sections
+
+        private void CreateSectionsNode(TreeNode treeNodeParent)
         {
             TreeNode treeNodeSections = new()
             {
@@ -197,13 +367,17 @@
                 };
                 treeNodeSections.Nodes.Add(treeNodeSection);
 
-                ShowLinesOfSection(section, treeNodeSection);
-                ShowRectanglesOfSection(section, treeNodeSection);
-                ShowTextsOfSection(section, treeNodeSection);
+                CreateLinesOfSectionNode(section, treeNodeSection);
+                CreateRectanglesOfSectionNode(section, treeNodeSection);
+                CreateTextsOfSectionNode(section, treeNodeSection);
             }
         }
 
-        private void ShowLinesOfSection(Model.Section section, TreeNode treeNodeParent)
+        #endregion Sections
+
+        #region Lines
+
+        private void CreateLinesOfSectionNode(Model.Section section, TreeNode treeNodeParent)
         {
             TreeNode treeNodeSectionLines = new()
             {
@@ -225,7 +399,11 @@
             }
         }
 
-        private void ShowRectanglesOfSection(Model.Section section, TreeNode treeNodeParent)
+        #endregion Lines
+
+        #region Rectangles
+
+        private void CreateRectanglesOfSectionNode(Model.Section section, TreeNode treeNodeParent)
         {
             TreeNode treeNodeSectionRectangles = new()
             {
@@ -247,7 +425,11 @@
             }
         }
 
-        private void ShowTextsOfSection(Model.Section section, TreeNode treeNodeParent)
+        #endregion Rectangles
+
+        #region Texts
+
+        private void CreateTextsOfSectionNode(Model.Section section, TreeNode treeNodeParent)
         {
             TreeNode treeNodeSectionTexts = new()
             {
@@ -269,98 +451,7 @@
             }
         }
 
-        #endregion Display report elements
-
-        #region Events
-
-        private void TreeViewReport_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-            string nodeType = e.Node.Tag.ToString()[..e.Node.Tag.ToString().IndexOf('@')];
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
-            switch (nodeType)
-            {
-                case ReportKey:
-                    ShowReportProperties();
-                    break;
-            }
-        }
-
-        #endregion Events
-
-        #region Display report elements properties
-
-        private void ShowReportProperties()
-        {
-            TableLayoutPanelReport.SuspendLayout();
-
-            textBoxReportId.Text = mReport.ReportId.ToString();
-            textBoxName.Text = mReport.Name;
-            textBoxTemplateFileName.Text = mReport.TemplateFileName;
-            comboBoxPageSize.SelectedIndex = (byte)mReport.PageSize;
-            comboBoxPageOrientation.SelectedItem = mReport.PageOrientation;
-            numericUpDownPageMarginTop.Value = mReport.PageMarginTop;
-            numericUpDownPageMarginLeft.Value = mReport.PageMarginLeft;
-            numericUpDownPageMarginRight.Value = mReport.PageMarginRight;
-            numericUpDownPageMarginBottom.Value = mReport.PageMarginBottom;
-            numericUpDownDetailSectionMaxRowCount.Value = mReport.DetailSectionMaxRowCount;
-
-            TableLayoutPanelReport.ResumeLayout();
-            TableLayoutPanelReport.Visible = true;
-        }
-
-        #endregion Display report element properties
-
-        #region Extra stuff
-
-        private static string PageSizeFriendlyName(Model.Report.PageSizes pageSize)
-        {
-            return pageSize switch
-            {
-                Model.Report.PageSizes.A0 => "A0",
-                Model.Report.PageSizes.A1 => "A1",
-                Model.Report.PageSizes.A2 => "A2",
-                Model.Report.PageSizes.A3 => "A3",
-                Model.Report.PageSizes.A4 => "A4",
-                Model.Report.PageSizes.A5 => "A5",
-                Model.Report.PageSizes.RA0 => "RA0",
-                Model.Report.PageSizes.RA1 => "RA1",
-                Model.Report.PageSizes.RA2 => "RA2",
-                Model.Report.PageSizes.RA3 => "RA3",
-                Model.Report.PageSizes.RA4 => "RA4",
-                Model.Report.PageSizes.RA5 => "RA5",
-                Model.Report.PageSizes.B0 => "B0",
-                Model.Report.PageSizes.B1 => "B1",
-                Model.Report.PageSizes.B2 => "B2",
-                Model.Report.PageSizes.B3 => "B3",
-                Model.Report.PageSizes.B4 => "B4",
-                Model.Report.PageSizes.B5 => "B5",
-                Model.Report.PageSizes.Quarto => "Quarto",
-                Model.Report.PageSizes.Foolscap => "Foolscap",
-                Model.Report.PageSizes.Executive => "Executive",
-                Model.Report.PageSizes.GovernmentLetter => "Government Letter",
-                Model.Report.PageSizes.Letter => "Letter",
-                Model.Report.PageSizes.Legal => "Legal",
-                Model.Report.PageSizes.Ledger => "Ledger",
-                Model.Report.PageSizes.Tabloid => "Tabloid",
-                Model.Report.PageSizes.Post => "Post",
-                Model.Report.PageSizes.Crown => "Crown",
-                Model.Report.PageSizes.LargePost => "Large Post",
-                Model.Report.PageSizes.Demy => "Demy",
-                Model.Report.PageSizes.Medium => "Medium",
-                Model.Report.PageSizes.Royal => "Royal",
-                Model.Report.PageSizes.Elephant => "Elephant",
-                Model.Report.PageSizes.DoubleDemy => "Double Demy",
-                Model.Report.PageSizes.QuadDemy => "Quad Demy",
-                Model.Report.PageSizes.STMT => "STMT",
-                Model.Report.PageSizes.Folio => "Folio",
-                Model.Report.PageSizes.Statement => "Statement",
-                Model.Report.PageSizes.Size10x14 => "10x14",
-                _ => "Undefined"
-            };
-        }
-
-        #endregion Extra stuff
+        #endregion Texts
 
     }
 }
