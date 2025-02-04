@@ -20,8 +20,7 @@ namespace CardonerSistemas.Reports.Net.Engine
                 {
                     // Open the datasource
                     DbDataReader? dbDataReader = null;
-                    Dictionary<string, int> fieldsOrdinals = [];
-                    Data.Datasource.GetDatasource(report, ref dbDataReader, fieldsOrdinals);
+                    Data.Datasource.GetDatasource(report.Datasource, ref dbDataReader);
 
                     // Create a new PDF document
                     pdfDocument = new();
@@ -37,7 +36,7 @@ namespace CardonerSistemas.Reports.Net.Engine
                     Dictionary<short, XBrush> brushes = Brushes.Create(report.Brushes);
 
                     // Generate report
-                    Pages.CreateNewPage(pdfDocument, report, 1, brushes, fonts, dbDataReader, fieldsOrdinals);
+                    Pages.CreateNewPage(pdfDocument, report, 1, brushes, fonts, dbDataReader);
 
                     // Close the datasource
                     if (dbDataReader is not null && !dbDataReader.IsClosed)

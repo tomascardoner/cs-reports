@@ -5,7 +5,9 @@
         public enum TextTypes : byte
         {
             Static,
-            Field,
+            DatasourceField,
+            DatasourceParameter,
+            ReportParameter,
             Formula
         }
     }

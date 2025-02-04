@@ -97,6 +97,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are parameters with unspecified values. Do you want to continue anyway?.
+        /// </summary>
+        internal static string StringDatasourceGetFieldsWithNullParametersConfirmation {
+            get {
+                return ResourceManager.GetString("StringDatasourceGetFieldsWithNullParametersConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Datasource not specified..
         /// </summary>
         internal static string StringDatasourceNotSpecified {

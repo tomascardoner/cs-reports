@@ -30,7 +30,7 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public TextTypes TextType { get; set; }
 
-        public FieldTypes? FieldType { get; set; }
+        public Value.Types? FieldType { get; set; }
 
         public string Value { get; set; } = string.Empty;
 

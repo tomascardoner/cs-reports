@@ -97,38 +97,57 @@ namespace CardonerSistemas.Reports.Net.Data
             return dbDataReader;
         }
 
-        public static void GetDatasource(Model.Report report, ref DbDataReader? dbDataReader, Dictionary<string, int> fieldsOrdinals)
+        private static bool GetDatasourceFields(DbDataReader dbDataReader, Model.Datasource datasource)
         {
-            if (report.Datasource is not null && report.Datasource.Provider != Model.Datasource.Providers.None && !string.IsNullOrEmpty(GetProviderName(report.Datasource.Provider)))
+            ArgumentNullException.ThrowIfNull(dbDataReader);
+            ArgumentNullException.ThrowIfNull(datasource);
+            try
             {
-                DbConnection? dbConnection = CreateAndOpenConnection(report.Datasource);
+                for (int columnIndex = 0; columnIndex < dbDataReader.FieldCount; columnIndex++)
+                {
+                    string fieldName = dbDataReader.GetName(columnIndex);
+                    Model.DatasourceField? field = datasource.Fields.FirstOrDefault(f => f.Name == fieldName);
+                    if (field is null)
+                    {
+                        field = new(datasource)
+                        {
+                            Name = fieldName
+                        };
+                        datasource.Fields.Add(field);
+                    }
+                    field.Position = columnIndex;
+                    field.Type = dbDataReader.GetFieldType(columnIndex);
+                    field.DataTypeName = dbDataReader.GetDataTypeName(columnIndex);
+                    field.Verified = true;
+                }
+
+                // Remove fields that are not in the datasource
+                foreach (Model.DatasourceField field in datasource.Fields.Where(f => !f.Verified))
+                {
+                    datasource.Fields.Remove(field);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public static void GetDatasource(Model.Datasource? datasource, ref DbDataReader? dbDataReader)
+        {
+            if (datasource is not null && datasource.Provider != Model.Datasource.Providers.None && !string.IsNullOrEmpty(GetProviderName(datasource.Provider)))
+            {
+                DbConnection? dbConnection = CreateAndOpenConnection(datasource);
                 if (dbConnection is not null)
                 {
-                    dbDataReader = GetDataReader(dbConnection, report.Datasource);
-                    if (dbDataReader is not null)
+                    dbDataReader = GetDataReader(dbConnection, datasource);
+                    if (dbDataReader is not null && (!dbDataReader.Read() || !GetDatasourceFields(dbDataReader, datasource)))
                     {
-                        if (dbDataReader.Read())
-                        {
-                            try
-                            {
-                                for (int columnIndex = 0; columnIndex < dbDataReader.FieldCount; columnIndex++)
-                                {
-                                    fieldsOrdinals.Add(dbDataReader.GetName(columnIndex), columnIndex);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine(ex.Message);
-                                dbDataReader = null;
-                                dbConnection.Close();
-                            }
-                        }
-                        else
-                        {
-                            dbDataReader.Close();
-                            dbDataReader = null;
-                            dbConnection.Close();
-                        }
+                        dbDataReader.Close();
+                        dbDataReader = null;
+                        dbConnection.Close();
                     }
                 }
             }

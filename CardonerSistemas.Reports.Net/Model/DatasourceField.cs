@@ -1,9 +1,36 @@
-﻿namespace CardonerSistemas.Reports.Net.Model
+﻿using System.Text.Json.Serialization;
+
+namespace CardonerSistemas.Reports.Net.Model
 {
     public class DatasourceField
     {
-        public required string Name { get; set; }
 
-        public required Type Type { get; set; }
+        public DatasourceField(Datasource datasource)
+        {
+            FieldId = (short)(datasource.Fields.Max(f => f.FieldId) + 1);
+        }
+
+        [JsonConstructor]
+        public DatasourceField(short fieldId)
+        {
+            FieldId = fieldId;
+        }
+
+        public short FieldId { get; }
+
+        public string Name { get; set; } = string.Empty;
+
+        [JsonIgnore]
+        public int Position { get; set; }
+
+        [JsonIgnore]
+        public Type Type { get; set; } = typeof(object);
+
+        [JsonIgnore]
+        public string DataTypeName { get; set; } = string.Empty;
+
+        [JsonIgnore]
+        public bool Verified { get; set; }
+
     }
 }

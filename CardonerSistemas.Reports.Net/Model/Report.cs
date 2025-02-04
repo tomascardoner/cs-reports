@@ -4,6 +4,7 @@ namespace CardonerSistemas.Reports.Net.Model
 {
     public partial class Report
     {
+
         public Report() {
             ReportId = Guid.NewGuid();
         }
@@ -35,6 +36,8 @@ namespace CardonerSistemas.Reports.Net.Model
         public decimal PageMarginBottom { get; set; } = 1.5m;
 
         public short DetailSectionMaxRowCount { get; set; } = 0;
+
+        public ICollection<ReportParameter> Parameters { get; set; } = [];
 
         public Datasource? Datasource { get; set; }
 

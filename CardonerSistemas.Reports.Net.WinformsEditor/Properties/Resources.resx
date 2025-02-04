@@ -306,4 +306,7 @@
   <data name="StringDatasourceTextNotSpecified" xml:space="preserve">
     <value>Datasource text not specified.</value>
   </data>
+  <data name="StringDatasourceGetFieldsWithNullParametersConfirmation" xml:space="preserve">
+    <value>There are parameters with unspecified values. Do you want to continue anyway?</value>
+  </data>
 </root>

@@ -32,6 +32,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReportEditor));
             splitContainerMain = new SplitContainer();
             treeViewReport = new TreeView();
+            tableLayoutPanelDatasourceParameter = new TableLayoutPanel();
+            labelDatasourceParameterValueNull = new Label();
+            labelDatasourceParameterValueNumeric = new Label();
+            labelDatasourceParameterValueDateTime = new Label();
+            textBoxDatasourceParameterValueText = new TextBox();
+            labelDatasourceParameterName = new Label();
+            textBoxDatasourceParameterName = new TextBox();
+            labelDatasourceParameterType = new Label();
+            labelDatasourceParameterValueText = new Label();
+            comboBoxDatasourceParameterType = new ComboBox();
+            tableLayoutPanelDatasourceParameterButtons = new TableLayoutPanel();
+            buttonDatasourceParameterReset = new Button();
+            buttonDatasourceParameterApply = new Button();
             tableLayoutPanelDatasource = new TableLayoutPanel();
             textBoxDatasourceText = new TextBox();
             labelDatasourceProvider = new Label();
@@ -72,10 +85,18 @@
             buttonReportReset = new Button();
             imageListMain = new ImageList(components);
             toolTipMain = new ToolTip(components);
+            buttonDatasourceAddParameter = new Button();
+            numericUpDownDatasourceParameterValueNumeric = new NumericUpDown();
+            checkBoxDatasourceParameterValueNull = new CheckBox();
+            dateTimePickerDatasourceParameterValueDateTime = new DateTimePicker();
+            labelDatasourceParameterValueYesNo = new Label();
+            checkBoxDatasourceParameterValueYesNo = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)splitContainerMain).BeginInit();
             splitContainerMain.Panel1.SuspendLayout();
             splitContainerMain.Panel2.SuspendLayout();
             splitContainerMain.SuspendLayout();
+            tableLayoutPanelDatasourceParameter.SuspendLayout();
+            tableLayoutPanelDatasourceParameterButtons.SuspendLayout();
             tableLayoutPanelDatasource.SuspendLayout();
             tableLayoutPanelButtons.SuspendLayout();
             tableLayoutPanelReport.SuspendLayout();
@@ -85,6 +106,7 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownReportPageMarginBottom).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownReportDetailSectionMaxRowCount).BeginInit();
             tableLayoutPanelReportButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownDatasourceParameterValueNumeric).BeginInit();
             SuspendLayout();
             // 
             // splitContainerMain
@@ -99,6 +121,7 @@
             // 
             // splitContainerMain.Panel2
             // 
+            splitContainerMain.Panel2.Controls.Add(tableLayoutPanelDatasourceParameter);
             splitContainerMain.Panel2.Controls.Add(tableLayoutPanelDatasource);
             splitContainerMain.Panel2.Controls.Add(tableLayoutPanelReport);
             splitContainerMain.Size = new Size(1062, 661);
@@ -115,6 +138,183 @@
             treeViewReport.Size = new Size(250, 661);
             treeViewReport.TabIndex = 0;
             treeViewReport.AfterSelect += TreeViewReport_AfterSelect;
+            // 
+            // tableLayoutPanelDatasourceParameter
+            // 
+            tableLayoutPanelDatasourceParameter.ColumnCount = 4;
+            tableLayoutPanelDatasourceParameter.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanelDatasourceParameter.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelDatasourceParameter.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelDatasourceParameter.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanelDatasourceParameter.Controls.Add(labelDatasourceParameterName, 1, 1);
+            tableLayoutPanelDatasourceParameter.Controls.Add(textBoxDatasourceParameterName, 2, 1);
+            tableLayoutPanelDatasourceParameter.Controls.Add(labelDatasourceParameterType, 1, 2);
+            tableLayoutPanelDatasourceParameter.Controls.Add(comboBoxDatasourceParameterType, 2, 2);
+            tableLayoutPanelDatasourceParameter.Controls.Add(labelDatasourceParameterValueNull, 1, 3);
+            tableLayoutPanelDatasourceParameter.Controls.Add(checkBoxDatasourceParameterValueNull, 2, 3);
+            tableLayoutPanelDatasourceParameter.Controls.Add(labelDatasourceParameterValueText, 1, 4);
+            tableLayoutPanelDatasourceParameter.Controls.Add(textBoxDatasourceParameterValueText, 2, 4);
+            tableLayoutPanelDatasourceParameter.Controls.Add(labelDatasourceParameterValueNumeric, 1, 5);
+            tableLayoutPanelDatasourceParameter.Controls.Add(numericUpDownDatasourceParameterValueNumeric, 2, 5);
+            tableLayoutPanelDatasourceParameter.Controls.Add(labelDatasourceParameterValueDateTime, 1, 6);
+            tableLayoutPanelDatasourceParameter.Controls.Add(dateTimePickerDatasourceParameterValueDateTime, 2, 6);
+            tableLayoutPanelDatasourceParameter.Controls.Add(labelDatasourceParameterValueYesNo, 1, 7);
+            tableLayoutPanelDatasourceParameter.Controls.Add(checkBoxDatasourceParameterValueYesNo, 2, 7);
+            tableLayoutPanelDatasourceParameter.Controls.Add(tableLayoutPanelDatasourceParameterButtons, 2, 8);
+            tableLayoutPanelDatasourceParameter.Dock = DockStyle.Fill;
+            tableLayoutPanelDatasourceParameter.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
+            tableLayoutPanelDatasourceParameter.Location = new Point(0, 0);
+            tableLayoutPanelDatasourceParameter.Name = "tableLayoutPanelDatasourceParameter";
+            tableLayoutPanelDatasourceParameter.RowCount = 10;
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle());
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle());
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle());
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle());
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle());
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle());
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle());
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle());
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanelDatasourceParameter.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanelDatasourceParameter.Size = new Size(808, 661);
+            tableLayoutPanelDatasourceParameter.TabIndex = 3;
+            tableLayoutPanelDatasourceParameter.Visible = false;
+            // 
+            // labelDatasourceParameterValueNull
+            // 
+            labelDatasourceParameterValueNull.AutoSize = true;
+            labelDatasourceParameterValueNull.Dock = DockStyle.Fill;
+            labelDatasourceParameterValueNull.Location = new Point(162, 252);
+            labelDatasourceParameterValueNull.Name = "labelDatasourceParameterValueNull";
+            labelDatasourceParameterValueNull.Size = new Size(78, 23);
+            labelDatasourceParameterValueNull.TabIndex = 4;
+            labelDatasourceParameterValueNull.Text = "Null value:";
+            labelDatasourceParameterValueNull.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // labelDatasourceParameterValueNumeric
+            // 
+            labelDatasourceParameterValueNumeric.AutoSize = true;
+            labelDatasourceParameterValueNumeric.Dock = DockStyle.Fill;
+            labelDatasourceParameterValueNumeric.Location = new Point(162, 341);
+            labelDatasourceParameterValueNumeric.Name = "labelDatasourceParameterValueNumeric";
+            labelDatasourceParameterValueNumeric.Size = new Size(78, 33);
+            labelDatasourceParameterValueNumeric.TabIndex = 8;
+            labelDatasourceParameterValueNumeric.Text = "Value:";
+            labelDatasourceParameterValueNumeric.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // labelDatasourceParameterValueDateTime
+            // 
+            labelDatasourceParameterValueDateTime.AutoSize = true;
+            labelDatasourceParameterValueDateTime.Dock = DockStyle.Fill;
+            labelDatasourceParameterValueDateTime.Location = new Point(162, 374);
+            labelDatasourceParameterValueDateTime.Name = "labelDatasourceParameterValueDateTime";
+            labelDatasourceParameterValueDateTime.Size = new Size(78, 33);
+            labelDatasourceParameterValueDateTime.TabIndex = 10;
+            labelDatasourceParameterValueDateTime.Text = "Value:";
+            labelDatasourceParameterValueDateTime.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // textBoxDatasourceParameterValueText
+            // 
+            textBoxDatasourceParameterValueText.Dock = DockStyle.Fill;
+            textBoxDatasourceParameterValueText.Location = new Point(246, 278);
+            textBoxDatasourceParameterValueText.Multiline = true;
+            textBoxDatasourceParameterValueText.Name = "textBoxDatasourceParameterValueText";
+            textBoxDatasourceParameterValueText.ScrollBars = ScrollBars.Vertical;
+            textBoxDatasourceParameterValueText.Size = new Size(400, 60);
+            textBoxDatasourceParameterValueText.TabIndex = 7;
+            // 
+            // labelDatasourceParameterName
+            // 
+            labelDatasourceParameterName.AutoSize = true;
+            labelDatasourceParameterName.Dock = DockStyle.Fill;
+            labelDatasourceParameterName.Location = new Point(162, 185);
+            labelDatasourceParameterName.Name = "labelDatasourceParameterName";
+            labelDatasourceParameterName.Size = new Size(78, 33);
+            labelDatasourceParameterName.TabIndex = 0;
+            labelDatasourceParameterName.Text = "Name:";
+            labelDatasourceParameterName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // textBoxDatasourceParameterName
+            // 
+            textBoxDatasourceParameterName.Dock = DockStyle.Fill;
+            textBoxDatasourceParameterName.Location = new Point(246, 188);
+            textBoxDatasourceParameterName.MaxLength = 128;
+            textBoxDatasourceParameterName.Name = "textBoxDatasourceParameterName";
+            textBoxDatasourceParameterName.Size = new Size(400, 27);
+            textBoxDatasourceParameterName.TabIndex = 1;
+            // 
+            // labelDatasourceParameterType
+            // 
+            labelDatasourceParameterType.AutoSize = true;
+            labelDatasourceParameterType.Dock = DockStyle.Fill;
+            labelDatasourceParameterType.Location = new Point(162, 218);
+            labelDatasourceParameterType.Name = "labelDatasourceParameterType";
+            labelDatasourceParameterType.Size = new Size(78, 34);
+            labelDatasourceParameterType.TabIndex = 2;
+            labelDatasourceParameterType.Text = "Type:";
+            labelDatasourceParameterType.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // labelDatasourceParameterValueText
+            // 
+            labelDatasourceParameterValueText.AutoSize = true;
+            labelDatasourceParameterValueText.Dock = DockStyle.Fill;
+            labelDatasourceParameterValueText.Location = new Point(162, 275);
+            labelDatasourceParameterValueText.Name = "labelDatasourceParameterValueText";
+            labelDatasourceParameterValueText.Size = new Size(78, 66);
+            labelDatasourceParameterValueText.TabIndex = 6;
+            labelDatasourceParameterValueText.Text = "Value:";
+            labelDatasourceParameterValueText.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // comboBoxDatasourceParameterType
+            // 
+            comboBoxDatasourceParameterType.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxDatasourceParameterType.FormattingEnabled = true;
+            comboBoxDatasourceParameterType.Location = new Point(246, 221);
+            comboBoxDatasourceParameterType.Name = "comboBoxDatasourceParameterType";
+            comboBoxDatasourceParameterType.Size = new Size(250, 28);
+            comboBoxDatasourceParameterType.TabIndex = 3;
+            // 
+            // tableLayoutPanelDatasourceParameterButtons
+            // 
+            tableLayoutPanelDatasourceParameterButtons.AutoSize = true;
+            tableLayoutPanelDatasourceParameterButtons.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanelDatasourceParameterButtons.ColumnCount = 2;
+            tableLayoutPanelDatasourceParameterButtons.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelDatasourceParameterButtons.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelDatasourceParameterButtons.Controls.Add(buttonDatasourceParameterApply, 0, 0);
+            tableLayoutPanelDatasourceParameterButtons.Controls.Add(buttonDatasourceParameterReset, 1, 0);
+            tableLayoutPanelDatasourceParameterButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
+            tableLayoutPanelDatasourceParameterButtons.Location = new Point(246, 433);
+            tableLayoutPanelDatasourceParameterButtons.Name = "tableLayoutPanelDatasourceParameterButtons";
+            tableLayoutPanelDatasourceParameterButtons.RowCount = 1;
+            tableLayoutPanelDatasourceParameterButtons.RowStyles.Add(new RowStyle());
+            tableLayoutPanelDatasourceParameterButtons.Size = new Size(133, 40);
+            tableLayoutPanelDatasourceParameterButtons.TabIndex = 14;
+            // 
+            // buttonDatasourceParameterReset
+            // 
+            buttonDatasourceParameterReset.AutoSize = true;
+            buttonDatasourceParameterReset.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonDatasourceParameterReset.Location = new Point(73, 5);
+            buttonDatasourceParameterReset.Margin = new Padding(5);
+            buttonDatasourceParameterReset.Name = "buttonDatasourceParameterReset";
+            buttonDatasourceParameterReset.Size = new Size(55, 30);
+            buttonDatasourceParameterReset.TabIndex = 1;
+            buttonDatasourceParameterReset.Text = "Reset";
+            buttonDatasourceParameterReset.UseVisualStyleBackColor = true;
+            // 
+            // buttonDatasourceParameterApply
+            // 
+            buttonDatasourceParameterApply.AutoSize = true;
+            buttonDatasourceParameterApply.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonDatasourceParameterApply.Location = new Point(5, 5);
+            buttonDatasourceParameterApply.Margin = new Padding(5);
+            buttonDatasourceParameterApply.Name = "buttonDatasourceParameterApply";
+            buttonDatasourceParameterApply.Size = new Size(58, 30);
+            buttonDatasourceParameterApply.TabIndex = 0;
+            buttonDatasourceParameterApply.Text = "Apply";
+            buttonDatasourceParameterApply.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanelDatasource
             // 
@@ -151,11 +351,11 @@
             // textBoxDatasourceText
             // 
             textBoxDatasourceText.Dock = DockStyle.Fill;
-            textBoxDatasourceText.Location = new Point(271, 319);
+            textBoxDatasourceText.Location = new Point(266, 319);
             textBoxDatasourceText.Multiline = true;
             textBoxDatasourceText.Name = "textBoxDatasourceText";
             textBoxDatasourceText.ScrollBars = ScrollBars.Vertical;
-            textBoxDatasourceText.Size = new Size(400, 150);
+            textBoxDatasourceText.Size = new Size(410, 150);
             textBoxDatasourceText.TabIndex = 7;
             textBoxDatasourceText.Enter += TextBoxs_Enter;
             // 
@@ -163,7 +363,7 @@
             // 
             labelDatasourceProvider.AutoSize = true;
             labelDatasourceProvider.Dock = DockStyle.Fill;
-            labelDatasourceProvider.Location = new Point(137, 142);
+            labelDatasourceProvider.Location = new Point(132, 142);
             labelDatasourceProvider.Name = "labelDatasourceProvider";
             labelDatasourceProvider.Size = new Size(128, 34);
             labelDatasourceProvider.TabIndex = 0;
@@ -174,7 +374,7 @@
             // 
             labelDatasourceConnectionString.AutoSize = true;
             labelDatasourceConnectionString.Dock = DockStyle.Fill;
-            labelDatasourceConnectionString.Location = new Point(137, 176);
+            labelDatasourceConnectionString.Location = new Point(132, 176);
             labelDatasourceConnectionString.Name = "labelDatasourceConnectionString";
             labelDatasourceConnectionString.Size = new Size(128, 106);
             labelDatasourceConnectionString.TabIndex = 2;
@@ -184,12 +384,12 @@
             // textBoxDatasourceConnectionString
             // 
             textBoxDatasourceConnectionString.Dock = DockStyle.Fill;
-            textBoxDatasourceConnectionString.Location = new Point(271, 179);
+            textBoxDatasourceConnectionString.Location = new Point(266, 179);
             textBoxDatasourceConnectionString.MaxLength = 500;
             textBoxDatasourceConnectionString.Multiline = true;
             textBoxDatasourceConnectionString.Name = "textBoxDatasourceConnectionString";
             textBoxDatasourceConnectionString.ScrollBars = ScrollBars.Vertical;
-            textBoxDatasourceConnectionString.Size = new Size(400, 100);
+            textBoxDatasourceConnectionString.Size = new Size(410, 100);
             textBoxDatasourceConnectionString.TabIndex = 3;
             textBoxDatasourceConnectionString.Enter += TextBoxs_Enter;
             // 
@@ -197,7 +397,7 @@
             // 
             labelDatasourceType.AutoSize = true;
             labelDatasourceType.Dock = DockStyle.Fill;
-            labelDatasourceType.Location = new Point(137, 282);
+            labelDatasourceType.Location = new Point(132, 282);
             labelDatasourceType.Name = "labelDatasourceType";
             labelDatasourceType.Size = new Size(128, 34);
             labelDatasourceType.TabIndex = 4;
@@ -208,7 +408,7 @@
             // 
             labelDatasourceText.AutoSize = true;
             labelDatasourceText.Dock = DockStyle.Fill;
-            labelDatasourceText.Location = new Point(137, 316);
+            labelDatasourceText.Location = new Point(132, 316);
             labelDatasourceText.Name = "labelDatasourceText";
             labelDatasourceText.Size = new Size(128, 156);
             labelDatasourceText.TabIndex = 6;
@@ -220,16 +420,16 @@
             comboBoxDatasourceProvider.Dock = DockStyle.Fill;
             comboBoxDatasourceProvider.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxDatasourceProvider.FormattingEnabled = true;
-            comboBoxDatasourceProvider.Location = new Point(271, 145);
+            comboBoxDatasourceProvider.Location = new Point(266, 145);
             comboBoxDatasourceProvider.Name = "comboBoxDatasourceProvider";
-            comboBoxDatasourceProvider.Size = new Size(400, 28);
+            comboBoxDatasourceProvider.Size = new Size(410, 28);
             comboBoxDatasourceProvider.TabIndex = 1;
             // 
             // comboBoxDatasourceType
             // 
             comboBoxDatasourceType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxDatasourceType.FormattingEnabled = true;
-            comboBoxDatasourceType.Location = new Point(271, 285);
+            comboBoxDatasourceType.Location = new Point(266, 285);
             comboBoxDatasourceType.Name = "comboBoxDatasourceType";
             comboBoxDatasourceType.Size = new Size(250, 28);
             comboBoxDatasourceType.TabIndex = 5;
@@ -238,29 +438,30 @@
             // 
             tableLayoutPanelButtons.AutoSize = true;
             tableLayoutPanelButtons.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tableLayoutPanelButtons.ColumnCount = 4;
+            tableLayoutPanelButtons.ColumnCount = 5;
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanelButtons.Controls.Add(buttonDatasourceTest, 3, 0);
-            tableLayoutPanelButtons.Controls.Add(buttonDatasourceGetFields, 2, 0);
+            tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelButtons.Controls.Add(buttonDatasourceAddParameter, 2, 0);
+            tableLayoutPanelButtons.Controls.Add(buttonDatasourceTest, 4, 0);
+            tableLayoutPanelButtons.Controls.Add(buttonDatasourceGetFields, 3, 0);
             tableLayoutPanelButtons.Controls.Add(buttonDatasourceReset, 1, 0);
             tableLayoutPanelButtons.Controls.Add(buttonDatasourceApply, 0, 0);
             tableLayoutPanelButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            tableLayoutPanelButtons.Location = new Point(271, 475);
+            tableLayoutPanelButtons.Location = new Point(266, 475);
             tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             tableLayoutPanelButtons.RowCount = 1;
             tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
-            tableLayoutPanelButtons.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanelButtons.Size = new Size(280, 40);
+            tableLayoutPanelButtons.Size = new Size(410, 40);
             tableLayoutPanelButtons.TabIndex = 9;
             // 
             // buttonDatasourceTest
             // 
             buttonDatasourceTest.AutoSize = true;
             buttonDatasourceTest.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonDatasourceTest.Location = new Point(230, 5);
+            buttonDatasourceTest.Location = new Point(360, 5);
             buttonDatasourceTest.Margin = new Padding(5);
             buttonDatasourceTest.Name = "buttonDatasourceTest";
             buttonDatasourceTest.Size = new Size(45, 30);
@@ -272,7 +473,7 @@
             // 
             buttonDatasourceGetFields.AutoSize = true;
             buttonDatasourceGetFields.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonDatasourceGetFields.Location = new Point(138, 5);
+            buttonDatasourceGetFields.Location = new Point(268, 5);
             buttonDatasourceGetFields.Margin = new Padding(5);
             buttonDatasourceGetFields.Name = "buttonDatasourceGetFields";
             buttonDatasourceGetFields.Size = new Size(82, 30);
@@ -638,6 +839,64 @@
             imageListMain.Images.SetKeyName(13, "Texts");
             imageListMain.Images.SetKeyName(14, "Text");
             // 
+            // buttonDatasourceAddParameter
+            // 
+            buttonDatasourceAddParameter.AutoSize = true;
+            buttonDatasourceAddParameter.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonDatasourceAddParameter.Location = new Point(138, 5);
+            buttonDatasourceAddParameter.Margin = new Padding(5);
+            buttonDatasourceAddParameter.Name = "buttonDatasourceAddParameter";
+            buttonDatasourceAddParameter.Size = new Size(120, 30);
+            buttonDatasourceAddParameter.TabIndex = 13;
+            buttonDatasourceAddParameter.Text = "Add parameter";
+            buttonDatasourceAddParameter.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDownDatasourceParameterValueNumeric
+            // 
+            numericUpDownDatasourceParameterValueNumeric.Location = new Point(246, 344);
+            numericUpDownDatasourceParameterValueNumeric.Name = "numericUpDownDatasourceParameterValueNumeric";
+            numericUpDownDatasourceParameterValueNumeric.Size = new Size(150, 27);
+            numericUpDownDatasourceParameterValueNumeric.TabIndex = 9;
+            numericUpDownDatasourceParameterValueNumeric.TextAlign = HorizontalAlignment.Right;
+            numericUpDownDatasourceParameterValueNumeric.ThousandsSeparator = true;
+            // 
+            // checkBoxDatasourceParameterValueNull
+            // 
+            checkBoxDatasourceParameterValueNull.AutoSize = true;
+            checkBoxDatasourceParameterValueNull.Location = new Point(246, 255);
+            checkBoxDatasourceParameterValueNull.Name = "checkBoxDatasourceParameterValueNull";
+            checkBoxDatasourceParameterValueNull.Size = new Size(18, 17);
+            checkBoxDatasourceParameterValueNull.TabIndex = 5;
+            checkBoxDatasourceParameterValueNull.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePickerDatasourceParameterValueDateTime
+            // 
+            dateTimePickerDatasourceParameterValueDateTime.Format = DateTimePickerFormat.Short;
+            dateTimePickerDatasourceParameterValueDateTime.Location = new Point(246, 377);
+            dateTimePickerDatasourceParameterValueDateTime.Name = "dateTimePickerDatasourceParameterValueDateTime";
+            dateTimePickerDatasourceParameterValueDateTime.Size = new Size(189, 27);
+            dateTimePickerDatasourceParameterValueDateTime.TabIndex = 11;
+            // 
+            // labelDatasourceParameterValueYesNo
+            // 
+            labelDatasourceParameterValueYesNo.AutoSize = true;
+            labelDatasourceParameterValueYesNo.Dock = DockStyle.Fill;
+            labelDatasourceParameterValueYesNo.Location = new Point(162, 407);
+            labelDatasourceParameterValueYesNo.Name = "labelDatasourceParameterValueYesNo";
+            labelDatasourceParameterValueYesNo.Size = new Size(78, 23);
+            labelDatasourceParameterValueYesNo.TabIndex = 12;
+            labelDatasourceParameterValueYesNo.Text = "Value:";
+            labelDatasourceParameterValueYesNo.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // checkBoxDatasourceParameterValueYesNo
+            // 
+            checkBoxDatasourceParameterValueYesNo.AutoSize = true;
+            checkBoxDatasourceParameterValueYesNo.Location = new Point(246, 410);
+            checkBoxDatasourceParameterValueYesNo.Name = "checkBoxDatasourceParameterValueYesNo";
+            checkBoxDatasourceParameterValueYesNo.Size = new Size(18, 17);
+            checkBoxDatasourceParameterValueYesNo.TabIndex = 13;
+            checkBoxDatasourceParameterValueYesNo.UseVisualStyleBackColor = true;
+            // 
             // FormReportEditor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -650,6 +909,10 @@
             splitContainerMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainerMain).EndInit();
             splitContainerMain.ResumeLayout(false);
+            tableLayoutPanelDatasourceParameter.ResumeLayout(false);
+            tableLayoutPanelDatasourceParameter.PerformLayout();
+            tableLayoutPanelDatasourceParameterButtons.ResumeLayout(false);
+            tableLayoutPanelDatasourceParameterButtons.PerformLayout();
             tableLayoutPanelDatasource.ResumeLayout(false);
             tableLayoutPanelDatasource.PerformLayout();
             tableLayoutPanelButtons.ResumeLayout(false);
@@ -663,6 +926,7 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownReportDetailSectionMaxRowCount).EndInit();
             tableLayoutPanelReportButtons.ResumeLayout(false);
             tableLayoutPanelReportButtons.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownDatasourceParameterValueNumeric).EndInit();
             ResumeLayout(false);
         }
 
@@ -710,5 +974,31 @@
         private TableLayoutPanel tableLayoutPanelReportButtons;
         private Button buttonReportReset;
         private Button buttonReportApply;
+        private TableLayoutPanel tableLayoutPanelDatasourceParameters;
+        private TextBox textBox1;
+        private Label labelDatasourceParametersCount;
+        private TextBox textBox2;
+        private ComboBox comboBox1;
+        private ComboBox comboBox2;
+        private TableLayoutPanel tableLayoutPanelDatasourceParameter;
+        private TextBox textBoxDatasourceParameterValueText;
+        private Label labelDatasourceParameterName;
+        private Label label6;
+        private TextBox textBoxDatasourceParameterName;
+        private Label labelDatasourceParameterType;
+        private Label labelDatasourceParameterValueText;
+        private ComboBox comboBoxDatasourceParameterType;
+        private TableLayoutPanel tableLayoutPanelDatasourceParameterButtons;
+        private Button buttonDatasourceParameterReset;
+        private Button buttonDatasourceParameterApply;
+        private Label labelDatasourceParameterValueNull;
+        private Label labelDatasourceParameterValueNumeric;
+        private Label labelDatasourceParameterValueDateTime;
+        private Button buttonDatasourceAddParameter;
+        private NumericUpDown numericUpDownDatasourceParameterValueNumeric;
+        private CheckBox checkBoxDatasourceParameterValueNull;
+        private DateTimePicker dateTimePickerDatasourceParameterValueDateTime;
+        private CheckBox checkBoxDatasourceParameterValueYesNo;
+        private Label labelDatasourceParameterValueYesNo;
     }
 }

@@ -23,7 +23,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         private const string TextsKey = "Texts";
         private const string TextKey = "Text";
 
-        private string mApplicationTitle;
+        private readonly string mApplicationTitle;
         private readonly Model.Report mReport;
         private string mFilePath;
 
@@ -239,7 +239,6 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                 ImageKey = DatasourceKey,
                 SelectedImageKey = DatasourceKey
             };
-            treeNodeParent.Nodes.Add(treeNodeDatasource);
             if (mReport.Datasource is null)
             {
                 treeNodeDatasource.Text = Properties.Resources.StringDatasource;
@@ -247,17 +246,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             else
             {
                 treeNodeDatasource.Text = FriendlyNames.GetDatasourceType(mReport.Datasource.Type) + (mReport.Datasource.Type != System.Data.CommandType.Text ? " => " + mReport.Datasource.Text : string.Empty);
-                foreach (string parameterName in mReport.Datasource.Parameters.OrderBy(p => p.Name).Select(p => p.Name))
-                {
-                    treeNodeDatasource.Nodes.Add(new TreeNode()
-                    {
-                        Text = parameterName,
-                        Tag = DatasourceParameterKey + "@" + parameterName,
-                        ImageKey = DatasourceParameterKey,
-                        SelectedImageKey = DatasourceParameterKey
-                    });
-                }
             }
+            treeNodeParent.Nodes.Add(treeNodeDatasource);
+
+            CreateDatasourceParametersNodes(treeNodeDatasource);
         }
 
         private void ShowDatasourceProperties()
@@ -322,42 +314,43 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                 MessageBox.Show(Properties.Resources.StringDatasourceTextNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (mReport.Datasource.Parameters.Any(p => p.Value is null))
+            if (mReport.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceGetFieldsWithNullParametersConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
-                // Show the parameters form
+                return;
             }
 
             // Open the datasource
             DbDataReader? dbDataReader = null;
-            Dictionary<string, int> fieldsOrdinals = [];
-            Data.Datasource.GetDatasource(mReport, ref dbDataReader, fieldsOrdinals);
-                
+            Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
             if (dbDataReader is not null)
             {
-                try
-                {
-                    if (dbDataReader.Read())
-                    {
-                        mReport.Datasource.Fields.Clear();
-                        for (int i = 0; i < dbDataReader.FieldCount; i++)
-                        {
-                            mReport.Datasource.Fields.Add(new()
-                            {
-                                Name = dbDataReader.GetName(i),
-                                Type = dbDataReader.GetFieldType(i),
-                            });
-                        }
-                    }
-                    dbDataReader.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                dbDataReader.Close();
             }
         }
 
         #endregion Datasource
+
+        #region Datasource parameters
+
+        private void CreateDatasourceParametersNodes(TreeNode treeNodeParent)
+        {
+            if (mReport.Datasource is null)
+            {
+                return;
+            }
+            foreach (string parameterName in mReport.Datasource.Parameters.Select(p => p.Name))
+            {
+                treeNodeParent.Nodes.Add(new TreeNode()
+                {
+                    Text = parameterName,
+                    Tag = DatasourceParameterKey + "@" + parameterName,
+                    ImageKey = DatasourceParameterKey,
+                    SelectedImageKey = DatasourceParameterKey
+                });
+            }
+        }
+
+        #endregion Datasource parameters
 
         #region Fonts
 

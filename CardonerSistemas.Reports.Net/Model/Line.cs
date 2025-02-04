@@ -5,6 +5,7 @@ namespace CardonerSistemas.Reports.Net.Model
 {
     public class Line
     {
+
         public Line(Report report) {
             LineId = (short)(report.Lines.Max(l => l.LineId) + 1);
         }
@@ -39,5 +40,6 @@ namespace CardonerSistemas.Reports.Net.Model
         public decimal PositionX2 { get; set; }
 
         public decimal PositionY2 { get; set; }
+
     }
 }

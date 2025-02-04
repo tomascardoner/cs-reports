@@ -6,7 +6,7 @@ namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class Pages
     {
-        internal static PdfPage CreateNewPage(PdfDocument pdfDocument, Model.Report report, int pageNumber, Dictionary<short, XBrush> brushes, Dictionary<short, XFont> fonts, DbDataReader? dbDataReader, Dictionary<string, int> fieldsOrdinals)
+        internal static PdfPage CreateNewPage(PdfDocument pdfDocument, Model.Report report, int pageNumber, Dictionary<short, XBrush> brushes, Dictionary<short, XFont> fonts, DbDataReader? dbDataReader)
         {
             ArgumentNullException.ThrowIfNull(report);
             ArgumentOutOfRangeException.ThrowIfLessThan(pageNumber, 1);
@@ -28,11 +28,11 @@ namespace CardonerSistemas.Reports.Net.Engine
             if (pageNumber == 1)
             {
                 // Create report headers
-                Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.ReportHeader, brushes, fonts, dbDataReader, fieldsOrdinals, ref sectionsPositionYStart);
+                Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.ReportHeader, brushes, fonts, dbDataReader, ref sectionsPositionYStart);
             }
 
             // Create page headers
-            Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.PageHeader, brushes, fonts, dbDataReader, fieldsOrdinals, ref sectionsPositionYStart);
+            Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.PageHeader, brushes, fonts, dbDataReader, ref sectionsPositionYStart);
 
             // Create details
             if (dbDataReader is not null)
@@ -41,7 +41,7 @@ namespace CardonerSistemas.Reports.Net.Engine
                 {
                     do
                     {
-                        Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.Detail, brushes, fonts, dbDataReader, fieldsOrdinals, ref sectionsPositionYStart);
+                        Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.Detail, brushes, fonts, dbDataReader, ref sectionsPositionYStart);
                     } while (dbDataReader.Read());
                 }
                 catch (Exception ex)
@@ -53,11 +53,11 @@ namespace CardonerSistemas.Reports.Net.Engine
             // Create report footers
             if (pageNumber == 100)
             {
-                Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.ReportFooter, brushes, fonts, dbDataReader, fieldsOrdinals, ref sectionsPositionYStart);
+                Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.ReportFooter, brushes, fonts, dbDataReader, ref sectionsPositionYStart);
             }
 
             // Create page footers
-            Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.PageFooter, brushes, fonts, dbDataReader, fieldsOrdinals, ref sectionsPositionYStart);
+            Section.CreateByType(xGraphics, report, Model.Section.SectionTypes.PageFooter, brushes, fonts, dbDataReader, ref sectionsPositionYStart);
 
             return pdfPage;
         }

@@ -1,8 +1,8 @@
 ﻿namespace CardonerSistemas.Reports.Net.Model
 {
-    public partial class Text
+    public partial class Value
     {
-        public enum FieldTypes : byte
+        public enum Types : byte
         {
             Text,
             Integer,
