@@ -6,46 +6,46 @@
         {
             return pageSize switch
             {
-                Model.Report.PageSizes.A0 => "A0",
-                Model.Report.PageSizes.A1 => "A1",
-                Model.Report.PageSizes.A2 => "A2",
-                Model.Report.PageSizes.A3 => "A3",
-                Model.Report.PageSizes.A4 => "A4",
-                Model.Report.PageSizes.A5 => "A5",
-                Model.Report.PageSizes.RA0 => "RA0",
-                Model.Report.PageSizes.RA1 => "RA1",
-                Model.Report.PageSizes.RA2 => "RA2",
-                Model.Report.PageSizes.RA3 => "RA3",
-                Model.Report.PageSizes.RA4 => "RA4",
-                Model.Report.PageSizes.RA5 => "RA5",
-                Model.Report.PageSizes.B0 => "B0",
-                Model.Report.PageSizes.B1 => "B1",
-                Model.Report.PageSizes.B2 => "B2",
-                Model.Report.PageSizes.B3 => "B3",
-                Model.Report.PageSizes.B4 => "B4",
-                Model.Report.PageSizes.B5 => "B5",
-                Model.Report.PageSizes.Quarto => "Quarto",
-                Model.Report.PageSizes.Foolscap => "Foolscap",
-                Model.Report.PageSizes.Executive => "Executive",
-                Model.Report.PageSizes.GovernmentLetter => "Government Letter",
-                Model.Report.PageSizes.Letter => "Letter",
-                Model.Report.PageSizes.Legal => "Legal",
-                Model.Report.PageSizes.Ledger => "Ledger",
-                Model.Report.PageSizes.Tabloid => "Tabloid",
-                Model.Report.PageSizes.Post => "Post",
-                Model.Report.PageSizes.Crown => "Crown",
-                Model.Report.PageSizes.LargePost => "Large Post",
-                Model.Report.PageSizes.Demy => "Demy",
-                Model.Report.PageSizes.Medium => "Medium",
-                Model.Report.PageSizes.Royal => "Royal",
-                Model.Report.PageSizes.Elephant => "Elephant",
-                Model.Report.PageSizes.DoubleDemy => "Double Demy",
-                Model.Report.PageSizes.QuadDemy => "Quad Demy",
-                Model.Report.PageSizes.STMT => "STMT",
-                Model.Report.PageSizes.Folio => "Folio",
-                Model.Report.PageSizes.Statement => "Statement",
-                Model.Report.PageSizes.Size10x14 => "10x14",
-                _ => "Undefined"
+                Model.Report.PageSizes.A0 => Properties.Resources.StringReportPageSizeA0,
+                Model.Report.PageSizes.A1 => Properties.Resources.StringReportPageSizeA1,
+                Model.Report.PageSizes.A2 => Properties.Resources.StringReportPageSizeA2,
+                Model.Report.PageSizes.A3 => Properties.Resources.StringReportPageSizeA3,
+                Model.Report.PageSizes.A4 => Properties.Resources.StringReportPageSizeA4,
+                Model.Report.PageSizes.A5 => Properties.Resources.StringReportPageSizeA5,
+                Model.Report.PageSizes.RA0 => Properties.Resources.StringReportPageSizeRA0,
+                Model.Report.PageSizes.RA1 => Properties.Resources.StringReportPageSizeRA1,
+                Model.Report.PageSizes.RA2 => Properties.Resources.StringReportPageSizeRA2,
+                Model.Report.PageSizes.RA3 => Properties.Resources.StringReportPageSizeRA3,
+                Model.Report.PageSizes.RA4 => Properties.Resources.StringReportPageSizeRA4,
+                Model.Report.PageSizes.RA5 => Properties.Resources.StringReportPageSizeRA5,
+                Model.Report.PageSizes.B0 => Properties.Resources.StringReportPageSizeB0,
+                Model.Report.PageSizes.B1 => Properties.Resources.StringReportPageSizeB1,
+                Model.Report.PageSizes.B2 => Properties.Resources.StringReportPageSizeB2,
+                Model.Report.PageSizes.B3 => Properties.Resources.StringReportPageSizeB3,
+                Model.Report.PageSizes.B4 => Properties.Resources.StringReportPageSizeB4,
+                Model.Report.PageSizes.B5 => Properties.Resources.StringReportPageSizeB5,
+                Model.Report.PageSizes.Quarto => Properties.Resources.StringReportPageSizeQuarto,
+                Model.Report.PageSizes.Foolscap => Properties.Resources.StringReportPageSizeFoolscap,
+                Model.Report.PageSizes.Executive => Properties.Resources.StringReportPageSizeExecutive,
+                Model.Report.PageSizes.GovernmentLetter => Properties.Resources.StringReportPageSizeGovernmentLetter,
+                Model.Report.PageSizes.Letter => Properties.Resources.StringReportPageSizeLetter,
+                Model.Report.PageSizes.Legal => Properties.Resources.StringReportPageSizeLegal,
+                Model.Report.PageSizes.Ledger => Properties.Resources.StringReportPageSizeLedger,
+                Model.Report.PageSizes.Tabloid => Properties.Resources.StringReportPageSizeTabloid,
+                Model.Report.PageSizes.Post => Properties.Resources.StringReportPageSizePost,
+                Model.Report.PageSizes.Crown => Properties.Resources.StringReportPageSizeCrown,
+                Model.Report.PageSizes.LargePost => Properties.Resources.StringReportPageSizeLargePost,
+                Model.Report.PageSizes.Demy => Properties.Resources.StringReportPageSizeDemy,
+                Model.Report.PageSizes.Medium => Properties.Resources.StringReportPageSizeMedium,
+                Model.Report.PageSizes.Royal => Properties.Resources.StringReportPageSizeRoyal,
+                Model.Report.PageSizes.Elephant => Properties.Resources.StringReportPageSizeElephant,
+                Model.Report.PageSizes.DoubleDemy => Properties.Resources.StringReportPageSizeDoubleDemy,
+                Model.Report.PageSizes.QuadDemy => Properties.Resources.StringReportPageSizeQuadDemy,
+                Model.Report.PageSizes.STMT => Properties.Resources.StringReportPageSizeSTMT,
+                Model.Report.PageSizes.Folio => Properties.Resources.StringReportPageSizeFolio,
+                Model.Report.PageSizes.Statement => Properties.Resources.StringReportPageSizeStatement,
+                Model.Report.PageSizes.Size10x14 => Properties.Resources.StringReportPageSizeSize10x14,
+                _ => Properties.Resources.StringUndefined
             };
         }
 
@@ -55,7 +55,7 @@
             {
                 Model.Report.PageOrientations.Portrait => Properties.Resources.StringPageOrientationPortrait,
                 Model.Report.PageOrientations.Landscape => Properties.Resources.StringPageOrientationLandscape,
-                _ => string.Empty
+                _ => Properties.Resources.StringUndefined
             };
         }
 
@@ -68,7 +68,7 @@
                 Model.Datasource.Providers.Odbc => Properties.Resources.StringDatasourceProvidersOdbc,
                 Model.Datasource.Providers.Oracle => Properties.Resources.StringDatasourceProvidersOracle,
                 Model.Datasource.Providers.DataSet => Properties.Resources.StringDatasourceProvidersDataSet,
-                _ => string.Empty
+                _ => Properties.Resources.StringUndefined
             };
         }
 
@@ -79,7 +79,7 @@
                 System.Data.CommandType.Text => Properties.Resources.StringDatasourceTypeText,
                 System.Data.CommandType.StoredProcedure => Properties.Resources.StringDatasourceTypeStoredProcedure,
                 System.Data.CommandType.TableDirect => Properties.Resources.StringDatasourceTypeTableDirect,
-                _ => string.Empty
+                _ => Properties.Resources.StringUndefined
             };
         }
     }

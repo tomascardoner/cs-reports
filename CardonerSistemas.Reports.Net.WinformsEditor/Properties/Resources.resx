@@ -174,4 +174,136 @@
   <data name="StringPageOrientationLandscape" xml:space="preserve">
     <value>Landscape</value>
   </data>
+  <data name="StringReportPageSizeA0" xml:space="preserve">
+    <value>A0</value>
+  </data>
+  <data name="StringReportPageSizeA1" xml:space="preserve">
+    <value>A1</value>
+  </data>
+  <data name="StringReportPageSizeA2" xml:space="preserve">
+    <value>A2</value>
+  </data>
+  <data name="StringReportPageSizeA3" xml:space="preserve">
+    <value>A3</value>
+  </data>
+  <data name="StringReportPageSizeA4" xml:space="preserve">
+    <value>A4</value>
+  </data>
+  <data name="StringReportPageSizeA5" xml:space="preserve">
+    <value>A5</value>
+  </data>
+  <data name="StringReportPageSizeRA0" xml:space="preserve">
+    <value>RA0</value>
+  </data>
+  <data name="StringReportPageSizeRA1" xml:space="preserve">
+    <value>RA1</value>
+  </data>
+  <data name="StringReportPageSizeRA2" xml:space="preserve">
+    <value>RA2</value>
+  </data>
+  <data name="StringReportPageSizeRA3" xml:space="preserve">
+    <value>RA3</value>
+  </data>
+  <data name="StringReportPageSizeRA4" xml:space="preserve">
+    <value>RA4</value>
+  </data>
+  <data name="StringReportPageSizeRA5" xml:space="preserve">
+    <value>RA5</value>
+  </data>
+  <data name="StringReportPageSizeB0" xml:space="preserve">
+    <value>B0</value>
+  </data>
+  <data name="StringReportPageSizeB1" xml:space="preserve">
+    <value>B1</value>
+  </data>
+  <data name="StringReportPageSizeB2" xml:space="preserve">
+    <value>B2</value>
+  </data>
+  <data name="StringReportPageSizeB3" xml:space="preserve">
+    <value>B3</value>
+  </data>
+  <data name="StringReportPageSizeB4" xml:space="preserve">
+    <value>B4</value>
+  </data>
+  <data name="StringReportPageSizeB5" xml:space="preserve">
+    <value>B5</value>
+  </data>
+  <data name="StringReportPageSizeQuarto" xml:space="preserve">
+    <value>Quarto</value>
+  </data>
+  <data name="StringReportPageSizeFoolscap" xml:space="preserve">
+    <value>Foolscap</value>
+  </data>
+  <data name="StringReportPageSizeExecutive" xml:space="preserve">
+    <value>Executive</value>
+  </data>
+  <data name="StringReportPageSizeGovernmentLetter" xml:space="preserve">
+    <value>Government Letter</value>
+  </data>
+  <data name="StringReportPageSizeLetter" xml:space="preserve">
+    <value>Letter</value>
+  </data>
+  <data name="StringReportPageSizeLegal" xml:space="preserve">
+    <value>Legal</value>
+  </data>
+  <data name="StringReportPageSizeLedger" xml:space="preserve">
+    <value>Ledger</value>
+  </data>
+  <data name="StringReportPageSizeTabloid" xml:space="preserve">
+    <value>Tabloid</value>
+  </data>
+  <data name="StringReportPageSizePost" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="StringReportPageSizeCrown" xml:space="preserve">
+    <value>Crown</value>
+  </data>
+  <data name="StringReportPageSizeLargePost" xml:space="preserve">
+    <value>Large Post</value>
+  </data>
+  <data name="StringReportPageSizeDemy" xml:space="preserve">
+    <value>Demy</value>
+  </data>
+  <data name="StringReportPageSizeMedium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="StringReportPageSizeRoyal" xml:space="preserve">
+    <value>Royal</value>
+  </data>
+  <data name="StringReportPageSizeElephant" xml:space="preserve">
+    <value>Elephant</value>
+  </data>
+  <data name="StringReportPageSizeDoubleDemy" xml:space="preserve">
+    <value>Double Demy</value>
+  </data>
+  <data name="StringReportPageSizeQuadDemy" xml:space="preserve">
+    <value>Quad Demy</value>
+  </data>
+  <data name="StringReportPageSizeSTMT" xml:space="preserve">
+    <value>STMT</value>
+  </data>
+  <data name="StringReportPageSizeFolio" xml:space="preserve">
+    <value>Folio</value>
+  </data>
+  <data name="StringReportPageSizeStatement" xml:space="preserve">
+    <value>Statement</value>
+  </data>
+  <data name="StringReportPageSizeSize10x14" xml:space="preserve">
+    <value>10x14</value>
+  </data>
+  <data name="StringUndefined" xml:space="preserve">
+    <value>Undefined</value>
+  </data>
+  <data name="StringDatasourceProviderNotSpecified" xml:space="preserve">
+    <value>You must specify database provider.</value>
+  </data>
+  <data name="StringDatasourceNotSpecified" xml:space="preserve">
+    <value>Datasource not specified.</value>
+  </data>
+  <data name="StringDatasourceConnectionStringNotSpecified" xml:space="preserve">
+    <value>ConnectionString not specified.</value>
+  </data>
+  <data name="StringDatasourceTextNotSpecified" xml:space="preserve">
+    <value>Datasource text not specified.</value>
+  </data>
 </root>

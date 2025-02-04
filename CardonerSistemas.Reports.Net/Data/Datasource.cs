@@ -2,8 +2,17 @@
 
 namespace CardonerSistemas.Reports.Net.Data
 {
-    internal static class Datasource
+    public static class Datasource
     {
+        private static string GetProviderName(Model.Datasource.Providers provider) => provider switch
+        {
+            Model.Datasource.Providers.SqlServer => "Microsoft.Data.SqlClient",
+            Model.Datasource.Providers.OleDb => "System.Data.OleDb",
+            Model.Datasource.Providers.Odbc => "System.Data.Odbc",
+            Model.Datasource.Providers.DataSet => "System.Data.DataSet",
+            _ => string.Empty
+        };
+
         // Given a provider name and connection string,
         // create the DbProviderFactory and DbConnection.
         // Returns a DbConnection on success; null on failure.
@@ -22,7 +31,7 @@ namespace CardonerSistemas.Reports.Net.Data
                     case Model.Datasource.Providers.None:
                         break;
                     case Model.Datasource.Providers.SqlServer:
-                        DbProviderFactories.RegisterFactory(datasource.ProviderName, Microsoft.Data.SqlClient.SqlClientFactory.Instance);
+                        DbProviderFactories.RegisterFactory(GetProviderName(datasource.Provider), Microsoft.Data.SqlClient.SqlClientFactory.Instance);
                         break;
                     case Model.Datasource.Providers.OleDb:
                         
@@ -37,7 +46,7 @@ namespace CardonerSistemas.Reports.Net.Data
                         
                         break;
                 }
-                DbProviderFactory factory = DbProviderFactories.GetFactory(datasource.ProviderName);
+                DbProviderFactory factory = DbProviderFactories.GetFactory(GetProviderName(datasource.Provider));
                 dbConnection = factory.CreateConnection();
                 if (dbConnection is not null)
                 {
@@ -88,9 +97,9 @@ namespace CardonerSistemas.Reports.Net.Data
             return dbDataReader;
         }
 
-        internal static void GetDatasource(Model.Report report, ref DbDataReader? dbDataReader, Dictionary<string, int> fieldsOrdinals)
+        public static void GetDatasource(Model.Report report, ref DbDataReader? dbDataReader, Dictionary<string, int> fieldsOrdinals)
         {
-            if (report.Datasource is not null && report.Datasource.Provider != Model.Datasource.Providers.None && !string.IsNullOrEmpty(report.Datasource.ProviderName))
+            if (report.Datasource is not null && report.Datasource.Provider != Model.Datasource.Providers.None && !string.IsNullOrEmpty(GetProviderName(report.Datasource.Provider)))
             {
                 DbConnection? dbConnection = CreateAndOpenConnection(report.Datasource);
                 if (dbConnection is not null)

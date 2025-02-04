@@ -1,4 +1,6 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor
+﻿using System.Data.Common;
+
+namespace CardonerSistemas.Reports.Net.WinformsEditor
 {
     public partial class FormReportEditor : Form
     {
@@ -21,18 +23,20 @@
         private const string TextsKey = "Texts";
         private const string TextKey = "Text";
 
+        private string mApplicationTitle;
         private readonly Model.Report mReport;
         private string mFilePath;
 
-        internal string FilePath => mFilePath;
+        //internal string FilePath => mFilePath;
 
         #endregion Declarations
 
         #region Form stuff
 
-        public FormReportEditor(Model.Report report, string filePath)
+        public FormReportEditor(string applicationTitle, Model.Report report, string filePath)
         {
             InitializeComponent();
+            mApplicationTitle = applicationTitle;
             mReport = report;
             mFilePath = filePath;
             InitializeForm();
@@ -185,8 +189,8 @@
         {
             mReport.Name = textBoxReportName.Text;
             mReport.TemplateFileName = textBoxReportTemplateFileName.Text;
-            mReport.PageSize = (Model.Report.PageSizes)comboBoxReportPageSize.SelectedIndex;
-            mReport.PageOrientation = (Model.Report.PageOrientations)comboBoxReportPageOrientation.SelectedIndex;
+            mReport.PageSize = (Model.Report.PageSizes)(comboBoxReportPageSize.SelectedValue ?? Model.Report.PageSizes.Undefined);
+            mReport.PageOrientation = (Model.Report.PageOrientations)(comboBoxReportPageOrientation.SelectedValue ?? Model.Report.PageOrientations.Portrait);
             mReport.PageMarginTop = numericUpDownReportPageMarginTop.Value;
             mReport.PageMarginLeft = numericUpDownReportPageMarginLeft.Value;
             mReport.PageMarginRight = numericUpDownReportPageMarginRight.Value;
@@ -280,15 +284,77 @@
         private void DatasourceApplyChanges(object sender, EventArgs e)
         {
             mReport.Datasource ??= new();
-            mReport.Datasource.Provider = (Model.Datasource.Providers)comboBoxDatasourceProvider.SelectedIndex;
+            mReport.Datasource.Provider = (Model.Datasource.Providers)(comboBoxDatasourceProvider.SelectedValue ?? Model.Datasource.Providers.None);
             mReport.Datasource.ConnectionString = textBoxDatasourceConnectionString.Text;
-            mReport.Datasource.Type = (System.Data.CommandType)comboBoxDatasourceType.SelectedIndex;
+            mReport.Datasource.Type = (System.Data.CommandType)(short)(comboBoxDatasourceType.SelectedValue ?? System.Data.CommandType.Text);
             mReport.Datasource.Text = textBoxDatasourceText.Text;
         }
 
         private void DatasourceResetChanges(object sender, EventArgs e)
         {
             ShowDatasourceProperties();
+        }
+
+        private void DatasourceGetFields(object sender, EventArgs e)
+        {
+            if (mReport.Datasource is null)
+            {
+                MessageBox.Show(Properties.Resources.StringDatasourceNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (mReport.Datasource.Provider == Model.Datasource.Providers.None)
+            {
+                MessageBox.Show(Properties.Resources.StringDatasourceProviderNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(textBoxDatasourceConnectionString.Text))
+            {
+                MessageBox.Show(Properties.Resources.StringDatasourceConnectionStringNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (mReport.Datasource.Type == System.Data.CommandType.Text && string.IsNullOrEmpty(textBoxDatasourceText.Text))
+            {
+                MessageBox.Show(Properties.Resources.StringDatasourceTextNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(mReport.Datasource.Text))
+            {
+                MessageBox.Show(Properties.Resources.StringDatasourceTextNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (mReport.Datasource.Parameters.Any(p => p.Value is null))
+            {
+                // Show the parameters form
+            }
+
+            // Open the datasource
+            DbDataReader? dbDataReader = null;
+            Dictionary<string, int> fieldsOrdinals = [];
+            Data.Datasource.GetDatasource(mReport, ref dbDataReader, fieldsOrdinals);
+                
+            if (dbDataReader is not null)
+            {
+                try
+                {
+                    if (dbDataReader.Read())
+                    {
+                        mReport.Datasource.Fields.Clear();
+                        for (int i = 0; i < dbDataReader.FieldCount; i++)
+                        {
+                            mReport.Datasource.Fields.Add(new()
+                            {
+                                Name = dbDataReader.GetName(i),
+                                Type = dbDataReader.GetFieldType(i),
+                            });
+                        }
+                    }
+                    dbDataReader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         #endregion Datasource
