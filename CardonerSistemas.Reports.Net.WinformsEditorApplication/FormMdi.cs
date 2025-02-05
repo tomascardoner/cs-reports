@@ -46,7 +46,7 @@
                 return;
             }
             WinformsEditor.FormReportEditor formReportEditor = (WinformsEditor.FormReportEditor)this.ActiveMdiChild;
-            formReportEditor.SaveReport();
+            saveToolStripButton.Enabled = !formReportEditor.SaveReport();
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,18 +56,7 @@
                 return;
             }
             WinformsEditor.FormReportEditor formReportEditor = (WinformsEditor.FormReportEditor)this.ActiveMdiChild;
-            SaveFileDialog saveFileDialog = new()
-            {
-                Filter = Properties.Resources.StringFileDialogFilter,
-                FilterIndex = 1,
-                RestoreDirectory = true,
-                CheckWriteAccess = true,
-                ValidateNames = true
-            };
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                saveToolStripButton.Enabled = !formReportEditor.SaveReport(saveFileDialog.FileName);
-            }
+            saveToolStripButton.Enabled = !formReportEditor.SaveReportAs();
         }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)

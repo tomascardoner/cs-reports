@@ -309,4 +309,11 @@
   <data name="StringDatasourceGetFieldsWithNullParametersConfirmation" xml:space="preserve">
     <value>There are parameters with unspecified values. Do you want to continue anyway?</value>
   </data>
+  <data name="StringReportModifiedConfirmation" xml:space="preserve">
+    <value>The report has unsaved changes.
+Do you want to save them?</value>
+  </data>
+  <data name="StringFileDialogFilter" xml:space="preserve">
+    <value>Report files (*.csrpt)|*.csrpt|All files (*.*)|*.*</value>
+  </data>
 </root>

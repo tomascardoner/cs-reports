@@ -1,4 +1,6 @@
-﻿using System.Data.Common;
+﻿using CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels;
+using System.Collections.ObjectModel;
+using System.Data.Common;
 
 namespace CardonerSistemas.Reports.Net.WinformsEditor
 {
@@ -27,7 +29,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         private readonly Model.Report mReport;
         private string mFilePath;
 
-        //internal string FilePath => mFilePath;
+        private PanelReport? mPanelReport;
+        private PanelDatasource? mPanelDatasource;
+
+        public string FilePath => mFilePath;
 
         #endregion Declarations
 
@@ -47,14 +52,14 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             this.Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNew : $"{mReport.Name} ({mFilePath})";
             treeViewReport.ImageList = imageListMain;
             CreateReportNode();
+        }
 
-            // Report combo boxes
-            FillReportPageSizes();
-            FillReportPageOrientations();
-
-            // Datasource combo boxes
-            FillDatasourceProviders();
-            FillDatasourceTypes();
+        private void FormReportEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (mReport.IsModified && MessageBox.Show(Properties.Resources.StringReportModifiedConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                SaveReport();
+            }
         }
 
         #endregion Form stuff
@@ -63,18 +68,29 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         public bool SaveReport()
         {
-            if (!string.IsNullOrEmpty(mFilePath))
+            if (string.IsNullOrEmpty(mFilePath))
+            {
+                return SaveReportAs();
+            }
+            else
             {
                 return Storage.FileSystem.Save(mReport, mFilePath);
             }
-            return false;
         }
 
-        public bool SaveReport(string fileName)
+        public bool SaveReportAs()
         {
-            if (Storage.FileSystem.Save(mReport, fileName))
+            SaveFileDialog saveFileDialog = new()
             {
-                mFilePath = fileName;
+                Filter = Properties.Resources.StringFileDialogFilter,
+                FilterIndex = 1,
+                RestoreDirectory = true,
+                CheckWriteAccess = true,
+                ValidateNames = true
+            };
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK && Storage.FileSystem.Save(mReport, saveFileDialog.FileName))
+            {
+                mFilePath = saveFileDialog.FileName;
                 this.Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNew : $"{mReport.Name} ({mFilePath})";
                 return true;
             }
@@ -90,16 +106,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
             string nodeType = e.Node.Tag.ToString()[..e.Node.Tag.ToString().IndexOf('@')];
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
-            tableLayoutPanelReport.Visible = false;
-            tableLayoutPanelDatasource.Visible = false;
+
+            PanelControlsHide();
 
             switch (nodeType)
             {
                 case ReportKey:
-                    ShowReportProperties();
+                    PanelReportShow();
                     break;
                 case DatasourceKey:
-                    ShowDatasourceProperties();
+                    PanelDatasourceShow();
                     break;
             }
         }
@@ -114,31 +130,17 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         #endregion Events
 
+        #region Panel controls
+
+        private void PanelControlsHide()
+        {
+            mPanelReport?.Hide();
+            mPanelDatasource?.Hide();
+        }
+
+        #endregion Panel controls
+
         #region Report
-
-        private void FillReportPageSizes()
-        {
-            comboBoxReportPageSize.ValueMember = "Key";
-            comboBoxReportPageSize.DisplayMember = "Value";
-            ICollection<KeyValuePair<byte, string>> reportPageSizes = [];
-            foreach (Model.Report.PageSizes pageSize in Enum.GetValues<Model.Report.PageSizes>())
-            {
-                reportPageSizes.Add(new KeyValuePair<byte, string>((byte)pageSize, FriendlyNames.GetPageSize(pageSize)));
-            }
-            comboBoxReportPageSize.DataSource = reportPageSizes;
-        }
-
-        private void FillReportPageOrientations()
-        {
-            comboBoxReportPageOrientation.ValueMember = "Key";
-            comboBoxReportPageOrientation.DisplayMember = "Value";
-            ICollection<KeyValuePair<byte, string>> reportPageOrientations = [];
-            foreach (Model.Report.PageOrientations pageOrientation in Enum.GetValues<Model.Report.PageOrientations>())
-            {
-                reportPageOrientations.Add(new KeyValuePair<byte, string>((byte)pageOrientation, FriendlyNames.GetPageOrientation(pageOrientation)));
-            }
-            comboBoxReportPageOrientation.DataSource = reportPageOrientations;
-        }
 
         private void CreateReportNode()
         {
@@ -169,67 +171,32 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             this.Cursor = Cursors.Default;
         }
 
-        private void ShowReportProperties()
+        private void PanelReportShow()
         {
-            textBoxReportId.Text = mReport.ReportId.ToString();
-            textBoxReportName.Text = mReport.Name;
-            textBoxReportTemplateFileName.Text = mReport.TemplateFileName;
-            comboBoxReportPageSize.SelectedIndex = (byte)mReport.PageSize;
-            comboBoxReportPageOrientation.SelectedItem = mReport.PageOrientation;
-            numericUpDownReportPageMarginTop.Value = mReport.PageMarginTop;
-            numericUpDownReportPageMarginLeft.Value = mReport.PageMarginLeft;
-            numericUpDownReportPageMarginRight.Value = mReport.PageMarginRight;
-            numericUpDownReportPageMarginBottom.Value = mReport.PageMarginBottom;
-            numericUpDownReportDetailSectionMaxRowCount.Value = mReport.DetailSectionMaxRowCount;
-
-            tableLayoutPanelReport.Visible = true;
+            if (mPanelReport is null)
+            {
+                mPanelReport = new()
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(mPanelReport);
+            }
+            mPanelReport.ShowProperties(mReport);
+            mPanelReport.Show();
         }
 
         private void ReportApplyChanges(object sender, EventArgs e)
         {
-            mReport.Name = textBoxReportName.Text;
-            mReport.TemplateFileName = textBoxReportTemplateFileName.Text;
-            mReport.PageSize = (Model.Report.PageSizes)(comboBoxReportPageSize.SelectedValue ?? Model.Report.PageSizes.Undefined);
-            mReport.PageOrientation = (Model.Report.PageOrientations)(comboBoxReportPageOrientation.SelectedValue ?? Model.Report.PageOrientations.Portrait);
-            mReport.PageMarginTop = numericUpDownReportPageMarginTop.Value;
-            mReport.PageMarginLeft = numericUpDownReportPageMarginLeft.Value;
-            mReport.PageMarginRight = numericUpDownReportPageMarginRight.Value;
-            mReport.PageMarginBottom = numericUpDownReportPageMarginBottom.Value;
-            mReport.DetailSectionMaxRowCount = (short)numericUpDownReportDetailSectionMaxRowCount.Value;
         }
 
         private void ReportResetChanges(object sender, EventArgs e)
         {
-            ShowReportProperties();
+            mPanelReport.ShowProperties(mReport);
         }
 
         #endregion Report
 
         #region Datasource
-
-        private void FillDatasourceProviders()
-        {
-            comboBoxDatasourceProvider.ValueMember = "Key";
-            comboBoxDatasourceProvider.DisplayMember = "Value";
-            ICollection<KeyValuePair<byte, string>> datasourceProviders = [];
-            foreach (Model.Datasource.Providers provider in Enum.GetValues<Model.Datasource.Providers>())
-            {
-                datasourceProviders.Add(new KeyValuePair<byte, string>((byte)provider, FriendlyNames.GetDatasourceProvider(provider)));
-            }
-            comboBoxDatasourceProvider.DataSource = datasourceProviders;
-        }
-
-        private void FillDatasourceTypes()
-        {
-            comboBoxDatasourceType.ValueMember = "Key";
-            comboBoxDatasourceType.DisplayMember = "Value";
-            ICollection<KeyValuePair<short, string>> datasourceTypes = [];
-            foreach (System.Data.CommandType datasourceType in Enum.GetValues<System.Data.CommandType>())
-            {
-                datasourceTypes.Add(new KeyValuePair<short, string>((short)datasourceType, FriendlyNames.GetDatasourceType(datasourceType)));
-            }
-            comboBoxDatasourceType.DataSource = datasourceTypes;
-        }
 
         private void CreateDatasourceNode(TreeNode treeNodeParent)
         {
@@ -252,39 +219,27 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             CreateDatasourceParametersNodes(treeNodeDatasource);
         }
 
-        private void ShowDatasourceProperties()
+        private void PanelDatasourceShow()
         {
-            tableLayoutPanelDatasource.SuspendLayout();
-            if (mReport.Datasource is null)
+            if (mPanelDatasource is null)
             {
-                comboBoxDatasourceProvider.SelectedIndex = -1;
-                textBoxDatasourceConnectionString.Text = string.Empty;
-                comboBoxDatasourceType.SelectedIndex = -1;
-                textBoxDatasourceText.Text = string.Empty;
+                mPanelDatasource = new(mApplicationTitle)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(mPanelDatasource);
             }
-            else
-            {
-                comboBoxDatasourceProvider.SelectedValue = (byte)mReport.Datasource.Provider;
-                textBoxDatasourceConnectionString.Text = mReport.Datasource.ConnectionString;
-                comboBoxDatasourceType.SelectedValue = (short)mReport.Datasource.Type;
-                textBoxDatasourceText.Text = mReport.Datasource.Text;
-            }
-            tableLayoutPanelDatasource.ResumeLayout();
-            tableLayoutPanelDatasource.Visible = true;
+            mPanelDatasource.ShowProperties(mReport.Datasource);
+            mPanelDatasource.Show();
         }
 
         private void DatasourceApplyChanges(object sender, EventArgs e)
         {
-            mReport.Datasource ??= new();
-            mReport.Datasource.Provider = (Model.Datasource.Providers)(comboBoxDatasourceProvider.SelectedValue ?? Model.Datasource.Providers.None);
-            mReport.Datasource.ConnectionString = textBoxDatasourceConnectionString.Text;
-            mReport.Datasource.Type = (System.Data.CommandType)(short)(comboBoxDatasourceType.SelectedValue ?? System.Data.CommandType.Text);
-            mReport.Datasource.Text = textBoxDatasourceText.Text;
         }
 
         private void DatasourceResetChanges(object sender, EventArgs e)
         {
-            ShowDatasourceProperties();
+            mPanelDatasource.ShowProperties(mReport.Datasource);
         }
 
         private void DatasourceGetFields(object sender, EventArgs e)
@@ -299,17 +254,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                 MessageBox.Show(Properties.Resources.StringDatasourceProviderNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (string.IsNullOrEmpty(textBoxDatasourceConnectionString.Text))
-            {
-                MessageBox.Show(Properties.Resources.StringDatasourceConnectionStringNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (mReport.Datasource.Type == System.Data.CommandType.Text && string.IsNullOrEmpty(textBoxDatasourceText.Text))
-            {
-                MessageBox.Show(Properties.Resources.StringDatasourceTextNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (string.IsNullOrEmpty(mReport.Datasource.Text))
+            if (mReport.Datasource.Type == System.Data.CommandType.Text && string.IsNullOrEmpty(mReport.Datasource.Text))
             {
                 MessageBox.Show(Properties.Resources.StringDatasourceTextNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -322,10 +267,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             // Open the datasource
             DbDataReader? dbDataReader = null;
             Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
-            if (dbDataReader is not null)
-            {
-                dbDataReader.Close();
-            }
+            dbDataReader?.Close();
         }
 
         #endregion Datasource

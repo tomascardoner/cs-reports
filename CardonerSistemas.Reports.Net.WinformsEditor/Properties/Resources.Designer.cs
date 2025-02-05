@@ -205,6 +205,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Report files (*.csrpt)|*.csrpt|All files (*.*)|*.*.
+        /// </summary>
+        internal static string StringFileDialogFilter {
+            get {
+                return ResourceManager.GetString("StringFileDialogFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fonts.
         /// </summary>
         internal static string StringFonts {
@@ -246,6 +255,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringRectangles {
             get {
                 return ResourceManager.GetString("StringRectangles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The report has unsaved changes.
+        ///Do you want to save them?.
+        /// </summary>
+        internal static string StringReportModifiedConfirmation {
+            get {
+                return ResourceManager.GetString("StringReportModifiedConfirmation", resourceCulture);
             }
         }
         
