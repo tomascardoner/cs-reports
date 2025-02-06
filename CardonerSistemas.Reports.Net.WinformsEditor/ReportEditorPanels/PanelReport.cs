@@ -10,10 +10,18 @@
             InitializeComponent();
             mReport = report;
             mApplicationTitle = applicationTitle;
+            InitializeForm();
+
+            ShowProperties();
+        }
+
+        private void InitializeForm()
+        {
+            buttonApply.Text = Properties.Resources.StringApplyChanges;
+            buttonReset.Text = Properties.Resources.StringResetChanges;
 
             FillPageSizes();
             FillPageOrientations();
-            ShowProperties();
         }
 
         public void SetReport(Model.Report report)

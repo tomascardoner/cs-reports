@@ -42,7 +42,6 @@
             buttonReset = new Button();
             buttonAddParameter = new Button();
             buttonGetFields = new Button();
-            buttonTest = new Button();
             tableLayoutPanelMain.SuspendLayout();
             tableLayoutPanelButtons.SuspendLayout();
             SuspendLayout();
@@ -178,13 +177,12 @@
             tableLayoutPanelButtons.Controls.Add(buttonReset, 1, 0);
             tableLayoutPanelButtons.Controls.Add(buttonAddParameter, 2, 0);
             tableLayoutPanelButtons.Controls.Add(buttonGetFields, 3, 0);
-            tableLayoutPanelButtons.Controls.Add(buttonTest, 4, 0);
             tableLayoutPanelButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanelButtons.Location = new Point(212, 395);
             tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             tableLayoutPanelButtons.RowCount = 1;
             tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
-            tableLayoutPanelButtons.Size = new Size(410, 40);
+            tableLayoutPanelButtons.Size = new Size(375, 40);
             tableLayoutPanelButtons.TabIndex = 8;
             // 
             // buttonApply
@@ -220,9 +218,9 @@
             buttonAddParameter.Location = new Point(138, 5);
             buttonAddParameter.Margin = new Padding(5);
             buttonAddParameter.Name = "buttonAddParameter";
-            buttonAddParameter.Size = new Size(120, 30);
+            buttonAddParameter.Size = new Size(140, 30);
             buttonAddParameter.TabIndex = 2;
-            buttonAddParameter.Text = "Add parameter";
+            buttonAddParameter.Text = "Delete datasource";
             buttonAddParameter.UseVisualStyleBackColor = true;
             buttonAddParameter.Click += AddParameter;
             // 
@@ -230,7 +228,7 @@
             // 
             buttonGetFields.AutoSize = true;
             buttonGetFields.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonGetFields.Location = new Point(268, 5);
+            buttonGetFields.Location = new Point(288, 5);
             buttonGetFields.Margin = new Padding(5);
             buttonGetFields.Name = "buttonGetFields";
             buttonGetFields.Size = new Size(82, 30);
@@ -238,18 +236,6 @@
             buttonGetFields.Text = "Get fields";
             buttonGetFields.UseVisualStyleBackColor = true;
             buttonGetFields.Click += GetFields;
-            // 
-            // buttonTest
-            // 
-            buttonTest.AutoSize = true;
-            buttonTest.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonTest.Location = new Point(360, 5);
-            buttonTest.Margin = new Padding(5);
-            buttonTest.Name = "buttonTest";
-            buttonTest.Size = new Size(45, 30);
-            buttonTest.TabIndex = 4;
-            buttonTest.Text = "Test";
-            buttonTest.UseVisualStyleBackColor = true;
             // 
             // PanelDatasource
             // 
@@ -278,7 +264,6 @@
         private ComboBox comboBoxType;
         private TableLayoutPanel tableLayoutPanelButtons;
         private Button buttonAddParameter;
-        private Button buttonTest;
         private Button buttonGetFields;
         private Button buttonReset;
         private Button buttonApply;

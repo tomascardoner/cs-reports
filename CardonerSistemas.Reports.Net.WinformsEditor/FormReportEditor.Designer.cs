@@ -71,20 +71,22 @@
             imageListMain.TransparentColor = Color.Transparent;
             imageListMain.Images.SetKeyName(0, "Report");
             imageListMain.Images.SetKeyName(1, "Datasource");
-            imageListMain.Images.SetKeyName(2, "DatasourceParameter");
-            imageListMain.Images.SetKeyName(3, "DatasourceField");
-            imageListMain.Images.SetKeyName(4, "Fonts");
-            imageListMain.Images.SetKeyName(5, "Font");
-            imageListMain.Images.SetKeyName(6, "Brushes");
-            imageListMain.Images.SetKeyName(7, "Brush");
-            imageListMain.Images.SetKeyName(8, "Sections");
-            imageListMain.Images.SetKeyName(9, "Section");
-            imageListMain.Images.SetKeyName(10, "Rectangles");
-            imageListMain.Images.SetKeyName(11, "Rectangle");
-            imageListMain.Images.SetKeyName(12, "Lines");
-            imageListMain.Images.SetKeyName(13, "Line");
-            imageListMain.Images.SetKeyName(14, "Texts");
-            imageListMain.Images.SetKeyName(15, "Text");
+            imageListMain.Images.SetKeyName(2, "DatasourceParameters");
+            imageListMain.Images.SetKeyName(3, "DatasourceParameter");
+            imageListMain.Images.SetKeyName(4, "DatasourceFields");
+            imageListMain.Images.SetKeyName(5, "DatasourceField");
+            imageListMain.Images.SetKeyName(6, "Fonts");
+            imageListMain.Images.SetKeyName(7, "Font");
+            imageListMain.Images.SetKeyName(8, "Brushes");
+            imageListMain.Images.SetKeyName(9, "Brush");
+            imageListMain.Images.SetKeyName(10, "Sections");
+            imageListMain.Images.SetKeyName(11, "Section");
+            imageListMain.Images.SetKeyName(12, "Rectangles");
+            imageListMain.Images.SetKeyName(13, "Rectangle");
+            imageListMain.Images.SetKeyName(14, "Lines");
+            imageListMain.Images.SetKeyName(15, "Line");
+            imageListMain.Images.SetKeyName(16, "Texts");
+            imageListMain.Images.SetKeyName(17, "Text");
             // 
             // FormReportEditor
             // 

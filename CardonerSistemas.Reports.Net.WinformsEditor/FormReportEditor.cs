@@ -1,4 +1,4 @@
-﻿using System.Data.Common;
+﻿using System.Collections.ObjectModel;
 
 namespace CardonerSistemas.Reports.Net.WinformsEditor
 {
@@ -9,7 +9,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private const string ReportKey = "Report";
         private const string DatasourceKey = "Datasource";
+        private const string DatasourceParametersKey = "DatasourceParameters";
         private const string DatasourceParameterKey = "DatasourceParameter";
+        private const string DatasourceFieldsKey = "DatasourceFields";
         private const string DatasourceFieldKey = "DatasourceField";
         private const string FontsKey = "Fonts";
         private const string FontKey = "Font";
@@ -30,7 +32,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private ReportEditorPanels.PanelReport? mPanelReport;
         private ReportEditorPanels.PanelDatasource? mPanelDatasource;
+        private ReportEditorPanels.PanelDatasourceParameters? mPanelDatasourceParameters;
         private ReportEditorPanels.PanelDatasourceParameter? mPanelDatasourceParameter;
+        private ReportEditorPanels.PanelDatasourceFields? mPanelDatasourceFields;
 
         public string FilePath => mFilePath;
 
@@ -125,8 +129,14 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                 case DatasourceKey:
                     PanelDatasourceShow();
                     break;
+                case DatasourceParametersKey:
+                    PanelDatasourceParametersShow();
+                    break;
                 case DatasourceParameterKey:
                     PanelDatasourceParameterShow(nodeId);
+                    break;
+                case DatasourceFieldsKey:
+                    PanelDatasourceFieldsShow();
                     break;
             }
         }
@@ -139,7 +149,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         {
             mPanelReport?.Hide();
             mPanelDatasource?.Hide();
+            mPanelDatasourceParameters?.Hide();
             mPanelDatasourceParameter?.Hide();
+            mPanelDatasourceFields?.Hide();
         }
 
         #endregion Panel controls
@@ -245,9 +257,17 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             {
                 return;
             }
+            TreeNode treeNodeDatasourceParameters = new()
+            {
+                Text = Properties.Resources.StringDatasourceParameters + string.Format(Properties.Resources.StringNodeItemsCount, mReport.Datasource.Parameters.Count),
+                Tag = DatasourceParametersKey + "@",
+                ImageKey = DatasourceParametersKey,
+                SelectedImageKey = DatasourceParametersKey
+            };
+            treeNodeParent.Nodes.Add(treeNodeDatasourceParameters);
             foreach (string parameterName in mReport.Datasource.Parameters.Select(p => p.Name))
             {
-                treeNodeParent.Nodes.Add(new TreeNode()
+                treeNodeDatasourceParameters.Nodes.Add(new TreeNode()
                 {
                     Text = parameterName,
                     Tag = DatasourceParameterKey + "@" + parameterName,
@@ -255,6 +275,23 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                     SelectedImageKey = DatasourceParameterKey
                 });
             }
+        }
+
+        private void PanelDatasourceParametersShow()
+        {
+            if (mPanelDatasourceParameters is null)
+            {
+                mPanelDatasourceParameters = new(mReport.Datasource)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(mPanelDatasourceParameters);
+            }
+            else
+            {
+                mPanelDatasourceParameters.SetDatasource(mReport.Datasource);
+            }
+            mPanelDatasourceParameters.Show();
         }
 
         private void PanelDatasourceParameterShow(string parameterName)
@@ -289,9 +326,17 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             {
                 return;
             }
+            TreeNode treeNodeDatasourceFields = new()
+            {
+                Text = Properties.Resources.StringDatasourceFields + string.Format(Properties.Resources.StringNodeItemsCount, mReport.Datasource.Fields.Count),
+                Tag = DatasourceFieldsKey + "@",
+                ImageKey = DatasourceFieldsKey,
+                SelectedImageKey = DatasourceFieldsKey
+            };
+            treeNodeParent.Nodes.Add(treeNodeDatasourceFields);
             foreach (string fieldName in mReport.Datasource.Fields.Select(f => f.Name))
             {
-                treeNodeParent.Nodes.Add(new TreeNode()
+                treeNodeDatasourceFields.Nodes.Add(new TreeNode()
                 {
                     Text = fieldName,
                     Tag = DatasourceFieldKey + "@" + fieldName,
@@ -299,6 +344,23 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                     SelectedImageKey = DatasourceFieldKey
                 });
             }
+        }
+
+        private void PanelDatasourceFieldsShow()
+        {
+            if (mPanelDatasourceFields is null)
+            {
+                mPanelDatasourceFields = new(mReport.Datasource)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(mPanelDatasourceFields);
+            }
+            else
+            {
+                mPanelDatasourceFields.SetDatasource(mReport.Datasource);
+            }
+            mPanelDatasourceFields.Show();
         }
 
         private void PanelDatasourceFieldShow(string fieldName)
@@ -329,8 +391,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private void CreateFontsNode(TreeNode treeNodeParent)
         {
-            TreeNode treeNodeFonts = new(Properties.Resources.StringFonts)
+            TreeNode treeNodeFonts = new()
             {
+                Text = Properties.Resources.StringFonts + string.Format(Properties.Resources.StringNodeItemsCount, mReport.Fonts.Count),
                 Tag = FontsKey + "@",
                 ImageKey = FontsKey,
                 SelectedImageKey = FontsKey
@@ -356,7 +419,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         {
             TreeNode treeNodeBrushes = new()
             {
-                Text = Properties.Resources.StringBrushes,
+                Text = Properties.Resources.StringBrushes + string.Format(Properties.Resources.StringNodeItemsCount, mReport.Brushes.Count),
                 Tag = BrushesKey + "@",
                 ImageKey = BrushesKey,
                 SelectedImageKey = BrushesKey
@@ -382,7 +445,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         {
             TreeNode treeNodeSections = new()
             {
-                Text = Properties.Resources.StringSections,
+                Text = Properties.Resources.StringSections + string.Format(Properties.Resources.StringNodeItemsCount, mReport.Sections.Count),
                 Tag = SectionsKey + "@",
                 ImageKey = SectionsKey,
                 SelectedImageKey = SectionsKey
@@ -411,15 +474,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private void CreateLinesOfSectionNode(Model.Section section, TreeNode treeNodeParent)
         {
+            Collection<short> linesIds = [.. mReport.Lines.Where(l => l.SectionId1 == section.SectionId).OrderBy(l => l.LineId).Select(l => l.LineId)];
             TreeNode treeNodeSectionLines = new()
             {
-                Text = Properties.Resources.StringLines,
+                Text = Properties.Resources.StringLines + string.Format(Properties.Resources.StringNodeItemsCount, linesIds.Count),
                 Tag = LinesKey + "@",
                 ImageKey = LinesKey,
                 SelectedImageKey = LinesKey
             };
             treeNodeParent.Nodes.Add(treeNodeSectionLines);
-            foreach (short lineId in mReport.Lines.Where(l => l.SectionId1 == section.SectionId).OrderBy(l => l.LineId).Select(l => l.LineId))
+            foreach (short lineId in linesIds)
             {
                 treeNodeSectionLines.Nodes.Add(new TreeNode()
                 {
@@ -437,15 +501,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private void CreateRectanglesOfSectionNode(Model.Section section, TreeNode treeNodeParent)
         {
+            Collection<short> rectanglesIds = [.. mReport.Rectangles.Where(r => r.SectionId1 == section.SectionId).OrderBy(r => r.RectangleId).Select(r => r.RectangleId)];
             TreeNode treeNodeSectionRectangles = new()
             {
-                Text = Properties.Resources.StringRectangles,
+                Text = Properties.Resources.StringRectangles + string.Format(Properties.Resources.StringNodeItemsCount, rectanglesIds.Count),
                 Tag = RectanglesKey + "@",
                 ImageKey = RectanglesKey,
                 SelectedImageKey = RectanglesKey
             };
             treeNodeParent.Nodes.Add(treeNodeSectionRectangles);
-            foreach (short rectangleId in mReport.Rectangles.Where(r => r.SectionId1 == section.SectionId).OrderBy(r => r.RectangleId).Select(r => r.RectangleId))
+            foreach (short rectangleId in rectanglesIds)
             {
                 treeNodeSectionRectangles.Nodes.Add(new TreeNode()
                 {
@@ -463,15 +528,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private void CreateTextsOfSectionNode(Model.Section section, TreeNode treeNodeParent)
         {
+            Collection<Model.Text> texts = [.. mReport.Texts.Where(t => t.SectionId == section.SectionId).OrderBy(t => t.TextId)];
             TreeNode treeNodeSectionTexts = new()
             {
-                Text = Properties.Resources.StringTexts,
+                Text = Properties.Resources.StringTexts + string.Format(Properties.Resources.StringNodeItemsCount, texts.Count),
                 Tag = TextsKey + "@",
                 ImageKey = TextsKey,
                 SelectedImageKey = TextsKey
             };
             treeNodeParent.Nodes.Add(treeNodeSectionTexts);
-            foreach (Model.Text text in mReport.Texts.Where(t => t.SectionId == section.SectionId).OrderBy(t => t.TextId))
+            foreach (Model.Text text in texts)
             {
                 treeNodeSectionTexts.Nodes.Add(new TreeNode()
                 {

@@ -12,10 +12,18 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
             InitializeComponent();
             mDatasource = datasource;
             mApplicationTitle = applicationTitle;
+            InitializeForm();
+
+            ShowProperties();
+        }
+
+        private void InitializeForm()
+        {
+            buttonApply.Text = Properties.Resources.StringApplyChanges;
+            buttonReset.Text = Properties.Resources.StringResetChanges;
 
             FillProviders();
             FillTypes();
-            ShowProperties();
         }
 
         public void SetDatasource(Model.Datasource? datasource)

@@ -61,6 +61,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        internal static string StringApplyChanges {
+            get {
+                return ResourceManager.GetString("StringApplyChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brushes.
         /// </summary>
         internal static string StringBrushes {
@@ -97,6 +106,60 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        internal static string StringDatasourceFieldNameNew {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldNameNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fields.
+        /// </summary>
+        internal static string StringDatasourceFields {
+            get {
+                return ResourceManager.GetString("StringDatasourceFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add field.
+        /// </summary>
+        internal static string StringDatasourceFieldsAdd {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldsAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are {0} fields..
+        /// </summary>
+        internal static string StringDatasourceFieldsCounter {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldsCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are not fields..
+        /// </summary>
+        internal static string StringDatasourceFieldsCounterEmpty {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldsCounterEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is one field..
+        /// </summary>
+        internal static string StringDatasourceFieldsCounterOne {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldsCounterOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are parameters with unspecified values. Do you want to continue anyway?.
         /// </summary>
         internal static string StringDatasourceGetFieldsWithNullParametersConfirmation {
@@ -120,6 +183,51 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringDatasourceParameterNameRequired {
             get {
                 return ResourceManager.GetString("StringDatasourceParameterNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameters.
+        /// </summary>
+        internal static string StringDatasourceParameters {
+            get {
+                return ResourceManager.GetString("StringDatasourceParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add parameter.
+        /// </summary>
+        internal static string StringDatasourceParametersAdd {
+            get {
+                return ResourceManager.GetString("StringDatasourceParametersAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are {0} parameters..
+        /// </summary>
+        internal static string StringDatasourceParametersCounter {
+            get {
+                return ResourceManager.GetString("StringDatasourceParametersCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are not parameters..
+        /// </summary>
+        internal static string StringDatasourceParametersCounterEmpty {
+            get {
+                return ResourceManager.GetString("StringDatasourceParametersCounterEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is one parameter..
+        /// </summary>
+        internal static string StringDatasourceParametersCounterOne {
+            get {
+                return ResourceManager.GetString("StringDatasourceParametersCounterOne", resourceCulture);
             }
         }
         
@@ -255,6 +363,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringLines {
             get {
                 return ResourceManager.GetString("StringLines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  - (count: {0}).
+        /// </summary>
+        internal static string StringNodeItemsCount {
+            get {
+                return ResourceManager.GetString("StringNodeItemsCount", resourceCulture);
             }
         }
         
@@ -679,6 +796,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringReportPageSizeTabloid {
             get {
                 return ResourceManager.GetString("StringReportPageSizeTabloid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string StringResetChanges {
+            get {
+                return ResourceManager.GetString("StringResetChanges", resourceCulture);
             }
         }
         

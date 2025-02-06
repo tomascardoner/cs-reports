@@ -334,4 +334,46 @@ Do you want to save them?</value>
   <data name="StringDatasourceTypeRequired" xml:space="preserve">
     <value>Must specify type.</value>
   </data>
+  <data name="StringDatasourceParameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="StringDatasourceFields" xml:space="preserve">
+    <value>Fields</value>
+  </data>
+  <data name="StringDatasourceParametersCounterEmpty" xml:space="preserve">
+    <value>There are not parameters.</value>
+  </data>
+  <data name="StringDatasourceFieldsCounterEmpty" xml:space="preserve">
+    <value>There are not fields.</value>
+  </data>
+  <data name="StringDatasourceParametersCounterOne" xml:space="preserve">
+    <value>There is one parameter.</value>
+  </data>
+  <data name="StringDatasourceFieldsCounterOne" xml:space="preserve">
+    <value>There is one field.</value>
+  </data>
+  <data name="StringDatasourceParametersCounter" xml:space="preserve">
+    <value>There are {0} parameters.</value>
+  </data>
+  <data name="StringDatasourceFieldsCounter" xml:space="preserve">
+    <value>There are {0} fields.</value>
+  </data>
+  <data name="StringDatasourceParametersAdd" xml:space="preserve">
+    <value>Add parameter</value>
+  </data>
+  <data name="StringDatasourceFieldsAdd" xml:space="preserve">
+    <value>Add field</value>
+  </data>
+  <data name="StringApplyChanges" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="StringResetChanges" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="StringDatasourceFieldNameNew" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="StringNodeItemsCount" xml:space="preserve">
+    <value> - (count: {0})</value>
+  </data>
 </root>
