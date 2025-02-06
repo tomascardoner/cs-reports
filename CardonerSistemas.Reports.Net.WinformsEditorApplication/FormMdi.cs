@@ -74,6 +74,18 @@
 
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (ActiveMdiChild is null || ActiveMdiChild.ActiveControl is null)
+            {
+                return;
+            }
+            if (ActiveMdiChild.ActiveControl is SplitContainer splitContainer)
+            {
+                
+            }
+            if (ActiveMdiChild.ActiveControl is TextBox textBox && Clipboard.ContainsText())
+            {
+                textBox.Paste();
+            }
         }
 
         private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)

@@ -130,7 +130,7 @@
             textBoxReportId.Size = new Size(400, 27);
             textBoxReportId.TabIndex = 1;
             textBoxReportId.TextAlign = HorizontalAlignment.Center;
-            textBoxReportId.Enter += TextBoxs_Enter;
+            textBoxReportId.Enter += ControlFocusEnter;
             // 
             // labelName
             // 
@@ -151,7 +151,7 @@
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(400, 27);
             textBoxName.TabIndex = 3;
-            textBoxName.Enter += TextBoxs_Enter;
+            textBoxName.Enter += ControlFocusEnter;
             // 
             // labelTemplateFileName
             // 
@@ -172,7 +172,7 @@
             textBoxTemplateFileName.Name = "textBoxTemplateFileName";
             textBoxTemplateFileName.Size = new Size(400, 27);
             textBoxTemplateFileName.TabIndex = 5;
-            textBoxTemplateFileName.Enter += TextBoxs_Enter;
+            textBoxTemplateFileName.Enter += ControlFocusEnter;
             // 
             // labelPageSize
             // 
@@ -235,7 +235,7 @@
             numericUpDownPageMarginTop.Size = new Size(72, 27);
             numericUpDownPageMarginTop.TabIndex = 11;
             numericUpDownPageMarginTop.TextAlign = HorizontalAlignment.Right;
-            numericUpDownPageMarginTop.Enter += TextBoxs_Enter;
+            numericUpDownPageMarginTop.Enter += ControlFocusEnter;
             // 
             // labelPageMarginLeft
             // 
@@ -257,7 +257,7 @@
             numericUpDownPageMarginLeft.Size = new Size(72, 27);
             numericUpDownPageMarginLeft.TabIndex = 13;
             numericUpDownPageMarginLeft.TextAlign = HorizontalAlignment.Right;
-            numericUpDownPageMarginLeft.Enter += TextBoxs_Enter;
+            numericUpDownPageMarginLeft.Enter += ControlFocusEnter;
             // 
             // labelPageMarginRight
             // 
@@ -279,7 +279,7 @@
             numericUpDownPageMarginRight.Size = new Size(72, 27);
             numericUpDownPageMarginRight.TabIndex = 15;
             numericUpDownPageMarginRight.TextAlign = HorizontalAlignment.Right;
-            numericUpDownPageMarginRight.Enter += TextBoxs_Enter;
+            numericUpDownPageMarginRight.Enter += ControlFocusEnter;
             // 
             // labelPageMarginBottom
             // 
@@ -301,7 +301,7 @@
             numericUpDownPageMarginBottom.Size = new Size(72, 27);
             numericUpDownPageMarginBottom.TabIndex = 17;
             numericUpDownPageMarginBottom.TextAlign = HorizontalAlignment.Right;
-            numericUpDownPageMarginBottom.Enter += TextBoxs_Enter;
+            numericUpDownPageMarginBottom.Enter += ControlFocusEnter;
             // 
             // labelDetailSectionMaxRowCount
             // 
@@ -322,7 +322,7 @@
             numericUpDownDetailSectionMaxRowCount.Size = new Size(54, 27);
             numericUpDownDetailSectionMaxRowCount.TabIndex = 19;
             numericUpDownDetailSectionMaxRowCount.TextAlign = HorizontalAlignment.Right;
-            numericUpDownDetailSectionMaxRowCount.Enter += TextBoxs_Enter;
+            numericUpDownDetailSectionMaxRowCount.Enter += ControlFocusEnter;
             // 
             // tableLayoutPanelButtons
             // 

@@ -111,7 +111,7 @@
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(400, 27);
             textBoxName.TabIndex = 1;
-            textBoxName.Enter += TextBoxs_Enter;
+            textBoxName.Enter += ControlFocusEnter;
             // 
             // labelType
             // 
@@ -175,7 +175,7 @@
             textBoxValueText.ScrollBars = ScrollBars.Vertical;
             textBoxValueText.Size = new Size(400, 60);
             textBoxValueText.TabIndex = 7;
-            textBoxValueText.Enter += TextBoxs_Enter;
+            textBoxValueText.Enter += ControlFocusEnter;
             // 
             // labelValueNumeric
             // 
@@ -196,7 +196,7 @@
             numericUpDownValueNumeric.TabIndex = 9;
             numericUpDownValueNumeric.TextAlign = HorizontalAlignment.Right;
             numericUpDownValueNumeric.ThousandsSeparator = true;
-            numericUpDownValueNumeric.Enter += TextBoxs_Enter;
+            numericUpDownValueNumeric.Enter += ControlFocusEnter;
             // 
             // labelValueDateTime
             // 

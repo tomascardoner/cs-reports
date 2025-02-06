@@ -376,4 +376,7 @@ Do you want to save them?</value>
   <data name="StringNodeItemsCount" xml:space="preserve">
     <value> - (count: {0})</value>
   </data>
+  <data name="StringDatasourceDeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete the datasource?</value>
+  </data>
 </root>

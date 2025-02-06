@@ -29,9 +29,12 @@
         private void InitializeComponent()
         {
             tableLayoutPanelMain = new TableLayoutPanel();
-            labelCounter = new Label();
+            tableLayoutPanelButtons = new TableLayoutPanel();
             buttonAdd = new Button();
+            buttonGetFields = new Button();
+            labelCounter = new Label();
             tableLayoutPanelMain.SuspendLayout();
+            tableLayoutPanelButtons.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanelMain
@@ -40,8 +43,8 @@
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.Controls.Add(tableLayoutPanelButtons, 1, 2);
             tableLayoutPanelMain.Controls.Add(labelCounter, 1, 1);
-            tableLayoutPanelMain.Controls.Add(buttonAdd, 1, 2);
             tableLayoutPanelMain.Dock = DockStyle.Fill;
             tableLayoutPanelMain.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanelMain.Location = new Point(0, 0);
@@ -57,29 +60,60 @@
             tableLayoutPanelMain.Size = new Size(700, 500);
             tableLayoutPanelMain.TabIndex = 1;
             // 
-            // labelCounter
+            // tableLayoutPanelButtons
             // 
-            labelCounter.AutoSize = true;
-            labelCounter.Dock = DockStyle.Fill;
-            labelCounter.Location = new Point(318, 220);
-            labelCounter.Name = "labelCounter";
-            labelCounter.Size = new Size(64, 20);
-            labelCounter.TabIndex = 0;
-            labelCounter.Text = "Counter.";
-            labelCounter.TextAlign = ContentAlignment.MiddleLeft;
+            tableLayoutPanelButtons.AutoSize = true;
+            tableLayoutPanelButtons.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanelButtons.ColumnCount = 2;
+            tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanelButtons.Controls.Add(buttonAdd, 0, 0);
+            tableLayoutPanelButtons.Controls.Add(buttonGetFields, 1, 0);
+            tableLayoutPanelButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
+            tableLayoutPanelButtons.Location = new Point(275, 240);
+            tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
+            tableLayoutPanelButtons.RowCount = 1;
+            tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
+            tableLayoutPanelButtons.Size = new Size(149, 40);
+            tableLayoutPanelButtons.TabIndex = 9;
             // 
             // buttonAdd
             // 
             buttonAdd.AutoSize = true;
             buttonAdd.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonAdd.Location = new Point(320, 245);
+            buttonAdd.Location = new Point(5, 5);
             buttonAdd.Margin = new Padding(5);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(47, 30);
-            buttonAdd.TabIndex = 2;
+            buttonAdd.TabIndex = 0;
             buttonAdd.Text = "Add";
             buttonAdd.UseVisualStyleBackColor = true;
             buttonAdd.Click += Add;
+            // 
+            // buttonGetFields
+            // 
+            buttonGetFields.AutoSize = true;
+            buttonGetFields.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonGetFields.Location = new Point(62, 5);
+            buttonGetFields.Margin = new Padding(5);
+            buttonGetFields.Name = "buttonGetFields";
+            buttonGetFields.Size = new Size(82, 30);
+            buttonGetFields.TabIndex = 3;
+            buttonGetFields.Text = "Get fields";
+            buttonGetFields.UseVisualStyleBackColor = true;
+            buttonGetFields.Click += GetFields;
+            // 
+            // labelCounter
+            // 
+            labelCounter.AutoSize = true;
+            labelCounter.Dock = DockStyle.Fill;
+            labelCounter.Location = new Point(275, 217);
+            labelCounter.Name = "labelCounter";
+            labelCounter.Size = new Size(149, 20);
+            labelCounter.TabIndex = 0;
+            labelCounter.Text = "Counter.";
+            labelCounter.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // PanelDatasourceFields
             // 
@@ -90,6 +124,8 @@
             Size = new Size(700, 500);
             tableLayoutPanelMain.ResumeLayout(false);
             tableLayoutPanelMain.PerformLayout();
+            tableLayoutPanelButtons.ResumeLayout(false);
+            tableLayoutPanelButtons.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -97,6 +133,8 @@
 
         private TableLayoutPanel tableLayoutPanelMain;
         private Label labelCounter;
+        private TableLayoutPanel tableLayoutPanelButtons;
         private Button buttonAdd;
+        private Button buttonGetFields;
     }
 }

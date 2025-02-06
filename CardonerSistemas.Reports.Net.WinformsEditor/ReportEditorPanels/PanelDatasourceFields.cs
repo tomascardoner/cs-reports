@@ -1,13 +1,17 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
+﻿using System.Data.Common;
+
+namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
 {
     public partial class PanelDatasourceFields : UserControl
     {
         private Model.Datasource? mDatasource;
+        private string mApplicationTitle;
 
-        public PanelDatasourceFields(Model.Datasource? datasource)
+        public PanelDatasourceFields(Model.Datasource? datasource, string applicationTitle)
         {
             InitializeComponent();
             mDatasource = datasource;
+            mApplicationTitle = applicationTitle;
             InitializeForm();
 
             ShowProperties();
@@ -42,6 +46,24 @@
         {
             mDatasource ??= new();
             mDatasource.Fields.Add(new(mDatasource) { Name = Properties.Resources.StringDatasourceFieldNameNew });
+        }
+
+        private void GetFields(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(mDatasource?.ConnectionString))
+            {
+                MessageBox.Show(Properties.Resources.StringDatasourceConnectionStringRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (mDatasource is null || (mDatasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceGetFieldsWithNullParametersConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No))
+            {
+                return;
+            }
+
+            // Open the datasource
+            DbDataReader? dbDataReader = null;
+            Data.Datasource.GetDatasource(mDatasource, ref dbDataReader);
+            dbDataReader?.Close();
         }
     }
 }

@@ -54,7 +54,7 @@
             comboBoxPageOrientation.DataSource = items;
         }
 
-        private void TextBoxs_Enter(object sender, EventArgs e)
+        private void ControlFocusEnter(object sender, EventArgs e)
         {
             if (sender is TextBox textBox)
             {

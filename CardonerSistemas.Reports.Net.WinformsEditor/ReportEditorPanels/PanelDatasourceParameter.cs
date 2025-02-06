@@ -33,7 +33,7 @@
             comboBoxType.DataSource = items;
         }
 
-        private void TextBoxs_Enter(object sender, EventArgs e)
+        private void ControlFocusEnter(object sender, EventArgs e)
         {
             if (sender is TextBox textBox)
             {
@@ -127,11 +127,13 @@
             if (string.IsNullOrEmpty(textBoxName.Text))
             {
                 MessageBox.Show(Properties.Resources.StringDatasourceParameterNameRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBoxName.Focus();
                 return;
             }
             if (comboBoxType.SelectedValue is null)
             {
                 MessageBox.Show(Properties.Resources.StringDatasourceParameterTypeRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                comboBoxType.Focus();
                 return;
             }
 

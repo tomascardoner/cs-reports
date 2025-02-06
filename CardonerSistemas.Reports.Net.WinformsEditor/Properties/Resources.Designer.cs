@@ -106,6 +106,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the datasource?.
+        /// </summary>
+        internal static string StringDatasourceDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("StringDatasourceDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         internal static string StringDatasourceFieldNameNew {

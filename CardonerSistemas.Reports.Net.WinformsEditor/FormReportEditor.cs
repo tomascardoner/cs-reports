@@ -105,23 +105,30 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         #region Events
 
+        private Tuple<string, string> GetNodeInfo(TreeNode treeNode)
+        {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            string nodeTag = treeNode.Tag.ToString();
+            string nodeType = nodeTag[..nodeTag.IndexOf('@')];
+            string nodeId = nodeTag[(nodeType.Length + 1)..];
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+
+            return Tuple.Create(nodeType, nodeId);
+        }
+
         private void TreeViewReport_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node is null || e.Node.Tag is null)
             {
                 return;
             }
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-            string nodeTag = e.Node.Tag.ToString();
-            string nodeType = nodeTag[..nodeTag.IndexOf('@')];
-            string nodeId = nodeTag[(nodeType.Length + 1)..];
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             PanelControlsHide();
 
-            switch (nodeType)
+            Tuple<string, string> nodeInfo = GetNodeInfo(e.Node);
+            switch (nodeInfo.Item1)
             {
                 case ReportKey:
                     PanelReportShow();
@@ -133,7 +140,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                     PanelDatasourceParametersShow();
                     break;
                 case DatasourceParameterKey:
-                    PanelDatasourceParameterShow(nodeId);
+                    PanelDatasourceParameterShow(nodeInfo.Item2);
                     break;
                 case DatasourceFieldsKey:
                     PanelDatasourceFieldsShow();
@@ -239,12 +246,20 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(mPanelDatasource);
+                mPanelDatasource.DatasourceDeleted += DatasourceDeleted;
             }
             else
             {
                 mPanelDatasource.SetDatasource(mReport.Datasource);
             }
             mPanelDatasource.Show();
+        }
+
+        private void DatasourceDeleted(object sender, EventArgs e)
+        {
+            treeViewReport.SuspendLayout();
+            treeViewReport.Nodes[0].Nodes[0].Nodes.Clear();
+            treeViewReport.ResumeLayout();
         }
 
         #endregion Datasource
@@ -350,7 +365,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         {
             if (mPanelDatasourceFields is null)
             {
-                mPanelDatasourceFields = new(mReport.Datasource)
+                mPanelDatasourceFields = new(mReport.Datasource, mApplicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };
