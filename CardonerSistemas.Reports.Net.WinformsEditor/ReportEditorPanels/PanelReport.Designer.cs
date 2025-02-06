@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanelReport = new TableLayoutPanel();
+            tableLayoutPanelMain = new TableLayoutPanel();
             labelReportId = new Label();
             textBoxReportId = new TextBox();
             labelName = new Label();
@@ -52,7 +52,7 @@
             tableLayoutPanelButtons = new TableLayoutPanel();
             buttonApply = new Button();
             buttonReset = new Button();
-            tableLayoutPanelReport.SuspendLayout();
+            tableLayoutPanelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginTop).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginLeft).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginRight).BeginInit();
@@ -61,55 +61,54 @@
             tableLayoutPanelButtons.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanelReport
+            // tableLayoutPanelMain
             // 
-            tableLayoutPanelReport.ColumnCount = 4;
-            tableLayoutPanelReport.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanelReport.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanelReport.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanelReport.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanelReport.Controls.Add(labelReportId, 1, 1);
-            tableLayoutPanelReport.Controls.Add(textBoxReportId, 2, 1);
-            tableLayoutPanelReport.Controls.Add(labelName, 1, 2);
-            tableLayoutPanelReport.Controls.Add(textBoxName, 2, 2);
-            tableLayoutPanelReport.Controls.Add(labelTemplateFileName, 1, 3);
-            tableLayoutPanelReport.Controls.Add(textBoxTemplateFileName, 2, 3);
-            tableLayoutPanelReport.Controls.Add(labelPageSize, 1, 4);
-            tableLayoutPanelReport.Controls.Add(comboBoxPageSize, 2, 4);
-            tableLayoutPanelReport.Controls.Add(labelPageOrientation, 1, 5);
-            tableLayoutPanelReport.Controls.Add(comboBoxPageOrientation, 2, 5);
-            tableLayoutPanelReport.Controls.Add(labelPageMarginTop, 1, 6);
-            tableLayoutPanelReport.Controls.Add(numericUpDownPageMarginTop, 2, 6);
-            tableLayoutPanelReport.Controls.Add(labelPageMarginLeft, 1, 7);
-            tableLayoutPanelReport.Controls.Add(numericUpDownPageMarginLeft, 2, 7);
-            tableLayoutPanelReport.Controls.Add(labelPageMarginRight, 1, 8);
-            tableLayoutPanelReport.Controls.Add(numericUpDownPageMarginRight, 2, 8);
-            tableLayoutPanelReport.Controls.Add(labelPageMarginBottom, 1, 9);
-            tableLayoutPanelReport.Controls.Add(numericUpDownPageMarginBottom, 2, 9);
-            tableLayoutPanelReport.Controls.Add(labelDetailSectionMaxRowCount, 1, 10);
-            tableLayoutPanelReport.Controls.Add(numericUpDownDetailSectionMaxRowCount, 2, 10);
-            tableLayoutPanelReport.Controls.Add(tableLayoutPanelButtons, 2, 11);
-            tableLayoutPanelReport.Dock = DockStyle.Fill;
-            tableLayoutPanelReport.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            tableLayoutPanelReport.Location = new Point(0, 0);
-            tableLayoutPanelReport.Name = "tableLayoutPanelReport";
-            tableLayoutPanelReport.RowCount = 13;
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle());
-            tableLayoutPanelReport.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanelReport.Size = new Size(700, 500);
-            tableLayoutPanelReport.TabIndex = 0;
-            tableLayoutPanelReport.Visible = false;
+            tableLayoutPanelMain.ColumnCount = 4;
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.Controls.Add(labelReportId, 1, 1);
+            tableLayoutPanelMain.Controls.Add(textBoxReportId, 2, 1);
+            tableLayoutPanelMain.Controls.Add(labelName, 1, 2);
+            tableLayoutPanelMain.Controls.Add(textBoxName, 2, 2);
+            tableLayoutPanelMain.Controls.Add(labelTemplateFileName, 1, 3);
+            tableLayoutPanelMain.Controls.Add(textBoxTemplateFileName, 2, 3);
+            tableLayoutPanelMain.Controls.Add(labelPageSize, 1, 4);
+            tableLayoutPanelMain.Controls.Add(comboBoxPageSize, 2, 4);
+            tableLayoutPanelMain.Controls.Add(labelPageOrientation, 1, 5);
+            tableLayoutPanelMain.Controls.Add(comboBoxPageOrientation, 2, 5);
+            tableLayoutPanelMain.Controls.Add(labelPageMarginTop, 1, 6);
+            tableLayoutPanelMain.Controls.Add(numericUpDownPageMarginTop, 2, 6);
+            tableLayoutPanelMain.Controls.Add(labelPageMarginLeft, 1, 7);
+            tableLayoutPanelMain.Controls.Add(numericUpDownPageMarginLeft, 2, 7);
+            tableLayoutPanelMain.Controls.Add(labelPageMarginRight, 1, 8);
+            tableLayoutPanelMain.Controls.Add(numericUpDownPageMarginRight, 2, 8);
+            tableLayoutPanelMain.Controls.Add(labelPageMarginBottom, 1, 9);
+            tableLayoutPanelMain.Controls.Add(numericUpDownPageMarginBottom, 2, 9);
+            tableLayoutPanelMain.Controls.Add(labelDetailSectionMaxRowCount, 1, 10);
+            tableLayoutPanelMain.Controls.Add(numericUpDownDetailSectionMaxRowCount, 2, 10);
+            tableLayoutPanelMain.Controls.Add(tableLayoutPanelButtons, 2, 11);
+            tableLayoutPanelMain.Dock = DockStyle.Fill;
+            tableLayoutPanelMain.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
+            tableLayoutPanelMain.Location = new Point(0, 0);
+            tableLayoutPanelMain.Name = "tableLayoutPanelMain";
+            tableLayoutPanelMain.RowCount = 13;
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.Size = new Size(700, 500);
+            tableLayoutPanelMain.TabIndex = 0;
             // 
             // labelReportId
             // 
@@ -131,6 +130,7 @@
             textBoxReportId.Size = new Size(400, 27);
             textBoxReportId.TabIndex = 1;
             textBoxReportId.TextAlign = HorizontalAlignment.Center;
+            textBoxReportId.Enter += TextBoxs_Enter;
             // 
             // labelName
             // 
@@ -151,6 +151,7 @@
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(400, 27);
             textBoxName.TabIndex = 3;
+            textBoxName.Enter += TextBoxs_Enter;
             // 
             // labelTemplateFileName
             // 
@@ -171,6 +172,7 @@
             textBoxTemplateFileName.Name = "textBoxTemplateFileName";
             textBoxTemplateFileName.Size = new Size(400, 27);
             textBoxTemplateFileName.TabIndex = 5;
+            textBoxTemplateFileName.Enter += TextBoxs_Enter;
             // 
             // labelPageSize
             // 
@@ -233,6 +235,7 @@
             numericUpDownPageMarginTop.Size = new Size(72, 27);
             numericUpDownPageMarginTop.TabIndex = 11;
             numericUpDownPageMarginTop.TextAlign = HorizontalAlignment.Right;
+            numericUpDownPageMarginTop.Enter += TextBoxs_Enter;
             // 
             // labelPageMarginLeft
             // 
@@ -254,6 +257,7 @@
             numericUpDownPageMarginLeft.Size = new Size(72, 27);
             numericUpDownPageMarginLeft.TabIndex = 13;
             numericUpDownPageMarginLeft.TextAlign = HorizontalAlignment.Right;
+            numericUpDownPageMarginLeft.Enter += TextBoxs_Enter;
             // 
             // labelPageMarginRight
             // 
@@ -275,6 +279,7 @@
             numericUpDownPageMarginRight.Size = new Size(72, 27);
             numericUpDownPageMarginRight.TabIndex = 15;
             numericUpDownPageMarginRight.TextAlign = HorizontalAlignment.Right;
+            numericUpDownPageMarginRight.Enter += TextBoxs_Enter;
             // 
             // labelPageMarginBottom
             // 
@@ -296,6 +301,7 @@
             numericUpDownPageMarginBottom.Size = new Size(72, 27);
             numericUpDownPageMarginBottom.TabIndex = 17;
             numericUpDownPageMarginBottom.TextAlign = HorizontalAlignment.Right;
+            numericUpDownPageMarginBottom.Enter += TextBoxs_Enter;
             // 
             // labelDetailSectionMaxRowCount
             // 
@@ -316,6 +322,7 @@
             numericUpDownDetailSectionMaxRowCount.Size = new Size(54, 27);
             numericUpDownDetailSectionMaxRowCount.TabIndex = 19;
             numericUpDownDetailSectionMaxRowCount.TextAlign = HorizontalAlignment.Right;
+            numericUpDownDetailSectionMaxRowCount.Enter += TextBoxs_Enter;
             // 
             // tableLayoutPanelButtons
             // 
@@ -347,6 +354,7 @@
             buttonApply.TabIndex = 0;
             buttonApply.Text = "Apply";
             buttonApply.UseVisualStyleBackColor = true;
+            buttonApply.Click += ApplyChanges;
             // 
             // buttonReset
             // 
@@ -359,16 +367,17 @@
             buttonReset.TabIndex = 1;
             buttonReset.Text = "Reset";
             buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Click += ResetChanges;
             // 
             // PanelReport
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(tableLayoutPanelReport);
+            Controls.Add(tableLayoutPanelMain);
             Name = "PanelReport";
             Size = new Size(700, 500);
-            tableLayoutPanelReport.ResumeLayout(false);
-            tableLayoutPanelReport.PerformLayout();
+            tableLayoutPanelMain.ResumeLayout(false);
+            tableLayoutPanelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginTop).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginLeft).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPageMarginRight).EndInit();
@@ -381,7 +390,7 @@
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanelReport;
+        private TableLayoutPanel tableLayoutPanelMain;
         private Label labelReportId;
         private Label labelName;
         private Label labelTemplateFileName;

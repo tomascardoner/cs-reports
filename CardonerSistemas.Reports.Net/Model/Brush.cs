@@ -7,7 +7,14 @@ namespace CardonerSistemas.Reports.Net.Model
     {
         public Brush(Report report)
         {
-            BrushId = (short)(report.Brushes.Max(b => b.BrushId) + 1);
+            if (report.Brushes.Count == 0)
+            {
+                BrushId = 1;
+            }
+            else
+            {
+                BrushId = (short)(report.Brushes.Max(b => b.BrushId) + 1);
+            }
         }
 
         [JsonConstructor]

@@ -7,7 +7,14 @@ namespace CardonerSistemas.Reports.Net.Model
     {
 
         public Line(Report report) {
-            LineId = (short)(report.Lines.Max(l => l.LineId) + 1);
+            if (report.Lines.Count == 0)
+            {
+                LineId = 1;
+            }
+            else
+            {
+                LineId = (short)(report.Lines.Max(l => l.LineId) + 1);
+            }
         }
 
         [JsonConstructor]

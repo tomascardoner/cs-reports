@@ -10,7 +10,14 @@ namespace CardonerSistemas.Reports.Net.Model
         {
             _Report = report;
             Type = type;
-            SectionId = (short)(report.Sections.Where(s => s.Type == type).Max(s => s.SectionId) + 1);
+            if (report.Sections.Count == 0)
+            {
+                SectionId = 1;
+            }
+            else
+            {
+                SectionId = (short)(report.Sections.Where(s => s.Type == type).Max(s => s.SectionId) + 1);
+            }
         }
 
         public Section(Report report, SectionTypes type, short sectionId)

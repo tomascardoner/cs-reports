@@ -10,7 +10,14 @@ namespace CardonerSistemas.Reports.Net.Model
         public Text(Report report)
         {
             _Report = report;
-            TextId = (short)(report.Texts.Max(t => t.TextId) + 1);
+            if (report.Texts.Count == 0)
+            {
+                TextId = 1;
+            }
+            else
+            {
+                TextId = (short)(report.Texts.Max(t => t.TextId) + 1);
+            }
         }
 
         public Text(Report report, short textId)

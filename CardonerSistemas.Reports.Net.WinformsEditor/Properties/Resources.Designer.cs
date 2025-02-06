@@ -88,11 +88,11 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ConnectionString not specified..
+        ///   Looks up a localized string similar to Must specify connection string..
         /// </summary>
-        internal static string StringDatasourceConnectionStringNotSpecified {
+        internal static string StringDatasourceConnectionStringRequired {
             get {
-                return ResourceManager.GetString("StringDatasourceConnectionStringNotSpecified", resourceCulture);
+                return ResourceManager.GetString("StringDatasourceConnectionStringRequired", resourceCulture);
             }
         }
         
@@ -106,20 +106,38 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datasource not specified..
+        ///   Looks up a localized string similar to New.
         /// </summary>
-        internal static string StringDatasourceNotSpecified {
+        internal static string StringDatasourceParameterNameNew {
             get {
-                return ResourceManager.GetString("StringDatasourceNotSpecified", resourceCulture);
+                return ResourceManager.GetString("StringDatasourceParameterNameNew", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must specify database provider..
+        ///   Looks up a localized string similar to Must specify name..
         /// </summary>
-        internal static string StringDatasourceProviderNotSpecified {
+        internal static string StringDatasourceParameterNameRequired {
             get {
-                return ResourceManager.GetString("StringDatasourceProviderNotSpecified", resourceCulture);
+                return ResourceManager.GetString("StringDatasourceParameterNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify type..
+        /// </summary>
+        internal static string StringDatasourceParameterTypeRequired {
+            get {
+                return ResourceManager.GetString("StringDatasourceParameterTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify provider..
+        /// </summary>
+        internal static string StringDatasourceProviderRequired {
+            get {
+                return ResourceManager.GetString("StringDatasourceProviderRequired", resourceCulture);
             }
         }
         
@@ -169,11 +187,20 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datasource text not specified..
+        ///   Looks up a localized string similar to Must specify text..
         /// </summary>
-        internal static string StringDatasourceTextNotSpecified {
+        internal static string StringDatasourceTextRequired {
             get {
-                return ResourceManager.GetString("StringDatasourceTextNotSpecified", resourceCulture);
+                return ResourceManager.GetString("StringDatasourceTextRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify type..
+        /// </summary>
+        internal static string StringDatasourceTypeRequired {
+            get {
+                return ResourceManager.GetString("StringDatasourceTypeRequired", resourceCulture);
             }
         }
         
@@ -269,11 +296,29 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must specify name..
+        /// </summary>
+        internal static string StringReportNameRequired {
+            get {
+                return ResourceManager.GetString("StringReportNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to * New report *.
         /// </summary>
         internal static string StringReportNew {
             get {
                 return ResourceManager.GetString("StringReportNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify page orientation..
+        /// </summary>
+        internal static string StringReportPageOrientationRequired {
+            get {
+                return ResourceManager.GetString("StringReportPageOrientationRequired", resourceCulture);
             }
         }
         
@@ -580,6 +625,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringReportPageSizeRA5 {
             get {
                 return ResourceManager.GetString("StringReportPageSizeRA5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify page size..
+        /// </summary>
+        internal static string StringReportPageSizeRequired {
+            get {
+                return ResourceManager.GetString("StringReportPageSizeRequired", resourceCulture);
             }
         }
         

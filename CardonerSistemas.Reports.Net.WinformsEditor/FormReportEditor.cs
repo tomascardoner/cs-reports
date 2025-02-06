@@ -1,6 +1,4 @@
-﻿using CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels;
-using System.Collections.ObjectModel;
-using System.Data.Common;
+﻿using System.Data.Common;
 
 namespace CardonerSistemas.Reports.Net.WinformsEditor
 {
@@ -12,6 +10,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         private const string ReportKey = "Report";
         private const string DatasourceKey = "Datasource";
         private const string DatasourceParameterKey = "DatasourceParameter";
+        private const string DatasourceFieldKey = "DatasourceField";
         private const string FontsKey = "Fonts";
         private const string FontKey = "Font";
         private const string BrushesKey = "Brushes";
@@ -29,8 +28,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         private readonly Model.Report mReport;
         private string mFilePath;
 
-        private PanelReport? mPanelReport;
-        private PanelDatasource? mPanelDatasource;
+        private ReportEditorPanels.PanelReport? mPanelReport;
+        private ReportEditorPanels.PanelDatasource? mPanelDatasource;
+        private ReportEditorPanels.PanelDatasourceParameter? mPanelDatasourceParameter;
 
         public string FilePath => mFilePath;
 
@@ -103,8 +103,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private void TreeViewReport_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            if (e.Node is null || e.Node.Tag is null)
+            {
+                return;
+            }
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            string nodeType = e.Node.Tag.ToString()[..e.Node.Tag.ToString().IndexOf('@')];
+            string nodeTag = e.Node.Tag.ToString();
+            string nodeType = nodeTag[..nodeTag.IndexOf('@')];
+            string nodeId = nodeTag[(nodeType.Length + 1)..];
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             PanelControlsHide();
@@ -117,14 +125,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                 case DatasourceKey:
                     PanelDatasourceShow();
                     break;
-            }
-        }
-
-        private void TextBoxs_Enter(object sender, EventArgs e)
-        {
-            if (sender is TextBox textBox)
-            {
-                textBox.SelectAll();
+                case DatasourceParameterKey:
+                    PanelDatasourceParameterShow(nodeId);
+                    break;
             }
         }
 
@@ -136,6 +139,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         {
             mPanelReport?.Hide();
             mPanelDatasource?.Hide();
+            mPanelDatasourceParameter?.Hide();
         }
 
         #endregion Panel controls
@@ -175,23 +179,17 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         {
             if (mPanelReport is null)
             {
-                mPanelReport = new()
+                mPanelReport = new(mReport, mApplicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(mPanelReport);
             }
-            mPanelReport.ShowProperties(mReport);
+            else
+            {
+                mPanelReport.SetReport(mReport);
+            }
             mPanelReport.Show();
-        }
-
-        private void ReportApplyChanges(object sender, EventArgs e)
-        {
-        }
-
-        private void ReportResetChanges(object sender, EventArgs e)
-        {
-            mPanelReport.ShowProperties(mReport);
         }
 
         #endregion Report
@@ -217,57 +215,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             treeNodeParent.Nodes.Add(treeNodeDatasource);
 
             CreateDatasourceParametersNodes(treeNodeDatasource);
+            CreateDatasourceFieldsNodes(treeNodeDatasource);
         }
 
         private void PanelDatasourceShow()
         {
             if (mPanelDatasource is null)
             {
-                mPanelDatasource = new(mApplicationTitle)
+                mPanelDatasource = new(mReport.Datasource, mApplicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(mPanelDatasource);
             }
-            mPanelDatasource.ShowProperties(mReport.Datasource);
+            else
+            {
+                mPanelDatasource.SetDatasource(mReport.Datasource);
+            }
             mPanelDatasource.Show();
-        }
-
-        private void DatasourceApplyChanges(object sender, EventArgs e)
-        {
-        }
-
-        private void DatasourceResetChanges(object sender, EventArgs e)
-        {
-            mPanelDatasource.ShowProperties(mReport.Datasource);
-        }
-
-        private void DatasourceGetFields(object sender, EventArgs e)
-        {
-            if (mReport.Datasource is null)
-            {
-                MessageBox.Show(Properties.Resources.StringDatasourceNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (mReport.Datasource.Provider == Model.Datasource.Providers.None)
-            {
-                MessageBox.Show(Properties.Resources.StringDatasourceProviderNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (mReport.Datasource.Type == System.Data.CommandType.Text && string.IsNullOrEmpty(mReport.Datasource.Text))
-            {
-                MessageBox.Show(Properties.Resources.StringDatasourceTextNotSpecified, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (mReport.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceGetFieldsWithNullParametersConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
-            {
-                return;
-            }
-
-            // Open the datasource
-            DbDataReader? dbDataReader = null;
-            Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
-            dbDataReader?.Close();
         }
 
         #endregion Datasource
@@ -292,7 +257,73 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             }
         }
 
+        private void PanelDatasourceParameterShow(string parameterName)
+        {
+            Model.DatasourceParameter? parameter = mReport.Datasource?.Parameters.FirstOrDefault(p => p.Name == parameterName);
+            if (parameter is null)
+            {
+                return;
+            }
+            if (mPanelDatasourceParameter is null)
+            {
+                mPanelDatasourceParameter = new(parameter, mApplicationTitle)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(mPanelDatasourceParameter);
+            }
+            else
+            {
+                mPanelDatasourceParameter.SetDatasourceParameter(parameter);
+            }
+            mPanelDatasourceParameter.Show();
+        }
+
         #endregion Datasource parameters
+
+        #region Datasource fields
+
+        private void CreateDatasourceFieldsNodes(TreeNode treeNodeParent)
+        {
+            if (mReport.Datasource is null)
+            {
+                return;
+            }
+            foreach (string fieldName in mReport.Datasource.Fields.Select(f => f.Name))
+            {
+                treeNodeParent.Nodes.Add(new TreeNode()
+                {
+                    Text = fieldName,
+                    Tag = DatasourceFieldKey + "@" + fieldName,
+                    ImageKey = DatasourceFieldKey,
+                    SelectedImageKey = DatasourceFieldKey
+                });
+            }
+        }
+
+        private void PanelDatasourceFieldShow(string fieldName)
+        {
+            Model.DatasourceField? field = mReport.Datasource?.Fields.FirstOrDefault(p => p.Name == fieldName);
+            if (field is null)
+            {
+                return;
+            }
+            //if (mPanelDatasourceField is null)
+            //{
+            //    mPanelDatasourceField = new(field, mApplicationTitle)
+            //    {
+            //        Dock = DockStyle.Fill
+            //    };
+            //    splitContainerMain.Panel2.Controls.Add(mPanelDatasourceField);
+            //}
+            //else
+            //{
+            //    mPanelDatasourceField.SetDatasourceField(field);
+            //}
+            //mPanelDatasourceField.Show();
+        }
+
+        #endregion Datasource fields
 
         #region Fonts
 

@@ -1,5 +1,4 @@
 ﻿using PdfSharp.Drawing;
-using System.Drawing;
 using System.Text.Json.Serialization;
 
 namespace CardonerSistemas.Reports.Net.Model
@@ -8,7 +7,14 @@ namespace CardonerSistemas.Reports.Net.Model
     {
         public Font(Report report)
         {
-            FontId = (short)(report.Fonts.Max(f => f.FontId) + 1);
+            if (report.Fonts.Count == 0)
+            {
+                FontId = 1;
+            }
+            else
+            {
+                FontId = (short)(report.Fonts.Max(f => f.FontId) + 1);
+            }
         }
 
         [JsonConstructor]

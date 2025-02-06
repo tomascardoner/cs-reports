@@ -7,7 +7,14 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public DatasourceField(Datasource datasource)
         {
-            FieldId = (short)(datasource.Fields.Max(f => f.FieldId) + 1);
+            if (datasource.Fields.Count ==  0)
+            {
+                FieldId = 1;
+            }
+            else
+            {
+                FieldId = (short)(datasource.Fields.Max(f => f.FieldId) + 1);
+            }
         }
 
         [JsonConstructor]

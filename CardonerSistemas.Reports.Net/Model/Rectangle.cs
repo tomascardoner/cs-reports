@@ -10,7 +10,14 @@ namespace CardonerSistemas.Reports.Net.Model
         public Rectangle(Report report)
         {
             _Report = report;
+            if (report.Rectangles.Count == 0)
+            {
+                RectangleId = 1;
+            }
+            else
+            {
             RectangleId = (short)(report.Rectangles.Max(r => r.RectangleId) + 1);
+            }
         }
 
         public Rectangle(Report report, short rectangleId)

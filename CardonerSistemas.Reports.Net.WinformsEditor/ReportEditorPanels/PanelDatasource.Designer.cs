@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanelDatasource = new TableLayoutPanel();
+            tableLayoutPanelMain = new TableLayoutPanel();
             labelProvider = new Label();
             comboBoxProvider = new ComboBox();
             labelConnectionString = new Label();
@@ -43,41 +43,40 @@
             buttonAddParameter = new Button();
             buttonGetFields = new Button();
             buttonTest = new Button();
-            tableLayoutPanelDatasource.SuspendLayout();
+            tableLayoutPanelMain.SuspendLayout();
             tableLayoutPanelButtons.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanelDatasource
+            // tableLayoutPanelMain
             // 
-            tableLayoutPanelDatasource.ColumnCount = 4;
-            tableLayoutPanelDatasource.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanelDatasource.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanelDatasource.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanelDatasource.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanelDatasource.Controls.Add(labelProvider, 1, 1);
-            tableLayoutPanelDatasource.Controls.Add(comboBoxProvider, 2, 1);
-            tableLayoutPanelDatasource.Controls.Add(labelConnectionString, 1, 2);
-            tableLayoutPanelDatasource.Controls.Add(textBoxConnectionString, 2, 2);
-            tableLayoutPanelDatasource.Controls.Add(labelType, 1, 3);
-            tableLayoutPanelDatasource.Controls.Add(comboBoxType, 2, 3);
-            tableLayoutPanelDatasource.Controls.Add(labelText, 1, 4);
-            tableLayoutPanelDatasource.Controls.Add(textBoxText, 2, 4);
-            tableLayoutPanelDatasource.Controls.Add(tableLayoutPanelButtons, 2, 5);
-            tableLayoutPanelDatasource.Dock = DockStyle.Fill;
-            tableLayoutPanelDatasource.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            tableLayoutPanelDatasource.Location = new Point(0, 0);
-            tableLayoutPanelDatasource.Name = "tableLayoutPanelDatasource";
-            tableLayoutPanelDatasource.RowCount = 7;
-            tableLayoutPanelDatasource.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanelDatasource.RowStyles.Add(new RowStyle());
-            tableLayoutPanelDatasource.RowStyles.Add(new RowStyle());
-            tableLayoutPanelDatasource.RowStyles.Add(new RowStyle());
-            tableLayoutPanelDatasource.RowStyles.Add(new RowStyle());
-            tableLayoutPanelDatasource.RowStyles.Add(new RowStyle());
-            tableLayoutPanelDatasource.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanelDatasource.Size = new Size(700, 500);
-            tableLayoutPanelDatasource.TabIndex = 0;
-            tableLayoutPanelDatasource.Visible = false;
+            tableLayoutPanelMain.ColumnCount = 4;
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.Controls.Add(labelProvider, 1, 1);
+            tableLayoutPanelMain.Controls.Add(comboBoxProvider, 2, 1);
+            tableLayoutPanelMain.Controls.Add(labelConnectionString, 1, 2);
+            tableLayoutPanelMain.Controls.Add(textBoxConnectionString, 2, 2);
+            tableLayoutPanelMain.Controls.Add(labelType, 1, 3);
+            tableLayoutPanelMain.Controls.Add(comboBoxType, 2, 3);
+            tableLayoutPanelMain.Controls.Add(labelText, 1, 4);
+            tableLayoutPanelMain.Controls.Add(textBoxText, 2, 4);
+            tableLayoutPanelMain.Controls.Add(tableLayoutPanelButtons, 2, 5);
+            tableLayoutPanelMain.Dock = DockStyle.Fill;
+            tableLayoutPanelMain.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
+            tableLayoutPanelMain.Location = new Point(0, 0);
+            tableLayoutPanelMain.Name = "tableLayoutPanelMain";
+            tableLayoutPanelMain.RowCount = 7;
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.Size = new Size(700, 500);
+            tableLayoutPanelMain.TabIndex = 0;
             // 
             // labelProvider
             // 
@@ -106,7 +105,7 @@
             labelConnectionString.Dock = DockStyle.Fill;
             labelConnectionString.Location = new Point(78, 96);
             labelConnectionString.Name = "labelConnectionString";
-            labelConnectionString.Size = new Size(128, 106);
+            labelConnectionString.Size = new Size(128, 156);
             labelConnectionString.TabIndex = 2;
             labelConnectionString.Text = "Connection string:";
             labelConnectionString.TextAlign = ContentAlignment.MiddleLeft;
@@ -119,14 +118,15 @@
             textBoxConnectionString.Multiline = true;
             textBoxConnectionString.Name = "textBoxConnectionString";
             textBoxConnectionString.ScrollBars = ScrollBars.Vertical;
-            textBoxConnectionString.Size = new Size(410, 100);
+            textBoxConnectionString.Size = new Size(410, 150);
             textBoxConnectionString.TabIndex = 3;
+            textBoxConnectionString.Enter += TextBoxs_Enter;
             // 
             // labelType
             // 
             labelType.AutoSize = true;
             labelType.Dock = DockStyle.Fill;
-            labelType.Location = new Point(78, 202);
+            labelType.Location = new Point(78, 252);
             labelType.Name = "labelType";
             labelType.Size = new Size(128, 34);
             labelType.TabIndex = 4;
@@ -137,7 +137,7 @@
             // 
             comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxType.FormattingEnabled = true;
-            comboBoxType.Location = new Point(212, 205);
+            comboBoxType.Location = new Point(212, 255);
             comboBoxType.Name = "comboBoxType";
             comboBoxType.Size = new Size(250, 28);
             comboBoxType.TabIndex = 5;
@@ -146,9 +146,9 @@
             // 
             labelText.AutoSize = true;
             labelText.Dock = DockStyle.Fill;
-            labelText.Location = new Point(78, 236);
+            labelText.Location = new Point(78, 286);
             labelText.Name = "labelText";
-            labelText.Size = new Size(128, 156);
+            labelText.Size = new Size(128, 106);
             labelText.TabIndex = 6;
             labelText.Text = "Text:";
             labelText.TextAlign = ContentAlignment.MiddleLeft;
@@ -156,12 +156,13 @@
             // textBoxText
             // 
             textBoxText.Dock = DockStyle.Fill;
-            textBoxText.Location = new Point(212, 239);
+            textBoxText.Location = new Point(212, 289);
             textBoxText.Multiline = true;
             textBoxText.Name = "textBoxText";
             textBoxText.ScrollBars = ScrollBars.Vertical;
-            textBoxText.Size = new Size(410, 150);
+            textBoxText.Size = new Size(410, 100);
             textBoxText.TabIndex = 7;
+            textBoxText.Enter += TextBoxs_Enter;
             // 
             // tableLayoutPanelButtons
             // 
@@ -197,6 +198,7 @@
             buttonApply.TabIndex = 0;
             buttonApply.Text = "Apply";
             buttonApply.UseVisualStyleBackColor = true;
+            buttonApply.Click += ApplyChanges;
             // 
             // buttonReset
             // 
@@ -209,6 +211,7 @@
             buttonReset.TabIndex = 1;
             buttonReset.Text = "Reset";
             buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Click += ResetChanges;
             // 
             // buttonAddParameter
             // 
@@ -221,6 +224,7 @@
             buttonAddParameter.TabIndex = 2;
             buttonAddParameter.Text = "Add parameter";
             buttonAddParameter.UseVisualStyleBackColor = true;
+            buttonAddParameter.Click += AddParameter;
             // 
             // buttonGetFields
             // 
@@ -233,7 +237,7 @@
             buttonGetFields.TabIndex = 3;
             buttonGetFields.Text = "Get fields";
             buttonGetFields.UseVisualStyleBackColor = true;
-            buttonGetFields.Click += ButtonGetFields_Click;
+            buttonGetFields.Click += GetFields;
             // 
             // buttonTest
             // 
@@ -251,11 +255,11 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(tableLayoutPanelDatasource);
+            Controls.Add(tableLayoutPanelMain);
             Name = "PanelDatasource";
             Size = new Size(700, 500);
-            tableLayoutPanelDatasource.ResumeLayout(false);
-            tableLayoutPanelDatasource.PerformLayout();
+            tableLayoutPanelMain.ResumeLayout(false);
+            tableLayoutPanelMain.PerformLayout();
             tableLayoutPanelButtons.ResumeLayout(false);
             tableLayoutPanelButtons.PerformLayout();
             ResumeLayout(false);
@@ -263,7 +267,7 @@
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanelDatasource;
+        private TableLayoutPanel tableLayoutPanelMain;
         private TextBox textBoxText;
         private Label labelProvider;
         private Label labelConnectionString;

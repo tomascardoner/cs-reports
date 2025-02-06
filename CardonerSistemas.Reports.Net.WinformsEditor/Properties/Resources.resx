@@ -294,17 +294,14 @@
   <data name="StringUndefined" xml:space="preserve">
     <value>Undefined</value>
   </data>
-  <data name="StringDatasourceProviderNotSpecified" xml:space="preserve">
-    <value>You must specify database provider.</value>
+  <data name="StringDatasourceProviderRequired" xml:space="preserve">
+    <value>Must specify provider.</value>
   </data>
-  <data name="StringDatasourceNotSpecified" xml:space="preserve">
-    <value>Datasource not specified.</value>
+  <data name="StringDatasourceConnectionStringRequired" xml:space="preserve">
+    <value>Must specify connection string.</value>
   </data>
-  <data name="StringDatasourceConnectionStringNotSpecified" xml:space="preserve">
-    <value>ConnectionString not specified.</value>
-  </data>
-  <data name="StringDatasourceTextNotSpecified" xml:space="preserve">
-    <value>Datasource text not specified.</value>
+  <data name="StringDatasourceTextRequired" xml:space="preserve">
+    <value>Must specify text.</value>
   </data>
   <data name="StringDatasourceGetFieldsWithNullParametersConfirmation" xml:space="preserve">
     <value>There are parameters with unspecified values. Do you want to continue anyway?</value>
@@ -315,5 +312,26 @@ Do you want to save them?</value>
   </data>
   <data name="StringFileDialogFilter" xml:space="preserve">
     <value>Report files (*.csrpt)|*.csrpt|All files (*.*)|*.*</value>
+  </data>
+  <data name="StringDatasourceParameterNameNew" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="StringDatasourceParameterNameRequired" xml:space="preserve">
+    <value>Must specify name.</value>
+  </data>
+  <data name="StringDatasourceParameterTypeRequired" xml:space="preserve">
+    <value>Must specify type.</value>
+  </data>
+  <data name="StringReportNameRequired" xml:space="preserve">
+    <value>Must specify name.</value>
+  </data>
+  <data name="StringReportPageSizeRequired" xml:space="preserve">
+    <value>Must specify page size.</value>
+  </data>
+  <data name="StringReportPageOrientationRequired" xml:space="preserve">
+    <value>Must specify page orientation.</value>
+  </data>
+  <data name="StringDatasourceTypeRequired" xml:space="preserve">
+    <value>Must specify type.</value>
   </data>
 </root>
