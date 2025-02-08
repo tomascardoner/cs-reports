@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using CardonerSistemas.Reports.Net.Model;
+using System.Collections.ObjectModel;
 
 namespace CardonerSistemas.Reports.Net.WinformsEditor
 {
@@ -25,6 +26,18 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         private const string RectangleKey = "Rectangle";
         private const string TextsKey = "Texts";
         private const string TextKey = "Text";
+
+        // Tree node indexs
+        private const int TreeNodeRootIndex = 0;
+
+        private const int TreeNodeDatasourceIndex = 0;
+        private const int TreeNodeDatasourceParametersIndex = 0;
+        private const int TreeNodeDatasourceFieldsIndex = 0;
+
+        private const int TreeNodeFontsIndex = 1;
+        private const int TreeNodeBrushesIndex = 2;
+        private const int TreeNodeSectionsIndex = 3;
+
 
         private readonly string mApplicationTitle;
         private readonly Model.Report mReport;
@@ -233,26 +246,30 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             }
             treeNodeParent.Nodes.Add(treeNodeDatasource);
 
-            CreateDatasourceParametersNodes(treeNodeDatasource);
-            CreateDatasourceFieldsNodes(treeNodeDatasource);
+            CreateDatasourceParametersNodes();
+            CreateDatasourceFieldsNodes();
         }
 
         private void PanelDatasourceShow()
         {
             if (mPanelDatasource is null)
             {
-                mPanelDatasource = new(mReport.Datasource, mApplicationTitle)
+                mPanelDatasource = new(mApplicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(mPanelDatasource);
+                mPanelDatasource.DatasourceAdded += DatasourceAdded;
                 mPanelDatasource.DatasourceDeleted += DatasourceDeleted;
             }
-            else
-            {
-                mPanelDatasource.SetDatasource(mReport.Datasource);
-            }
+            mPanelDatasource.SetObject(mReport);
             mPanelDatasource.Show();
+        }
+
+        private void DatasourceAdded(object sender, EventArgs e)
+        {
+            CreateDatasourceParametersNodes();
+            CreateDatasourceFieldsNodes();
         }
 
         private void DatasourceDeleted(object sender, EventArgs e)
@@ -266,8 +283,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         #region Datasource parameters
 
-        private void CreateDatasourceParametersNodes(TreeNode treeNodeParent)
+        private void CreateDatasourceParametersNodes()
         {
+
             if (mReport.Datasource is null)
             {
                 return;
@@ -279,7 +297,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                 ImageKey = DatasourceParametersKey,
                 SelectedImageKey = DatasourceParametersKey
             };
-            treeNodeParent.Nodes.Add(treeNodeDatasourceParameters);
+            treeViewReport.Nodes[TreeNodeRootIndex].Nodes[TreeNodeDatasourceIndex].Nodes.Add(treeNodeDatasourceParameters);
             foreach (string parameterName in mReport.Datasource.Parameters.Select(p => p.Name))
             {
                 treeNodeDatasourceParameters.Nodes.Add(new TreeNode()
@@ -335,7 +353,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         #region Datasource fields
 
-        private void CreateDatasourceFieldsNodes(TreeNode treeNodeParent)
+        private void CreateDatasourceFieldsNodes()
         {
             if (mReport.Datasource is null)
             {
@@ -348,7 +366,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                 ImageKey = DatasourceFieldsKey,
                 SelectedImageKey = DatasourceFieldsKey
             };
-            treeNodeParent.Nodes.Add(treeNodeDatasourceFields);
+            treeViewReport.Nodes[TreeNodeRootIndex].Nodes[TreeNodeDatasourceIndex].Nodes.Add(treeNodeDatasourceFields);
             foreach (string fieldName in mReport.Datasource.Fields.Select(f => f.Name))
             {
                 treeNodeDatasourceFields.Nodes.Add(new TreeNode()
