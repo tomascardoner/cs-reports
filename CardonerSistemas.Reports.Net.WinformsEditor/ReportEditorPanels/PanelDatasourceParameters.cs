@@ -2,12 +2,25 @@
 {
     public partial class PanelDatasourceParameters : UserControl
     {
-        private Model.Datasource? mDatasource;
 
-        public PanelDatasourceParameters(Model.Datasource? datasource)
+        #region Declarations
+
+        private readonly string mApplicationTitle;
+        private readonly Model.Report mReport;
+
+        public event EventHandler? ParameterAdded;
+
+        #endregion Declarations
+
+        #region Initialization
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+        public PanelDatasourceParameters(Model.Report report, string applicationTitle)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         {
             InitializeComponent();
-            mDatasource = datasource;
+            mApplicationTitle = applicationTitle;
+            mReport = report;
             InitializeForm();
 
             ShowProperties();
@@ -18,30 +31,45 @@
             buttonAdd.Text = Properties.Resources.StringDatasourceParametersAdd;
         }
 
-        public void SetDatasource(Model.Datasource? datasource)
-        {
-            mDatasource = datasource;
-            ShowProperties();
-        }
+        #endregion Initialization
 
-        private void ShowProperties()
+        #region Methods
+
+        internal void ShowProperties()
         {
-            if (mDatasource is null)
+            if (mReport.Datasource is null)
             {
                 return;
             }
-            labelCounter.Text = mDatasource.Parameters.Count switch
+            labelCounter.Text = mReport.Datasource.Parameters.Count switch
             {
                 0 => Properties.Resources.StringDatasourceParametersCounterEmpty,
                 1 => Properties.Resources.StringDatasourceParametersCounterOne,
-                _ => string.Format(Properties.Resources.StringDatasourceParametersCounter, mDatasource.Parameters.Count)
+                _ => string.Format(Properties.Resources.StringDatasourceParametersCounter, mReport.Datasource.Parameters.Count)
             };
         }
 
         private void Add(object sender, EventArgs e)
         {
-            mDatasource ??= new();
-            mDatasource.Parameters.Add(new() { Name = Properties.Resources.StringDatasourceParameterNameNew });
+            if (mReport.Datasource is null)
+            {
+                return;
+            }
+            if (mReport.Datasource.Parameters.Any(p => p.Name.Trim() == Properties.Resources.StringDatasourceParameterNameNew))
+            {
+                MessageBox.Show(Properties.Resources.StringDatasourceParameterNewAlreadyExists, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                mReport.Datasource.Parameters.Add(new() { Name = Properties.Resources.StringDatasourceParameterNameNew });
+            }
+            if (ParameterAdded is not null)
+            {
+                ParameterAdded(this, EventArgs.Empty);
+            }
         }
+
+        #endregion Methods
+
     }
 }

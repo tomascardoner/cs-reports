@@ -2,23 +2,39 @@
 {
     public partial class PanelDatasourceParameter : UserControl
     {
-        private Model.DatasourceParameter mDatasourceParameter;
+
+        #region Declarations
+
+        private readonly Model.Report mReport;
+        private Model.DatasourceParameter? mDatasourceParameter;
         private readonly string mApplicationTitle;
 
-        public PanelDatasourceParameter(Model.DatasourceParameter datasourceParameter, string applicationTitle)
+        public class ParameterEventArgs : EventArgs
+        {
+            public string NameOld { get; set; } = string.Empty;
+            public string NameNew { get; set; } = string.Empty;
+            public System.Data.DbType TypeOld { get; set; }
+            public System.Data.DbType TypeNew { get; set; }
+            public object? ValueOld { get; set; }
+            public object? ValueNew { get; set; }
+        }
+
+        public delegate void DatasourceParameterHandler(object sender, ParameterEventArgs e);
+
+        public event DatasourceParameterHandler? ParameterUpdated;
+        public event DatasourceParameterHandler? ParameterDeleted;
+
+        #endregion Declarations
+
+        #region Initialization
+
+        public PanelDatasourceParameter(Model.Report report, string applicationTitle)
         {
             InitializeComponent();
-            mDatasourceParameter = datasourceParameter;
+            mReport = report;
             mApplicationTitle = applicationTitle;
 
             FillTypes();
-            ShowProperties();
-        }
-
-        public void SetDatasourceParameter(Model.DatasourceParameter datasourceParameter)
-        {
-            mDatasourceParameter = datasourceParameter;
-            ShowProperties();
         }
 
         private void FillTypes()
@@ -32,6 +48,10 @@
             }
             comboBoxType.DataSource = items;
         }
+
+        #endregion Initialization
+
+        #region Events
 
         private void ControlFocusEnter(object sender, EventArgs e)
         {
@@ -87,8 +107,16 @@
             checkBoxValueYesNo.Enabled = !checkBoxValueNull.Checked;
         }
 
+        #endregion Events
+
+        #region Methods
+
         private void ShowProperties()
         {
+            if (mDatasourceParameter is null)
+            {
+                return;
+            }
             textBoxName.Text = mDatasourceParameter.Name;
             comboBoxType.SelectedValue = (int)mDatasourceParameter.Type;
             checkBoxValueNull.Checked = mDatasourceParameter.Value is null;
@@ -122,8 +150,26 @@
             }
         }
 
+        internal void ShowProperties(string parameterName)
+        {
+            if (mReport.Datasource is null)
+            {
+                return;
+            }
+            mDatasourceParameter = mReport.Datasource.Parameters.FirstOrDefault(p => p.Name == parameterName);
+            if (mDatasourceParameter is null)
+            {
+                return;
+            }
+            ShowProperties();
+        }
+
         private void ApplyChanges(object sender, EventArgs e)
         {
+            if (mDatasourceParameter is null)
+            {
+                return;
+            }
             if (string.IsNullOrEmpty(textBoxName.Text))
             {
                 MessageBox.Show(Properties.Resources.StringDatasourceParameterNameRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -136,8 +182,18 @@
                 comboBoxType.Focus();
                 return;
             }
-
-            mDatasourceParameter.Name = textBoxName.Text;
+            if (mReport.Datasource is not null && mReport.Datasource.Parameters.Any(p => p.Name == textBoxName.Text.Trim()))
+            {
+                MessageBox.Show(Properties.Resources.StringDatasourceParameterNameAlreadyExists, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBoxName.Focus();
+            }
+            ParameterEventArgs parameterEventArgs = new()
+            {
+                NameOld = mDatasourceParameter.Name,
+                TypeOld = mDatasourceParameter.Type,
+                ValueOld = mDatasourceParameter.Value
+            };
+            mDatasourceParameter.Name = textBoxName.Text.Trim();
             mDatasourceParameter.Type = (System.Data.DbType)comboBoxType.SelectedValue;
             if (checkBoxValueNull.Checked)
             {
@@ -164,11 +220,41 @@
                         break;
                 }
             }
+            if (ParameterUpdated is not null)
+            {
+                parameterEventArgs.NameNew = mDatasourceParameter.Name;
+                parameterEventArgs.TypeNew = mDatasourceParameter.Type;
+                parameterEventArgs.ValueNew = mDatasourceParameter.Value;
+                ParameterUpdated(this, parameterEventArgs);
+            }
         }
 
         private void ResetChanges(object sender, EventArgs e)
         {
             ShowProperties();
         }
+
+        private void Delete(object sender, EventArgs e)
+        {
+            if (mReport.Datasource is null || mDatasourceParameter is null || MessageBox.Show(Properties.Resources.StringDatasourceParameterDeleteConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                return;
+            }
+
+            mReport.Datasource.Parameters.Remove(mDatasourceParameter);
+            if (ParameterDeleted is not null)
+            {
+                ParameterEventArgs parameterEventArgs = new()
+                {
+                    NameOld = mDatasourceParameter.Name,
+                    TypeOld = mDatasourceParameter.Type,
+                    ValueOld = mDatasourceParameter.Value
+                };
+                ParameterDeleted(this, parameterEventArgs);
+            }
+        }
+
+        #endregion Methods
+
     }
 }

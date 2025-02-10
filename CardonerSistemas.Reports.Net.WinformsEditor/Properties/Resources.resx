@@ -156,7 +156,7 @@
   <data name="StringRectangles" xml:space="preserve">
     <value>Rectangles</value>
   </data>
-  <data name="StringReportNew" xml:space="preserve">
+  <data name="StringReportNameNew" xml:space="preserve">
     <value>* New report *</value>
   </data>
   <data name="StringSections" xml:space="preserve">
@@ -314,7 +314,7 @@ Do you want to save them?</value>
     <value>Report files (*.csrpt)|*.csrpt|All files (*.*)|*.*</value>
   </data>
   <data name="StringDatasourceParameterNameNew" xml:space="preserve">
-    <value>New</value>
+    <value>* New *</value>
   </data>
   <data name="StringDatasourceParameterNameRequired" xml:space="preserve">
     <value>Must specify name.</value>
@@ -371,12 +371,21 @@ Do you want to save them?</value>
     <value>Reset</value>
   </data>
   <data name="StringDatasourceFieldNameNew" xml:space="preserve">
-    <value>New</value>
+    <value>* New *</value>
   </data>
   <data name="StringNodeItemsCount" xml:space="preserve">
     <value> - (count: {0})</value>
   </data>
   <data name="StringDatasourceDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the datasource?</value>
+  </data>
+  <data name="StringDatasourceParameterDeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete the parameter?</value>
+  </data>
+  <data name="StringDatasourceParameterNewAlreadyExists" xml:space="preserve">
+    <value>There is already a new parameter created.</value>
+  </data>
+  <data name="StringDatasourceParameterNameAlreadyExists" xml:space="preserve">
+    <value>There is already a parameter with this name.</value>
   </data>
 </root>

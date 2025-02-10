@@ -1,4 +1,4 @@
-﻿using CardonerSistemas.Reports.Net.Model;
+﻿using CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels;
 using System.Collections.ObjectModel;
 
 namespace CardonerSistemas.Reports.Net.WinformsEditor
@@ -32,11 +32,11 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private const int TreeNodeDatasourceIndex = 0;
         private const int TreeNodeDatasourceParametersIndex = 0;
-        private const int TreeNodeDatasourceFieldsIndex = 0;
+        //private const int TreeNodeDatasourceFieldsIndex = 1;
 
-        private const int TreeNodeFontsIndex = 1;
-        private const int TreeNodeBrushesIndex = 2;
-        private const int TreeNodeSectionsIndex = 3;
+        //private const int TreeNodeFontsIndex = 1;
+        //private const int TreeNodeBrushesIndex = 2;
+        //private const int TreeNodeSectionsIndex = 3;
 
 
         private readonly string mApplicationTitle;
@@ -66,7 +66,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         private void InitializeForm()
         {
-            this.Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNew : $"{mReport.Name} ({mFilePath})";
+            this.Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNameNew : $"{mReport.Name} ({mFilePath})";
             treeViewReport.ImageList = imageListMain;
             CreateReportNode();
         }
@@ -108,7 +108,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK && Storage.FileSystem.Save(mReport, saveFileDialog.FileName))
             {
                 mFilePath = saveFileDialog.FileName;
-                this.Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNew : $"{mReport.Name} ({mFilePath})";
+                this.Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNameNew : $"{mReport.Name} ({mFilePath})";
                 return true;
             }
             return false;
@@ -116,9 +116,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
         #endregion Methods
 
-        #region Events
+        #region Extra functions
 
-        private Tuple<string, string> GetNodeInfo(TreeNode treeNode)
+        private static Tuple<string, string> GetTreeNodeInfo(TreeNode treeNode)
         {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -131,6 +131,22 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             return Tuple.Create(nodeType, nodeId);
         }
 
+        private TreeNode? GetTreeNodeByTag(TreeNode parentTreeNode, string nodeType, string nodeId)
+        {
+            foreach (TreeNode treeNode in parentTreeNode.Nodes)
+            {
+                if (treeNode.Tag is not null && treeNode.Tag.ToString() == nodeType + "@" + nodeId)
+                {
+                    return treeNode;
+                }
+            }
+            return null;
+        }
+
+        #endregion Extra functions
+
+        #region Events
+
         private void TreeViewReport_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node is null || e.Node.Tag is null)
@@ -140,7 +156,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
 
             PanelControlsHide();
 
-            Tuple<string, string> nodeInfo = GetNodeInfo(e.Node);
+            Tuple<string, string> nodeInfo = GetTreeNodeInfo(e.Node);
             switch (nodeInfo.Item1)
             {
                 case ReportKey:
@@ -189,7 +205,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                 // Root node for the report
                 TreeNode treeNodeReport = new()
                 {
-                    Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNew : mReport.Name,
+                    Text = string.IsNullOrWhiteSpace(mReport.Name) ? Properties.Resources.StringReportNameNew : mReport.Name,
                     Tag = ReportKey + "@",
                     ImageKey = ReportKey,
                     SelectedImageKey = ReportKey
@@ -217,10 +233,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
                 };
                 splitContainerMain.Panel2.Controls.Add(mPanelReport);
             }
-            else
-            {
-                mPanelReport.SetReport(mReport);
-            }
+            mPanelReport.ShowProperties();
             mPanelReport.Show();
         }
 
@@ -254,15 +267,17 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         {
             if (mPanelDatasource is null)
             {
-                mPanelDatasource = new(mApplicationTitle)
+                mPanelDatasource = new(mReport, mApplicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(mPanelDatasource);
+#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
                 mPanelDatasource.DatasourceAdded += DatasourceAdded;
                 mPanelDatasource.DatasourceDeleted += DatasourceDeleted;
+#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
             }
-            mPanelDatasource.SetObject(mReport);
+            mPanelDatasource.ShowProperties();
             mPanelDatasource.Show();
         }
 
@@ -300,13 +315,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             treeViewReport.Nodes[TreeNodeRootIndex].Nodes[TreeNodeDatasourceIndex].Nodes.Add(treeNodeDatasourceParameters);
             foreach (string parameterName in mReport.Datasource.Parameters.Select(p => p.Name))
             {
-                treeNodeDatasourceParameters.Nodes.Add(new TreeNode()
-                {
-                    Text = parameterName,
-                    Tag = DatasourceParameterKey + "@" + parameterName,
-                    ImageKey = DatasourceParameterKey,
-                    SelectedImageKey = DatasourceParameterKey
-                });
+                CreateDatasourceParameterNode(parameterName);
             }
         }
 
@@ -314,17 +323,32 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
         {
             if (mPanelDatasourceParameters is null)
             {
-                mPanelDatasourceParameters = new(mReport.Datasource)
+                mPanelDatasourceParameters = new(mReport, mApplicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(mPanelDatasourceParameters);
+#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+                mPanelDatasourceParameters.ParameterAdded += DatasourceParameterAdded;
+#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
             }
-            else
-            {
-                mPanelDatasourceParameters.SetDatasource(mReport.Datasource);
-            }
+            mPanelDatasourceParameters.ShowProperties();
             mPanelDatasourceParameters.Show();
+        }
+
+        #endregion Datasource parameters
+
+        #region Datasource parameter
+
+        private void CreateDatasourceParameterNode(string parameterName)
+        {
+            treeViewReport.Nodes[TreeNodeRootIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex].Nodes.Add(new TreeNode()
+            {
+                Text = parameterName,
+                Tag = DatasourceParameterKey + "@" + parameterName,
+                ImageKey = DatasourceParameterKey,
+                SelectedImageKey = DatasourceParameterKey
+            });
         }
 
         private void PanelDatasourceParameterShow(string parameterName)
@@ -336,20 +360,78 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor
             }
             if (mPanelDatasourceParameter is null)
             {
-                mPanelDatasourceParameter = new(parameter, mApplicationTitle)
+                mPanelDatasourceParameter = new(mReport, mApplicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(mPanelDatasourceParameter);
+#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+                mPanelDatasourceParameter.ParameterUpdated += DatasourceParameterUpdated;
+#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
             }
-            else
-            {
-                mPanelDatasourceParameter.SetDatasourceParameter(parameter);
-            }
+            mPanelDatasourceParameter.ShowProperties(parameterName);
             mPanelDatasourceParameter.Show();
         }
 
-        #endregion Datasource parameters
+        private void DatasourceParameterShow(PanelDatasourceParameter.ParameterEventArgs e)
+        {
+
+        }
+
+        private void DatasourceParameterAdded(object sender, PanelDatasourceParameter.ParameterEventArgs e)
+        {
+            TreeNode treeNodeDatasourceParameters = treeViewReport.Nodes[TreeNodeRootIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex];
+            TreeNode? treeNodeDatasourceParameterNew = GetTreeNodeByTag(treeNodeDatasourceParameters, DatasourceParameterKey, Properties.Resources.StringDatasourceParameterNameNew);
+            if (treeNodeDatasourceParameterNew is not null)
+            {
+                treeViewReport.SelectedNode = treeNodeDatasourceParameterNew;
+                return;
+            }
+            else
+            {
+                treeNodeDatasourceParameterNew = new()
+                {
+                    Text = Properties.Resources.StringDatasourceParameterNameNew,
+                    Tag = DatasourceParameterKey + "@" + Properties.Resources.StringDatasourceParameterNameNew,
+                    ImageKey = DatasourceParameterKey,
+                    SelectedImageKey = DatasourceParameterKey
+                };
+                treeNodeDatasourceParameters.Nodes.Add(treeNodeDatasourceParameterNew);
+                treeNodeDatasourceParameters.Text = Properties.Resources.StringDatasourceParameters + string.Format(Properties.Resources.StringNodeItemsCount, mReport.Datasource?.Parameters.Count);
+                treeViewReport.SelectedNode = treeNodeDatasourceParameterNew;
+            }
+        }
+
+        private void DatasourceParameterUpdated(object sender, PanelDatasourceParameter.ParameterEventArgs e)
+        {
+            TreeNode treeNodeDatasourceParameters = treeViewReport.Nodes[TreeNodeRootIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex];
+            TreeNode? treeNodeDatasourceParameterNew = GetTreeNodeByTag(treeNodeDatasourceParameters, DatasourceParameterKey, e.NameOld);
+            foreach (TreeNode treeNode in treeNodeDatasourceParameters.Nodes)
+            {
+                if (treeNode.Tag is not null && treeNode.Tag.ToString() == DatasourceParameterKey + "@" + Properties.Resources.StringDatasourceParameterNameNew)
+                {
+                    treeViewReport.SelectedNode = treeNode;
+                    return;
+                }
+            }
+            TreeNode treeNodeNew = new()
+            {
+                Text = Properties.Resources.StringDatasourceParameterNameNew,
+                Tag = DatasourceParameterKey + "@" + Properties.Resources.StringDatasourceParameterNameNew,
+                ImageKey = DatasourceParameterKey,
+                SelectedImageKey = DatasourceParameterKey
+            };
+            treeNodeDatasourceParameters.Nodes.Add(treeNodeNew);
+            treeNodeDatasourceParameters.Text = Properties.Resources.StringDatasourceParameters + string.Format(Properties.Resources.StringNodeItemsCount, mReport.Datasource?.Parameters.Count);
+            treeViewReport.SelectedNode = treeNodeNew;
+        }
+
+        private void DatasourceParameterDeleted(object sender, PanelDatasourceParameter.ParameterEventArgs e)
+        {
+
+        }
+
+        #endregion Datasource parameter
 
         #region Datasource fields
 

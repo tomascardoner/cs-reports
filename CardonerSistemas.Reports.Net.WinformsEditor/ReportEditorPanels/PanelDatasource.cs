@@ -5,19 +5,25 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
 {
     public partial class PanelDatasource : UserControl
     {
+
+        #region Declarations
+
         private const string PasswordRegExp = ";?Password=([^;]*)";
 
         private readonly string mApplicationTitle;
-        private Model.Report mReport;
+        private readonly Model.Report mReport;
 
         public event EventHandler? DatasourceAdded;
         public event EventHandler? DatasourceDeleted;
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
-        public PanelDatasource(string applicationTitle)
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+        #endregion Declarations
+
+        #region Initialization
+
+        public PanelDatasource(Model.Report report, string applicationTitle)
         {
             InitializeComponent();
+            mReport = report;
             mApplicationTitle = applicationTitle;
             InitializeForm();
         }
@@ -29,12 +35,6 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
 
             FillProviders();
             FillTypes();
-        }
-
-        public void SetObject(Model.Report report)
-        {
-            mReport = report;
-            ShowProperties();
         }
 
         private void FillProviders()
@@ -61,6 +61,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
             comboBoxType.DataSource = items;
         }
 
+        #endregion Initialization
+
+        #region Events
+
         private void ControlFocusEnter(object sender, EventArgs e)
         {
             if (sender is TextBox textBox)
@@ -74,7 +78,11 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
             checkBoxConnectionStringSavePassword.Enabled = checkBoxConnectionStringSave.Checked;
         }
 
-        private void ShowProperties()
+        #endregion Events
+
+        #region Methods
+
+        internal void ShowProperties()
         {
             if (mReport.Datasource is null)
             {
@@ -82,6 +90,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
                 textBoxConnectionString.Text = string.Empty;
                 comboBoxType.SelectedIndex = -1;
                 textBoxText.Text = string.Empty;
+                buttonDelete.Enabled = false;
+                buttonGetFields.Enabled = false;
             }
             else
             {
@@ -89,6 +99,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
                 textBoxConnectionString.Text = mReport.Datasource.ConnectionString;
                 comboBoxType.SelectedValue = (short)mReport.Datasource.Type;
                 textBoxText.Text = mReport.Datasource.Text;
+                buttonDelete.Enabled = true;
+                buttonGetFields.Enabled = true;
             }
         }
 
@@ -147,6 +159,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
             }
             mReport.Datasource.Type = (System.Data.CommandType)(short)(comboBoxType.SelectedValue ?? System.Data.CommandType.Text);
             mReport.Datasource.Text = textBoxText.Text;
+            buttonDelete.Enabled = true;
+            buttonGetFields.Enabled = true;
         }
 
         private void ResetChanges(object sender, EventArgs e)
@@ -154,7 +168,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
             ShowProperties();
         }
 
-        private void DeleteDatasource(object sender, EventArgs e)
+        private void Delete(object sender, EventArgs e)
         {
             if (mReport.Datasource is null || MessageBox.Show(Properties.Resources.StringDatasourceDeleteConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
@@ -195,5 +209,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
             Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
             dbDataReader?.Close();
         }
+
+        #endregion Methods
+
     }
 }

@@ -46,6 +46,7 @@
             tableLayoutPanelButtons = new TableLayoutPanel();
             buttonApply = new Button();
             buttonReset = new Button();
+            buttonDelete = new Button();
             tableLayoutPanelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownValueNumeric).BeginInit();
             tableLayoutPanelButtons.SuspendLayout();
@@ -241,9 +242,11 @@
             // 
             tableLayoutPanelButtons.AutoSize = true;
             tableLayoutPanelButtons.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tableLayoutPanelButtons.ColumnCount = 2;
+            tableLayoutPanelButtons.ColumnCount = 3;
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelButtons.Controls.Add(buttonDelete, 2, 0);
             tableLayoutPanelButtons.Controls.Add(buttonApply, 0, 0);
             tableLayoutPanelButtons.Controls.Add(buttonReset, 1, 0);
             tableLayoutPanelButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
@@ -251,7 +254,7 @@
             tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             tableLayoutPanelButtons.RowCount = 1;
             tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
-            tableLayoutPanelButtons.Size = new Size(133, 40);
+            tableLayoutPanelButtons.Size = new Size(279, 40);
             tableLayoutPanelButtons.TabIndex = 14;
             // 
             // buttonApply
@@ -279,6 +282,18 @@
             buttonReset.Text = "Reset";
             buttonReset.UseVisualStyleBackColor = true;
             buttonReset.Click += ResetChanges;
+            // 
+            // buttonDelete
+            // 
+            buttonDelete.AutoSize = true;
+            buttonDelete.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonDelete.Location = new Point(138, 5);
+            buttonDelete.Margin = new Padding(5);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(136, 30);
+            buttonDelete.TabIndex = 3;
+            buttonDelete.Text = "Delete parameter";
+            buttonDelete.UseVisualStyleBackColor = true;
             // 
             // PanelDatasourceParameter
             // 
@@ -315,5 +330,6 @@
         private TableLayoutPanel tableLayoutPanelButtons;
         private Button buttonApply;
         private Button buttonReset;
+        private Button buttonDelete;
     }
 }

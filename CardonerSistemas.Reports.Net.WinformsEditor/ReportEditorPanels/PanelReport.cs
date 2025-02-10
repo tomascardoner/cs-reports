@@ -2,8 +2,15 @@
 {
     public partial class PanelReport : UserControl
     {
+
+        #region Declarations
+
         private Model.Report mReport;
         private readonly string mApplicationTitle;
+
+        #endregion Declarations
+
+        #region Initialization
 
         public PanelReport(Model.Report report, string applicationTitle)
         {
@@ -11,8 +18,6 @@
             mReport = report;
             mApplicationTitle = applicationTitle;
             InitializeForm();
-
-            ShowProperties();
         }
 
         private void InitializeForm()
@@ -22,12 +27,6 @@
 
             FillPageSizes();
             FillPageOrientations();
-        }
-
-        public void SetReport(Model.Report report)
-        {
-            mReport = report;
-            ShowProperties();
         }
 
         private void FillPageSizes()
@@ -54,6 +53,10 @@
             comboBoxPageOrientation.DataSource = items;
         }
 
+        #endregion Initialization
+
+        #region Events
+
         private void ControlFocusEnter(object sender, EventArgs e)
         {
             if (sender is TextBox textBox)
@@ -66,7 +69,11 @@
             }
         }
 
-        private void ShowProperties()
+        #endregion Events
+
+        #region Methods
+
+        internal void ShowProperties()
         {
             textBoxReportId.Text = mReport.ReportId.ToString();
             textBoxName.Text = mReport.Name;
@@ -113,5 +120,8 @@
         {
             ShowProperties();
         }
+
+        #endregion Methods
+
     }
 }

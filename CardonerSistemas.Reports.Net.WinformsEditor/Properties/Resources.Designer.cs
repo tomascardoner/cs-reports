@@ -115,7 +115,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New.
+        ///   Looks up a localized string similar to * New *.
         /// </summary>
         internal static string StringDatasourceFieldNameNew {
             get {
@@ -178,7 +178,25 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New.
+        ///   Looks up a localized string similar to Are you sure you want to delete the parameter?.
+        /// </summary>
+        internal static string StringDatasourceParameterDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("StringDatasourceParameterDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is already a parameter with this name..
+        /// </summary>
+        internal static string StringDatasourceParameterNameAlreadyExists {
+            get {
+                return ResourceManager.GetString("StringDatasourceParameterNameAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * New *.
         /// </summary>
         internal static string StringDatasourceParameterNameNew {
             get {
@@ -192,6 +210,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringDatasourceParameterNameRequired {
             get {
                 return ResourceManager.GetString("StringDatasourceParameterNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is already a new parameter created..
+        /// </summary>
+        internal static string StringDatasourceParameterNewAlreadyExists {
+            get {
+                return ResourceManager.GetString("StringDatasourceParameterNewAlreadyExists", resourceCulture);
             }
         }
         
@@ -422,20 +449,20 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to * New report *.
+        /// </summary>
+        internal static string StringReportNameNew {
+            get {
+                return ResourceManager.GetString("StringReportNameNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must specify name..
         /// </summary>
         internal static string StringReportNameRequired {
             get {
                 return ResourceManager.GetString("StringReportNameRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to * New report *.
-        /// </summary>
-        internal static string StringReportNew {
-            get {
-                return ResourceManager.GetString("StringReportNew", resourceCulture);
             }
         }
         

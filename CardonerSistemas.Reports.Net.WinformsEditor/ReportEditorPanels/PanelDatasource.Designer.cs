@@ -43,7 +43,7 @@
             tableLayoutPanelButtons = new TableLayoutPanel();
             buttonApply = new Button();
             buttonReset = new Button();
-            buttonAddParameter = new Button();
+            buttonDelete = new Button();
             buttonGetFields = new Button();
             tableLayoutPanelMain.SuspendLayout();
             tableLayoutPanelConnectionString.SuspendLayout();
@@ -224,7 +224,7 @@
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelButtons.Controls.Add(buttonApply, 0, 0);
             tableLayoutPanelButtons.Controls.Add(buttonReset, 1, 0);
-            tableLayoutPanelButtons.Controls.Add(buttonAddParameter, 2, 0);
+            tableLayoutPanelButtons.Controls.Add(buttonDelete, 2, 0);
             tableLayoutPanelButtons.Controls.Add(buttonGetFields, 3, 0);
             tableLayoutPanelButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanelButtons.Location = new Point(212, 410);
@@ -260,18 +260,18 @@
             buttonReset.UseVisualStyleBackColor = true;
             buttonReset.Click += ResetChanges;
             // 
-            // buttonAddParameter
+            // buttonDelete
             // 
-            buttonAddParameter.AutoSize = true;
-            buttonAddParameter.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonAddParameter.Location = new Point(138, 5);
-            buttonAddParameter.Margin = new Padding(5);
-            buttonAddParameter.Name = "buttonAddParameter";
-            buttonAddParameter.Size = new Size(140, 30);
-            buttonAddParameter.TabIndex = 2;
-            buttonAddParameter.Text = "Delete datasource";
-            buttonAddParameter.UseVisualStyleBackColor = true;
-            buttonAddParameter.Click += DeleteDatasource;
+            buttonDelete.AutoSize = true;
+            buttonDelete.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonDelete.Location = new Point(138, 5);
+            buttonDelete.Margin = new Padding(5);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(140, 30);
+            buttonDelete.TabIndex = 2;
+            buttonDelete.Text = "Delete datasource";
+            buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += Delete;
             // 
             // buttonGetFields
             // 
@@ -313,7 +313,7 @@
         private ComboBox comboBoxProvider;
         private ComboBox comboBoxType;
         private TableLayoutPanel tableLayoutPanelButtons;
-        private Button buttonAddParameter;
+        private Button buttonDelete;
         private Button buttonGetFields;
         private Button buttonReset;
         private Button buttonApply;
