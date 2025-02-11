@@ -9,7 +9,7 @@
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            WinformsEditor.FormReportEditor formReportEditor = new(Program.ApplicationInfo.Title, new(), string.Empty)
+            WinformsEditor.Editor.FormReportEditor formReportEditor = new(Program.ApplicationInfo.Title, new(), string.Empty)
             {
                 MdiParent = this,
                 WindowState = FormWindowState.Maximized
@@ -30,7 +30,7 @@
 
             if (openFileDialog.ShowDialog(this) == DialogResult.OK && Storage.FileSystem.Load(openFileDialog.FileName, out Model.Report? report) && report is not null)
             {
-                WinformsEditor.FormReportEditor formReportEditor = new(Program.ApplicationInfo.Title, report, openFileDialog.FileName)
+                WinformsEditor.Editor.FormReportEditor formReportEditor = new(Program.ApplicationInfo.Title, report, openFileDialog.FileName)
                 {
                     MdiParent = this,
                     WindowState = FormWindowState.Maximized
@@ -45,7 +45,7 @@
             {
                 return;
             }
-            WinformsEditor.FormReportEditor formReportEditor = (WinformsEditor.FormReportEditor)this.ActiveMdiChild;
+            WinformsEditor.Editor.FormReportEditor formReportEditor = (WinformsEditor.Editor.FormReportEditor)this.ActiveMdiChild;
             saveToolStripButton.Enabled = !formReportEditor.SaveReport();
         }
 
@@ -55,7 +55,7 @@
             {
                 return;
             }
-            WinformsEditor.FormReportEditor formReportEditor = (WinformsEditor.FormReportEditor)this.ActiveMdiChild;
+            WinformsEditor.Editor.FormReportEditor formReportEditor = (WinformsEditor.Editor.FormReportEditor)this.ActiveMdiChild;
             saveToolStripButton.Enabled = !formReportEditor.SaveReportAs();
         }
 

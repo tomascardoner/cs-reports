@@ -1,4 +1,4 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
+﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
     public partial class PanelDatasourceParameters : UserControl
     {
@@ -8,19 +8,19 @@
         private readonly string mApplicationTitle;
         private readonly Model.Report mReport;
 
-        public event EventHandler? ParameterAdded;
+        public delegate void ParameterHandler(object sender, PanelDatasourceParameter.ParameterEventArgs e);
+
+        public event ParameterHandler? ParameterAdded;
 
         #endregion Declarations
 
         #region Initialization
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         public PanelDatasourceParameters(Model.Report report, string applicationTitle)
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         {
             InitializeComponent();
-            mApplicationTitle = applicationTitle;
             mReport = report;
+            mApplicationTitle = applicationTitle;
             InitializeForm();
 
             ShowProperties();
@@ -57,7 +57,7 @@
             }
             if (mReport.Datasource.Parameters.Any(p => p.Name.Trim() == Properties.Resources.StringDatasourceParameterNameNew))
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceParameterNewAlreadyExists, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.Resources.StringDatasourceFieldNewAlreadyExists, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
@@ -65,7 +65,7 @@
             }
             if (ParameterAdded is not null)
             {
-                ParameterAdded(this, EventArgs.Empty);
+                ParameterAdded(this, new() { NameNew = Properties.Resources.StringDatasourceParameterNameNew });
             }
         }
 

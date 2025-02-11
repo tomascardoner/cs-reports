@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using System.Text.RegularExpressions;
 
-namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
+namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
     public partial class PanelDatasource : UserControl
     {
@@ -13,8 +13,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
         private readonly string mApplicationTitle;
         private readonly Model.Report mReport;
 
-        public event EventHandler? DatasourceAdded;
+        public event EventHandler? DatasourceUpdated;
         public event EventHandler? DatasourceDeleted;
+        public event EventHandler? FieldsRefreshed;
 
         #endregion Declarations
 
@@ -133,15 +134,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
             {
                 return;
             }
-            if (mReport.Datasource is null)
-            {
-                mReport.Datasource = new();
-                if (DatasourceAdded is not null)
-                {
-                    DatasourceAdded(this, EventArgs.Empty);
-                }
-            }
-            mReport.Datasource.Provider = (Model.Datasource.Providers)(comboBoxProvider.SelectedValue ?? Model.Datasource.Providers.None);
+            mReport.Datasource ??= new();
+#pragma warning disable CS8605 // Unboxing a possibly null value.
+            mReport.Datasource.Provider = (Model.Datasource.Providers)comboBoxProvider.SelectedValue;
+#pragma warning restore CS8605 // Unboxing a possibly null value.
             if (checkBoxConnectionStringSave.Checked)
             {
                 if (checkBoxConnectionStringSavePassword.Checked)
@@ -161,6 +157,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
             mReport.Datasource.Text = textBoxText.Text;
             buttonDelete.Enabled = true;
             buttonGetFields.Enabled = true;
+            if (DatasourceUpdated is not null)
+            {
+                DatasourceUpdated(this, EventArgs.Empty);
+            }
         }
 
         private void ResetChanges(object sender, EventArgs e)
@@ -208,6 +208,11 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
             DbDataReader? dbDataReader = null;
             Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
             dbDataReader?.Close();
+
+            if (FieldsRefreshed is not null)
+            {
+                FieldsRefreshed(this, EventArgs.Empty);
+            }
         }
 
         #endregion Methods

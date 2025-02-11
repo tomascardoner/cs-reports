@@ -1,4 +1,4 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
+﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
     public partial class PanelDatasourceParameter : UserControl
     {
@@ -19,10 +19,10 @@
             public object? ValueNew { get; set; }
         }
 
-        public delegate void DatasourceParameterHandler(object sender, ParameterEventArgs e);
+        public delegate void ParameterHandler(object sender, ParameterEventArgs e);
 
-        public event DatasourceParameterHandler? ParameterUpdated;
-        public event DatasourceParameterHandler? ParameterDeleted;
+        public event ParameterHandler? ParameterUpdated;
+        public event ParameterHandler? ParameterDeleted;
 
         #endregion Declarations
 

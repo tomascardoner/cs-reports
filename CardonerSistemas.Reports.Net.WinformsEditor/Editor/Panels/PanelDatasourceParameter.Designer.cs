@@ -1,4 +1,4 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
+﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
     partial class PanelDatasourceParameter
     {
@@ -44,9 +44,9 @@
             labelValueYesNo = new Label();
             checkBoxValueYesNo = new CheckBox();
             tableLayoutPanelButtons = new TableLayoutPanel();
+            buttonDelete = new Button();
             buttonApply = new Button();
             buttonReset = new Button();
-            buttonDelete = new Button();
             tableLayoutPanelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownValueNumeric).BeginInit();
             tableLayoutPanelButtons.SuspendLayout();
@@ -257,6 +257,18 @@
             tableLayoutPanelButtons.Size = new Size(279, 40);
             tableLayoutPanelButtons.TabIndex = 14;
             // 
+            // buttonDelete
+            // 
+            buttonDelete.AutoSize = true;
+            buttonDelete.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonDelete.Location = new Point(138, 5);
+            buttonDelete.Margin = new Padding(5);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(136, 30);
+            buttonDelete.TabIndex = 2;
+            buttonDelete.Text = "Delete parameter";
+            buttonDelete.UseVisualStyleBackColor = true;
+            // 
             // buttonApply
             // 
             buttonApply.AutoSize = true;
@@ -282,18 +294,6 @@
             buttonReset.Text = "Reset";
             buttonReset.UseVisualStyleBackColor = true;
             buttonReset.Click += ResetChanges;
-            // 
-            // buttonDelete
-            // 
-            buttonDelete.AutoSize = true;
-            buttonDelete.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonDelete.Location = new Point(138, 5);
-            buttonDelete.Margin = new Padding(5);
-            buttonDelete.Name = "buttonDelete";
-            buttonDelete.Size = new Size(136, 30);
-            buttonDelete.TabIndex = 3;
-            buttonDelete.Text = "Delete parameter";
-            buttonDelete.UseVisualStyleBackColor = true;
             // 
             // PanelDatasourceParameter
             // 

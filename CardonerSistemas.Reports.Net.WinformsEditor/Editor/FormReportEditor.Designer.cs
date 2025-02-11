@@ -1,4 +1,4 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor
+﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 {
     partial class FormReportEditor
     {

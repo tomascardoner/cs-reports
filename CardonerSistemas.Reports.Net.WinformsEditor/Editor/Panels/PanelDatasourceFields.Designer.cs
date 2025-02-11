@@ -1,4 +1,4 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.ReportEditorPanels
+﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
     partial class PanelDatasourceFields
     {

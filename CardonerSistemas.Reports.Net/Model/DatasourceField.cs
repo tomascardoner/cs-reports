@@ -30,7 +30,6 @@ namespace CardonerSistemas.Reports.Net.Model
         [JsonIgnore]
         public int Position { get; set; }
 
-        [JsonIgnore]
         public Type Type { get; set; } = typeof(object);
 
         [JsonIgnore]

@@ -115,11 +115,47 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the field?.
+        /// </summary>
+        internal static string StringDatasourceFieldDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is already a field with this name..
+        /// </summary>
+        internal static string StringDatasourceFieldNameAlreadyExists {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldNameAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to * New *.
         /// </summary>
         internal static string StringDatasourceFieldNameNew {
             get {
                 return ResourceManager.GetString("StringDatasourceFieldNameNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify name..
+        /// </summary>
+        internal static string StringDatasourceFieldNameRequired {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is already a new field created..
+        /// </summary>
+        internal static string StringDatasourceFieldNewAlreadyExists {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldNewAlreadyExists", resourceCulture);
             }
         }
         
@@ -165,6 +201,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringDatasourceFieldsCounterOne {
             get {
                 return ResourceManager.GetString("StringDatasourceFieldsCounterOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify type..
+        /// </summary>
+        internal static string StringDatasourceFieldTypeRequired {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldTypeRequired", resourceCulture);
             }
         }
         

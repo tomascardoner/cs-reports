@@ -4,7 +4,6 @@
     {
         public enum Providers : byte
         {
-            None = 0,
             SqlServer = 1,
             OleDb = 2,
             Odbc = 3,

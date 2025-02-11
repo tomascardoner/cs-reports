@@ -28,8 +28,6 @@ namespace CardonerSistemas.Reports.Net.Data
             {
                 switch (datasource.Provider)
                 {
-                    case Model.Datasource.Providers.None:
-                        break;
                     case Model.Datasource.Providers.SqlServer:
                         DbProviderFactories.RegisterFactory(GetProviderName(datasource.Provider), Microsoft.Data.SqlClient.SqlClientFactory.Instance);
                         break;
@@ -137,7 +135,7 @@ namespace CardonerSistemas.Reports.Net.Data
 
         public static void GetDatasource(Model.Datasource? datasource, ref DbDataReader? dbDataReader)
         {
-            if (datasource is not null && datasource.Provider != Model.Datasource.Providers.None && !string.IsNullOrEmpty(GetProviderName(datasource.Provider)))
+            if (datasource is not null && !string.IsNullOrEmpty(GetProviderName(datasource.Provider)))
             {
                 DbConnection? dbConnection = CreateAndOpenConnection(datasource);
                 if (dbConnection is not null)

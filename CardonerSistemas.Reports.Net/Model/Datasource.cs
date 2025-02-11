@@ -2,7 +2,7 @@
 {
     public partial class Datasource
     {
-        public Providers Provider { get; set; } = Providers.None;
+        public Providers Provider { get; set; }
 
         public string ConnectionString { get; set; } = string.Empty;
 
