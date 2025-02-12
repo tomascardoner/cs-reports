@@ -83,7 +83,7 @@ namespace CardonerSistemas.Reports.Net.Data
                     DbParameter dbParameter = dbCommand.CreateParameter();
                     dbParameter.ParameterName = parameter.Name;
                     dbParameter.DbType = parameter.Type;
-                    dbParameter.Value = parameter.Value;
+                    dbParameter.Value = parameter.Value ?? DBNull.Value;
                     dbCommand.Parameters.Add(dbParameter);
                 }
                 dbDataReader = dbCommand.ExecuteReader();
@@ -114,7 +114,7 @@ namespace CardonerSistemas.Reports.Net.Data
                         datasource.Fields.Add(field);
                     }
                     field.Position = columnIndex;
-                    field.Type = dbDataReader.GetFieldType(columnIndex);
+                    field.Type = Framework.Base.TypeMapper.GetDbType(dbDataReader.GetFieldType(columnIndex));
                     field.DataTypeName = dbDataReader.GetDataTypeName(columnIndex);
                     field.Verified = true;
                 }

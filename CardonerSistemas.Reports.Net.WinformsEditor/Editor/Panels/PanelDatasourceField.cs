@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
+﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
     public partial class PanelDatasourceField : UserControl
     {
@@ -16,8 +14,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             public short FieldId { get; set; }
             public string NameOld { get; set; } = string.Empty;
             public string NameNew { get; set; } = string.Empty;
-            public Type TypeOld { get; set; } = typeof(object);
-            public Type TypeNew { get; set; } = typeof(object);
+            public System.Data.DbType TypeOld { get; set; } = System.Data.DbType.Object;
+            public System.Data.DbType TypeNew { get; set; } = System.Data.DbType.Object;
             public object? ValueOld { get; set; }
             public object? ValueNew { get; set; }
         }
@@ -45,9 +43,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             comboBoxType.ValueMember = "Key";
             comboBoxType.DisplayMember = "Value";
             ICollection<KeyValuePair<int, string>> items = [];
-            foreach (var item in Assembly.GetExecutingAssembly().GetTypes())
+            foreach (System.Data.DbType dbType in Enum.GetValues<System.Data.DbType>())
             {
-                items.Add(new KeyValuePair<int, string>(0, item.ToString()));
+                items.Add(new KeyValuePair<int, string>((int)dbType, dbType.ToString()));
             }
             comboBoxType.DataSource = items;
         }
@@ -75,7 +73,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
                 return;
             }
             textBoxName.Text = mDatasourceField.Name;
-            //comboBoxType.SelectedValue = (int)mDatasourceField.Type;
+            comboBoxType.SelectedValue = (int)mDatasourceField.Type;
         }
 
         internal void ShowProperties(short fieldId)
@@ -110,7 +108,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
                 comboBoxType.Focus();
                 return;
             }
-            if (mReport.Datasource is not null && mReport.Datasource.Fields.Any(p => p.Name == textBoxName.Text.Trim()))
+            if (mReport.Datasource is not null && mReport.Datasource.Fields.Any(f => f.Name == textBoxName.Text.Trim() && f.FieldId != mDatasourceField.FieldId))
             {
                 MessageBox.Show(Properties.Resources.StringDatasourceFieldNewAlreadyExists, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxName.Focus();
@@ -122,7 +120,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
                 TypeOld = mDatasourceField.Type
             };
             mDatasourceField.Name = textBoxName.Text.Trim();
-            mDatasourceField.Type = (Type)comboBoxType.SelectedValue;
+            mDatasourceField.Type = (System.Data.DbType)comboBoxType.SelectedValue;
             if (FieldUpdated is not null)
             {
                 fieldEventArgs.NameNew = mDatasourceField.Name;

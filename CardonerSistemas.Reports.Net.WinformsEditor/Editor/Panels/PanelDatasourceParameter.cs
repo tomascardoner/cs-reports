@@ -5,6 +5,8 @@
 
         #region Declarations
 
+        private const int DecimalPlaces = 4;
+
         private readonly Model.Report mReport;
         private Model.DatasourceParameter? mDatasourceParameter;
         private readonly string mApplicationTitle;
@@ -88,13 +90,67 @@
 
             Model.Value.Types valueType = GetValueTypeFromType((System.Data.DbType)comboBoxType.SelectedValue);
 
+            // Text value
             labelValueText.Visible = valueType == Model.Value.Types.Text;
             textBoxValueText.Visible = valueType == Model.Value.Types.Text;
+
+            // Numeric value
             labelValueNumeric.Visible = valueType == Model.Value.Types.Integer || valueType == Model.Value.Types.Decimal;
             numericUpDownValueNumeric.Visible = valueType == Model.Value.Types.Integer || valueType == Model.Value.Types.Decimal;
-            numericUpDownValueNumeric.DecimalPlaces = valueType == Model.Value.Types.Decimal ? 2 : 0;
+            if (valueType == Model.Value.Types.Integer || valueType == Model.Value.Types.Decimal)
+            {
+                numericUpDownValueNumeric.DecimalPlaces = valueType == Model.Value.Types.Decimal ? DecimalPlaces : 0;
+                switch ((System.Data.DbType)comboBoxType.SelectedValue)
+                {
+                    case System.Data.DbType.Byte:
+                        numericUpDownValueNumeric.Minimum = Byte.MinValue;
+                        numericUpDownValueNumeric.Maximum = Byte.MaxValue;
+                        break;
+                    case System.Data.DbType.Currency:
+                    case System.Data.DbType.Decimal:
+                    case System.Data.DbType.Double:
+                    case System.Data.DbType.Single:
+                        numericUpDownValueNumeric.Minimum = Decimal.MinValue;
+                        numericUpDownValueNumeric.Maximum = Decimal.MaxValue;
+                        break;
+                    case System.Data.DbType.Int16:
+                        numericUpDownValueNumeric.Minimum = Int16.MinValue;
+                        numericUpDownValueNumeric.Maximum = Int16.MaxValue;
+                        break;
+                    case System.Data.DbType.Int32:
+                        numericUpDownValueNumeric.Minimum = Int32.MinValue;
+                        numericUpDownValueNumeric.Maximum = Int32.MaxValue;
+                        break;
+                    case System.Data.DbType.Int64:
+                        numericUpDownValueNumeric.Minimum = Int64.MinValue;
+                        numericUpDownValueNumeric.Maximum = Int64.MaxValue;
+                        break;
+                    case System.Data.DbType.SByte:
+                        numericUpDownValueNumeric.Minimum = SByte.MinValue;
+                        numericUpDownValueNumeric.Maximum = SByte.MaxValue;
+                        break;
+                    case System.Data.DbType.UInt16:
+                        numericUpDownValueNumeric.Minimum = UInt16.MinValue;
+                        numericUpDownValueNumeric.Maximum = UInt16.MaxValue;
+                        break;
+                    case System.Data.DbType.UInt32:
+                        numericUpDownValueNumeric.Minimum = UInt32.MinValue;
+                        numericUpDownValueNumeric.Maximum = UInt32.MaxValue;
+                        break;
+                    case System.Data.DbType.UInt64:
+                        numericUpDownValueNumeric.Minimum = UInt64.MinValue;
+                        numericUpDownValueNumeric.Maximum = UInt64.MaxValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // DateTime value
             labelValueDateTime.Visible = valueType == Model.Value.Types.DateTime;
             dateTimePickerValueDateTime.Visible = valueType == Model.Value.Types.DateTime;
+
+            // Yes-No value
             labelValueYesNo.Visible = valueType == Model.Value.Types.YesNo;
             checkBoxValueYesNo.Visible = valueType == Model.Value.Types.YesNo;
         }
