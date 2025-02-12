@@ -182,7 +182,7 @@
                 comboBoxType.Focus();
                 return;
             }
-            if (mReport.Datasource is not null && mReport.Datasource.Parameters.Any(p => p.Name == textBoxName.Text.Trim()))
+            if (mDatasourceParameter.Name != textBoxName.Text.Trim() && mReport.Datasource is not null && mReport.Datasource.Parameters.Any(p => p.Name == textBoxName.Text.Trim()))
             {
                 MessageBox.Show(Properties.Resources.StringDatasourceParameterNameAlreadyExists, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxName.Focus();
@@ -236,11 +236,10 @@
 
         private void Delete(object sender, EventArgs e)
         {
-            if (mReport.Datasource is null || mDatasourceParameter is null || MessageBox.Show(Properties.Resources.StringDatasourceParameterDeleteConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (mReport.Datasource is null || mDatasourceParameter is null || MessageBox.Show(string.Format(Properties.Resources.StringDatasourceParameterDeleteConfirmation, mDatasourceParameter.Name), mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
-
             mReport.Datasource.Parameters.Remove(mDatasourceParameter);
             if (ParameterDeleted is not null)
             {

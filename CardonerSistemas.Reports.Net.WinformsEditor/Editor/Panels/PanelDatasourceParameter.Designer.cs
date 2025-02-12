@@ -268,6 +268,7 @@
             buttonDelete.TabIndex = 2;
             buttonDelete.Text = "Delete parameter";
             buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += Delete;
             // 
             // buttonApply
             // 

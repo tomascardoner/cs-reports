@@ -13,7 +13,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         public delegate void FieldHandler(object sender, PanelDatasourceField.FieldEventArgs e);
 
         public event FieldHandler? FieldAdded;
-        public event EventHandler? FieldsRefreshed;
+        public event EventHandler? FieldsUpdated;
 
         #endregion Declarations
 
@@ -80,7 +80,11 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
                 MessageBox.Show(Properties.Resources.StringDatasourceConnectionStringRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if (mReport.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceGetFieldsWithNullParametersConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            if (mReport.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetWithNullParametersConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            {
+                return;
+            }
+            if (MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
                 return;
             }
@@ -89,9 +93,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             DbDataReader? dbDataReader = null;
             Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
             dbDataReader?.Close();
-            if (FieldsRefreshed is not null)
+            if (FieldsUpdated is not null)
             {
-                FieldsRefreshed(this, EventArgs.Empty);
+                FieldsUpdated(this, EventArgs.Empty);
             }
         }
 

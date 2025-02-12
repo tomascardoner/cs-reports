@@ -292,6 +292,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
                 mPanelDatasource.DatasourceUpdated += DatasourceUpdated;
                 mPanelDatasource.DatasourceDeleted += DatasourceDeleted;
+                mPanelDatasource.FieldsUpdated += DatasourceFieldsUpdated;
 #pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
             }
             mPanelDatasource.ShowProperties();
@@ -386,6 +387,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 splitContainerMain.Panel2.Controls.Add(mPanelDatasourceParameter);
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
                 mPanelDatasourceParameter.ParameterUpdated += DatasourceParameterUpdated;
+                mPanelDatasourceParameter.ParameterDeleted += DatasourceParameterDeleted;
 #pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
             }
             mPanelDatasourceParameter.ShowProperties(parameterName);
@@ -435,12 +437,11 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             {
                 return;
             }
-            if (GetTreeNodeByTag(treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex], DatasourceFieldsKey, string.Empty) is not null)
+            if (treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes.Count <= TreeNodeDatasourceFieldsIndex)
             {
-                return;
+                treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes.Add(AddTreeNode(DatasourceFieldsTreeNodeGetText(), DatasourceFieldsKey, string.Empty));
             }
-            treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes.Add(AddTreeNode(DatasourceFieldsTreeNodeGetText(), DatasourceFieldsKey, string.Empty));
-            foreach (Model.DatasourceField field in mReport.Datasource.Fields)
+            foreach (Model.DatasourceField field in mReport.Datasource.Fields.OrderBy(f => f.Position))
             {
                 DatasourceFieldCreateNode(field.FieldId, field.Name);
             }
@@ -457,10 +458,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 splitContainerMain.Panel2.Controls.Add(mPanelDatasourceFields);
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
                 mPanelDatasourceFields.FieldAdded += DatasourceFieldUpdated;
+                mPanelDatasourceFields.FieldsUpdated += DatasourceFieldsUpdated;
 #pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
             }
             mPanelDatasourceFields.ShowProperties();
             mPanelDatasourceFields.Show();
+        }
+
+        private void DatasourceFieldsUpdated(object sender, EventArgs e)
+        {
+            treeViewReport.SuspendLayout();
+            treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceFieldsIndex].Text = DatasourceFieldsTreeNodeGetText();
+            treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceFieldsIndex].Nodes.Clear();
+            DatasourceFieldsCreateNodes();
+            treeViewReport.ResumeLayout();
+            if (treeViewReport.SelectedNode is not null && treeViewReport.SelectedNode.Tag == treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceFieldsIndex].Tag && mPanelDatasourceFields is not null)
+            {
+                mPanelDatasourceFields.ShowProperties();
+            }
         }
 
         #endregion Datasource fields
@@ -493,6 +508,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 splitContainerMain.Panel2.Controls.Add(mPanelDatasourceField);
 #pragma warning disable CS8622 // Nullability of reference types in type of field doesn't match the target delegate (possibly because of nullability attributes).
                 mPanelDatasourceField.FieldUpdated += DatasourceFieldUpdated;
+                mPanelDatasourceField.FieldDeleted += DatasourceFieldDeleted;
 #pragma warning restore CS8622 // Nullability of reference types in type of field doesn't match the target delegate (possibly because of nullability attributes).
             }
             mPanelDatasourceField.ShowProperties(fieldId);
@@ -502,7 +518,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         private void DatasourceFieldUpdated(object sender, Panels.PanelDatasourceField.FieldEventArgs e)
         {
             TreeNode treeNodeDatasourceFields = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceFieldsIndex];
-            TreeNode? treeNodeDatasourceField = GetTreeNodeByTag(treeNodeDatasourceFields, DatasourceFieldKey, e.NameOld);
+            TreeNode? treeNodeDatasourceField = GetTreeNodeByTag(treeNodeDatasourceFields, DatasourceFieldKey, e.FieldId.ToString());
             if (treeNodeDatasourceField is null)
             {
                 treeNodeDatasourceFields.Nodes.Add(AddTreeNode(DatasourceFieldTreeNodeGetText(e.NameNew), DatasourceFieldKey, e.NameNew));
@@ -519,7 +535,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         private void DatasourceFieldDeleted(object sender, Panels.PanelDatasourceField.FieldEventArgs e)
         {
             TreeNode treeNodeDatasourceFields = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceFieldsIndex];
-            TreeNode? treeNodeDatasourceField = GetTreeNodeByTag(treeNodeDatasourceFields, DatasourceFieldKey, e.NameOld);
+            TreeNode? treeNodeDatasourceField = GetTreeNodeByTag(treeNodeDatasourceFields, DatasourceFieldKey, e.FieldId.ToString());
             if (treeNodeDatasourceField is not null)
             {
                 treeNodeDatasourceFields.Nodes.Remove(treeNodeDatasourceField);

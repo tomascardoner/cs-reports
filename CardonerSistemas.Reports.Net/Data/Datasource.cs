@@ -16,7 +16,7 @@ namespace CardonerSistemas.Reports.Net.Data
         // Given a provider name and connection string,
         // create the DbProviderFactory and DbConnection.
         // Returns a DbConnection on success; null on failure.
-        private static DbConnection? CreateAndOpenConnection(Model.Datasource datasource)
+        private static DbConnection? CreateAndOpenConnection(Model.Datasource datasource, string connectionStringToOverride)
         {
             ArgumentNullException.ThrowIfNull(datasource);
 
@@ -48,7 +48,7 @@ namespace CardonerSistemas.Reports.Net.Data
                 dbConnection = factory.CreateConnection();
                 if (dbConnection is not null)
                 {
-                    dbConnection.ConnectionString = datasource.ConnectionString;
+                    dbConnection.ConnectionString = string.IsNullOrEmpty(connectionStringToOverride) ? datasource.ConnectionString : connectionStringToOverride;
                     dbConnection.Open();
                 }
             }
@@ -135,9 +135,14 @@ namespace CardonerSistemas.Reports.Net.Data
 
         public static void GetDatasource(Model.Datasource? datasource, ref DbDataReader? dbDataReader)
         {
+            GetDatasource(datasource, ref dbDataReader, string.Empty);
+        }
+
+        public static void GetDatasource(Model.Datasource? datasource, ref DbDataReader? dbDataReader, string connectionStringToOverride)
+        {
             if (datasource is not null && !string.IsNullOrEmpty(GetProviderName(datasource.Provider)))
             {
-                DbConnection? dbConnection = CreateAndOpenConnection(datasource);
+                DbConnection? dbConnection = CreateAndOpenConnection(datasource, connectionStringToOverride);
                 if (dbConnection is not null)
                 {
                     dbDataReader = GetDataReader(dbConnection, datasource);

@@ -15,7 +15,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         public event EventHandler? DatasourceUpdated;
         public event EventHandler? DatasourceDeleted;
-        public event EventHandler? FieldsRefreshed;
+        public event EventHandler? FieldsUpdated;
 
         #endregion Declarations
 
@@ -192,26 +192,35 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             {
                 return;
             }
-            if (string.IsNullOrEmpty(textBoxConnectionString.Text))
+            if (string.IsNullOrEmpty(mReport.Datasource?.ConnectionString) && string.IsNullOrEmpty(textBoxConnectionString.Text))
             {
                 MessageBox.Show(Properties.Resources.StringDatasourceConnectionStringRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 textBoxConnectionString.Focus();
                 return;
             }
-            if (mReport.Datasource is null || (mReport.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceGetFieldsWithNullParametersConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No))
+            if (mReport.Datasource is null || (mReport.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetWithNullParametersConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No))
             {
                 return;
             }
-            buttonApply.PerformClick();
+            if (MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            {
+                return;
+            }
 
             // Open the datasource
             DbDataReader? dbDataReader = null;
-            Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
-            dbDataReader?.Close();
-
-            if (FieldsRefreshed is not null)
+            if (string.IsNullOrEmpty(mReport.Datasource?.ConnectionString))
             {
-                FieldsRefreshed(this, EventArgs.Empty);
+                Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader, textBoxConnectionString.Text.Trim());
+            }
+            else
+            {
+                Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
+            }
+            dbDataReader?.Close();
+            if (FieldsUpdated is not null)
+            {
+                FieldsUpdated(this, EventArgs.Empty);
             }
         }
 

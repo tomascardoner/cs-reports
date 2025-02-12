@@ -115,7 +115,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete the field?.
+        ///   Looks up a localized string similar to Are you sure you want to delete the datasource field named &apos;{0}&apos;?.
         /// </summary>
         internal static string StringDatasourceFieldDeleteConfirmation {
             get {
@@ -205,6 +205,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to refresh the fields of the datasource?.
+        /// </summary>
+        internal static string StringDatasourceFieldsGetConfirmation {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldsGetConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are parameters with unspecified values. Do you want to continue anyway?.
+        /// </summary>
+        internal static string StringDatasourceFieldsGetWithNullParametersConfirmation {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldsGetWithNullParametersConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must specify type..
         /// </summary>
         internal static string StringDatasourceFieldTypeRequired {
@@ -214,16 +232,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are parameters with unspecified values. Do you want to continue anyway?.
-        /// </summary>
-        internal static string StringDatasourceGetFieldsWithNullParametersConfirmation {
-            get {
-                return ResourceManager.GetString("StringDatasourceGetFieldsWithNullParametersConfirmation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete the parameter?.
+        ///   Looks up a localized string similar to Are you sure you want to delete the datasource parameter named &apos;{0}&apos;?.
         /// </summary>
         internal static string StringDatasourceParameterDeleteConfirmation {
             get {

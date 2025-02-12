@@ -13,6 +13,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         public class FieldEventArgs : EventArgs
         {
+            public short FieldId { get; set; }
             public string NameOld { get; set; } = string.Empty;
             public string NameNew { get; set; } = string.Empty;
             public Type TypeOld { get; set; } = typeof(object);
@@ -116,6 +117,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             }
             FieldEventArgs fieldEventArgs = new()
             {
+                FieldId = mDatasourceField.FieldId,
                 NameOld = mDatasourceField.Name,
                 TypeOld = mDatasourceField.Type
             };
@@ -136,16 +138,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         private void Delete(object sender, EventArgs e)
         {
-            if (mReport.Datasource is null || mDatasourceField is null || MessageBox.Show(Properties.Resources.StringDatasourceFieldDeleteConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (mReport.Datasource is null || mDatasourceField is null || MessageBox.Show(string.Format(Properties.Resources.StringDatasourceFieldDeleteConfirmation, mDatasourceField.Name), mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
-
             mReport.Datasource.Fields.Remove(mDatasourceField);
             if (FieldDeleted is not null)
             {
                 FieldEventArgs fieldEventArgs = new()
                 {
+                    FieldId = mDatasourceField.FieldId,
                     NameOld = mDatasourceField.Name,
                     TypeOld = mDatasourceField.Type
                 };

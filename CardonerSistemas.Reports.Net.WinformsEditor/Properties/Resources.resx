@@ -303,7 +303,7 @@
   <data name="StringDatasourceTextRequired" xml:space="preserve">
     <value>Must specify text.</value>
   </data>
-  <data name="StringDatasourceGetFieldsWithNullParametersConfirmation" xml:space="preserve">
+  <data name="StringDatasourceFieldsGetWithNullParametersConfirmation" xml:space="preserve">
     <value>There are parameters with unspecified values. Do you want to continue anyway?</value>
   </data>
   <data name="StringReportModifiedConfirmation" xml:space="preserve">
@@ -380,10 +380,10 @@ Do you want to save them?</value>
     <value>Are you sure you want to delete the datasource?</value>
   </data>
   <data name="StringDatasourceParameterDeleteConfirmation" xml:space="preserve">
-    <value>Are you sure you want to delete the parameter?</value>
+    <value>Are you sure you want to delete the datasource parameter named '{0}'?</value>
   </data>
   <data name="StringDatasourceFieldDeleteConfirmation" xml:space="preserve">
-    <value>Are you sure you want to delete the field?</value>
+    <value>Are you sure you want to delete the datasource field named '{0}'?</value>
   </data>
   <data name="StringDatasourceParameterNewAlreadyExists" xml:space="preserve">
     <value>There is already a new parameter created.</value>
@@ -402,5 +402,8 @@ Do you want to save them?</value>
   </data>
   <data name="StringDatasourceFieldTypeRequired" xml:space="preserve">
     <value>Must specify type.</value>
+  </data>
+  <data name="StringDatasourceFieldsGetConfirmation" xml:space="preserve">
+    <value>Do you want to refresh the fields of the datasource?</value>
   </data>
 </root>
