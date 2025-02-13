@@ -115,7 +115,6 @@ namespace CardonerSistemas.Reports.Net.Data
                     }
                     field.Position = columnIndex;
                     field.Type = Framework.Base.TypeMapper.GetDbType(dbDataReader.GetFieldType(columnIndex));
-                    field.DataTypeName = dbDataReader.GetDataTypeName(columnIndex);
                     field.Verified = true;
                 }
 

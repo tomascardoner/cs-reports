@@ -33,9 +33,6 @@ namespace CardonerSistemas.Reports.Net.Model
         public System.Data.DbType Type { get; set; } = System.Data.DbType.Object;
 
         [JsonIgnore]
-        public string DataTypeName { get; set; } = string.Empty;
-
-        [JsonIgnore]
         public bool Verified { get; set; }
 
     }
