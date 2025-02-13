@@ -1,5 +1,5 @@
-﻿using PdfSharp.Drawing;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using PdfSharp.Drawing;
 
 namespace CardonerSistemas.Reports.Net.Model
 {
@@ -16,7 +16,7 @@ namespace CardonerSistemas.Reports.Net.Model
             }
             else
             {
-            RectangleId = (short)(report.Rectangles.Max(r => r.RectangleId) + 1);
+                RectangleId = (short)(report.Rectangles.Max(r => r.RectangleId) + 1);
             }
         }
 

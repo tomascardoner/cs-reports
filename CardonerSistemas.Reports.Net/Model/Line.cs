@@ -1,12 +1,13 @@
-﻿using PdfSharp.Drawing;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using PdfSharp.Drawing;
 
 namespace CardonerSistemas.Reports.Net.Model
 {
     public class Line
     {
 
-        public Line(Report report) {
+        public Line(Report report)
+        {
             if (report.Lines.Count == 0)
             {
                 LineId = 1;
@@ -20,7 +21,7 @@ namespace CardonerSistemas.Reports.Net.Model
         [JsonConstructor]
         public Line(short lineId)
         {
-            LineId = lineId; 
+            LineId = lineId;
         }
 
         public short LineId { get; }

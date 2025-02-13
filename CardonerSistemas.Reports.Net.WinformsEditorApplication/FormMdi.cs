@@ -80,7 +80,7 @@
             }
             if (ActiveMdiChild.ActiveControl is SplitContainer splitContainer)
             {
-                
+
             }
             if (ActiveMdiChild.ActiveControl is TextBox textBox && Clipboard.ContainsText())
             {

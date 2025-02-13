@@ -1,5 +1,5 @@
-﻿using PdfSharp.Drawing;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using PdfSharp.Drawing;
 
 namespace CardonerSistemas.Reports.Net.Model
 {
@@ -23,7 +23,7 @@ namespace CardonerSistemas.Reports.Net.Model
             BrushId = brushId;
         }
 
-        public short BrushId {  get; }
+        public short BrushId { get; }
 
         public BrushTypes Type { get; set; }
 

@@ -1,5 +1,5 @@
-﻿using SharpCompress.Archives.GZip;
-using System.Text;
+﻿using System.Text;
+using SharpCompress.Archives.GZip;
 
 namespace CardonerSistemas.Reports.Net.Storage
 {

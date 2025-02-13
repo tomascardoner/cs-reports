@@ -32,16 +32,16 @@ namespace CardonerSistemas.Reports.Net.Data
                         DbProviderFactories.RegisterFactory(GetProviderName(datasource.Provider), Microsoft.Data.SqlClient.SqlClientFactory.Instance);
                         break;
                     case Model.Datasource.Providers.OleDb:
-                        
+
                         break;
                     case Model.Datasource.Providers.Odbc:
-                        
+
                         break;
                     case Model.Datasource.Providers.Oracle:
-                        
+
                         break;
                     case Model.Datasource.Providers.DataSet:
-                        
+
                         break;
                 }
                 DbProviderFactory factory = DbProviderFactories.GetFactory(GetProviderName(datasource.Provider));

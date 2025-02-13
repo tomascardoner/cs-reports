@@ -7,7 +7,7 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public DatasourceField(Datasource datasource)
         {
-            if (datasource.Fields.Count ==  0)
+            if (datasource.Fields.Count == 0)
             {
                 FieldId = 1;
             }

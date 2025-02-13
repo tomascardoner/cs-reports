@@ -5,7 +5,8 @@ namespace CardonerSistemas.Reports.Net.Model
     public partial class Report
     {
 
-        public Report() {
+        public Report()
+        {
             ReportId = Guid.NewGuid();
         }
 
@@ -42,7 +43,7 @@ namespace CardonerSistemas.Reports.Net.Model
         public Datasource? Datasource { get; set; }
 
         public ICollection<Section> Sections { get; set; } = [];
-        
+
         public ICollection<Font> Fonts { get; set; } = [];
 
         public ICollection<Brush> Brushes { get; set; } = [];

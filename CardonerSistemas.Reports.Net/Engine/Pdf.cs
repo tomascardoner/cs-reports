@@ -1,7 +1,7 @@
-﻿using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Diagnostics;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 
 namespace CardonerSistemas.Reports.Net.Engine
 {
@@ -10,7 +10,7 @@ namespace CardonerSistemas.Reports.Net.Engine
         private static PdfDocument? Create(Model.Report report, string language = "")
         {
             ArgumentNullException.ThrowIfNull(report);
-            
+
             PdfDocument? pdfDocument = null;
 
             try

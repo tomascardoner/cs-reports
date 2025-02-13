@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace CardonerSistemas.Reports.Net.WinformsViewer
+﻿namespace CardonerSistemas.Reports.Net.WinformsViewer
 {
     public partial class FormPdfViewer : Form
     {

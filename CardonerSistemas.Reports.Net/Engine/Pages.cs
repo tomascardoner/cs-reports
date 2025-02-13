@@ -1,6 +1,6 @@
-﻿using PdfSharp.Drawing;
+﻿using System.Data.Common;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using System.Data.Common;
 
 namespace CardonerSistemas.Reports.Net.Engine
 {
@@ -14,7 +14,7 @@ namespace CardonerSistemas.Reports.Net.Engine
             PdfPage pdfPage = pdfDocument.Pages.Add();
             pdfPage.Size = (PdfSharp.PageSize)report.PageSize;
             pdfPage.Orientation = (PdfSharp.PageOrientation)report.PageOrientation;
-            pdfPage.TrimMargins .Top = new((double)report.PageMarginTop, XGraphicsUnit.Centimeter);
+            pdfPage.TrimMargins.Top = new((double)report.PageMarginTop, XGraphicsUnit.Centimeter);
             pdfPage.TrimMargins.Left = new((double)report.PageMarginLeft, XGraphicsUnit.Centimeter);
             pdfPage.TrimMargins.Right = new((double)report.PageMarginRight, XGraphicsUnit.Centimeter);
             pdfPage.TrimMargins.Bottom = new((double)report.PageMarginBottom, XGraphicsUnit.Centimeter);

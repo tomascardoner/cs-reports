@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace CardonerSistemas.Reports.Net.Model
+﻿namespace CardonerSistemas.Reports.Net.Model
 {
     public partial class Report
     {
