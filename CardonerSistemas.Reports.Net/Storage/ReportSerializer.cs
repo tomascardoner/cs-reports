@@ -9,10 +9,8 @@ namespace CardonerSistemas.Reports.Net.Storage
             try
             {
 
-#pragma warning disable CA1869 // Cache and reuse 'JsonSerializerOptions' instances
                 reportSerial = JsonSerializer.Serialize(report, new JsonSerializerOptions() { WriteIndented = true });
                 return true;
-#pragma warning restore CA1869 // Cache and reuse 'JsonSerializerOptions' instances
             }
             catch (Exception)
             {

@@ -5,11 +5,11 @@ namespace CardonerSistemas.Reports.Net.Model
 {
     public partial class Text
     {
-        private readonly Report _Report;
+        private readonly Report _report;
 
         public Text(Report report)
         {
-            _Report = report;
+            _report = report;
             if (report.Texts.Count == 0)
             {
                 TextId = 1;
@@ -22,14 +22,14 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public Text(Report report, short textId)
         {
-            _Report = report;
+            _report = report;
             TextId = textId;
         }
 
         [JsonConstructor]
         public Text(short textId)
         {
-            _Report = new();
+            _report = new();
             TextId = textId;
         }
 
@@ -91,12 +91,12 @@ namespace CardonerSistemas.Reports.Net.Model
         public decimal ParagraphIndent { get; set; }
 
         [JsonIgnore]
-        public Brush? Brush => _Report.Brushes.FirstOrDefault(b => b.BrushId == BrushId);
+        public Brush? Brush => _report.Brushes.FirstOrDefault(b => b.BrushId == BrushId);
 
         [JsonIgnore]
-        public Section? Section => _Report.Sections.FirstOrDefault(s => s.SectionId == SectionId);
+        public Section? Section => _report.Sections.FirstOrDefault(s => s.SectionId == SectionId);
 
         [JsonIgnore]
-        public Font? Font => _Report.Fonts.FirstOrDefault(f => f.FontId == FontId);
+        public Font? Font => _report.Fonts.FirstOrDefault(f => f.FontId == FontId);
     }
 }

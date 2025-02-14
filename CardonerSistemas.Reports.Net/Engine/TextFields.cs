@@ -74,14 +74,7 @@ namespace CardonerSistemas.Reports.Net.Engine
             }
             catch (Exception ex)
             {
-                if (ex.HResult == -2146233033)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                else
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                Console.WriteLine(ex.Message);
                 return string.Empty;
             }
         }

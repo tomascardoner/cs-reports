@@ -5,8 +5,8 @@
 
         #region Declarations
 
-        private Model.Report mReport;
-        private readonly string mApplicationTitle;
+        private readonly Model.Report _report;
+        private readonly string _applicationTitle;
 
         #endregion Declarations
 
@@ -15,8 +15,8 @@
         public PanelReport(Model.Report report, string applicationTitle)
         {
             InitializeComponent();
-            mReport = report;
-            mApplicationTitle = applicationTitle;
+            _report = report;
+            _applicationTitle = applicationTitle;
             InitializeForm();
         }
 
@@ -75,45 +75,45 @@
 
         internal void ShowProperties()
         {
-            textBoxReportId.Text = mReport.ReportId.ToString();
-            textBoxName.Text = mReport.Name;
-            textBoxTemplateFileName.Text = mReport.TemplateFileName;
-            comboBoxPageSize.SelectedValue = (byte)mReport.PageSize;
-            comboBoxPageOrientation.SelectedValue = (byte)mReport.PageOrientation;
-            numericUpDownPageMarginTop.Value = mReport.PageMarginTop;
-            numericUpDownPageMarginLeft.Value = mReport.PageMarginLeft;
-            numericUpDownPageMarginRight.Value = mReport.PageMarginRight;
-            numericUpDownPageMarginBottom.Value = mReport.PageMarginBottom;
-            numericUpDownDetailSectionMaxRowCount.Value = mReport.DetailSectionMaxRowCount;
+            textBoxReportId.Text = _report.ReportId.ToString();
+            textBoxName.Text = _report.Name;
+            textBoxTemplateFileName.Text = _report.TemplateFileName;
+            comboBoxPageSize.SelectedValue = (byte)_report.PageSize;
+            comboBoxPageOrientation.SelectedValue = (byte)_report.PageOrientation;
+            numericUpDownPageMarginTop.Value = _report.PageMarginTop;
+            numericUpDownPageMarginLeft.Value = _report.PageMarginLeft;
+            numericUpDownPageMarginRight.Value = _report.PageMarginRight;
+            numericUpDownPageMarginBottom.Value = _report.PageMarginBottom;
+            numericUpDownDetailSectionMaxRowCount.Value = _report.DetailSectionMaxRowCount;
         }
 
         private void ApplyChanges(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
-                MessageBox.Show(Properties.Resources.StringReportNameRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.Resources.StringReportNameRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if (comboBoxPageSize.SelectedValue is null)
             {
-                MessageBox.Show(Properties.Resources.StringReportPageSizeRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.Resources.StringReportPageSizeRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if (comboBoxPageOrientation.SelectedValue is null)
             {
-                MessageBox.Show(Properties.Resources.StringReportPageOrientationRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.Resources.StringReportPageOrientationRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            mReport.Name = textBoxName.Text;
-            mReport.TemplateFileName = textBoxTemplateFileName.Text;
-            mReport.PageSize = (Model.Report.PageSizes)(comboBoxPageSize.SelectedValue ?? Model.Report.PageSizes.Undefined);
-            mReport.PageOrientation = (Model.Report.PageOrientations)(comboBoxPageOrientation.SelectedValue ?? Model.Report.PageOrientations.Portrait);
-            mReport.PageMarginTop = numericUpDownPageMarginTop.Value;
-            mReport.PageMarginLeft = numericUpDownPageMarginLeft.Value;
-            mReport.PageMarginRight = numericUpDownPageMarginRight.Value;
-            mReport.PageMarginBottom = numericUpDownPageMarginBottom.Value;
-            mReport.DetailSectionMaxRowCount = (short)numericUpDownDetailSectionMaxRowCount.Value;
+            _report.Name = textBoxName.Text;
+            _report.TemplateFileName = textBoxTemplateFileName.Text;
+            _report.PageSize = (Model.Report.PageSizes)(comboBoxPageSize.SelectedValue ?? Model.Report.PageSizes.Undefined);
+            _report.PageOrientation = (Model.Report.PageOrientations)(comboBoxPageOrientation.SelectedValue ?? Model.Report.PageOrientations.Portrait);
+            _report.PageMarginTop = numericUpDownPageMarginTop.Value;
+            _report.PageMarginLeft = numericUpDownPageMarginLeft.Value;
+            _report.PageMarginRight = numericUpDownPageMarginRight.Value;
+            _report.PageMarginBottom = numericUpDownPageMarginBottom.Value;
+            _report.DetailSectionMaxRowCount = (short)numericUpDownDetailSectionMaxRowCount.Value;
         }
 
         private void ResetChanges(object sender, EventArgs e)

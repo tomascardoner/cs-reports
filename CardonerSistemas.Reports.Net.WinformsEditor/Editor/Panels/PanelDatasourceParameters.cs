@@ -5,8 +5,8 @@
 
         #region Declarations
 
-        private readonly string mApplicationTitle;
-        private readonly Model.Report mReport;
+        private readonly string _applicationTitle;
+        private readonly Model.Report _report;
 
         public delegate void ParameterHandler(object sender, PanelDatasourceParameter.ParameterEventArgs e);
 
@@ -19,8 +19,8 @@
         public PanelDatasourceParameters(Model.Report report, string applicationTitle)
         {
             InitializeComponent();
-            mReport = report;
-            mApplicationTitle = applicationTitle;
+            _report = report;
+            _applicationTitle = applicationTitle;
             InitializeForm();
 
             ShowProperties();
@@ -37,35 +37,37 @@
 
         internal void ShowProperties()
         {
-            if (mReport.Datasource is null)
+            if (_report.Datasource is null)
             {
                 return;
             }
-            labelCounter.Text = mReport.Datasource.Parameters.Count switch
+            labelCounter.Text = _report.Datasource.Parameters.Count switch
             {
                 0 => Properties.Resources.StringDatasourceParametersCounterEmpty,
                 1 => Properties.Resources.StringDatasourceParametersCounterOne,
-                _ => string.Format(Properties.Resources.StringDatasourceParametersCounter, mReport.Datasource.Parameters.Count)
+                _ => string.Format(Properties.Resources.StringDatasourceParametersCounter, _report.Datasource.Parameters.Count)
             };
         }
 
         private void Add(object sender, EventArgs e)
         {
-            if (mReport.Datasource is null)
+            if (_report.Datasource is null)
             {
                 return;
             }
-            if (mReport.Datasource.Parameters.Any(p => p.Name.Trim() == Properties.Resources.StringDatasourceParameterNameNew))
+            Model.DatasourceParameter? datasourceParameter = _report.Datasource.Parameters.FirstOrDefault(p => p.Name.Trim() == Properties.Resources.StringDatasourceParameterNameNew);
+            if (datasourceParameter is null)
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceFieldNewAlreadyExists, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                datasourceParameter = new Model.DatasourceParameter() { Name = Properties.Resources.StringDatasourceParameterNameNew };
+                _report.Datasource.Parameters.Add(datasourceParameter);
             }
             else
             {
-                mReport.Datasource.Parameters.Add(new() { Name = Properties.Resources.StringDatasourceParameterNameNew });
+                MessageBox.Show(Properties.Resources.StringDatasourceFieldNewAlreadyExists, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             if (ParameterAdded is not null)
             {
-                ParameterAdded(this, new() { NameNew = Properties.Resources.StringDatasourceParameterNameNew });
+                ParameterAdded(this, new() { NameOld = Properties.Resources.StringDatasourceParameterNameNew, NameNew = Properties.Resources.StringDatasourceParameterNameNew });
             }
         }
 

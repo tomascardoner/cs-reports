@@ -9,12 +9,12 @@
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            WinformsEditor.Editor.FormReportEditor formReportEditor = new(Program.ApplicationInfo.Title, new(), string.Empty)
+            WinformsEditor.Editor.For_reportEditor for_reportEditor = new(Program.s_applicationInfo.Title, new(), string.Empty)
             {
                 MdiParent = this,
                 WindowState = FormWindowState.Maximized
             };
-            formReportEditor.Show();
+            for_reportEditor.Show();
         }
 
         private void OpenFile(object sender, EventArgs e)
@@ -30,62 +30,53 @@
 
             if (openFileDialog.ShowDialog(this) == DialogResult.OK && Storage.FileSystem.Load(openFileDialog.FileName, out Model.Report? report) && report is not null)
             {
-                WinformsEditor.Editor.FormReportEditor formReportEditor = new(Program.ApplicationInfo.Title, report, openFileDialog.FileName)
+                WinformsEditor.Editor.For_reportEditor for_reportEditor = new(Program.s_applicationInfo.Title, report, openFileDialog.FileName)
                 {
                     MdiParent = this,
                     WindowState = FormWindowState.Maximized
                 };
-                formReportEditor.Show();
+                for_reportEditor.Show();
             }
         }
 
         private void SaveToolStripButton_Click(object sender, EventArgs e)
         {
-            if (this.ActiveMdiChild is null)
+            if (ActiveMdiChild is null)
             {
                 return;
             }
-            WinformsEditor.Editor.FormReportEditor formReportEditor = (WinformsEditor.Editor.FormReportEditor)this.ActiveMdiChild;
-            saveToolStripButton.Enabled = !formReportEditor.SaveReport();
+            WinformsEditor.Editor.For_reportEditor for_reportEditor = (WinformsEditor.Editor.For_reportEditor)ActiveMdiChild;
+            saveToolStripButton.Enabled = !for_reportEditor.SaveReport();
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.ActiveMdiChild is null)
+            if (ActiveMdiChild is null)
             {
                 return;
             }
-            WinformsEditor.Editor.FormReportEditor formReportEditor = (WinformsEditor.Editor.FormReportEditor)this.ActiveMdiChild;
-            saveToolStripButton.Enabled = !formReportEditor.SaveReportAs();
+            WinformsEditor.Editor.For_reportEditor for_reportEditor = (WinformsEditor.Editor.For_reportEditor)ActiveMdiChild;
+            saveToolStripButton.Enabled = !for_reportEditor.SaveReportAs();
         }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // This method is under construction
         }
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // This method is under construction
         }
 
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild is null || ActiveMdiChild.ActiveControl is null)
-            {
-                return;
-            }
-            if (ActiveMdiChild.ActiveControl is SplitContainer splitContainer)
-            {
-
-            }
-            if (ActiveMdiChild.ActiveControl is TextBox textBox && Clipboard.ContainsText())
-            {
-                textBox.Paste();
-            }
+            // This method is under construction
         }
 
         private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)

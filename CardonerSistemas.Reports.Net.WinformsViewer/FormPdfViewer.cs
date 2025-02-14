@@ -25,7 +25,7 @@
 
             IntPtr pointerIcon = Properties.Resources.Printer32.GetHicon();
             Icon icon = Icon.FromHandle(pointerIcon);
-            this.Icon = icon;
+            Icon = icon;
             MdiParent = mdiForm;
             WindowState = FormWindowState.Normal;
             Dock = DockStyle.Fill;

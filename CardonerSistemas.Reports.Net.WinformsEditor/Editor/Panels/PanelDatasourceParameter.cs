@@ -7,9 +7,9 @@
 
         private const int DecimalPlaces = 4;
 
-        private readonly Model.Report mReport;
+        private readonly Model.Report _report;
         private Model.DatasourceParameter? mDatasourceParameter;
-        private readonly string mApplicationTitle;
+        private readonly string _applicationTitle;
 
         public class ParameterEventArgs : EventArgs
         {
@@ -33,8 +33,8 @@
         public PanelDatasourceParameter(Model.Report report, string applicationTitle)
         {
             InitializeComponent();
-            mReport = report;
-            mApplicationTitle = applicationTitle;
+            _report = report;
+            _applicationTitle = applicationTitle;
 
             FillTypes();
         }
@@ -208,11 +208,11 @@
 
         internal void ShowProperties(string parameterName)
         {
-            if (mReport.Datasource is null)
+            if (_report.Datasource is null)
             {
                 return;
             }
-            mDatasourceParameter = mReport.Datasource.Parameters.FirstOrDefault(p => p.Name == parameterName);
+            mDatasourceParameter = _report.Datasource.Parameters.FirstOrDefault(p => p.Name == parameterName);
             if (mDatasourceParameter is null)
             {
                 return;
@@ -228,19 +228,19 @@
             }
             if (string.IsNullOrEmpty(textBoxName.Text))
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceParameterNameRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Properties.Resources.StringDatasourceParameterNameRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxName.Focus();
                 return;
             }
             if (comboBoxType.SelectedValue is null)
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceParameterTypeRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Properties.Resources.StringDatasourceParameterTypeRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 comboBoxType.Focus();
                 return;
             }
-            if (mDatasourceParameter.Name != textBoxName.Text.Trim() && mReport.Datasource is not null && mReport.Datasource.Parameters.Any(p => p.Name == textBoxName.Text.Trim()))
+            if (mDatasourceParameter.Name != textBoxName.Text.Trim() && _report.Datasource is not null && _report.Datasource.Parameters.Any(p => p.Name == textBoxName.Text.Trim()))
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceParameterNameAlreadyExists, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Properties.Resources.StringDatasourceParameterNameAlreadyExists, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxName.Focus();
             }
             ParameterEventArgs parameterEventArgs = new()
@@ -292,11 +292,11 @@
 
         private void Delete(object sender, EventArgs e)
         {
-            if (mReport.Datasource is null || mDatasourceParameter is null || MessageBox.Show(string.Format(Properties.Resources.StringDatasourceParameterDeleteConfirmation, mDatasourceParameter.Name), mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (_report.Datasource is null || mDatasourceParameter is null || MessageBox.Show(string.Format(Properties.Resources.StringDatasourceParameterDeleteConfirmation, mDatasourceParameter.Name), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
-            mReport.Datasource.Parameters.Remove(mDatasourceParameter);
+            _report.Datasource.Parameters.Remove(mDatasourceParameter);
             if (ParameterDeleted is not null)
             {
                 ParameterEventArgs parameterEventArgs = new()

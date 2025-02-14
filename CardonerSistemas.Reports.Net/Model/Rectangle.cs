@@ -5,11 +5,11 @@ namespace CardonerSistemas.Reports.Net.Model
 {
     public class Rectangle
     {
-        private readonly Report _Report;
+        private readonly Report _report;
 
         public Rectangle(Report report)
         {
-            _Report = report;
+            _report = report;
             if (report.Rectangles.Count == 0)
             {
                 RectangleId = 1;
@@ -22,14 +22,14 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public Rectangle(Report report, short rectangleId)
         {
-            _Report = report;
+            _report = report;
             RectangleId = rectangleId;
         }
 
         [JsonConstructor]
         public Rectangle(short rectangleId)
         {
-            _Report = new();
+            _report = new();
             RectangleId = rectangleId;
         }
 
@@ -61,12 +61,12 @@ namespace CardonerSistemas.Reports.Net.Model
         public decimal PositionY2 { get; set; }
 
         [JsonIgnore]
-        public Brush? Brush => _Report.Brushes.FirstOrDefault(b => b.BrushId == BrushId);
+        public Brush? Brush => _report.Brushes.FirstOrDefault(b => b.BrushId == BrushId);
 
         [JsonIgnore]
-        public Section? Section1 => _Report.Sections.FirstOrDefault(s => s.SectionId == SectionId1);
+        public Section? Section1 => _report.Sections.FirstOrDefault(s => s.SectionId == SectionId1);
 
         [JsonIgnore]
-        public Section? Section2 => _Report.Sections.FirstOrDefault(s => s.SectionId == SectionId2);
+        public Section? Section2 => _report.Sections.FirstOrDefault(s => s.SectionId == SectionId2);
     }
 }

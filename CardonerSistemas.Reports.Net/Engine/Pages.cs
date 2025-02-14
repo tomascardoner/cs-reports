@@ -18,8 +18,8 @@ namespace CardonerSistemas.Reports.Net.Engine
             pdfPage.TrimMargins.Left = new((double)report.PageMarginLeft, XGraphicsUnit.Centimeter);
             pdfPage.TrimMargins.Right = new((double)report.PageMarginRight, XGraphicsUnit.Centimeter);
             pdfPage.TrimMargins.Bottom = new((double)report.PageMarginBottom, XGraphicsUnit.Centimeter);
-            pdfPage.Width = pdfPage.Width - (pdfPage.TrimMargins.Left + pdfPage.TrimMargins.Right);
-            pdfPage.Height = pdfPage.Height - (pdfPage.TrimMargins.Top + pdfPage.TrimMargins.Bottom);
+            pdfPage.Width -= (pdfPage.TrimMargins.Left + pdfPage.TrimMargins.Right);
+            pdfPage.Height -= (pdfPage.TrimMargins.Top + pdfPage.TrimMargins.Bottom);
 
             // Get an XGraphics object for drawing on this page.
             using XGraphics xGraphics = XGraphics.FromPdfPage(pdfPage);

@@ -1,6 +1,6 @@
 ﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 {
-    partial class FormReportEditor
+    partial class For_reportEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReportEditor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(For_reportEditor));
             splitContainerMain = new SplitContainer();
             treeViewReport = new TreeView();
             imageListMain = new ImageList(components);
@@ -88,15 +88,15 @@
             imageListMain.Images.SetKeyName(16, "Texts");
             imageListMain.Images.SetKeyName(17, "Text");
             // 
-            // FormReportEditor
+            // For_reportEditor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1062, 661);
             Controls.Add(splitContainerMain);
-            Name = "FormReportEditor";
+            Name = "For_reportEditor";
             Text = "Report editor";
-            FormClosing += FormReportEditor_FormClosing;
+            FormClosing += For_reportEditor_FormClosing;
             splitContainerMain.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainerMain).EndInit();
             splitContainerMain.ResumeLayout(false);

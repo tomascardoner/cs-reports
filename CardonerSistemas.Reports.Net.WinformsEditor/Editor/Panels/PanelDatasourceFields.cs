@@ -7,8 +7,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         #region Declarations
 
-        private string mApplicationTitle;
-        private readonly Model.Report mReport;
+        private string _applicationTitle;
+        private readonly Model.Report _report;
 
         public delegate void FieldHandler(object sender, PanelDatasourceField.FieldEventArgs e);
 
@@ -22,8 +22,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         public PanelDatasourceFields(Model.Report report, string applicationTitle)
         {
             InitializeComponent();
-            mReport = report;
-            mApplicationTitle = applicationTitle;
+            _report = report;
+            _applicationTitle = applicationTitle;
             InitializeForm();
 
             ShowProperties();
@@ -40,58 +40,59 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         public void ShowProperties()
         {
-            if (mReport.Datasource is null)
+            if (_report.Datasource is null)
             {
                 return;
             }
-            labelCounter.Text = mReport.Datasource.Fields.Count switch
+            labelCounter.Text = _report.Datasource.Fields.Count switch
             {
                 0 => Properties.Resources.StringDatasourceFieldsCounterEmpty,
                 1 => Properties.Resources.StringDatasourceFieldsCounterOne,
-                _ => string.Format(Properties.Resources.StringDatasourceFieldsCounter, mReport.Datasource.Fields.Count)
+                _ => string.Format(Properties.Resources.StringDatasourceFieldsCounter, _report.Datasource.Fields.Count)
             };
         }
 
         private void Add(object sender, EventArgs e)
         {
-            if (mReport.Datasource is null)
+            if (_report.Datasource is null)
             {
                 return;
             }
-            if (mReport.Datasource.Fields.Any(f => f.Name.Trim() == Properties.Resources.StringDatasourceFieldNameNew))
+            Model.DatasourceField? datasourceField = _report.Datasource.Fields.FirstOrDefault(f => f.Name.Trim() == Properties.Resources.StringDatasourceFieldNameNew);
+            if (datasourceField is null)
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceFieldNewAlreadyExists, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                datasourceField = new Model.DatasourceField(_report.Datasource) { Name = Properties.Resources.StringDatasourceFieldNameNew };
+                _report.Datasource.Fields.Add(datasourceField);
             }
             else
             {
-                mReport.Datasource.Fields.Add(new(mReport.Datasource) { Name = Properties.Resources.StringDatasourceFieldNameNew });
+                MessageBox.Show(Properties.Resources.StringDatasourceFieldNewAlreadyExists, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             if (FieldAdded is not null)
             {
-                FieldAdded(this, new() { NameNew = Properties.Resources.StringDatasourceFieldNameNew });
+                FieldAdded(this, new() { FieldId = datasourceField.FieldId, NameNew = datasourceField.Name });
             }
         }
 
-
         private void GetFields(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(mReport.Datasource?.ConnectionString))
+            if (string.IsNullOrEmpty(_report.Datasource?.ConnectionString))
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceConnectionStringRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.Resources.StringDatasourceConnectionStringRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if (mReport.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetWithNullParametersConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            if (_report.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetWithNullParametersConfirmation, _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
                 return;
             }
-            if (MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            if (MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetConfirmation, _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
                 return;
             }
 
             // Open the datasource
             DbDataReader? dbDataReader = null;
-            Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
+            Data.Datasource.GetDatasource(_report.Datasource, ref dbDataReader);
             dbDataReader?.Close();
             if (FieldsUpdated is not null)
             {

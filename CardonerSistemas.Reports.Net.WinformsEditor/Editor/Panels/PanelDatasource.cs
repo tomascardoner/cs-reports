@@ -8,10 +8,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         #region Declarations
 
-        private const string PasswordRegExp = ";?Password=([^;]*)";
-
-        private readonly string mApplicationTitle;
-        private readonly Model.Report mReport;
+        private readonly string _applicationTitle;
+        private readonly Model.Report _report;
 
         public event EventHandler? DatasourceUpdated;
         public event EventHandler? DatasourceDeleted;
@@ -24,8 +22,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         public PanelDatasource(Model.Report report, string applicationTitle)
         {
             InitializeComponent();
-            mReport = report;
-            mApplicationTitle = applicationTitle;
+            _report = report;
+            _applicationTitle = applicationTitle;
             InitializeForm();
         }
 
@@ -85,7 +83,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         internal void ShowProperties()
         {
-            if (mReport.Datasource is null)
+            if (_report.Datasource is null)
             {
                 comboBoxProvider.SelectedIndex = -1;
                 textBoxConnectionString.Text = string.Empty;
@@ -96,10 +94,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             }
             else
             {
-                comboBoxProvider.SelectedValue = (byte)mReport.Datasource.Provider;
-                textBoxConnectionString.Text = mReport.Datasource.ConnectionString;
-                comboBoxType.SelectedValue = (short)mReport.Datasource.Type;
-                textBoxText.Text = mReport.Datasource.Text;
+                comboBoxProvider.SelectedValue = (byte)_report.Datasource.Provider;
+                textBoxConnectionString.Text = _report.Datasource.ConnectionString;
+                comboBoxType.SelectedValue = (short)_report.Datasource.Type;
+                textBoxText.Text = _report.Datasource.Text;
                 buttonDelete.Enabled = true;
                 buttonGetFields.Enabled = true;
             }
@@ -109,19 +107,19 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         {
             if (comboBoxProvider.SelectedValue is null)
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceProviderRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.Resources.StringDatasourceProviderRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 comboBoxProvider.Focus();
                 return false;
             }
             if (comboBoxType.SelectedValue is null)
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceTypeRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.Resources.StringDatasourceTypeRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 comboBoxType.Focus();
                 return false;
             }
             if (string.IsNullOrEmpty(textBoxText.Text))
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceTextRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.Resources.StringDatasourceTextRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 textBoxText.Focus();
                 return false;
             }
@@ -134,27 +132,27 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             {
                 return;
             }
-            mReport.Datasource ??= new();
+            _report.Datasource ??= new();
 #pragma warning disable CS8605 // Unboxing a possibly null value.
-            mReport.Datasource.Provider = (Model.Datasource.Providers)comboBoxProvider.SelectedValue;
+            _report.Datasource.Provider = (Model.Datasource.Providers)comboBoxProvider.SelectedValue;
 #pragma warning restore CS8605 // Unboxing a possibly null value.
             if (checkBoxConnectionStringSave.Checked)
             {
                 if (checkBoxConnectionStringSavePassword.Checked)
                 {
-                    mReport.Datasource.ConnectionString = textBoxConnectionString.Text;
+                    _report.Datasource.ConnectionString = textBoxConnectionString.Text;
                 }
                 else
                 {
-                    mReport.Datasource.ConnectionString = Regex.Replace(textBoxConnectionString.Text, PasswordRegExp, string.Empty);
+                    _report.Datasource.ConnectionString = PasswordRegex().Replace(textBoxConnectionString.Text, string.Empty);
                 }
             }
             else
             {
-                mReport.Datasource.ConnectionString = string.Empty;
+                _report.Datasource.ConnectionString = string.Empty;
             }
-            mReport.Datasource.Type = (System.Data.CommandType)(short)(comboBoxType.SelectedValue ?? System.Data.CommandType.Text);
-            mReport.Datasource.Text = textBoxText.Text;
+            _report.Datasource.Type = (System.Data.CommandType)(short)(comboBoxType.SelectedValue ?? System.Data.CommandType.Text);
+            _report.Datasource.Text = textBoxText.Text;
             buttonDelete.Enabled = true;
             buttonGetFields.Enabled = true;
             if (DatasourceUpdated is not null)
@@ -170,14 +168,14 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         private void Delete(object sender, EventArgs e)
         {
-            if (mReport.Datasource is null || MessageBox.Show(Properties.Resources.StringDatasourceDeleteConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (_report.Datasource is null || MessageBox.Show(Properties.Resources.StringDatasourceDeleteConfirmation, _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
 
-            mReport.Datasource.Parameters.Clear();
-            mReport.Datasource.Fields.Clear();
-            mReport.Datasource = null;
+            _report.Datasource.Parameters.Clear();
+            _report.Datasource.Fields.Clear();
+            _report.Datasource = null;
             ShowProperties();
             comboBoxProvider.Focus();
             if (DatasourceDeleted is not null)
@@ -192,30 +190,30 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             {
                 return;
             }
-            if (string.IsNullOrEmpty(mReport.Datasource?.ConnectionString) && string.IsNullOrEmpty(textBoxConnectionString.Text))
+            if (string.IsNullOrEmpty(_report.Datasource?.ConnectionString) && string.IsNullOrEmpty(textBoxConnectionString.Text))
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceConnectionStringRequired, mApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.Resources.StringDatasourceConnectionStringRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 textBoxConnectionString.Focus();
                 return;
             }
-            if (mReport.Datasource is null || (mReport.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetWithNullParametersConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No))
+            if (_report.Datasource is null || (_report.Datasource.Parameters.Any(p => p.Value is null) && MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetWithNullParametersConfirmation, _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No))
             {
                 return;
             }
-            if (MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetConfirmation, mApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            if (MessageBox.Show(Properties.Resources.StringDatasourceFieldsGetConfirmation, _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
                 return;
             }
 
             // Open the datasource
             DbDataReader? dbDataReader = null;
-            if (string.IsNullOrEmpty(mReport.Datasource?.ConnectionString))
+            if (string.IsNullOrEmpty(_report.Datasource?.ConnectionString))
             {
-                Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader, textBoxConnectionString.Text.Trim());
+                Data.Datasource.GetDatasource(_report.Datasource, ref dbDataReader, textBoxConnectionString.Text.Trim());
             }
             else
             {
-                Data.Datasource.GetDatasource(mReport.Datasource, ref dbDataReader);
+                Data.Datasource.GetDatasource(_report.Datasource, ref dbDataReader);
             }
             dbDataReader?.Close();
             if (FieldsUpdated is not null)
@@ -223,6 +221,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
                 FieldsUpdated(this, EventArgs.Empty);
             }
         }
+
+        [GeneratedRegex(";?Password=([^;]*)", RegexOptions.IgnoreCase)]
+        private static partial Regex PasswordRegex();
 
         #endregion Methods
 

@@ -4,11 +4,11 @@ namespace CardonerSistemas.Reports.Net.Model
 {
     public partial class Section
     {
-        private readonly Report _Report;
+        private readonly Report _report;
 
         public Section(Report report, SectionTypes type)
         {
-            _Report = report;
+            _report = report;
             Type = type;
             if (report.Sections.Count == 0)
             {
@@ -22,7 +22,7 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public Section(Report report, SectionTypes type, short sectionId)
         {
-            _Report = report;
+            _report = report;
             Type = type;
             SectionId = sectionId;
         }
@@ -30,7 +30,7 @@ namespace CardonerSistemas.Reports.Net.Model
         [JsonConstructor]
         public Section(SectionTypes type, short sectionId)
         {
-            _Report = new();
+            _report = new();
             Type = type;
             SectionId = sectionId;
         }
@@ -44,12 +44,12 @@ namespace CardonerSistemas.Reports.Net.Model
         public decimal Height { get; set; }
 
         [JsonIgnore]
-        public ICollection<Line> Lines => [.. _Report.Lines.Where(l => l.SectionId1 == SectionId || l.SectionId2 == SectionId)];
+        public ICollection<Line> Lines => [.. _report.Lines.Where(l => l.SectionId1 == SectionId || l.SectionId2 == SectionId)];
 
         [JsonIgnore]
-        public ICollection<Rectangle> Rectangles => [.. _Report.Rectangles.Where(r => r.SectionId1 == SectionId || r.SectionId2 == SectionId)];
+        public ICollection<Rectangle> Rectangles => [.. _report.Rectangles.Where(r => r.SectionId1 == SectionId || r.SectionId2 == SectionId)];
 
         [JsonIgnore]
-        public ICollection<Text> TextsNavigation => [.. _Report.Texts.Where(t => t.SectionId == SectionId)];
+        public ICollection<Text> TextsNavigation => [.. _report.Texts.Where(t => t.SectionId == SectionId)];
     }
 }
