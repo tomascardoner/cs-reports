@@ -1,8 +1,8 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor
+﻿namespace CardonerSistemas.Reports.Net
 {
-    internal static class FriendlyNames
+    public static class FriendlyNames
     {
-        internal static string GetPageSize(Model.Report.PageSizes pageSize)
+        public static string GetPageSize(Model.Report.PageSizes pageSize)
         {
             return pageSize switch
             {
@@ -49,7 +49,7 @@
             };
         }
 
-        internal static string GetPageOrientation(Model.Report.PageOrientations pageOrientation)
+        public static string GetPageOrientation(Model.Report.PageOrientations pageOrientation)
         {
             return pageOrientation switch
             {
@@ -59,7 +59,7 @@
             };
         }
 
-        internal static string GetDatasourceProvider(Model.Datasource.Providers provider)
+        public static string GetDatasourceProvider(Model.Datasource.Providers provider)
         {
             return provider switch
             {
@@ -72,7 +72,7 @@
             };
         }
 
-        internal static string GetDatasourceType(System.Data.CommandType type)
+        public static string GetDatasourceType(System.Data.CommandType type)
         {
             return type switch
             {

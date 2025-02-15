@@ -11,17 +11,7 @@
         private Model.DatasourceParameter? mDatasourceParameter;
         private readonly string _applicationTitle;
 
-        public class ParameterEventArgs : EventArgs
-        {
-            public string NameOld { get; set; } = string.Empty;
-            public string NameNew { get; set; } = string.Empty;
-            public System.Data.DbType TypeOld { get; set; }
-            public System.Data.DbType TypeNew { get; set; }
-            public object? ValueOld { get; set; }
-            public object? ValueNew { get; set; }
-        }
-
-        public delegate void ParameterHandler(object sender, ParameterEventArgs e);
+        public delegate void ParameterHandler(object sender, string parameterName);
 
         public event ParameterHandler? ParameterUpdated;
         public event ParameterHandler? ParameterDeleted;
@@ -243,12 +233,7 @@
                 MessageBox.Show(Properties.Resources.StringDatasourceParameterNameAlreadyExists, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxName.Focus();
             }
-            ParameterEventArgs parameterEventArgs = new()
-            {
-                NameOld = mDatasourceParameter.Name,
-                TypeOld = mDatasourceParameter.Type,
-                ValueOld = mDatasourceParameter.Value
-            };
+            string originalName = mDatasourceParameter.Name;
             mDatasourceParameter.Name = textBoxName.Text.Trim();
             mDatasourceParameter.Type = (System.Data.DbType)comboBoxType.SelectedValue;
             if (checkBoxValueNull.Checked)
@@ -278,10 +263,7 @@
             }
             if (ParameterUpdated is not null)
             {
-                parameterEventArgs.NameNew = mDatasourceParameter.Name;
-                parameterEventArgs.TypeNew = mDatasourceParameter.Type;
-                parameterEventArgs.ValueNew = mDatasourceParameter.Value;
-                ParameterUpdated(this, parameterEventArgs);
+                ParameterUpdated(this, originalName);
             }
         }
 
@@ -292,20 +274,14 @@
 
         private void Delete(object sender, EventArgs e)
         {
-            if (_report.Datasource is null || mDatasourceParameter is null || MessageBox.Show(string.Format(Properties.Resources.StringDatasourceParameterDeleteConfirmation, mDatasourceParameter.Name), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (_report.Datasource is null || mDatasourceParameter is null || MessageBox.Show(string.Format(Properties.Resources.StringDatasourceParameterDeleteConfirmation, mDatasourceParameter.DisplayName), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
             _report.Datasource.Parameters.Remove(mDatasourceParameter);
             if (ParameterDeleted is not null)
             {
-                ParameterEventArgs parameterEventArgs = new()
-                {
-                    NameOld = mDatasourceParameter.Name,
-                    TypeOld = mDatasourceParameter.Type,
-                    ValueOld = mDatasourceParameter.Value
-                };
-                ParameterDeleted(this, parameterEventArgs);
+                ParameterDeleted(this, mDatasourceParameter.Name);
             }
         }
 

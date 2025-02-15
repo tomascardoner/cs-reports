@@ -12,5 +12,8 @@ namespace CardonerSistemas.Reports.Net.Model
         [JsonIgnore]
         public object? Value { get; set; }
 
+        [JsonIgnore]
+        public string DisplayName => Name;
+
     }
 }

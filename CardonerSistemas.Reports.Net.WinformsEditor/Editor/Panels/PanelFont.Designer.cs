@@ -1,6 +1,6 @@
 ﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
-    partial class PanelDatasourceField
+    partial class PanelFont
     {
         /// <summary> 
         /// Required designer variable.
@@ -170,12 +170,12 @@
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += Delete;
             // 
-            // PanelDatasourceField
+            // PanelFont
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tableLayoutPanelMain);
-            Name = "PanelDatasourceField";
+            Name = "PanelFont";
             Size = new Size(700, 500);
             tableLayoutPanelMain.ResumeLayout(false);
             tableLayoutPanelMain.PerformLayout();

@@ -57,5 +57,8 @@ namespace CardonerSistemas.Reports.Net.Model
         [JsonIgnore]
         public bool IsModified { get; set; }
 
+        [JsonIgnore]
+        public string DisplayName => string.IsNullOrWhiteSpace(Name) ? Properties.Resources.StringReportNameNew : Name;
+
     }
 }

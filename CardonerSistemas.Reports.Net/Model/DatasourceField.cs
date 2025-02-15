@@ -35,5 +35,8 @@ namespace CardonerSistemas.Reports.Net.Model
         [JsonIgnore]
         public bool Verified { get; set; }
 
+        [JsonIgnore]
+        public string DisplayName => Name;
+
     }
 }

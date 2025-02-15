@@ -254,7 +254,7 @@
             tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             tableLayoutPanelButtons.RowCount = 1;
             tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
-            tableLayoutPanelButtons.Size = new Size(279, 40);
+            tableLayoutPanelButtons.Size = new Size(206, 40);
             tableLayoutPanelButtons.TabIndex = 14;
             // 
             // buttonDelete
@@ -264,9 +264,9 @@
             buttonDelete.Location = new Point(138, 5);
             buttonDelete.Margin = new Padding(5);
             buttonDelete.Name = "buttonDelete";
-            buttonDelete.Size = new Size(136, 30);
+            buttonDelete.Size = new Size(63, 30);
             buttonDelete.TabIndex = 2;
-            buttonDelete.Text = "Delete parameter";
+            buttonDelete.Text = "Delete";
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += Delete;
             // 

@@ -10,7 +10,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         private string _applicationTitle;
         private readonly Model.Report _report;
 
-        public delegate void FieldHandler(object sender, PanelDatasourceField.FieldEventArgs e);
+        public delegate void FieldHandler(object sender, short fieldId);
 
         public event FieldHandler? FieldAdded;
         public event EventHandler? FieldsUpdated;
@@ -70,7 +70,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             }
             if (FieldAdded is not null)
             {
-                FieldAdded(this, new() { FieldId = datasourceField.FieldId, NameNew = datasourceField.Name });
+                FieldAdded(this, datasourceField.FieldId);
             }
         }
 

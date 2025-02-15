@@ -67,6 +67,9 @@ namespace CardonerSistemas.Reports.Net.Model
         }
 
         [JsonIgnore]
-        public string Description => $"{Name} {Size}pt {Style}";
+        public string DisplayNameShort => Name == Properties.Resources.StringFontNameNew ? Properties.Resources.StringFontNameNew : $"{Name} {Size}pt {Style}";
+
+        [JsonIgnore]
+        public string DisplayName => $"#{FontId:00} - {DisplayNameShort}";
     }
 }

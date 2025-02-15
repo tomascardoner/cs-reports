@@ -1,4 +1,6 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
+﻿using static CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels.PanelFont;
+
+namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
     public partial class PanelReport : UserControl
     {
@@ -7,6 +9,8 @@
 
         private readonly Model.Report _report;
         private readonly string _applicationTitle;
+
+        public event EventHandler? ReportUpdated;
 
         #endregion Declarations
 
@@ -114,6 +118,11 @@
             _report.PageMarginRight = numericUpDownPageMarginRight.Value;
             _report.PageMarginBottom = numericUpDownPageMarginBottom.Value;
             _report.DetailSectionMaxRowCount = (short)numericUpDownDetailSectionMaxRowCount.Value;
+
+            if (ReportUpdated is not null)
+            {
+                ReportUpdated(this, EventArgs.Empty);
+            }
         }
 
         private void ResetChanges(object sender, EventArgs e)

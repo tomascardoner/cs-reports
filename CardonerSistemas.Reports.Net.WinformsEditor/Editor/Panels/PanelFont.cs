@@ -1,24 +1,24 @@
 ﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
-    public partial class PanelDatasourceField : UserControl
+    public partial class PanelFont : UserControl
     {
 
         #region Declarations
 
         private readonly Model.Report _report;
-        private Model.DatasourceField? _datasourceField;
+        private Model.Font? _font;
         private readonly string _applicationTitle;
 
-        public delegate void FieldHandler(object sender, short fieldId);
+        public delegate void FontHandler(object sender, short fontId);
 
-        public event FieldHandler? FieldUpdated;
-        public event FieldHandler? FieldDeleted;
+        public event FontHandler? FontUpdated;
+        public event FontHandler? FontDeleted;
 
         #endregion Declarations
 
         #region Initialization
 
-        public PanelDatasourceField(Model.Report report, string applicationTitle)
+        public PanelFont(Model.Report report, string applicationTitle)
         {
             InitializeComponent();
             _report = report;
@@ -57,22 +57,22 @@
 
         private void ShowProperties()
         {
-            if (_datasourceField is null)
+            if (_font is null)
             {
                 return;
             }
-            textBoxName.Text = _datasourceField.Name;
-            comboBoxType.SelectedValue = (int)_datasourceField.Type;
+            textBoxName.Text = _font.Name;
+            //comboBoxType.SelectedValue = (int)_font.Type;
         }
 
-        internal void ShowProperties(short fieldId)
+        internal void ShowProperties(short fontId)
         {
             if (_report.Datasource is null)
             {
                 return;
             }
-            _datasourceField = _report.Datasource.Fields.FirstOrDefault(f => f.FieldId == fieldId);
-            if (_datasourceField is null)
+            _font = _report.Fonts.FirstOrDefault(f => f.FontId == fontId);
+            if (_font is null)
             {
                 return;
             }
@@ -81,32 +81,31 @@
 
         private void ApplyChanges(object sender, EventArgs e)
         {
-            if (_datasourceField is null)
+            if (_font is null)
             {
                 return;
             }
             if (string.IsNullOrEmpty(textBoxName.Text))
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceFieldNameRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //MessageBox.Show(Properties.Resources.StringFontNameRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxName.Focus();
                 return;
             }
             if (comboBoxType.SelectedValue is null)
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceFieldTypeRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //MessageBox.Show(Properties.Resources.StringFontTypeRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 comboBoxType.Focus();
                 return;
             }
-            if (_report.Datasource is not null && _report.Datasource.Fields.Any(f => f.Name == textBoxName.Text.Trim() && f.FieldId != _datasourceField.FieldId))
+            if (_report.Datasource is not null && _report.Datasource.Fields.Any(f => f.Name == textBoxName.Text.Trim() && f.FieldId != _font.FontId))
             {
-                MessageBox.Show(Properties.Resources.StringDatasourceFieldNewAlreadyExists, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Properties.Resources.StringFontNewAlreadyExists, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxName.Focus();
             }
-            _datasourceField.Name = textBoxName.Text.Trim();
-            _datasourceField.Type = (System.Data.DbType)comboBoxType.SelectedValue;
-            if (FieldUpdated is not null)
+            _font.Name = textBoxName.Text.Trim();
+            if (FontUpdated is not null)
             {
-                FieldUpdated(this, _datasourceField.FieldId);
+                FontUpdated(this, _font.FontId);
             }
         }
 
@@ -117,14 +116,14 @@
 
         private void Delete(object sender, EventArgs e)
         {
-            if (_report.Datasource is null || _datasourceField is null || MessageBox.Show(string.Format(Properties.Resources.StringDatasourceFieldDeleteConfirmation, _datasourceField.DisplayName), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (_font is null || MessageBox.Show(string.Format(Properties.Resources.StringFontDeleteConfirmation, _font.DisplayName), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
-            _report.Datasource.Fields.Remove(_datasourceField);
-            if (FieldDeleted is not null)
+            _report.Fonts.Remove(_font);
+            if (FontDeleted is not null)
             {
-                FieldDeleted(this, _datasourceField.FieldId);
+                FontDeleted(this, _font.FontId);
             }
         }
 

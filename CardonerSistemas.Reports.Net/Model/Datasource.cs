@@ -1,4 +1,6 @@
-﻿namespace CardonerSistemas.Reports.Net.Model
+﻿using System.Text.Json.Serialization;
+
+namespace CardonerSistemas.Reports.Net.Model
 {
     public partial class Datasource
     {
@@ -24,5 +26,8 @@
             }
             return false;
         }
+
+        [JsonIgnore]
+        public string DisplayName => FriendlyNames.GetDatasourceType(Type) + (Type != System.Data.CommandType.Text ? " => " + Text : string.Empty);
     }
 }

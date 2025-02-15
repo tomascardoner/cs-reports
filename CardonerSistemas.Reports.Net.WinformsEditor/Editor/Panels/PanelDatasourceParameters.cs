@@ -8,7 +8,7 @@
         private readonly string _applicationTitle;
         private readonly Model.Report _report;
 
-        public delegate void ParameterHandler(object sender, PanelDatasourceParameter.ParameterEventArgs e);
+        public delegate void ParameterHandler(object sender, string parameterName);
 
         public event ParameterHandler? ParameterAdded;
 
@@ -67,7 +67,7 @@
             }
             if (ParameterAdded is not null)
             {
-                ParameterAdded(this, new() { NameOld = Properties.Resources.StringDatasourceParameterNameNew, NameNew = Properties.Resources.StringDatasourceParameterNameNew });
+                ParameterAdded(this, datasourceParameter.Name);
             }
         }
 

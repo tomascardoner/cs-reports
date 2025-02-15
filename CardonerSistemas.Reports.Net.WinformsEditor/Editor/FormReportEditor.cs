@@ -34,6 +34,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         private const int TreeNodeDatasourceParametersIndex = 0;
         private const int TreeNodeDatasourceFieldsIndex = 1;
 
+        private const int TreeNodeFontsIndex = 1;
+
         private readonly string _applicationTitle;
         private readonly Model.Report _report;
         private Panels.PanelReport? _panelReport;
@@ -42,6 +44,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         private Panels.PanelDatasourceParameter? _panelDatasourceParameter;
         private Panels.PanelDatasourceFields? _panelDatasourceFields;
         private Panels.PanelDatasourceField? _panelDatasourceField;
+        private Panels.PanelFonts? _panelFonts;
+        private Panels.PanelFont? _panelFont;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FilePath { get; private set; }
@@ -143,6 +147,12 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 case DatasourceFieldKey:
                     DatasourceFieldPanelShow(short.Parse(nodeInfo.Item2));
                     break;
+                case FontsKey:
+                    FontsPanelShow();
+                    break;
+                case FontKey:
+                    FontPanelShow(short.Parse(nodeInfo.Item2));
+                    break;
             }
         }
 
@@ -204,38 +214,37 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             _panelDatasourceParameter?.Hide();
             _panelDatasourceFields?.Hide();
             _panelDatasourceField?.Hide();
+            _panelFonts?.Hide();
+            _panelFont?.Hide();
         }
 
         #endregion Panel controls
 
         #region Report
 
+        private string ReportTreeNodeGetText()
+        {
+            return _report.DisplayName;
+        }
+
         private void ReportCreateNode()
         {
             Cursor = Cursors.WaitCursor;
-
             treeViewReport.SuspendLayout();
             treeViewReport.Nodes.Clear();
             if (_report.Sections is not null)
             {
                 // Root node for the report
-                TreeNode treeNodeReport = new()
-                {
-                    Text = string.IsNullOrWhiteSpace(_report.Name) ? Properties.Resources.StringReportNameNew : _report.Name,
-                    Tag = ReportKey + "@",
-                    ImageKey = ReportKey,
-                    SelectedImageKey = ReportKey
-                };
+                TreeNode treeNodeReport = AddTreeNode(ReportTreeNodeGetText(), ReportKey, string.Empty);
                 treeViewReport.Nodes.Add(treeNodeReport);
                 treeNodeReport.Expand();
 
-                DatasourceCreateNode();
-                CreateFontsNode(treeNodeReport);
+                DatasourceCreateNodes();
+                FontsCreateNodes();
                 CreateBrushesNode(treeNodeReport);
                 CreateSectionsNode(treeNodeReport);
             }
             treeViewReport.ResumeLayout();
-
             Cursor = Cursors.Default;
         }
 
@@ -248,9 +257,17 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(_panelReport);
+#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+                _panelReport.ReportUpdated += ReportUpdated;
+#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
             }
             _panelReport.ShowProperties();
             _panelReport.Show();
+        }
+
+        private void ReportUpdated(object sender, EventArgs e)
+        {
+            treeViewReport.Nodes[TreeNodeReportIndex].Text = ReportTreeNodeGetText();
         }
 
         #endregion Report
@@ -265,11 +282,11 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             }
             else
             {
-                return FriendlyNames.GetDatasourceType(_report.Datasource.Type) + (_report.Datasource.Type != System.Data.CommandType.Text ? " => " + _report.Datasource.Text : string.Empty);
+                return _report.Datasource.DisplayName;
             }
         }
 
-        private void DatasourceCreateNode()
+        private void DatasourceCreateNodes()
         {
             treeViewReport.Nodes[TreeNodeReportIndex].Nodes.Add(AddTreeNode(DatasourceTreeNodeGetText(), DatasourceKey, string.Empty));
             DatasourceParametersCreateNodes();
@@ -330,9 +347,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 return;
             }
             treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes.Add(AddTreeNode(DatasourceParametersTreeNodeGetText(), DatasourceParametersKey, string.Empty));
-            foreach (string parameterName in _report.Datasource.Parameters.Select(p => p.Name))
+            foreach (Model.DatasourceParameter parameter in _report.Datasource.Parameters.OrderBy(p => p.Name))
             {
-                DatasourceParameterCreateNode(parameterName);
+                DatasourceParameterCreateNode(parameter);
             }
         }
 
@@ -355,14 +372,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 
         #region Datasource parameter
 
-        private static string DatasourceParameterTreeNodeGetText(string parameterName)
+        private static string DatasourceParameterTreeNodeGetText(Model.DatasourceParameter parameter)
         {
-            return parameterName;
+            return parameter.DisplayName;
         }
 
-        private void DatasourceParameterCreateNode(string parameterName)
+        private TreeNode DatasourceParameterCreateNode(Model.DatasourceParameter parameter)
         {
-            treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex].Nodes.Add(AddTreeNode(DatasourceParameterTreeNodeGetText(parameterName), DatasourceParameterKey, parameterName));
+            TreeNode treeNodeDatasourceParameter = AddTreeNode(DatasourceParameterTreeNodeGetText(parameter), DatasourceParameterKey, parameter.Name);
+            treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex].Nodes.Add(treeNodeDatasourceParameter);
+            return treeNodeDatasourceParameter;
         }
 
         private void DatasourceParameterPanelShow(string parameterName)
@@ -386,20 +405,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             _panelDatasourceParameter.Show();
         }
 
-        private void DatasourceParameterUpdated(object sender, Panels.PanelDatasourceParameter.ParameterEventArgs e)
+        private void DatasourceParameterUpdated(object sender, string parameterName)
         {
+            Model.DatasourceParameter? parameter = _report.Datasource?.Parameters.FirstOrDefault(p => p.Name == parameterName);
+            if (parameter is null)
+            {
+                return;
+            }
             TreeNode treeNodeDatasourceParameters = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex];
-            TreeNode? treeNodeDatasourceParameter = GetTreeNodeByTag(treeNodeDatasourceParameters, DatasourceParameterKey, e.NameOld);
+            TreeNode? treeNodeDatasourceParameter = GetTreeNodeByTag(treeNodeDatasourceParameters, DatasourceParameterKey, parameter.Name);
             if (treeNodeDatasourceParameter is null)
             {
-                treeNodeDatasourceParameter = AddTreeNode(DatasourceParameterTreeNodeGetText(e.NameNew), DatasourceParameterKey, e.NameNew);
-                treeNodeDatasourceParameters.Nodes.Add(treeNodeDatasourceParameter);
+                treeNodeDatasourceParameter = DatasourceParameterCreateNode(parameter);
                 treeNodeDatasourceParameters.Text = DatasourceParametersTreeNodeGetText();
             }
             else
             {
-                treeNodeDatasourceParameter.Text = DatasourceParameterTreeNodeGetText(e.NameNew);
-                treeNodeDatasourceParameter.Tag = GetTreeNodeTag(DatasourceParameterKey, e.NameNew);
+                treeNodeDatasourceParameter.Text = DatasourceParameterTreeNodeGetText(parameter);
+                treeNodeDatasourceParameter.Tag = GetTreeNodeTag(DatasourceParameterKey, parameter.Name);
             }
             treeViewReport.SelectedNode = treeNodeDatasourceParameter;
             if (!treeNodeDatasourceParameter.IsVisible)
@@ -408,10 +431,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             }
         }
 
-        private void DatasourceParameterDeleted(object sender, Panels.PanelDatasourceParameter.ParameterEventArgs e)
+        private void DatasourceParameterDeleted(object sender, string parameterName)
         {
             TreeNode treeNodeDatasourceParameters = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex];
-            TreeNode? treeNodeDatasourceParameter = GetTreeNodeByTag(treeNodeDatasourceParameters, DatasourceParameterKey, e.NameOld);
+            TreeNode? treeNodeDatasourceParameter = GetTreeNodeByTag(treeNodeDatasourceParameters, DatasourceParameterKey, parameterName);
             if (treeNodeDatasourceParameter is not null)
             {
                 treeNodeDatasourceParameters.Nodes.Remove(treeNodeDatasourceParameter);
@@ -440,7 +463,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             }
             foreach (Model.DatasourceField field in _report.Datasource.Fields.OrderBy(f => f.Position))
             {
-                DatasourceFieldCreateNode(field.FieldId, field.Name);
+                DatasourceFieldCreateNode(field);
             }
         }
 
@@ -479,14 +502,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 
         #region Datasource field
 
-        private static string DatasourceFieldTreeNodeGetText(string fieldName)
+        private static string DatasourceFieldTreeNodeGetText(Model.DatasourceField field)
         {
-            return fieldName;
+            return field.DisplayName;
         }
 
-        private void DatasourceFieldCreateNode(short fieldId, string fieldName)
+        private TreeNode DatasourceFieldCreateNode(Model.DatasourceField field)
         {
-            treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceFieldsIndex].Nodes.Add(AddTreeNode(DatasourceFieldTreeNodeGetText(fieldName), DatasourceFieldKey, fieldId.ToString()));
+            TreeNode treeNodeDatasourceField = AddTreeNode(DatasourceFieldTreeNodeGetText(field), DatasourceFieldKey, field.FieldId.ToString());
+            treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceFieldsIndex].Nodes.Add(treeNodeDatasourceField);
+            return treeNodeDatasourceField;
         }
 
         private void DatasourceFieldPanelShow(short fieldId)
@@ -510,19 +535,23 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             _panelDatasourceField.Show();
         }
 
-        private void DatasourceFieldUpdated(object sender, Panels.PanelDatasourceField.FieldEventArgs e)
+        private void DatasourceFieldUpdated(object sender, short fieldId)
         {
+            Model.DatasourceField? field = _report.Datasource?.Fields.FirstOrDefault(f => f.FieldId == fieldId);
+            if (field is null)
+            {
+                return;
+            }
             TreeNode treeNodeDatasourceFields = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceFieldsIndex];
-            TreeNode? treeNodeDatasourceField = GetTreeNodeByTag(treeNodeDatasourceFields, DatasourceFieldKey, e.FieldId.ToString());
+            TreeNode? treeNodeDatasourceField = GetTreeNodeByTag(treeNodeDatasourceFields, DatasourceFieldKey, fieldId.ToString());
             if (treeNodeDatasourceField is null)
             {
-                treeNodeDatasourceField = AddTreeNode(DatasourceFieldTreeNodeGetText(e.NameNew), DatasourceFieldKey, e.FieldId.ToString());
-                treeNodeDatasourceFields.Nodes.Add(treeNodeDatasourceField);
+                treeNodeDatasourceField = DatasourceFieldCreateNode(field);
                 treeNodeDatasourceFields.Text = DatasourceFieldsTreeNodeGetText();
             }
             else
             {
-                treeNodeDatasourceField.Text = DatasourceFieldTreeNodeGetText(e.NameNew);
+                treeNodeDatasourceField.Text = DatasourceFieldTreeNodeGetText(field);
             }
             treeViewReport.SelectedNode = treeNodeDatasourceField;
             if (!treeNodeDatasourceField.IsVisible)
@@ -531,10 +560,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             }
         }
 
-        private void DatasourceFieldDeleted(object sender, Panels.PanelDatasourceField.FieldEventArgs e)
+        private void DatasourceFieldDeleted(object sender, short fieldId)
         {
             TreeNode treeNodeDatasourceFields = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceFieldsIndex];
-            TreeNode? treeNodeDatasourceField = GetTreeNodeByTag(treeNodeDatasourceFields, DatasourceFieldKey, e.FieldId.ToString());
+            TreeNode? treeNodeDatasourceField = GetTreeNodeByTag(treeNodeDatasourceFields, DatasourceFieldKey, fieldId.ToString());
             if (treeNodeDatasourceField is not null)
             {
                 treeNodeDatasourceFields.Nodes.Remove(treeNodeDatasourceField);
@@ -546,29 +575,112 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 
         #region Fonts
 
-        private void CreateFontsNode(TreeNode treeNodeParent)
+        private string FontsTreeNodeGetText()
         {
-            TreeNode treeNodeFonts = new()
+            return Properties.Resources.StringFonts + string.Format(Properties.Resources.StringNodeItemsCount, _report.Fonts.Count);
+        }
+
+        private void FontsCreateNodes()
+        {
+            if (treeViewReport.Nodes[TreeNodeReportIndex].Nodes.Count <= TreeNodeFontsIndex)
             {
-                Text = Properties.Resources.StringFonts + string.Format(Properties.Resources.StringNodeItemsCount, _report.Fonts.Count),
-                Tag = FontsKey + "@",
-                ImageKey = FontsKey,
-                SelectedImageKey = FontsKey
-            };
-            treeNodeParent.Nodes.Add(treeNodeFonts);
-            foreach (Model.Font font in _report.Fonts)
+                treeViewReport.Nodes[TreeNodeReportIndex].Nodes.Add(AddTreeNode(FontsTreeNodeGetText(), FontsKey, string.Empty));
+            }
+            foreach (Model.Font font in _report.Fonts.OrderBy(f => f.FontId))
             {
-                treeNodeFonts.Nodes.Add(new TreeNode()
-                {
-                    Text = $"#{font.FontId:00} - {font.Description}",
-                    Tag = FontKey + "@" + font.FontId,
-                    ImageKey = "Font",
-                    SelectedImageKey = "Font"
-                });
+                FontCreateNode(font);
             }
         }
 
+        private void FontsPanelShow()
+        {
+            if (_panelFonts is null)
+            {
+                _panelFonts = new(_report, _applicationTitle)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(_panelFonts);
+                _panelFonts.FontAdded += FontUpdated;
+            }
+            _panelFonts.ShowProperties();
+            _panelFonts.Show();
+        }
+
         #endregion Fonts
+
+        #region Font
+
+        private static string FontTreeNodeGetText(Model.Font font)
+        {
+            return font.DisplayName;
+        }
+
+        private TreeNode FontCreateNode(Model.Font font)
+        {
+            TreeNode treeNodeFont = AddTreeNode(FontTreeNodeGetText(font), FontKey, font.FontId.ToString());
+            treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeFontsIndex].Nodes.Add(treeNodeFont);
+            return treeNodeFont;
+        }
+
+        private void FontPanelShow(short fontId)
+        {
+            Model.Font? font = _report.Fonts.FirstOrDefault(f => f.FontId == fontId);
+            if (font is null)
+            {
+                return;
+            }
+            if (_panelFont is null)
+            {
+                _panelFont = new(_report, _applicationTitle)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(_panelFont);
+                _panelFont.FontUpdated += FontUpdated;
+                _panelFont.FontDeleted += FontDeleted;
+            }
+            _panelFont.ShowProperties(fontId);
+            _panelFont.Show();
+        }
+
+        private void FontUpdated(object sender, short fontId)
+        {
+            Model.Font? font = _report.Fonts.FirstOrDefault(f => f.FontId == fontId);
+            if (font is null)
+            {
+                return;
+            }
+            TreeNode treeNodeFonts = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeFontsIndex];
+            TreeNode? treeNodeFont = GetTreeNodeByTag(treeNodeFonts, FontKey, font.FontId.ToString());
+            if (treeNodeFont is null)
+            {
+                treeNodeFont = FontCreateNode(font);
+                treeNodeFonts.Text = FontsTreeNodeGetText();
+            }
+            else
+            {
+                treeNodeFont.Text = FontTreeNodeGetText(font);
+            }
+            treeViewReport.SelectedNode = treeNodeFont;
+            if (!treeNodeFont.IsVisible)
+            {
+                treeNodeFont.EnsureVisible();
+            }
+        }
+
+        private void FontDeleted(object sender, short fontId)
+        {
+            TreeNode treeNodeFonts = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeFontsIndex];
+            TreeNode? treeNodeFont = GetTreeNodeByTag(treeNodeFonts, FontKey, fontId.ToString());
+            if (treeNodeFont is not null)
+            {
+                treeNodeFonts.Nodes.Remove(treeNodeFont);
+                treeNodeFonts.Text = FontsTreeNodeGetText();
+            }
+        }
+
+        #endregion Font
 
         #region Brushes
 
