@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             tableLayoutPanelMain = new TableLayoutPanel();
-            labelName = new Label();
-            textBoxName = new TextBox();
-            labelType = new Label();
-            comboBoxType = new ComboBox();
+            tableLayoutPanelName = new TableLayoutPanel();
+            textBoxFont = new TextBox();
+            buttonFont = new Button();
+            labelFont = new Label();
             tableLayoutPanelButtons = new TableLayoutPanel();
             buttonApply = new Button();
             buttonReset = new Button();
             buttonDelete = new Button();
             tableLayoutPanelMain.SuspendLayout();
+            tableLayoutPanelName.SuspendLayout();
             tableLayoutPanelButtons.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,69 +49,74 @@
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanelMain.Controls.Add(labelName, 1, 1);
-            tableLayoutPanelMain.Controls.Add(textBoxName, 2, 1);
-            tableLayoutPanelMain.Controls.Add(labelType, 1, 2);
-            tableLayoutPanelMain.Controls.Add(comboBoxType, 2, 2);
-            tableLayoutPanelMain.Controls.Add(tableLayoutPanelButtons, 2, 3);
+            tableLayoutPanelMain.Controls.Add(tableLayoutPanelName, 2, 1);
+            tableLayoutPanelMain.Controls.Add(labelFont, 1, 1);
+            tableLayoutPanelMain.Controls.Add(tableLayoutPanelButtons, 2, 2);
             tableLayoutPanelMain.Dock = DockStyle.Fill;
             tableLayoutPanelMain.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanelMain.Location = new Point(0, 0);
             tableLayoutPanelMain.Name = "tableLayoutPanelMain";
-            tableLayoutPanelMain.RowCount = 5;
+            tableLayoutPanelMain.RowCount = 4;
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanelMain.RowStyles.Add(new RowStyle());
             tableLayoutPanelMain.RowStyles.Add(new RowStyle());
-            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanelMain.Size = new Size(700, 500);
             tableLayoutPanelMain.TabIndex = 0;
             // 
-            // labelName
+            // tableLayoutPanelName
             // 
-            labelName.AutoSize = true;
-            labelName.Dock = DockStyle.Fill;
-            labelName.Location = new Point(121, 193);
-            labelName.Name = "labelName";
-            labelName.Size = new Size(52, 33);
-            labelName.TabIndex = 0;
-            labelName.Text = "Name:";
-            labelName.TextAlign = ContentAlignment.MiddleLeft;
+            tableLayoutPanelName.AutoSize = true;
+            tableLayoutPanelName.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanelName.ColumnCount = 2;
+            tableLayoutPanelName.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanelName.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelName.Controls.Add(textBoxFont, 0, 0);
+            tableLayoutPanelName.Controls.Add(buttonFont, 1, 0);
+            tableLayoutPanelName.Dock = DockStyle.Fill;
+            tableLayoutPanelName.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
+            tableLayoutPanelName.Location = new Point(147, 209);
+            tableLayoutPanelName.Margin = new Padding(0);
+            tableLayoutPanelName.Name = "tableLayoutPanelName";
+            tableLayoutPanelName.RowCount = 1;
+            tableLayoutPanelName.RowStyles.Add(new RowStyle());
+            tableLayoutPanelName.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanelName.Size = new Size(452, 36);
+            tableLayoutPanelName.TabIndex = 5;
             // 
-            // textBoxName
+            // textBoxFont
             // 
-            textBoxName.Dock = DockStyle.Fill;
-            textBoxName.Location = new Point(179, 196);
-            textBoxName.MaxLength = 128;
-            textBoxName.Name = "textBoxName";
-            textBoxName.Size = new Size(400, 27);
-            textBoxName.TabIndex = 1;
-            textBoxName.Enter += ControlFocusEnter;
+            textBoxFont.Dock = DockStyle.Fill;
+            textBoxFont.Location = new Point(3, 3);
+            textBoxFont.Name = "textBoxFont";
+            textBoxFont.ReadOnly = true;
+            textBoxFont.Size = new Size(410, 27);
+            textBoxFont.TabIndex = 0;
+            textBoxFont.Enter += ControlFocusEnter;
             // 
-            // labelType
+            // buttonFont
             // 
-            labelType.AutoSize = true;
-            labelType.Dock = DockStyle.Fill;
-            labelType.Location = new Point(121, 226);
-            labelType.Name = "labelType";
-            labelType.Size = new Size(52, 34);
-            labelType.TabIndex = 2;
-            labelType.Text = "Type:";
-            labelType.TextAlign = ContentAlignment.MiddleLeft;
+            buttonFont.AutoSize = true;
+            buttonFont.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonFont.Location = new Point(419, 3);
+            buttonFont.Name = "buttonFont";
+            buttonFont.Size = new Size(30, 30);
+            buttonFont.TabIndex = 1;
+            buttonFont.Text = "…";
+            buttonFont.UseVisualStyleBackColor = true;
+            buttonFont.Click += SelectFont;
             // 
-            // comboBoxType
+            // labelFont
             // 
-            comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxType.FormattingEnabled = true;
-            comboBoxType.Location = new Point(179, 229);
-            comboBoxType.Name = "comboBoxType";
-            comboBoxType.Size = new Size(250, 28);
-            comboBoxType.TabIndex = 3;
+            labelFont.AutoSize = true;
+            labelFont.Dock = DockStyle.Fill;
+            labelFont.Location = new Point(103, 209);
+            labelFont.Name = "labelFont";
+            labelFont.Size = new Size(41, 36);
+            labelFont.TabIndex = 0;
+            labelFont.Text = "Font:";
+            labelFont.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanelButtons
             // 
@@ -124,7 +130,7 @@
             tableLayoutPanelButtons.Controls.Add(buttonReset, 1, 0);
             tableLayoutPanelButtons.Controls.Add(buttonDelete, 2, 0);
             tableLayoutPanelButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            tableLayoutPanelButtons.Location = new Point(179, 263);
+            tableLayoutPanelButtons.Location = new Point(150, 248);
             tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             tableLayoutPanelButtons.RowCount = 1;
             tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
@@ -179,6 +185,8 @@
             Size = new Size(700, 500);
             tableLayoutPanelMain.ResumeLayout(false);
             tableLayoutPanelMain.PerformLayout();
+            tableLayoutPanelName.ResumeLayout(false);
+            tableLayoutPanelName.PerformLayout();
             tableLayoutPanelButtons.ResumeLayout(false);
             tableLayoutPanelButtons.PerformLayout();
             ResumeLayout(false);
@@ -187,13 +195,13 @@
         #endregion
 
         private TableLayoutPanel tableLayoutPanelMain;
-        private Label labelName;
-        private TextBox textBoxName;
-        private Label labelType;
-        private ComboBox comboBoxType;
+        private Label labelFont;
         private TableLayoutPanel tableLayoutPanelButtons;
         private Button buttonApply;
         private Button buttonReset;
         private Button buttonDelete;
+        private TableLayoutPanel tableLayoutPanelName;
+        private TextBox textBoxFont;
+        private Button buttonFont;
     }
 }

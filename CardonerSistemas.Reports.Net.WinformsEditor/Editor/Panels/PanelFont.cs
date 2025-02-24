@@ -23,20 +23,6 @@
             InitializeComponent();
             _report = report;
             _applicationTitle = applicationTitle;
-
-            FillTypes();
-        }
-
-        private void FillTypes()
-        {
-            comboBoxType.ValueMember = "Key";
-            comboBoxType.DisplayMember = "Value";
-            ICollection<KeyValuePair<int, string>> items = [];
-            foreach (System.Data.DbType dbType in Enum.GetValues<System.Data.DbType>())
-            {
-                items.Add(new KeyValuePair<int, string>((int)dbType, dbType.ToString()));
-            }
-            comboBoxType.DataSource = items;
         }
 
         #endregion Initialization
@@ -51,6 +37,16 @@
             }
         }
 
+        private void SelectFont(object sender, EventArgs e)
+        {
+            using FontDialog fontDialog = new();
+            if (fontDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                textBoxFont.Tag = fontDialog.Font;
+                textBoxFont.Text = $"{fontDialog.Font.Name} {fontDialog.Font.Size}pt {fontDialog.Font.Style}";
+            }
+        }
+
         #endregion Events
 
         #region Methods
@@ -61,8 +57,7 @@
             {
                 return;
             }
-            textBoxName.Text = _font.Name;
-            //comboBoxType.SelectedValue = (int)_font.Type;
+            textBoxFont.Text = _font.DisplayNameShort;
         }
 
         internal void ShowProperties(short fontId)
@@ -81,28 +76,17 @@
 
         private void ApplyChanges(object sender, EventArgs e)
         {
-            if (_font is null)
+            if (_font is null || textBoxFont.Tag is null)
             {
                 return;
             }
-            if (string.IsNullOrEmpty(textBoxName.Text))
-            {
-                //MessageBox.Show(Properties.Resources.StringFontNameRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBoxName.Focus();
-                return;
-            }
-            if (comboBoxType.SelectedValue is null)
-            {
-                //MessageBox.Show(Properties.Resources.StringFontTypeRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                comboBoxType.Focus();
-                return;
-            }
-            if (_report.Datasource is not null && _report.Datasource.Fields.Any(f => f.Name == textBoxName.Text.Trim() && f.FieldId != _font.FontId))
-            {
-                MessageBox.Show(Properties.Resources.StringFontNewAlreadyExists, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBoxName.Focus();
-            }
-            _font.Name = textBoxName.Text.Trim();
+            Font font = (Font)textBoxFont.Tag;
+            _font.Name = font.Name;
+            _font.Size = (decimal)font.Size;
+            _font.Bold = font.Bold;
+            _font.Italic = font.Italic;
+            _font.Underline = font.Underline;
+            _font.Strikethrough = font.Strikeout;
             if (FontUpdated is not null)
             {
                 FontUpdated(this, _font.FontId);
