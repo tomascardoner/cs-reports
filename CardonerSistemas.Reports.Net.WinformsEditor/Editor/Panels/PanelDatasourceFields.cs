@@ -7,7 +7,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         #region Declarations
 
-        private string _applicationTitle;
+        private readonly string _applicationTitle;
         private readonly Model.Report _report;
 
         public delegate void FieldHandler(object sender, short fieldId);

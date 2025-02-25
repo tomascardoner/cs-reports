@@ -61,6 +61,15 @@ namespace CardonerSistemas.Reports.Net.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color.
+        /// </summary>
+        internal static string StringColor {
+            get {
+                return ResourceManager.GetString("StringColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DataSet.
         /// </summary>
         internal static string StringDatasourceProvidersDataSet {

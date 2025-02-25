@@ -79,11 +79,38 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Color.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
-        internal static string StringColor {
+        internal static string StringBrushesAdd {
             get {
-                return ResourceManager.GetString("StringColor", resourceCulture);
+                return ResourceManager.GetString("StringBrushesAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are {0} brushes..
+        /// </summary>
+        internal static string StringBrushesCounter {
+            get {
+                return ResourceManager.GetString("StringBrushesCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are not brushes..
+        /// </summary>
+        internal static string StringBrushesCounterEmpty {
+            get {
+                return ResourceManager.GetString("StringBrushesCounterEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is one brush..
+        /// </summary>
+        internal static string StringBrushesCounterOne {
+            get {
+                return ResourceManager.GetString("StringBrushesCounterOne", resourceCulture);
             }
         }
         
@@ -338,6 +365,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
                 return ResourceManager.GetString("StringDatasourceProviderRequired", resourceCulture);
             }
         }
+        
         /// <summary>
         ///   Looks up a localized string similar to Must specify text..
         /// </summary>
@@ -355,7 +383,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
                 return ResourceManager.GetString("StringDatasourceTypeRequired", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Report files (*.csrpt)|*.csrpt|All files (*.*)|*.*.
         /// </summary>
@@ -500,7 +528,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
                 return ResourceManager.GetString("StringReportPageOrientationRequired", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Must specify page size..
         /// </summary>
@@ -509,7 +537,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
                 return ResourceManager.GetString("StringReportPageSizeRequired", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>

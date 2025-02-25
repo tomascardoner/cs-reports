@@ -93,43 +93,43 @@
                 switch ((System.Data.DbType)comboBoxType.SelectedValue)
                 {
                     case System.Data.DbType.Byte:
-                        numericUpDownValueNumeric.Minimum = Byte.MinValue;
-                        numericUpDownValueNumeric.Maximum = Byte.MaxValue;
+                        numericUpDownValueNumeric.Minimum = byte.MinValue;
+                        numericUpDownValueNumeric.Maximum = byte.MaxValue;
                         break;
                     case System.Data.DbType.Currency:
                     case System.Data.DbType.Decimal:
                     case System.Data.DbType.Double:
                     case System.Data.DbType.Single:
-                        numericUpDownValueNumeric.Minimum = Decimal.MinValue;
-                        numericUpDownValueNumeric.Maximum = Decimal.MaxValue;
+                        numericUpDownValueNumeric.Minimum = decimal.MinValue;
+                        numericUpDownValueNumeric.Maximum = decimal.MaxValue;
                         break;
                     case System.Data.DbType.Int16:
-                        numericUpDownValueNumeric.Minimum = Int16.MinValue;
-                        numericUpDownValueNumeric.Maximum = Int16.MaxValue;
+                        numericUpDownValueNumeric.Minimum = short.MinValue;
+                        numericUpDownValueNumeric.Maximum = short.MaxValue;
                         break;
                     case System.Data.DbType.Int32:
-                        numericUpDownValueNumeric.Minimum = Int32.MinValue;
-                        numericUpDownValueNumeric.Maximum = Int32.MaxValue;
+                        numericUpDownValueNumeric.Minimum = int.MinValue;
+                        numericUpDownValueNumeric.Maximum = int.MaxValue;
                         break;
                     case System.Data.DbType.Int64:
-                        numericUpDownValueNumeric.Minimum = Int64.MinValue;
-                        numericUpDownValueNumeric.Maximum = Int64.MaxValue;
+                        numericUpDownValueNumeric.Minimum = long.MinValue;
+                        numericUpDownValueNumeric.Maximum = long.MaxValue;
                         break;
                     case System.Data.DbType.SByte:
-                        numericUpDownValueNumeric.Minimum = SByte.MinValue;
-                        numericUpDownValueNumeric.Maximum = SByte.MaxValue;
+                        numericUpDownValueNumeric.Minimum = sbyte.MinValue;
+                        numericUpDownValueNumeric.Maximum = sbyte.MaxValue;
                         break;
                     case System.Data.DbType.UInt16:
-                        numericUpDownValueNumeric.Minimum = UInt16.MinValue;
-                        numericUpDownValueNumeric.Maximum = UInt16.MaxValue;
+                        numericUpDownValueNumeric.Minimum = ushort.MinValue;
+                        numericUpDownValueNumeric.Maximum = ushort.MaxValue;
                         break;
                     case System.Data.DbType.UInt32:
-                        numericUpDownValueNumeric.Minimum = UInt32.MinValue;
-                        numericUpDownValueNumeric.Maximum = UInt32.MaxValue;
+                        numericUpDownValueNumeric.Minimum = uint.MinValue;
+                        numericUpDownValueNumeric.Maximum = uint.MaxValue;
                         break;
                     case System.Data.DbType.UInt64:
-                        numericUpDownValueNumeric.Minimum = UInt64.MinValue;
-                        numericUpDownValueNumeric.Maximum = UInt64.MaxValue;
+                        numericUpDownValueNumeric.Minimum = ulong.MinValue;
+                        numericUpDownValueNumeric.Maximum = ulong.MaxValue;
                         break;
                     default:
                         break;

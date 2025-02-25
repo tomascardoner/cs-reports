@@ -5,12 +5,12 @@
 
         #region Declarations
 
-        private string _applicationTitle;
+        private readonly string _applicationTitle;
         private readonly Model.Report _report;
 
-        public delegate void FieldHandler(object sender, short fontId);
+        public delegate void FontHandler(object sender, short fontId);
 
-        public event FieldHandler? FontAdded;
+        public event FontHandler? FontAdded;
 
         #endregion Declarations
 

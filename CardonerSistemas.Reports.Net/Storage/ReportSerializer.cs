@@ -4,12 +4,14 @@ namespace CardonerSistemas.Reports.Net.Storage
 {
     internal static class ReportSerializer
     {
+        private static JsonSerializerOptions options = new() { WriteIndented = true };
+
         internal static bool Serialize(Model.Report report, out string reportSerial)
         {
             try
             {
 
-                reportSerial = JsonSerializer.Serialize(report, new JsonSerializerOptions() { WriteIndented = true });
+                reportSerial = JsonSerializer.Serialize(report, options);
                 return true;
             }
             catch (Exception)

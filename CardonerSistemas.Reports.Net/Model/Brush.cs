@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Drawing;
+using System.Text.Json.Serialization;
 using PdfSharp.Drawing;
 
 namespace CardonerSistemas.Reports.Net.Model
@@ -75,5 +76,11 @@ namespace CardonerSistemas.Reports.Net.Model
         public decimal? RadiusStart { get; set; }
 
         public decimal? RadiusEnd { get; set; }
+
+        [JsonIgnore]
+        public string DisplayNameShort => $"{Type} - {Properties.Resources.StringColor}: {Color1Hex}";
+
+        [JsonIgnore]
+        public string DisplayName => $"#{BrushId:00} - {DisplayNameShort}";
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 {
-    partial class For_reportEditor
+    partial class FormReportEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(For_reportEditor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReportEditor));
             splitContainerMain = new SplitContainer();
             treeViewReport = new TreeView();
             imageListMain = new ImageList(components);

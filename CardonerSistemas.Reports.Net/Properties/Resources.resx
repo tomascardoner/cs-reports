@@ -279,4 +279,7 @@
   <data name="StringFontNameNew" xml:space="preserve">
     <value>* New *</value>
   </data>
+  <data name="StringColor" xml:space="preserve">
+    <value>Color</value>
+  </data>
 </root>

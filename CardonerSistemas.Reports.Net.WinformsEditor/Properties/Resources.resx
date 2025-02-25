@@ -120,9 +120,6 @@
   <data name="StringBrushes" xml:space="preserve">
     <value>Brushes</value>
   </data>
-  <data name="StringColor" xml:space="preserve">
-    <value>Color</value>
-  </data>
   <data name="StringDatasource" xml:space="preserve">
     <value>Datasource</value>
   </data>
@@ -268,13 +265,25 @@ Do you want to save them?</value>
   <data name="StringFontsCounterEmpty" xml:space="preserve">
     <value>There are not fonts.</value>
   </data>
+  <data name="StringBrushesCounterEmpty" xml:space="preserve">
+    <value>There are not brushes.</value>
+  </data>
   <data name="StringFontsCounterOne" xml:space="preserve">
     <value>There is one font.</value>
+  </data>
+  <data name="StringBrushesCounterOne" xml:space="preserve">
+    <value>There is one brush.</value>
   </data>
   <data name="StringFontsCounter" xml:space="preserve">
     <value>There are {0} fonts.</value>
   </data>
+  <data name="StringBrushesCounter" xml:space="preserve">
+    <value>There are {0} brushes.</value>
+  </data>
   <data name="StringFontNameNew" xml:space="preserve">
     <value>* New *</value>
+  </data>
+  <data name="StringBrushesAdd" xml:space="preserve">
+    <value>Add</value>
   </data>
 </root>
