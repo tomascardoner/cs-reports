@@ -7,6 +7,8 @@ namespace CardonerSistemas.Reports.Net.Engine
 {
     public static class Pdf
     {
+        public const int UnitsDecimalPlaces = 2;
+
         private static PdfDocument? Create(Model.Report report, string language = "")
         {
             ArgumentNullException.ThrowIfNull(report);

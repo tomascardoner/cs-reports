@@ -1,6 +1,4 @@
-﻿using static CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels.PanelFont;
-
-namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
+﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
     public partial class PanelReport : UserControl
     {
@@ -26,6 +24,11 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         private void InitializeForm()
         {
+            numericUpDownPageMarginTop.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            numericUpDownPageMarginLeft.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            numericUpDownPageMarginRight.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            numericUpDownPageMarginBottom.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+
             buttonApply.Text = Properties.Resources.StringApplyChanges;
             buttonReset.Text = Properties.Resources.StringResetChanges;
 
@@ -37,10 +40,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         {
             comboBoxPageSize.ValueMember = "Key";
             comboBoxPageSize.DisplayMember = "Value";
-            ICollection<KeyValuePair<byte, string>> items = [];
+            ICollection<KeyValuePair<int, string>> items = [];
             foreach (Model.Report.PageSizes pageSize in Enum.GetValues<Model.Report.PageSizes>())
             {
-                items.Add(new KeyValuePair<byte, string>((byte)pageSize, FriendlyNames.GetPageSize(pageSize)));
+                items.Add(new KeyValuePair<int, string>((int)pageSize, FriendlyNames.GetPageSize(pageSize)));
             }
             comboBoxPageSize.DataSource = items;
         }
@@ -49,10 +52,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         {
             comboBoxPageOrientation.ValueMember = "Key";
             comboBoxPageOrientation.DisplayMember = "Value";
-            ICollection<KeyValuePair<byte, string>> items = [];
+            ICollection<KeyValuePair<int, string>> items = [];
             foreach (Model.Report.PageOrientations pageOrientation in Enum.GetValues<Model.Report.PageOrientations>())
             {
-                items.Add(new KeyValuePair<byte, string>((byte)pageOrientation, FriendlyNames.GetPageOrientation(pageOrientation)));
+                items.Add(new KeyValuePair<int, string>((int)pageOrientation, FriendlyNames.GetPageOrientation(pageOrientation)));
             }
             comboBoxPageOrientation.DataSource = items;
         }
@@ -82,8 +85,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             textBoxReportId.Text = _report.ReportId.ToString();
             textBoxName.Text = _report.Name;
             textBoxTemplateFileName.Text = _report.TemplateFileName;
-            comboBoxPageSize.SelectedValue = (byte)_report.PageSize;
-            comboBoxPageOrientation.SelectedValue = (byte)_report.PageOrientation;
+            comboBoxPageSize.SelectedValue = (int)_report.PageSize;
+            comboBoxPageOrientation.SelectedValue = (int)_report.PageOrientation;
             numericUpDownPageMarginTop.Value = _report.PageMarginTop;
             numericUpDownPageMarginLeft.Value = _report.PageMarginLeft;
             numericUpDownPageMarginRight.Value = _report.PageMarginRight;

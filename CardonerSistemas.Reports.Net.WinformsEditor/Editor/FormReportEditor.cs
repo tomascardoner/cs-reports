@@ -48,6 +48,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         private Panels.PanelFonts? _panelFonts;
         private Panels.PanelFont? _panelFont;
         private Panels.PanelBrushes? _panelBrushes;
+        private Panels.PanelBrush? _panelBrush;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FilePath { get; private set; }
@@ -158,6 +159,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 case BrushesKey:
                     BrushesPanelShow();
                     break;
+                case BrushKey:
+                    BrushPanelShow(short.Parse(nodeInfo.Item2));
+                    break;
             }
         }
 
@@ -222,6 +226,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             _panelFonts?.Hide();
             _panelFont?.Hide();
             _panelBrushes?.Hide();
+            _panelBrush?.Hide();
         }
 
         #endregion Panel controls
@@ -738,26 +743,26 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             return treeNodeBrush;
         }
 
-        //private void BrushPanelShow(short brushId)
-        //{
-        //    Model.Brush? brush = _report.Brushs.FirstOrDefault(f => f.BrushId == brushId);
-        //    if (brush is null)
-        //    {
-        //        return;
-        //    }
-        //    if (_panelBrush is null)
-        //    {
-        //        _panelBrush = new(_report, _applicationTitle)
-        //        {
-        //            Dock = DockStyle.Fill
-        //        };
-        //        splitContainerMain.Panel2.Controls.Add(_panelBrush);
-        //        _panelBrush.BrushUpdated += BrushUpdated;
-        //        _panelBrush.BrushDeleted += BrushDeleted;
-        //    }
-        //    _panelBrush.ShowProperties(brushId);
-        //    _panelBrush.Show();
-        //}
+        private void BrushPanelShow(short brushId)
+        {
+            Model.Brush? brush = _report.Brushes.FirstOrDefault(b => b.BrushId == brushId);
+            if (brush is null)
+            {
+                return;
+            }
+            if (_panelBrush is null)
+            {
+                _panelBrush = new(_report, _applicationTitle)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(_panelBrush);
+                _panelBrush.BrushUpdated += BrushUpdated;
+                _panelBrush.BrushDeleted += BrushDeleted;
+            }
+            _panelBrush.ShowProperties(brushId);
+            _panelBrush.Show();
+        }
 
         private void BrushUpdated(object sender, short brushId)
         {
@@ -784,16 +789,16 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             }
         }
 
-        //private void BrushDeleted(object sender, short brushId)
-        //{
-        //    TreeNode treeNodeBrushs = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeBrushsIndex];
-        //    TreeNode? treeNodeBrush = GetTreeNodeByTag(treeNodeBrushs, BrushKey, brushId.ToString());
-        //    if (treeNodeBrush is not null)
-        //    {
-        //        treeNodeBrushs.Nodes.Remove(treeNodeBrush);
-        //        treeNodeBrushs.Text = BrushsTreeNodeGetText();
-        //    }
-        //}
+        private void BrushDeleted(object sender, short brushId)
+        {
+            TreeNode treeNodeBrushs = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeBrushesIndex];
+            TreeNode? treeNodeBrush = GetTreeNodeByTag(treeNodeBrushs, BrushKey, brushId.ToString());
+            if (treeNodeBrush is not null)
+            {
+                treeNodeBrushs.Nodes.Remove(treeNodeBrush);
+                treeNodeBrushs.Text = BrushesTreeNodeGetText();
+            }
+        }
 
         #endregion Brush
 

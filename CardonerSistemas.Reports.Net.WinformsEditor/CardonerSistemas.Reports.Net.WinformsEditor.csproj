@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Editor\Panels\PanelBrush.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Editor\Panels\PanelFont.cs">
       <SubType>UserControl</SubType>
     </Compile>

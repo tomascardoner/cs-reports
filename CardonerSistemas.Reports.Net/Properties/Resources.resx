@@ -282,4 +282,25 @@
   <data name="StringColor" xml:space="preserve">
     <value>Color</value>
   </data>
+  <data name="StringBrushLinearGradientModeHorizontal" xml:space="preserve">
+    <value>Horizontal</value>
+  </data>
+  <data name="StringBrushLinearGradientModeVertical" xml:space="preserve">
+    <value>Vertical</value>
+  </data>
+  <data name="StringBrushLinearGradientModeForwardDiagonal" xml:space="preserve">
+    <value>Forward diagonal</value>
+  </data>
+  <data name="StringBrushLinearGradientModeBackwardDiagonal" xml:space="preserve">
+    <value>Backward diagonal</value>
+  </data>
+  <data name="StringBrushTypeSolid" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="StringBrushTypeLinealGradient" xml:space="preserve">
+    <value>Linear gradient</value>
+  </data>
+  <data name="StringBrushTypeRadialGradient" xml:space="preserve">
+    <value>Radial gradient</value>
+  </data>
 </root>

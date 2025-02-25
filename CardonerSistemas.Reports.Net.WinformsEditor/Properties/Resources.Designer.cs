@@ -70,6 +70,33 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must specify color 1..
+        /// </summary>
+        internal static string StringBrushColor1Required {
+            get {
+                return ResourceManager.GetString("StringBrushColor1Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify color 2..
+        /// </summary>
+        internal static string StringBrushColor2Required {
+            get {
+                return ResourceManager.GetString("StringBrushColor2Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the brush &apos;{0}&apos;?.
+        /// </summary>
+        internal static string StringBrushDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("StringBrushDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brushes.
         /// </summary>
         internal static string StringBrushes {
@@ -111,6 +138,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringBrushesCounterOne {
             get {
                 return ResourceManager.GetString("StringBrushesCounterOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify gradient mode..
+        /// </summary>
+        internal static string StringBrushLiearGradientModeRequired {
+            get {
+                return ResourceManager.GetString("StringBrushLiearGradientModeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify type..
+        /// </summary>
+        internal static string StringBrushTypeRequired {
+            get {
+                return ResourceManager.GetString("StringBrushTypeRequired", resourceCulture);
             }
         }
         

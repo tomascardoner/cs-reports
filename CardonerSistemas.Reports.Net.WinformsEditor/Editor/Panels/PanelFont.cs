@@ -62,15 +62,7 @@
 
         internal void ShowProperties(short fontId)
         {
-            if (_report.Datasource is null)
-            {
-                return;
-            }
             _font = _report.Fonts.FirstOrDefault(f => f.FontId == fontId);
-            if (_font is null)
-            {
-                return;
-            }
             ShowProperties();
         }
 

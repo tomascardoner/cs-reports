@@ -5,7 +5,7 @@
         //
         // Summary:
         //     Specifies type of the SubSuperScript.
-        public enum SubSuperScripts : byte
+        public enum SubSuperScripts
         {
             //
             // Summary:

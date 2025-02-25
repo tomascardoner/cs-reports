@@ -2,7 +2,7 @@
 {
     public partial class Brush
     {
-        public enum BrushTypes : byte
+        public enum BrushTypes
         {
             Solid,
             LinealGradient,

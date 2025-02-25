@@ -2,7 +2,7 @@
 {
     public partial class Value
     {
-        public enum Types : byte
+        public enum Types
         {
             Text,
             Integer,

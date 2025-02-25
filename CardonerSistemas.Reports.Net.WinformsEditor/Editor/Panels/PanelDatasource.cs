@@ -40,10 +40,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         {
             comboBoxProvider.ValueMember = "Key";
             comboBoxProvider.DisplayMember = "Value";
-            ICollection<KeyValuePair<byte, string>> items = [];
+            ICollection<KeyValuePair<int, string>> items = [];
             foreach (Model.Datasource.Providers provider in Enum.GetValues<Model.Datasource.Providers>())
             {
-                items.Add(new KeyValuePair<byte, string>((byte)provider, FriendlyNames.GetDatasourceProvider(provider)));
+                items.Add(new KeyValuePair<int, string>((int)provider, FriendlyNames.GetDatasourceProvider(provider)));
             }
             comboBoxProvider.DataSource = items;
         }
@@ -52,10 +52,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         {
             comboBoxType.ValueMember = "Key";
             comboBoxType.DisplayMember = "Value";
-            ICollection<KeyValuePair<short, string>> items = [];
+            ICollection<KeyValuePair<int, string>> items = [];
             foreach (System.Data.CommandType datasourceType in Enum.GetValues<System.Data.CommandType>())
             {
-                items.Add(new KeyValuePair<short, string>((short)datasourceType, FriendlyNames.GetDatasourceType(datasourceType)));
+                items.Add(new KeyValuePair<int, string>((int)datasourceType, FriendlyNames.GetDatasourceType(datasourceType)));
             }
             comboBoxType.DataSource = items;
         }
@@ -94,9 +94,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             }
             else
             {
-                comboBoxProvider.SelectedValue = (byte)_report.Datasource.Provider;
+                comboBoxProvider.SelectedValue = (int)_report.Datasource.Provider;
                 textBoxConnectionString.Text = _report.Datasource.ConnectionString;
-                comboBoxType.SelectedValue = (short)_report.Datasource.Type;
+                comboBoxType.SelectedValue = (int)_report.Datasource.Type;
                 textBoxText.Text = _report.Datasource.Text;
                 buttonDelete.Enabled = true;
                 buttonGetFields.Enabled = true;
@@ -151,7 +151,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             {
                 _report.Datasource.ConnectionString = string.Empty;
             }
-            _report.Datasource.Type = (System.Data.CommandType)(short)(comboBoxType.SelectedValue ?? System.Data.CommandType.Text);
+            _report.Datasource.Type = (System.Data.CommandType)(int)(comboBoxType.SelectedValue ?? System.Data.CommandType.Text);
             _report.Datasource.Text = textBoxText.Text;
             buttonDelete.Enabled = true;
             buttonGetFields.Enabled = true;

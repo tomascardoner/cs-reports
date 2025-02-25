@@ -72,10 +72,6 @@
                 return;
             }
             _datasourceField = _report.Datasource.Fields.FirstOrDefault(f => f.FieldId == fieldId);
-            if (_datasourceField is null)
-            {
-                return;
-            }
             ShowProperties();
         }
 

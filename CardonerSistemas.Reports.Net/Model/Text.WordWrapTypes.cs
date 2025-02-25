@@ -2,7 +2,7 @@
 {
     public partial class Text
     {
-        public enum WordWrapTypes : byte
+        public enum WordWrapTypes
         {
             //
             // Summary:

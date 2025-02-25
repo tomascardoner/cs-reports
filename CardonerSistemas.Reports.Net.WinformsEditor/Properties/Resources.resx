@@ -232,6 +232,9 @@ Do you want to save them?</value>
   <data name="StringFontDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the font '{0}'?</value>
   </data>
+  <data name="StringBrushDeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete the brush '{0}'?</value>
+  </data>
   <data name="StringDatasourceFieldDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the datasource field named '{0}'?</value>
   </data>
@@ -255,6 +258,15 @@ Do you want to save them?</value>
   </data>
   <data name="StringDatasourceFieldTypeRequired" xml:space="preserve">
     <value>Must specify type.</value>
+  </data>
+  <data name="StringBrushTypeRequired" xml:space="preserve">
+    <value>Must specify type.</value>
+  </data>
+  <data name="StringBrushColor1Required" xml:space="preserve">
+    <value>Must specify color 1.</value>
+  </data>
+  <data name="StringBrushColor2Required" xml:space="preserve">
+    <value>Must specify color 2.</value>
   </data>
   <data name="StringDatasourceFieldsGetConfirmation" xml:space="preserve">
     <value>Do you want to refresh the fields of the datasource?</value>
@@ -285,5 +297,8 @@ Do you want to save them?</value>
   </data>
   <data name="StringBrushesAdd" xml:space="preserve">
     <value>Add</value>
+  </data>
+  <data name="StringBrushLiearGradientModeRequired" xml:space="preserve">
+    <value>Must specify gradient mode.</value>
   </data>
 </root>

@@ -5,7 +5,7 @@
         //
         // Summary:
         //     Specifies the type of horizontal text alignment.
-        public enum HorizontalAlignments : byte
+        public enum HorizontalAlignments
         {
             //
             // Summary:

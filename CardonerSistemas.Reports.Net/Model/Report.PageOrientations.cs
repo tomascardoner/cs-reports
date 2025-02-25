@@ -2,7 +2,7 @@
 {
     public partial class Report
     {
-        public enum PageOrientations : byte
+        public enum PageOrientations
         {
             Portrait,
             Landscape

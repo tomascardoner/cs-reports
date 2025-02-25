@@ -8,7 +8,7 @@
         private const int DecimalPlaces = 4;
 
         private readonly Model.Report _report;
-        private Model.DatasourceParameter? mDatasourceParameter;
+        private Model.DatasourceParameter? _datasourceParameter;
         private readonly string _applicationTitle;
 
         public delegate void ParameterHandler(object sender, string parameterName);
@@ -159,14 +159,14 @@
 
         private void ShowProperties()
         {
-            if (mDatasourceParameter is null)
+            if (_datasourceParameter is null)
             {
                 return;
             }
-            textBoxName.Text = mDatasourceParameter.Name;
-            comboBoxType.SelectedValue = (int)mDatasourceParameter.Type;
-            checkBoxValueNull.Checked = mDatasourceParameter.Value is null;
-            if (mDatasourceParameter.Value is null)
+            textBoxName.Text = _datasourceParameter.Name;
+            comboBoxType.SelectedValue = (int)_datasourceParameter.Type;
+            checkBoxValueNull.Checked = _datasourceParameter.Value is null;
+            if (_datasourceParameter.Value is null)
             {
                 textBoxValueText.Text = string.Empty;
                 numericUpDownValueNumeric.Value = 0;
@@ -178,19 +178,19 @@
                 switch (GetValueTypeFromType((System.Data.DbType)comboBoxType.SelectedValue))
                 {
                     case Model.Value.Types.Text:
-                        textBoxValueText.Text = (string)mDatasourceParameter.Value;
+                        textBoxValueText.Text = (string)_datasourceParameter.Value;
                         break;
                     case Model.Value.Types.Integer:
-                        numericUpDownValueNumeric.Value = (int)mDatasourceParameter.Value;
+                        numericUpDownValueNumeric.Value = (int)_datasourceParameter.Value;
                         break;
                     case Model.Value.Types.Decimal:
-                        numericUpDownValueNumeric.Value = (decimal)mDatasourceParameter.Value;
+                        numericUpDownValueNumeric.Value = (decimal)_datasourceParameter.Value;
                         break;
                     case Model.Value.Types.DateTime:
-                        dateTimePickerValueDateTime.Value = (DateTime)mDatasourceParameter.Value;
+                        dateTimePickerValueDateTime.Value = (DateTime)_datasourceParameter.Value;
                         break;
                     case Model.Value.Types.YesNo:
-                        checkBoxValueYesNo.Checked = (bool)mDatasourceParameter.Value;
+                        checkBoxValueYesNo.Checked = (bool)_datasourceParameter.Value;
                         break;
                 }
             }
@@ -202,17 +202,13 @@
             {
                 return;
             }
-            mDatasourceParameter = _report.Datasource.Parameters.FirstOrDefault(p => p.Name == parameterName);
-            if (mDatasourceParameter is null)
-            {
-                return;
-            }
+            _datasourceParameter = _report.Datasource.Parameters.FirstOrDefault(p => p.Name == parameterName);
             ShowProperties();
         }
 
         private void ApplyChanges(object sender, EventArgs e)
         {
-            if (mDatasourceParameter is null)
+            if (_datasourceParameter is null)
             {
                 return;
             }
@@ -228,36 +224,36 @@
                 comboBoxType.Focus();
                 return;
             }
-            if (mDatasourceParameter.Name != textBoxName.Text.Trim() && _report.Datasource is not null && _report.Datasource.Parameters.Any(p => p.Name == textBoxName.Text.Trim()))
+            if (_datasourceParameter.Name != textBoxName.Text.Trim() && _report.Datasource is not null && _report.Datasource.Parameters.Any(p => p.Name == textBoxName.Text.Trim()))
             {
                 MessageBox.Show(Properties.Resources.StringDatasourceParameterNameAlreadyExists, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxName.Focus();
             }
-            string originalName = mDatasourceParameter.Name;
-            mDatasourceParameter.Name = textBoxName.Text.Trim();
-            mDatasourceParameter.Type = (System.Data.DbType)comboBoxType.SelectedValue;
+            string originalName = _datasourceParameter.Name;
+            _datasourceParameter.Name = textBoxName.Text.Trim();
+            _datasourceParameter.Type = (System.Data.DbType)comboBoxType.SelectedValue;
             if (checkBoxValueNull.Checked)
             {
-                mDatasourceParameter.Value = null;
+                _datasourceParameter.Value = null;
             }
             else
             {
                 switch (GetValueTypeFromType((System.Data.DbType)comboBoxType.SelectedValue))
                 {
                     case Model.Value.Types.Text:
-                        mDatasourceParameter.Value = textBoxValueText.Text;
+                        _datasourceParameter.Value = textBoxValueText.Text;
                         break;
                     case Model.Value.Types.Integer:
-                        mDatasourceParameter.Value = (int)numericUpDownValueNumeric.Value;
+                        _datasourceParameter.Value = (int)numericUpDownValueNumeric.Value;
                         break;
                     case Model.Value.Types.Decimal:
-                        mDatasourceParameter.Value = numericUpDownValueNumeric.Value;
+                        _datasourceParameter.Value = numericUpDownValueNumeric.Value;
                         break;
                     case Model.Value.Types.DateTime:
-                        mDatasourceParameter.Value = dateTimePickerValueDateTime.Value;
+                        _datasourceParameter.Value = dateTimePickerValueDateTime.Value;
                         break;
                     case Model.Value.Types.YesNo:
-                        mDatasourceParameter.Value = checkBoxValueYesNo.Checked;
+                        _datasourceParameter.Value = checkBoxValueYesNo.Checked;
                         break;
                 }
             }
@@ -274,14 +270,14 @@
 
         private void Delete(object sender, EventArgs e)
         {
-            if (_report.Datasource is null || mDatasourceParameter is null || MessageBox.Show(string.Format(Properties.Resources.StringDatasourceParameterDeleteConfirmation, mDatasourceParameter.DisplayName), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (_report.Datasource is null || _datasourceParameter is null || MessageBox.Show(string.Format(Properties.Resources.StringDatasourceParameterDeleteConfirmation, _datasourceParameter.DisplayName), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
-            _report.Datasource.Parameters.Remove(mDatasourceParameter);
+            _report.Datasource.Parameters.Remove(_datasourceParameter);
             if (ParameterDeleted is not null)
             {
-                ParameterDeleted(this, mDatasourceParameter.Name);
+                ParameterDeleted(this, _datasourceParameter.Name);
             }
         }
 

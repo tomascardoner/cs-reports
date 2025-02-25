@@ -61,6 +61,69 @@ namespace CardonerSistemas.Reports.Net.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backward diagonal.
+        /// </summary>
+        internal static string StringBrushLinearGradientModeBackwardDiagonal {
+            get {
+                return ResourceManager.GetString("StringBrushLinearGradientModeBackwardDiagonal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forward diagonal.
+        /// </summary>
+        internal static string StringBrushLinearGradientModeForwardDiagonal {
+            get {
+                return ResourceManager.GetString("StringBrushLinearGradientModeForwardDiagonal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horizontal.
+        /// </summary>
+        internal static string StringBrushLinearGradientModeHorizontal {
+            get {
+                return ResourceManager.GetString("StringBrushLinearGradientModeHorizontal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vertical.
+        /// </summary>
+        internal static string StringBrushLinearGradientModeVertical {
+            get {
+                return ResourceManager.GetString("StringBrushLinearGradientModeVertical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linear gradient.
+        /// </summary>
+        internal static string StringBrushTypeLinealGradient {
+            get {
+                return ResourceManager.GetString("StringBrushTypeLinealGradient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Radial gradient.
+        /// </summary>
+        internal static string StringBrushTypeRadialGradient {
+            get {
+                return ResourceManager.GetString("StringBrushTypeRadialGradient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solid.
+        /// </summary>
+        internal static string StringBrushTypeSolid {
+            get {
+                return ResourceManager.GetString("StringBrushTypeSolid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color.
         /// </summary>
         internal static string StringColor {

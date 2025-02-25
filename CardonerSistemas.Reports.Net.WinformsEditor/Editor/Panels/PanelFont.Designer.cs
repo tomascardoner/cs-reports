@@ -83,7 +83,7 @@
             tableLayoutPanelName.RowStyles.Add(new RowStyle());
             tableLayoutPanelName.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanelName.Size = new Size(452, 36);
-            tableLayoutPanelName.TabIndex = 5;
+            tableLayoutPanelName.TabIndex = 1;
             // 
             // textBoxFont
             // 
@@ -135,7 +135,7 @@
             tableLayoutPanelButtons.RowCount = 1;
             tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
             tableLayoutPanelButtons.Size = new Size(206, 40);
-            tableLayoutPanelButtons.TabIndex = 4;
+            tableLayoutPanelButtons.TabIndex = 2;
             // 
             // buttonApply
             // 

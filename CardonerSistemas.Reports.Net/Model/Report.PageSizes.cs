@@ -2,7 +2,7 @@
 {
     public partial class Report
     {
-        public enum PageSizes : byte
+        public enum PageSizes
         {
             //
             // Summary:

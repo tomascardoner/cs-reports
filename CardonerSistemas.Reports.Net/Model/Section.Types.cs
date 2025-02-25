@@ -2,7 +2,7 @@
 {
     public partial class Section
     {
-        public enum SectionTypes : byte
+        public enum SectionTypes
         {
             ReportHeader,
             PageHeader,

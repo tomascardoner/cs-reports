@@ -5,7 +5,7 @@
         //
         // Summary:
         //     Specifies the type of Vertical alignment.
-        public enum VerticalAlignments : byte
+        public enum VerticalAlignments
         {
             //
             // Summary:

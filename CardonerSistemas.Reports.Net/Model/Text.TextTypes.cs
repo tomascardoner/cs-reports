@@ -2,7 +2,7 @@
 {
     public partial class Text
     {
-        public enum TextTypes : byte
+        public enum TextTypes
         {
             Static,
             DatasourceField,

@@ -1,4 +1,6 @@
-﻿namespace CardonerSistemas.Reports.Net
+﻿using PdfSharp.Drawing;
+
+namespace CardonerSistemas.Reports.Net
 {
     public static class FriendlyNames
     {
@@ -79,6 +81,29 @@
                 System.Data.CommandType.Text => Properties.Resources.StringDatasourceTypeText,
                 System.Data.CommandType.StoredProcedure => Properties.Resources.StringDatasourceTypeStoredProcedure,
                 System.Data.CommandType.TableDirect => Properties.Resources.StringDatasourceTypeTableDirect,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
+
+        public static string GetBrushType(Model.Brush.BrushTypes type)
+        {
+            return type switch
+            {
+                Model.Brush.BrushTypes.Solid => Properties.Resources.StringBrushTypeSolid,
+                Model.Brush.BrushTypes.LinealGradient => Properties.Resources.StringBrushTypeLinealGradient,
+                Model.Brush.BrushTypes.RadialGradient => Properties.Resources.StringBrushTypeRadialGradient,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
+
+        public static string GetBrushLinearGradientMode(XLinearGradientMode mode)
+        {
+            return mode switch
+            {
+                XLinearGradientMode.Horizontal => Properties.Resources.StringBrushLinearGradientModeHorizontal,
+                XLinearGradientMode.Vertical => Properties.Resources.StringBrushLinearGradientModeVertical,
+                XLinearGradientMode.ForwardDiagonal => Properties.Resources.StringBrushLinearGradientModeForwardDiagonal,
+                XLinearGradientMode.BackwardDiagonal => Properties.Resources.StringBrushLinearGradientModeBackwardDiagonal,
                 _ => Properties.Resources.StringUndefined
             };
         }
