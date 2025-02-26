@@ -223,7 +223,7 @@ Do you want to save them?</value>
   <data name="StringDatasourceFieldNameNew" xml:space="preserve">
     <value>* New *</value>
   </data>
-  <data name="StringNodeItemsCount" xml:space="preserve">
+  <data name="StringTreeNodeItemsCount" xml:space="preserve">
     <value> - (count: {0})</value>
   </data>
   <data name="StringDatasourceDeleteConfirmation" xml:space="preserve">
@@ -280,8 +280,14 @@ Do you want to save them?</value>
   <data name="StringFontsAdd" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="StringTextsAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="StringFontsCounterEmpty" xml:space="preserve">
     <value>There are not fonts.</value>
+  </data>
+  <data name="StringLinesCounterEmpty" xml:space="preserve">
+    <value>There are not lines.</value>
   </data>
   <data name="StringSectionsCounterEmpty" xml:space="preserve">
     <value>There are not sections.</value>
@@ -289,8 +295,17 @@ Do you want to save them?</value>
   <data name="StringBrushesCounterEmpty" xml:space="preserve">
     <value>There are not brushes.</value>
   </data>
+  <data name="StringRectanglesCounterEmpty" xml:space="preserve">
+    <value>There are not rectangles.</value>
+  </data>
   <data name="StringFontsCounterOne" xml:space="preserve">
     <value>There is one font.</value>
+  </data>
+  <data name="StringTextsCounterOne" xml:space="preserve">
+    <value>There is one text.</value>
+  </data>
+  <data name="StringLinesCounterOne" xml:space="preserve">
+    <value>There is one line.</value>
   </data>
   <data name="StringSectionsCounterOne" xml:space="preserve">
     <value>There is one section.</value>
@@ -298,8 +313,14 @@ Do you want to save them?</value>
   <data name="StringBrushesCounterOne" xml:space="preserve">
     <value>There is one brush.</value>
   </data>
+  <data name="StringRectanglesCounterOne" xml:space="preserve">
+    <value>There is one rectangle.</value>
+  </data>
   <data name="StringFontsCounter" xml:space="preserve">
     <value>There are {0} fonts.</value>
+  </data>
+  <data name="StringLinesCounter" xml:space="preserve">
+    <value>There are {0} lines.</value>
   </data>
   <data name="StringSectionsCounter" xml:space="preserve">
     <value>There are {0} sections.</value>
@@ -307,10 +328,16 @@ Do you want to save them?</value>
   <data name="StringBrushesCounter" xml:space="preserve">
     <value>There are {0} brushes.</value>
   </data>
+  <data name="StringRectanglesCounter" xml:space="preserve">
+    <value>There are {0} rectangles.</value>
+  </data>
   <data name="StringFontNameNew" xml:space="preserve">
     <value>* New *</value>
   </data>
   <data name="StringBrushesAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="StringRectanglesAdd" xml:space="preserve">
     <value>Add</value>
   </data>
   <data name="StringBrushLiearGradientModeRequired" xml:space="preserve">
@@ -328,6 +355,12 @@ Do you want to save them?</value>
   <data name="StringFontsDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="StringTextsDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="StringLinesDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="StringBrushesDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -339,5 +372,14 @@ Do you want to save them?</value>
   </data>
   <data name="StringSectionsDelete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="StringLinesAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="StringTextsCounterEmpty" xml:space="preserve">
+    <value>There are not texts.</value>
+  </data>
+  <data name="StringTextsCounter" xml:space="preserve">
+    <value>There are {0} texts.</value>
   </data>
 </root>

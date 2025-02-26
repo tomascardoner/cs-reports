@@ -1,5 +1,7 @@
 ﻿using System.Text.Json.Serialization;
+using CardonerSistemas.Reports.Net.Engine;
 using PdfSharp.Drawing;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CardonerSistemas.Reports.Net.Model
 {
@@ -98,5 +100,8 @@ namespace CardonerSistemas.Reports.Net.Model
 
         [JsonIgnore]
         public Font? Font => _report.Fonts.FirstOrDefault(f => f.FontId == FontId);
+
+        [JsonIgnore]
+        public string DisplayName => $"#{TextId:00} - {TextType} => {Value}";
     }
 }

@@ -574,11 +574,47 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  - (count: {0}).
+        ///   Looks up a localized string similar to Add.
         /// </summary>
-        internal static string StringNodeItemsCount {
+        internal static string StringLinesAdd {
             get {
-                return ResourceManager.GetString("StringNodeItemsCount", resourceCulture);
+                return ResourceManager.GetString("StringLinesAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are {0} lines..
+        /// </summary>
+        internal static string StringLinesCounter {
+            get {
+                return ResourceManager.GetString("StringLinesCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are not lines..
+        /// </summary>
+        internal static string StringLinesCounterEmpty {
+            get {
+                return ResourceManager.GetString("StringLinesCounterEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is one line..
+        /// </summary>
+        internal static string StringLinesCounterOne {
+            get {
+                return ResourceManager.GetString("StringLinesCounterOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string StringLinesDelete {
+            get {
+                return ResourceManager.GetString("StringLinesDelete", resourceCulture);
             }
         }
         
@@ -588,6 +624,42 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringRectangles {
             get {
                 return ResourceManager.GetString("StringRectangles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string StringRectanglesAdd {
+            get {
+                return ResourceManager.GetString("StringRectanglesAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are {0} rectangles..
+        /// </summary>
+        internal static string StringRectanglesCounter {
+            get {
+                return ResourceManager.GetString("StringRectanglesCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are not rectangles..
+        /// </summary>
+        internal static string StringRectanglesCounterEmpty {
+            get {
+                return ResourceManager.GetString("StringRectanglesCounterEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is one rectangle..
+        /// </summary>
+        internal static string StringRectanglesCounterOne {
+            get {
+                return ResourceManager.GetString("StringRectanglesCounterOne", resourceCulture);
             }
         }
         
@@ -724,6 +796,60 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringTexts {
             get {
                 return ResourceManager.GetString("StringTexts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string StringTextsAdd {
+            get {
+                return ResourceManager.GetString("StringTextsAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are {0} texts..
+        /// </summary>
+        internal static string StringTextsCounter {
+            get {
+                return ResourceManager.GetString("StringTextsCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are not texts..
+        /// </summary>
+        internal static string StringTextsCounterEmpty {
+            get {
+                return ResourceManager.GetString("StringTextsCounterEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is one text..
+        /// </summary>
+        internal static string StringTextsCounterOne {
+            get {
+                return ResourceManager.GetString("StringTextsCounterOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string StringTextsDelete {
+            get {
+                return ResourceManager.GetString("StringTextsDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  - (count: {0}).
+        /// </summary>
+        internal static string StringTreeNodeItemsCount {
+            get {
+                return ResourceManager.GetString("StringTreeNodeItemsCount", resourceCulture);
             }
         }
     }

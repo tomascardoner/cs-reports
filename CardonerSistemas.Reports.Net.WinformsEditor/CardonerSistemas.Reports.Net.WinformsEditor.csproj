@@ -33,6 +33,15 @@
     <Compile Update="Editor\Panels\PanelBrush.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Editor\Panels\PanelTexts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Editor\Panels\PanelRectangles.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Editor\Panels\PanelLines.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Editor\Panels\PanelSection.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using CardonerSistemas.Reports.Net.Engine;
 using PdfSharp.Drawing;
 
 namespace CardonerSistemas.Reports.Net.Model
@@ -68,5 +69,8 @@ namespace CardonerSistemas.Reports.Net.Model
 
         [JsonIgnore]
         public Section? Section2 => _report.Sections.FirstOrDefault(s => s.SectionId == SectionId2);
+
+        [JsonIgnore]
+        public string DisplayName => $"#{RectangleId:00}";
     }
 }

@@ -49,5 +49,7 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public decimal PositionY2 { get; set; }
 
+        [JsonIgnore]
+        public string DisplayName => $"#{LineId:00}";
     }
 }
