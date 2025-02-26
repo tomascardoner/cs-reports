@@ -31,6 +31,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         {
             buttonApply.Text = Properties.Resources.StringApplyChanges;
             buttonReset.Text = Properties.Resources.StringResetChanges;
+            buttonDelete.Text = Properties.Resources.StringDatasourceDelete;
+            buttonGetFields.Text = Properties.Resources.StringDatasourceFieldsGet;
 
             FillProviders();
             FillTypes();

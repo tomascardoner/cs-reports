@@ -232,7 +232,7 @@
             numericUpDownPageMarginTop.Location = new Point(268, 231);
             numericUpDownPageMarginTop.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPageMarginTop.Name = "numericUpDownPageMarginTop";
-            numericUpDownPageMarginTop.Size = new Size(72, 27);
+            numericUpDownPageMarginTop.Size = new Size(80, 27);
             numericUpDownPageMarginTop.TabIndex = 11;
             numericUpDownPageMarginTop.TextAlign = HorizontalAlignment.Right;
             numericUpDownPageMarginTop.Enter += ControlFocusEnter;
@@ -254,7 +254,7 @@
             numericUpDownPageMarginLeft.Location = new Point(268, 264);
             numericUpDownPageMarginLeft.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPageMarginLeft.Name = "numericUpDownPageMarginLeft";
-            numericUpDownPageMarginLeft.Size = new Size(72, 27);
+            numericUpDownPageMarginLeft.Size = new Size(80, 27);
             numericUpDownPageMarginLeft.TabIndex = 13;
             numericUpDownPageMarginLeft.TextAlign = HorizontalAlignment.Right;
             numericUpDownPageMarginLeft.Enter += ControlFocusEnter;
@@ -276,7 +276,7 @@
             numericUpDownPageMarginRight.Location = new Point(268, 297);
             numericUpDownPageMarginRight.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPageMarginRight.Name = "numericUpDownPageMarginRight";
-            numericUpDownPageMarginRight.Size = new Size(72, 27);
+            numericUpDownPageMarginRight.Size = new Size(80, 27);
             numericUpDownPageMarginRight.TabIndex = 15;
             numericUpDownPageMarginRight.TextAlign = HorizontalAlignment.Right;
             numericUpDownPageMarginRight.Enter += ControlFocusEnter;
@@ -298,7 +298,7 @@
             numericUpDownPageMarginBottom.Location = new Point(268, 330);
             numericUpDownPageMarginBottom.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPageMarginBottom.Name = "numericUpDownPageMarginBottom";
-            numericUpDownPageMarginBottom.Size = new Size(72, 27);
+            numericUpDownPageMarginBottom.Size = new Size(80, 27);
             numericUpDownPageMarginBottom.TabIndex = 17;
             numericUpDownPageMarginBottom.TextAlign = HorizontalAlignment.Right;
             numericUpDownPageMarginBottom.Enter += ControlFocusEnter;
@@ -319,7 +319,7 @@
             numericUpDownDetailSectionMaxRowCount.Location = new Point(268, 363);
             numericUpDownDetailSectionMaxRowCount.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
             numericUpDownDetailSectionMaxRowCount.Name = "numericUpDownDetailSectionMaxRowCount";
-            numericUpDownDetailSectionMaxRowCount.Size = new Size(54, 27);
+            numericUpDownDetailSectionMaxRowCount.Size = new Size(60, 27);
             numericUpDownDetailSectionMaxRowCount.TabIndex = 19;
             numericUpDownDetailSectionMaxRowCount.TextAlign = HorizontalAlignment.Right;
             numericUpDownDetailSectionMaxRowCount.Enter += ControlFocusEnter;

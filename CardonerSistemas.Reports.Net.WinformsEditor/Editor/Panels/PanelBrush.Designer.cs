@@ -124,7 +124,7 @@
             numericUpDownRadiusStart.Location = new Point(289, 333);
             numericUpDownRadiusStart.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownRadiusStart.Name = "numericUpDownRadiusStart";
-            numericUpDownRadiusStart.Size = new Size(72, 27);
+            numericUpDownRadiusStart.Size = new Size(80, 27);
             numericUpDownRadiusStart.TabIndex = 17;
             numericUpDownRadiusStart.TextAlign = HorizontalAlignment.Right;
             numericUpDownRadiusStart.Enter += ControlFocusEnter;
@@ -135,7 +135,7 @@
             numericUpDownRadiusEnd.Location = new Point(289, 366);
             numericUpDownRadiusEnd.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownRadiusEnd.Name = "numericUpDownRadiusEnd";
-            numericUpDownRadiusEnd.Size = new Size(72, 27);
+            numericUpDownRadiusEnd.Size = new Size(80, 27);
             numericUpDownRadiusEnd.TabIndex = 19;
             numericUpDownRadiusEnd.TextAlign = HorizontalAlignment.Right;
             numericUpDownRadiusEnd.Enter += ControlFocusEnter;
@@ -188,7 +188,7 @@
             numericUpDownPositionY2.Location = new Point(289, 266);
             numericUpDownPositionY2.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionY2.Name = "numericUpDownPositionY2";
-            numericUpDownPositionY2.Size = new Size(72, 27);
+            numericUpDownPositionY2.Size = new Size(80, 27);
             numericUpDownPositionY2.TabIndex = 13;
             numericUpDownPositionY2.TextAlign = HorizontalAlignment.Right;
             numericUpDownPositionY2.Enter += ControlFocusEnter;
@@ -199,7 +199,7 @@
             numericUpDownPositionX2.Location = new Point(289, 233);
             numericUpDownPositionX2.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionX2.Name = "numericUpDownPositionX2";
-            numericUpDownPositionX2.Size = new Size(72, 27);
+            numericUpDownPositionX2.Size = new Size(80, 27);
             numericUpDownPositionX2.TabIndex = 11;
             numericUpDownPositionX2.TextAlign = HorizontalAlignment.Right;
             numericUpDownPositionX2.Enter += ControlFocusEnter;
@@ -210,7 +210,7 @@
             numericUpDownPositionY1.Location = new Point(289, 200);
             numericUpDownPositionY1.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionY1.Name = "numericUpDownPositionY1";
-            numericUpDownPositionY1.Size = new Size(72, 27);
+            numericUpDownPositionY1.Size = new Size(80, 27);
             numericUpDownPositionY1.TabIndex = 9;
             numericUpDownPositionY1.TextAlign = HorizontalAlignment.Right;
             numericUpDownPositionY1.Enter += ControlFocusEnter;
@@ -221,7 +221,7 @@
             numericUpDownPositionX1.Location = new Point(289, 167);
             numericUpDownPositionX1.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionX1.Name = "numericUpDownPositionX1";
-            numericUpDownPositionX1.Size = new Size(72, 27);
+            numericUpDownPositionX1.Size = new Size(80, 27);
             numericUpDownPositionX1.TabIndex = 7;
             numericUpDownPositionX1.TextAlign = HorizontalAlignment.Right;
             numericUpDownPositionX1.Enter += ControlFocusEnter;
@@ -478,7 +478,6 @@
 
         private TableLayoutPanel tableLayoutPanelMain;
         private Label labelType;
-        private TextBox textBoxName;
         private Label labelColor1;
         private ComboBox comboBoxType;
         private Label labelColor2;

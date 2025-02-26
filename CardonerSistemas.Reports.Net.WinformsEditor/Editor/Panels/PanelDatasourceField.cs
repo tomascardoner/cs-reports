@@ -23,6 +23,14 @@
             InitializeComponent();
             _report = report;
             _applicationTitle = applicationTitle;
+            InitializeForm();
+        }
+
+        private void InitializeForm()
+        {
+            buttonApply.Text = Properties.Resources.StringApplyChanges;
+            buttonReset.Text = Properties.Resources.StringResetChanges;
+            buttonDelete.Text = Properties.Resources.StringDatasourceFieldsDelete;
 
             FillTypes();
         }

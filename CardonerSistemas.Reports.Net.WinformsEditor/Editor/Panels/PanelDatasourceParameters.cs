@@ -22,8 +22,6 @@
             _report = report;
             _applicationTitle = applicationTitle;
             InitializeForm();
-
-            ShowProperties();
         }
 
         private void InitializeForm()

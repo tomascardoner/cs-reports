@@ -181,6 +181,9 @@ Do you want to save them?</value>
   <data name="StringDatasourceTypeRequired" xml:space="preserve">
     <value>Must specify type.</value>
   </data>
+  <data name="StringSectionTypeRequired" xml:space="preserve">
+    <value>Must specify type.</value>
+  </data>
   <data name="StringDatasourceParameters" xml:space="preserve">
     <value>Parameters</value>
   </data>
@@ -231,6 +234,9 @@ Do you want to save them?</value>
   </data>
   <data name="StringFontDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the font '{0}'?</value>
+  </data>
+  <data name="StringSectionDeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete the section '{0}'?</value>
   </data>
   <data name="StringBrushDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the brush '{0}'?</value>
@@ -312,5 +318,26 @@ Do you want to save them?</value>
   </data>
   <data name="StringSectionsAdd" xml:space="preserve">
     <value>Add</value>
+  </data>
+  <data name="StringDatasourceParametersDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="StringDatasourceFieldsDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="StringFontsDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="StringBrushesDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="StringDatasourceDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="StringDatasourceFieldsGet" xml:space="preserve">
+    <value>Get fields</value>
+  </data>
+  <data name="StringSectionsDelete" xml:space="preserve">
+    <value>Delete</value>
   </data>
 </root>

@@ -51,6 +51,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         private Panels.PanelBrushes? _panelBrushes;
         private Panels.PanelBrush? _panelBrush;
         private Panels.PanelSections? _panelSections;
+        private Panels.PanelSection? _panelSection;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FilePath { get; private set; }
@@ -167,6 +168,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 case SectionsKey:
                     SectionsPanelShow();
                     break;
+                case SectionKey:
+                    SectionPanelShow(short.Parse(nodeInfo.Item2));
+                    break;
             }
         }
 
@@ -233,6 +237,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             _panelBrushes?.Hide();
             _panelBrush?.Hide();
             _panelSections?.Hide();
+            _panelSection?.Hide();
         }
 
         #endregion Panel controls
@@ -862,26 +867,26 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             return treeNodeSection;
         }
 
-        //private void SectionPanelShow(short sectionId)
-        //{
-        //    Model.Section? section = _report.Sections.FirstOrDefault(b => b.SectionId == sectionId);
-        //    if (section is null)
-        //    {
-        //        return;
-        //    }
-        //    if (_panelSection is null)
-        //    {
-        //        _panelSection = new(_report, _applicationTitle)
-        //        {
-        //            Dock = DockStyle.Fill
-        //        };
-        //        splitContainerMain.Panel2.Controls.Add(_panelSection);
-        //        _panelSection.SectionUpdated += SectionUpdated;
-        //        _panelSection.SectionDeleted += SectionDeleted;
-        //    }
-        //    _panelSection.ShowProperties(sectionId);
-        //    _panelSection.Show();
-        //}
+        private void SectionPanelShow(short sectionId)
+        {
+            Model.Section? section = _report.Sections.FirstOrDefault(s => s.SectionId == sectionId);
+            if (section is null)
+            {
+                return;
+            }
+            if (_panelSection is null)
+            {
+                _panelSection = new(_report, _applicationTitle)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(_panelSection);
+                _panelSection.SectionUpdated += SectionUpdated;
+                _panelSection.SectionDeleted += SectionDeleted;
+            }
+            _panelSection.ShowProperties(sectionId);
+            _panelSection.Show();
+        }
 
         private void SectionUpdated(object sender, short sectionId)
         {

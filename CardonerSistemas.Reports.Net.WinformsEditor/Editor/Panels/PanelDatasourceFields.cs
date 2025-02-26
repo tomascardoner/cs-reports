@@ -25,8 +25,6 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             _report = report;
             _applicationTitle = applicationTitle;
             InitializeForm();
-
-            ShowProperties();
         }
 
         private void InitializeForm()

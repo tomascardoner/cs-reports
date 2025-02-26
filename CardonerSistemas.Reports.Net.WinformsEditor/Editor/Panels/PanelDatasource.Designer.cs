@@ -231,7 +231,7 @@
             tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             tableLayoutPanelButtons.RowCount = 1;
             tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
-            tableLayoutPanelButtons.Size = new Size(375, 40);
+            tableLayoutPanelButtons.Size = new Size(298, 40);
             tableLayoutPanelButtons.TabIndex = 8;
             // 
             // buttonApply
@@ -267,9 +267,9 @@
             buttonDelete.Location = new Point(138, 5);
             buttonDelete.Margin = new Padding(5);
             buttonDelete.Name = "buttonDelete";
-            buttonDelete.Size = new Size(140, 30);
+            buttonDelete.Size = new Size(63, 30);
             buttonDelete.TabIndex = 2;
-            buttonDelete.Text = "Delete datasource";
+            buttonDelete.Text = "Delete";
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += Delete;
             // 
@@ -277,7 +277,7 @@
             // 
             buttonGetFields.AutoSize = true;
             buttonGetFields.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonGetFields.Location = new Point(288, 5);
+            buttonGetFields.Location = new Point(211, 5);
             buttonGetFields.Margin = new Padding(5);
             buttonGetFields.Name = "buttonGetFields";
             buttonGetFields.Size = new Size(82, 30);

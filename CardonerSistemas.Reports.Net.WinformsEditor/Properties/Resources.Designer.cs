@@ -142,6 +142,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string StringBrushesDelete {
+            get {
+                return ResourceManager.GetString("StringBrushesDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must specify gradient mode..
         /// </summary>
         internal static string StringBrushLiearGradientModeRequired {
@@ -174,6 +183,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringDatasourceConnectionStringRequired {
             get {
                 return ResourceManager.GetString("StringDatasourceConnectionStringRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string StringDatasourceDelete {
+            get {
+                return ResourceManager.GetString("StringDatasourceDelete", resourceCulture);
             }
         }
         
@@ -273,6 +291,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringDatasourceFieldsCounterOne {
             get {
                 return ResourceManager.GetString("StringDatasourceFieldsCounterOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string StringDatasourceFieldsDelete {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldsDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get fields.
+        /// </summary>
+        internal static string StringDatasourceFieldsGet {
+            get {
+                return ResourceManager.GetString("StringDatasourceFieldsGet", resourceCulture);
             }
         }
         
@@ -394,6 +430,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string StringDatasourceParametersDelete {
+            get {
+                return ResourceManager.GetString("StringDatasourceParametersDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must specify type..
         /// </summary>
         internal static string StringDatasourceParameterTypeRequired {
@@ -511,6 +556,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string StringFontsDelete {
+            get {
+                return ResourceManager.GetString("StringFontsDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lines.
         /// </summary>
         internal static string StringLines {
@@ -593,6 +647,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the section &apos;{0}&apos;?.
+        /// </summary>
+        internal static string StringSectionDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("StringSectionDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sections.
         /// </summary>
         internal static string StringSections {
@@ -634,6 +697,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringSectionsCounterOne {
             get {
                 return ResourceManager.GetString("StringSectionsCounterOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string StringSectionsDelete {
+            get {
+                return ResourceManager.GetString("StringSectionsDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify type..
+        /// </summary>
+        internal static string StringSectionTypeRequired {
+            get {
+                return ResourceManager.GetString("StringSectionTypeRequired", resourceCulture);
             }
         }
         

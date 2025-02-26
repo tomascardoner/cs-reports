@@ -26,9 +26,6 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             _report = report;
             _applicationTitle = applicationTitle;
             InitializeForm();
-
-            FillTypes();
-            FillLinearGradientModes();
         }
 
         private void InitializeForm()
@@ -39,6 +36,13 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             numericUpDownPositionY2.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
             numericUpDownRadiusStart.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
             numericUpDownRadiusEnd.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+
+            buttonApply.Text = Properties.Resources.StringApplyChanges;
+            buttonReset.Text = Properties.Resources.StringResetChanges;
+            buttonDelete.Text = Properties.Resources.StringBrushesDelete;
+
+            FillTypes();
+            FillLinearGradientModes();
         }
 
         private void FillTypes()
