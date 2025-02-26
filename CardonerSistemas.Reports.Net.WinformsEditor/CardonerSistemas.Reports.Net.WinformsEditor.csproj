@@ -42,6 +42,9 @@
     <Compile Update="Editor\Panels\PanelBrushes.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Editor\Panels\PanelSections.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Editor\Panels\PanelFonts.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -610,6 +610,69 @@ namespace CardonerSistemas.Reports.Net.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Detail.
+        /// </summary>
+        internal static string StringSectionTypeDetail {
+            get {
+                return ResourceManager.GetString("StringSectionTypeDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group footer.
+        /// </summary>
+        internal static string StringSectionTypeGroupFooter {
+            get {
+                return ResourceManager.GetString("StringSectionTypeGroupFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group header.
+        /// </summary>
+        internal static string StringSectionTypeGroupHeader {
+            get {
+                return ResourceManager.GetString("StringSectionTypeGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page footer.
+        /// </summary>
+        internal static string StringSectionTypePageFooter {
+            get {
+                return ResourceManager.GetString("StringSectionTypePageFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page header.
+        /// </summary>
+        internal static string StringSectionTypePageHeader {
+            get {
+                return ResourceManager.GetString("StringSectionTypePageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report footer.
+        /// </summary>
+        internal static string StringSectionTypeReportFooter {
+            get {
+                return ResourceManager.GetString("StringSectionTypeReportFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report header.
+        /// </summary>
+        internal static string StringSectionTypeReportHeader {
+            get {
+                return ResourceManager.GetString("StringSectionTypeReportHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undefined.
         /// </summary>
         internal static string StringUndefined {

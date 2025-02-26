@@ -206,10 +206,10 @@ Do you want to save them?</value>
     <value>There are {0} fields.</value>
   </data>
   <data name="StringDatasourceParametersAdd" xml:space="preserve">
-    <value>Add parameter</value>
+    <value>Add</value>
   </data>
   <data name="StringDatasourceFieldsAdd" xml:space="preserve">
-    <value>Add field</value>
+    <value>Add</value>
   </data>
   <data name="StringApplyChanges" xml:space="preserve">
     <value>Apply</value>
@@ -272,10 +272,13 @@ Do you want to save them?</value>
     <value>Do you want to refresh the fields of the datasource?</value>
   </data>
   <data name="StringFontsAdd" xml:space="preserve">
-    <value>Add font</value>
+    <value>Add</value>
   </data>
   <data name="StringFontsCounterEmpty" xml:space="preserve">
     <value>There are not fonts.</value>
+  </data>
+  <data name="StringSectionsCounterEmpty" xml:space="preserve">
+    <value>There are not sections.</value>
   </data>
   <data name="StringBrushesCounterEmpty" xml:space="preserve">
     <value>There are not brushes.</value>
@@ -283,11 +286,17 @@ Do you want to save them?</value>
   <data name="StringFontsCounterOne" xml:space="preserve">
     <value>There is one font.</value>
   </data>
+  <data name="StringSectionsCounterOne" xml:space="preserve">
+    <value>There is one section.</value>
+  </data>
   <data name="StringBrushesCounterOne" xml:space="preserve">
     <value>There is one brush.</value>
   </data>
   <data name="StringFontsCounter" xml:space="preserve">
     <value>There are {0} fonts.</value>
+  </data>
+  <data name="StringSectionsCounter" xml:space="preserve">
+    <value>There are {0} sections.</value>
   </data>
   <data name="StringBrushesCounter" xml:space="preserve">
     <value>There are {0} brushes.</value>
@@ -300,5 +309,8 @@ Do you want to save them?</value>
   </data>
   <data name="StringBrushLiearGradientModeRequired" xml:space="preserve">
     <value>Must specify gradient mode.</value>
+  </data>
+  <data name="StringSectionsAdd" xml:space="preserve">
+    <value>Add</value>
   </data>
 </root>

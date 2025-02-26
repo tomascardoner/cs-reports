@@ -303,4 +303,25 @@
   <data name="StringBrushTypeRadialGradient" xml:space="preserve">
     <value>Radial gradient</value>
   </data>
+  <data name="StringSectionTypeReportHeader" xml:space="preserve">
+    <value>Report header</value>
+  </data>
+  <data name="StringSectionTypePageHeader" xml:space="preserve">
+    <value>Page header</value>
+  </data>
+  <data name="StringSectionTypeGroupHeader" xml:space="preserve">
+    <value>Group header</value>
+  </data>
+  <data name="StringSectionTypeDetail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="StringSectionTypeGroupFooter" xml:space="preserve">
+    <value>Group footer</value>
+  </data>
+  <data name="StringSectionTypePageFooter" xml:space="preserve">
+    <value>Page footer</value>
+  </data>
+  <data name="StringSectionTypeReportFooter" xml:space="preserve">
+    <value>Report footer</value>
+  </data>
 </root>

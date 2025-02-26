@@ -107,5 +107,20 @@ namespace CardonerSistemas.Reports.Net
                 _ => Properties.Resources.StringUndefined
             };
         }
+
+        public static string GetSectionType(Model.Section.SectionTypes type)
+        {
+            return type switch
+            {
+                Model.Section.SectionTypes.ReportHeader => Properties.Resources.StringSectionTypeReportHeader,
+                Model.Section.SectionTypes.PageHeader => Properties.Resources.StringSectionTypePageHeader,
+                Model.Section.SectionTypes.GroupHeader => Properties.Resources.StringSectionTypeGroupHeader,
+                Model.Section.SectionTypes.Detail => Properties.Resources.StringSectionTypeDetail,
+                Model.Section.SectionTypes.GroupFooter => Properties.Resources.StringSectionTypeGroupFooter,
+                Model.Section.SectionTypes.PageFooter => Properties.Resources.StringSectionTypePageFooter,
+                Model.Section.SectionTypes.ReportFooter => Properties.Resources.StringSectionTypeReportFooter,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
     }
 }

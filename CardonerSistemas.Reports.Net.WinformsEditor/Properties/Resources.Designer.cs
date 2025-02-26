@@ -241,7 +241,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add field.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         internal static string StringDatasourceFieldsAdd {
             get {
@@ -358,7 +358,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add parameter.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         internal static string StringDatasourceParametersAdd {
             get {
@@ -475,7 +475,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add font.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         internal static string StringFontsAdd {
             get {
@@ -598,6 +598,42 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringSections {
             get {
                 return ResourceManager.GetString("StringSections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string StringSectionsAdd {
+            get {
+                return ResourceManager.GetString("StringSectionsAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are {0} sections..
+        /// </summary>
+        internal static string StringSectionsCounter {
+            get {
+                return ResourceManager.GetString("StringSectionsCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are not sections..
+        /// </summary>
+        internal static string StringSectionsCounterEmpty {
+            get {
+                return ResourceManager.GetString("StringSectionsCounterEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is one section..
+        /// </summary>
+        internal static string StringSectionsCounterOne {
+            get {
+                return ResourceManager.GetString("StringSectionsCounterOne", resourceCulture);
             }
         }
         

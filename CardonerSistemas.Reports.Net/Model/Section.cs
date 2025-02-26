@@ -6,38 +6,35 @@ namespace CardonerSistemas.Reports.Net.Model
     {
         private readonly Report _report;
 
-        public Section(Report report, SectionTypes type)
+        public Section(Report report)
         {
             _report = report;
-            Type = type;
             if (report.Sections.Count == 0)
             {
                 SectionId = 1;
             }
             else
             {
-                SectionId = (short)(report.Sections.Where(s => s.Type == type).Max(s => s.SectionId) + 1);
+                SectionId = (short)(report.Sections.Max(s => s.SectionId) + 1);
             }
         }
 
-        public Section(Report report, SectionTypes type, short sectionId)
+        public Section(Report report, short sectionId)
         {
             _report = report;
-            Type = type;
             SectionId = sectionId;
         }
 
         [JsonConstructor]
-        public Section(SectionTypes type, short sectionId)
+        public Section(short sectionId)
         {
             _report = new();
-            Type = type;
             SectionId = sectionId;
         }
 
         public short SectionId { get; }
 
-        public SectionTypes Type { get; }
+        public SectionTypes Type { get; set; }
 
         public byte Order { get; set; }
 
@@ -51,5 +48,8 @@ namespace CardonerSistemas.Reports.Net.Model
 
         [JsonIgnore]
         public ICollection<Text> TextsNavigation => [.. _report.Texts.Where(t => t.SectionId == SectionId)];
+
+        [JsonIgnore]
+        public string DisplayName => $"{FriendlyNames.GetSectionType(Type)} - #{SectionId:00}";
     }
 }
