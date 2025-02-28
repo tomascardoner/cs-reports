@@ -43,6 +43,9 @@ namespace CardonerSistemas.Reports.Net.Model
         public byte BorderColorBlue { get; set; }
 
         [JsonIgnore]
+        public string BorderColorHex => $"#{BorderColorRed:X2}{BorderColorGreen:X2}{BorderColorBlue:X2}";
+
+        [JsonIgnore]
         public XColor BorderColor => XColor.FromArgb(BorderColorRed, BorderColorGreen, BorderColorBlue);
 
         public decimal BorderThickness { get; set; }

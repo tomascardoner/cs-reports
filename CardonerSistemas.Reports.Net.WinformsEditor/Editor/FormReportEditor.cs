@@ -57,6 +57,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         private Panels.PanelSections? _panelSections;
         private Panels.PanelSection? _panelSection;
         private Panels.PanelLines? _panelLines;
+        private Panels.PanelLine? _panelLine;
         private Panels.PanelRectangles? _panelRectangles;
         private Panels.PanelTexts? _panelTexts;
 
@@ -181,6 +182,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 case LinesKey:
                     LinesPanelShow(GetShortIdFromParentNode(e.Node));
                     break;
+                case LineKey:
+                    LinePanelShow(short.Parse(nodeInfo.Item2));
+                    break;
                 case RectanglesKey:
                     RectanglesPanelShow(GetShortIdFromParentNode(e.Node));
                     break;
@@ -265,6 +269,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             _panelSections?.Hide();
             _panelSection?.Hide();
             _panelLines?.Hide();
+            _panelLine?.Hide();
             _panelRectangles?.Hide();
             _panelTexts?.Hide();
         }
@@ -1005,26 +1010,26 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             return treeTreeNodeLine;
         }
 
-        //private void LinePanelShow(short lineId)
-        //{
-        //    Model.Line? line = _report.Lines.FirstOrDefault(l => l.LineId == lineId);
-        //    if (line is null)
-        //    {
-        //        return;
-        //    }
-        //    if (_panelLine is null)
-        //    {
-        //        _panelLine = new(_report, _applicationTitle)
-        //        {
-        //            Dock = DockStyle.Fill
-        //        };
-        //        splitContainerMain.Panel2.Controls.Add(_panelLine);
-        //        _panelLine.LineUpdated += LineUpdated;
-        //        _panelLine.LineDeleted += LineDeleted;
-        //    }
-        //    _panelLine.ShowProperties(lineId);
-        //    _panelLine.Show();
-        //}
+        private void LinePanelShow(short lineId)
+        {
+            Model.Line? line = _report.Lines.FirstOrDefault(l => l.LineId == lineId);
+            if (line is null)
+            {
+                return;
+            }
+            if (_panelLine is null)
+            {
+                _panelLine = new(_report, _applicationTitle)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(_panelLine);
+                _panelLine.LineUpdated += LineUpdated;
+                _panelLine.LineDeleted += LineDeleted;
+            }
+            _panelLine.ShowProperties(lineId);
+            _panelLine.Show();
+        }
 
         private void LineUpdated(object sender, short lineId, short sectionId)
         {

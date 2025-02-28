@@ -235,6 +235,9 @@ Do you want to save them?</value>
   <data name="StringFontDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the font '{0}'?</value>
   </data>
+  <data name="StringLineDeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete the line '{0}'?</value>
+  </data>
   <data name="StringSectionDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the section '{0}'?</value>
   </data>
@@ -268,11 +271,11 @@ Do you want to save them?</value>
   <data name="StringBrushTypeRequired" xml:space="preserve">
     <value>Must specify type.</value>
   </data>
-  <data name="StringBrushColor1Required" xml:space="preserve">
-    <value>Must specify color 1.</value>
+  <data name="StringLineColorRequired" xml:space="preserve">
+    <value>Must specify color.</value>
   </data>
   <data name="StringBrushColor2Required" xml:space="preserve">
-    <value>Must specify color 2.</value>
+    <value>Must specify color.</value>
   </data>
   <data name="StringDatasourceFieldsGetConfirmation" xml:space="preserve">
     <value>Do you want to refresh the fields of the datasource?</value>
@@ -381,5 +384,8 @@ Do you want to save them?</value>
   </data>
   <data name="StringTextsCounter" xml:space="preserve">
     <value>There are {0} texts.</value>
+  </data>
+  <data name="StringLineSectionRequired" xml:space="preserve">
+    <value>Must specify section.</value>
   </data>
 </root>

@@ -31,11 +31,17 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
         private void InitializeForm()
         {
             numericUpDownPositionX1.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            numericUpDownPositionX1.Maximum = Engine.Pdf.PositionMaxValue;
             numericUpDownPositionY1.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            numericUpDownPositionY1.Maximum = Engine.Pdf.PositionMaxValue;
             numericUpDownPositionX2.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            numericUpDownPositionX2.Maximum = Engine.Pdf.PositionMaxValue;
             numericUpDownPositionY2.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            numericUpDownPositionY2.Maximum = Engine.Pdf.PositionMaxValue;
             numericUpDownRadiusStart.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            numericUpDownRadiusStart.Maximum = Engine.Pdf.PositionMaxValue;
             numericUpDownRadiusEnd.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            numericUpDownRadiusEnd.Maximum = Engine.Pdf.PositionMaxValue;
 
             buttonApply.Text = Properties.Resources.StringApplyChanges;
             buttonReset.Text = Properties.Resources.StringResetChanges;
@@ -177,7 +183,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             }
             if (textBoxColor1.Tag is null)
             {
-                MessageBox.Show(Properties.Resources.StringBrushColor1Required, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Properties.Resources.StringLineColorRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 buttonColor1.Focus();
                 return;
             }

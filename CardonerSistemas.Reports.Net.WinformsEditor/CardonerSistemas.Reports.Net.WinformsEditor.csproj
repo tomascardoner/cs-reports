@@ -33,6 +33,9 @@
     <Compile Update="Editor\Panels\PanelBrush.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Editor\Panels\PanelLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Editor\Panels\PanelTexts.cs">
       <SubType>UserControl</SubType>
     </Compile>

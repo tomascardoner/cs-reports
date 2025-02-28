@@ -10,7 +10,7 @@
 #pragma warning restore S4487 // Unread "private" fields should be removed
         private readonly Model.Report _report;
 
-        public delegate void LineHandler(object sender, short lineId, short sectionId);
+        public delegate void LineHandler(object sender, short lineId, short section1Id);
 
         public event LineHandler? LineAdded;
 

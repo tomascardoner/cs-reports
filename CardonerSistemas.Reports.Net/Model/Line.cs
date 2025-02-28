@@ -33,6 +33,9 @@ namespace CardonerSistemas.Reports.Net.Model
         public byte ColorBlue { get; set; }
 
         [JsonIgnore]
+        public string ColorHex => $"#{ColorRed:X2}{ColorGreen:X2}{ColorBlue:X2}";
+
+        [JsonIgnore]
         public XColor Color => XColor.FromArgb(ColorRed, ColorGreen, ColorBlue);
 
         public decimal Thickness { get; set; }

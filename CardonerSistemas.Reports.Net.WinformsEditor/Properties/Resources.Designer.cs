@@ -70,16 +70,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Must specify color 1..
-        /// </summary>
-        internal static string StringBrushColor1Required {
-            get {
-                return ResourceManager.GetString("StringBrushColor1Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Must specify color 2..
+        ///   Looks up a localized string similar to Must specify color..
         /// </summary>
         internal static string StringBrushColor2Required {
             get {
@@ -565,6 +556,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must specify color..
+        /// </summary>
+        internal static string StringLineColorRequired {
+            get {
+                return ResourceManager.GetString("StringLineColorRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the line &apos;{0}&apos;?.
+        /// </summary>
+        internal static string StringLineDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("StringLineDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lines.
         /// </summary>
         internal static string StringLines {
@@ -615,6 +624,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringLinesDelete {
             get {
                 return ResourceManager.GetString("StringLinesDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify section..
+        /// </summary>
+        internal static string StringLineSectionRequired {
+            get {
+                return ResourceManager.GetString("StringLineSectionRequired", resourceCulture);
             }
         }
         

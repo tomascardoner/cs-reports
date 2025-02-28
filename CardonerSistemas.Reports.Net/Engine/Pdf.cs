@@ -8,6 +8,8 @@ namespace CardonerSistemas.Reports.Net.Engine
     public static class Pdf
     {
         public const int UnitsDecimalPlaces = 2;
+        public const decimal ThicknessMaxValue = 10;
+        public const decimal PositionMaxValue = 50;
 
         private static PdfDocument? Create(Model.Report report, string language = "")
         {
