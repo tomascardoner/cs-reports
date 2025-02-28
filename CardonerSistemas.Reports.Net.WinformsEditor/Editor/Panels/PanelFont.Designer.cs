@@ -49,8 +49,8 @@
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanelMain.Controls.Add(tableLayoutPanelName, 2, 1);
             tableLayoutPanelMain.Controls.Add(labelFont, 1, 1);
+            tableLayoutPanelMain.Controls.Add(tableLayoutPanelName, 2, 1);
             tableLayoutPanelMain.Controls.Add(tableLayoutPanelButtons, 2, 2);
             tableLayoutPanelMain.Dock = DockStyle.Fill;
             tableLayoutPanelMain.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;

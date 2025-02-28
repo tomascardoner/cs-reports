@@ -1,4 +1,6 @@
-﻿namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
+﻿using CardonerSistemas.Reports.Net.Model;
+
+namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 {
     public partial class PanelRectangles : UserControl
     {
@@ -9,6 +11,7 @@
         private readonly string _applicationTitle;
 #pragma warning restore S4487 // Unread "private" fields should be removed
         private readonly Model.Report _report;
+        private readonly short _sectionId;
 
         public delegate void RectangleHandler(object sender, short rectangleId, short sectionId);
 
@@ -18,10 +21,11 @@
 
         #region Initialization
 
-        public PanelRectangles(Model.Report report, string applicationTitle)
+        public PanelRectangles(Model.Report report, short sectionId, string applicationTitle)
         {
             InitializeComponent();
             _report = report;
+            _sectionId = sectionId;
             _applicationTitle = applicationTitle;
             InitializeForm();
         }
@@ -47,7 +51,7 @@
 
         private void Add(object sender, EventArgs e)
         {
-            Model.Rectangle? rectangle = new(_report);
+            Model.Rectangle? rectangle = new(_report) { SectionId1 = _sectionId, SectionId2 = _sectionId };
             _report.Rectangles.Add(rectangle);
             if (RectangleAdded is not null)
             {

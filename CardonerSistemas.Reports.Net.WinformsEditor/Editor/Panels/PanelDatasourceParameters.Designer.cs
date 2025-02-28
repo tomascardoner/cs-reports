@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             tableLayoutPanelMain = new TableLayoutPanel();
-            labelCounter = new Label();
             tableLayoutPanelButtons = new TableLayoutPanel();
             buttonAdd = new Button();
+            labelCounter = new Label();
             tableLayoutPanelMain.SuspendLayout();
             tableLayoutPanelButtons.SuspendLayout();
             SuspendLayout();
@@ -42,8 +42,8 @@
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanelMain.Controls.Add(tableLayoutPanelButtons, 1, 2);
             tableLayoutPanelMain.Controls.Add(labelCounter, 1, 1);
+            tableLayoutPanelMain.Controls.Add(tableLayoutPanelButtons, 1, 2);
             tableLayoutPanelMain.Dock = DockStyle.Fill;
             tableLayoutPanelMain.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanelMain.Location = new Point(0, 0);
@@ -58,17 +58,6 @@
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanelMain.Size = new Size(700, 500);
             tableLayoutPanelMain.TabIndex = 1;
-            // 
-            // labelCounter
-            // 
-            labelCounter.AutoSize = true;
-            labelCounter.Dock = DockStyle.Fill;
-            labelCounter.Location = new Point(318, 217);
-            labelCounter.Name = "labelCounter";
-            labelCounter.Size = new Size(64, 20);
-            labelCounter.TabIndex = 0;
-            labelCounter.Text = "Counter.";
-            labelCounter.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanelButtons
             // 
@@ -97,6 +86,17 @@
             buttonAdd.Text = "Add";
             buttonAdd.UseVisualStyleBackColor = true;
             buttonAdd.Click += Add;
+            // 
+            // labelCounter
+            // 
+            labelCounter.AutoSize = true;
+            labelCounter.Dock = DockStyle.Fill;
+            labelCounter.Location = new Point(318, 217);
+            labelCounter.Name = "labelCounter";
+            labelCounter.Size = new Size(64, 20);
+            labelCounter.TabIndex = 0;
+            labelCounter.Text = "Counter.";
+            labelCounter.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // PanelDatasourceParameters
             // 

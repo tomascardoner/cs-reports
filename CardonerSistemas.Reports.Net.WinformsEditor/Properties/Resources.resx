@@ -238,6 +238,9 @@ Do you want to save them?</value>
   <data name="StringLineDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the line '{0}'?</value>
   </data>
+  <data name="StringRectangleDeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete the rectangle '{0}'?</value>
+  </data>
   <data name="StringSectionDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the section '{0}'?</value>
   </data>
@@ -364,6 +367,9 @@ Do you want to save them?</value>
   <data name="StringLinesDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="StringRectanglesDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="StringBrushesDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -387,5 +393,14 @@ Do you want to save them?</value>
   </data>
   <data name="StringLineSectionRequired" xml:space="preserve">
     <value>Must specify section.</value>
+  </data>
+  <data name="StringRectangleSectionRequired" xml:space="preserve">
+    <value>Must specify section.</value>
+  </data>
+  <data name="StringRectangleBorderColorRequired" xml:space="preserve">
+    <value>Must specify color.</value>
+  </data>
+  <data name="StringBrushNone" xml:space="preserve">
+    <value>« None »</value>
   </data>
 </root>

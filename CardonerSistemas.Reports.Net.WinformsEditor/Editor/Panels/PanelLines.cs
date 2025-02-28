@@ -9,6 +9,7 @@
         private readonly string _applicationTitle;
 #pragma warning restore S4487 // Unread "private" fields should be removed
         private readonly Model.Report _report;
+        private readonly short _sectionId;
 
         public delegate void LineHandler(object sender, short lineId, short section1Id);
 
@@ -18,10 +19,11 @@
 
         #region Initialization
 
-        public PanelLines(Model.Report report, string applicationTitle)
+        public PanelLines(Model.Report report, short sectionId, string applicationTitle)
         {
             InitializeComponent();
             _report = report;
+            _sectionId = sectionId;
             _applicationTitle = applicationTitle;
             InitializeForm();
         }
@@ -47,7 +49,7 @@
 
         private void Add(object sender, EventArgs e)
         {
-            Model.Line? line = new(_report);
+            Model.Line? line = new(_report) { SectionId1 = _sectionId, SectionId2 = _sectionId };
             _report.Lines.Add(line);
             if (LineAdded is not null)
             {

@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using PdfSharp.Drawing;
 
 namespace CardonerSistemas.Reports.Net.Model

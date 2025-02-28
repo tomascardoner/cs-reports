@@ -151,6 +151,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to « None ».
+        /// </summary>
+        internal static string StringBrushNone {
+            get {
+                return ResourceManager.GetString("StringBrushNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must specify type..
         /// </summary>
         internal static string StringBrushTypeRequired {
@@ -637,6 +646,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must specify color..
+        /// </summary>
+        internal static string StringRectangleBorderColorRequired {
+            get {
+                return ResourceManager.GetString("StringRectangleBorderColorRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the rectangle &apos;{0}&apos;?.
+        /// </summary>
+        internal static string StringRectangleDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("StringRectangleDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rectangles.
         /// </summary>
         internal static string StringRectangles {
@@ -678,6 +705,24 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringRectanglesCounterOne {
             get {
                 return ResourceManager.GetString("StringRectanglesCounterOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string StringRectanglesDelete {
+            get {
+                return ResourceManager.GetString("StringRectanglesDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify section..
+        /// </summary>
+        internal static string StringRectangleSectionRequired {
+            get {
+                return ResourceManager.GetString("StringRectangleSectionRequired", resourceCulture);
             }
         }
         

@@ -53,15 +53,13 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             comboBoxSection1.DisplayMember = "Value";
             comboBoxSection2.ValueMember = "Key";
             comboBoxSection2.DisplayMember = "Value";
-            ICollection<KeyValuePair<short, string>> items1 = [];
-            ICollection<KeyValuePair<short, string>> items2 = [];
+            ICollection<KeyValuePair<short, string>> items = [];
             foreach (Model.Section section in _report.Sections.OrderBy(s => s.Type).ThenBy(s => s.Order))
             {
-                items1.Add(new KeyValuePair<short, string>(section.SectionId, section.DisplayName));
-                items2.Add(new KeyValuePair<short, string>(section.SectionId, section.DisplayName));
+                items.Add(new KeyValuePair<short, string>(section.SectionId, section.DisplayName));
             }
-            comboBoxSection1.DataSource = items1;
-            comboBoxSection2.DataSource = items2;
+            comboBoxSection1.DataSource = items;
+            comboBoxSection2.DataSource = items;
         }
 
         #endregion Initialization
@@ -101,6 +99,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
                 return;
             }
             textBoxColor.Text = _line.ColorHex;
+            textBoxColor.Tag = Color.FromArgb(_line.ColorRed, _line.ColorGreen, _line.ColorBlue);
             numericUpDownThickness.Value = _line.Thickness;
             comboBoxSection1.SelectedValue = _line.SectionId1;
             numericUpDownPositionX1.Value = _line.PositionX1;

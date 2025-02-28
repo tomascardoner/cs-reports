@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using CardonerSistemas.Reports.Net.Engine;
 using PdfSharp.Drawing;
 
 namespace CardonerSistemas.Reports.Net.Model
@@ -52,13 +51,13 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public short? BrushId { get; set; }
 
-        public byte SectionId1 { get; set; }
+        public short SectionId1 { get; set; }
 
         public decimal PositionX1 { get; set; }
 
         public decimal PositionY1 { get; set; }
 
-        public byte SectionId2 { get; set; }
+        public short SectionId2 { get; set; }
 
         public decimal PositionX2 { get; set; }
 

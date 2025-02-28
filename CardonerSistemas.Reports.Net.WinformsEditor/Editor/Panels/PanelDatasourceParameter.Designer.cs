@@ -246,9 +246,9 @@
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelButtons.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanelButtons.Controls.Add(buttonDelete, 2, 0);
             tableLayoutPanelButtons.Controls.Add(buttonApply, 0, 0);
             tableLayoutPanelButtons.Controls.Add(buttonReset, 1, 0);
+            tableLayoutPanelButtons.Controls.Add(buttonDelete, 2, 0);
             tableLayoutPanelButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanelButtons.Location = new Point(192, 352);
             tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";

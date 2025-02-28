@@ -59,6 +59,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         private Panels.PanelLines? _panelLines;
         private Panels.PanelLine? _panelLine;
         private Panels.PanelRectangles? _panelRectangles;
+        private Panels.PanelRectangle? _panelRectangle;
         private Panels.PanelTexts? _panelTexts;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -187,6 +188,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                     break;
                 case RectanglesKey:
                     RectanglesPanelShow(GetShortIdFromParentNode(e.Node));
+                    break;
+                case RectangleKey:
+                    RectanglePanelShow(short.Parse(nodeInfo.Item2));
                     break;
                 case TextsKey:
                     TextsPanelShow(GetShortIdFromParentNode(e.Node));
@@ -983,7 +987,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         {
             if (_panelLines is null)
             {
-                _panelLines = new(_report, _applicationTitle)
+                _panelLines = new(_report, sectionId, _applicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };
@@ -1031,14 +1035,14 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             _panelLine.Show();
         }
 
-        private void LineUpdated(object sender, short lineId, short sectionId)
+        private void LineUpdated(object sender, short lineId, short section1Id)
         {
             Model.Line? line = _report.Lines.FirstOrDefault(f => f.LineId == lineId);
             if (line is null)
             {
                 return;
             }
-            TreeNode? treeTreeNodeSection = GetTreeNodeByTag(treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeSectionsIndex], SectionKey, sectionId.ToString());
+            TreeNode? treeTreeNodeSection = GetTreeNodeByTag(treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeSectionsIndex], SectionKey, section1Id.ToString());
             if (treeTreeNodeSection is null)
             {
                 return;
@@ -1048,7 +1052,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             if (treeTreeNodeLine is null)
             {
                 treeTreeNodeLine = LineCreateTreeNode(line, treeTreeNodeLines);
-                treeTreeNodeLines.Text = LinesTreeNodeGetText(_report.Lines.Count(l => l.SectionId1 == sectionId));
+                treeTreeNodeLines.Text = LinesTreeNodeGetText(_report.Lines.Count(l => l.SectionId1 == section1Id));
             }
             else
             {
@@ -1061,9 +1065,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             }
         }
 
-        private void LineDeleted(object sender, short lineId, short sectionId)
+        private void LineDeleted(object sender, short lineId, short section1Id)
         {
-            TreeNode? treeTreeNodeSection = GetTreeNodeByTag(treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeSectionsIndex], SectionKey, sectionId.ToString());
+            TreeNode? treeTreeNodeSection = GetTreeNodeByTag(treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeSectionsIndex], SectionKey, section1Id.ToString());
             if (treeTreeNodeSection is null)
             {
                 return;
@@ -1073,7 +1077,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             if (treeTreeNodeLine is not null)
             {
                 treeTreeNodeLines.Nodes.Remove(treeTreeNodeLine);
-                treeTreeNodeLines.Text = LinesTreeNodeGetText(_report.Lines.Count(l => l.SectionId1 == sectionId));
+                treeTreeNodeLines.Text = LinesTreeNodeGetText(_report.Lines.Count(l => l.SectionId1 == section1Id));
             }
         }
 
@@ -1103,7 +1107,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         {
             if (_panelRectangles is null)
             {
-                _panelRectangles = new(_report, _applicationTitle)
+                _panelRectangles = new(_report, sectionId, _applicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };
@@ -1130,35 +1134,35 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             return treeTreeNodeRectangle;
         }
 
-        //private void RectanglePanelShow(short rectangleId)
-        //{
-        //    Model.Rectangle? rectangle = _report.Rectangles.FirstOrDefault(l => l.RectangleId == rectangleId);
-        //    if (rectangle is null)
-        //    {
-        //        return;
-        //    }
-        //    if (_panelRectangle is null)
-        //    {
-        //        _panelRectangle = new(_report, _applicationTitle)
-        //        {
-        //            Dock = DockStyle.Fill
-        //        };
-        //        splitContainerMain.Panel2.Controls.Add(_panelRectangle);
-        //        _panelRectangle.RectangleUpdated += RectangleUpdated;
-        //        _panelRectangle.RectangleDeleted += RectangleDeleted;
-        //    }
-        //    _panelRectangle.ShowProperties(rectangleId);
-        //    _panelRectangle.Show();
-        //}
+        private void RectanglePanelShow(short rectangleId)
+        {
+            Model.Rectangle? rectangle = _report.Rectangles.FirstOrDefault(l => l.RectangleId == rectangleId);
+            if (rectangle is null)
+            {
+                return;
+            }
+            if (_panelRectangle is null)
+            {
+                _panelRectangle = new(_report, _applicationTitle)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(_panelRectangle);
+                _panelRectangle.RectangleUpdated += RectangleUpdated;
+                _panelRectangle.RectangleDeleted += RectangleDeleted;
+            }
+            _panelRectangle.ShowProperties(rectangleId);
+            _panelRectangle.Show();
+        }
 
-        private void RectangleUpdated(object sender, short rectangleId, short sectionId)
+        private void RectangleUpdated(object sender, short rectangleId, short section1Id)
         {
             Model.Rectangle? rectangle = _report.Rectangles.FirstOrDefault(r => r.RectangleId == rectangleId);
             if (rectangle is null)
             {
                 return;
             }
-            TreeNode? treeTreeNodeSection = GetTreeNodeByTag(treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeSectionsIndex], SectionKey, sectionId.ToString());
+            TreeNode? treeTreeNodeSection = GetTreeNodeByTag(treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeSectionsIndex], SectionKey, section1Id.ToString());
             if (treeTreeNodeSection is null)
             {
                 return;
@@ -1168,7 +1172,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             if (treeTreeNodeRectangle is null)
             {
                 treeTreeNodeRectangle = RectangleCreateTreeNode(rectangle, treeTreeNodeRectangles);
-                treeTreeNodeRectangles.Text = RectanglesTreeNodeGetText(_report.Rectangles.Count(l => l.SectionId1 == sectionId));
+                treeTreeNodeRectangles.Text = RectanglesTreeNodeGetText(_report.Rectangles.Count(l => l.SectionId1 == section1Id));
             }
             else
             {
@@ -1181,9 +1185,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             }
         }
 
-        private void RectangleDeleted(object sender, short rectangleId, short sectionId)
+        private void RectangleDeleted(object sender, short rectangleId, short section1Id)
         {
-            TreeNode? treeTreeNodeSection = GetTreeNodeByTag(treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeSectionsIndex], SectionKey, sectionId.ToString());
+            TreeNode? treeTreeNodeSection = GetTreeNodeByTag(treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeSectionsIndex], SectionKey, section1Id.ToString());
             if (treeTreeNodeSection is null)
             {
                 return;
@@ -1193,7 +1197,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             if (treeTreeNodeRectangle is not null)
             {
                 treeTreeNodeRectangles.Nodes.Remove(treeTreeNodeRectangle);
-                treeTreeNodeRectangles.Text = RectanglesTreeNodeGetText(_report.Rectangles.Count(r => r.SectionId1 == sectionId));
+                treeTreeNodeRectangles.Text = RectanglesTreeNodeGetText(_report.Rectangles.Count(r => r.SectionId1 == section1Id));
             }
         }
 
@@ -1223,7 +1227,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         {
             if (_panelTexts is null)
             {
-                _panelTexts = new(_report, _applicationTitle)
+                _panelTexts = new(_report, sectionId, _applicationTitle)
                 {
                     Dock = DockStyle.Fill
                 };

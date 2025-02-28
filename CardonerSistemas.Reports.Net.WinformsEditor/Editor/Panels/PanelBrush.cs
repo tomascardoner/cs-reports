@@ -153,7 +153,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             }
             comboBoxType.SelectedValue = (int)_brush.Type;
             textBoxColor1.Text = _brush.Color1Hex;
+            textBoxColor1.Tag = Color.FromArgb(_brush.Color1Red, _brush.Color1Green, _brush.Color1Blue);
             textBoxColor2.Text = _brush.Color2Hex;
+            textBoxColor2.Tag = _brush.Color2Red.HasValue && _brush.Color2Green.HasValue && _brush.Color2Blue.HasValue ? Color.FromArgb(_brush.Color2Red.Value, _brush.Color2Green.Value, _brush.Color2Blue.Value) : null;
             numericUpDownPositionX1.Value = _brush.PositionX1 ?? 0;
             numericUpDownPositionY1.Value = _brush.PositionY1 ?? 0;
             numericUpDownPositionX2.Value = _brush.PositionX2 ?? 0;
