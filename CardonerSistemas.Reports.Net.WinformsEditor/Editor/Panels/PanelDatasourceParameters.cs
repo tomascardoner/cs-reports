@@ -8,7 +8,7 @@
         private readonly string _applicationTitle;
         private readonly Model.Report _report;
 
-        public delegate void ParameterHandler(object sender, string parameterName);
+        public delegate void ParameterHandler(object sender, short parameterId);
 
         public event ParameterHandler? ParameterAdded;
 
@@ -56,7 +56,7 @@
             Model.DatasourceParameter? datasourceParameter = _report.Datasource.Parameters.FirstOrDefault(p => p.Name.Trim() == Properties.Resources.StringDatasourceParameterNameNew);
             if (datasourceParameter is null)
             {
-                datasourceParameter = new Model.DatasourceParameter() { Name = Properties.Resources.StringDatasourceParameterNameNew };
+                datasourceParameter = new Model.DatasourceParameter(_report.Datasource) { Name = Properties.Resources.StringDatasourceParameterNameNew };
                 _report.Datasource.Parameters.Add(datasourceParameter);
             }
             else
@@ -65,7 +65,7 @@
             }
             if (ParameterAdded is not null)
             {
-                ParameterAdded(this, datasourceParameter.Name);
+                ParameterAdded(this, datasourceParameter.ParameterId);
             }
         }
 

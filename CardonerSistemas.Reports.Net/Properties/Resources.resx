@@ -330,11 +330,20 @@
   <data name="StringTextTypeDatasourceField" xml:space="preserve">
     <value>Datasource field</value>
   </data>
+  <data name="StringTextTypeDatasourceFieldShort" xml:space="preserve">
+    <value>Field</value>
+  </data>
   <data name="StringTextTypeDatasourceParameter" xml:space="preserve">
     <value>Datasource parameter</value>
   </data>
+  <data name="StringTextTypeDatasourceParameterShort" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
   <data name="StringTextTypeReportParameter" xml:space="preserve">
     <value>Report parameter</value>
+  </data>
+  <data name="StringTextTypeReportParameterShort" xml:space="preserve">
+    <value>Parameter</value>
   </data>
   <data name="StringTextTypeFormula" xml:space="preserve">
     <value>Formula</value>

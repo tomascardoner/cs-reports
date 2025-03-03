@@ -13,7 +13,7 @@ namespace CardonerSistemas.Reports.Net.Engine
                 Tuple<decimal, decimal, decimal, decimal> positions = Units.ConvertRelativeCentimetersToAbsolutePoints(sectionPositionYStart, text.PositionX, text.PositionY, text.Width, text.Height);
                 string textValue = text.TextType switch
                 {
-                    Model.Text.TextTypes.Static => text.Value,
+                    Model.Text.TextTypes.Static => text.StaticText,
                     Model.Text.TextTypes.DatasourceField => report.Datasource is null ? string.Empty : TextProcessor.GetDatasourceFieldValue(text, dbDataReader, report.Datasource),
                     Model.Text.TextTypes.DatasourceParameter => report.Datasource is null ? string.Empty : TextProcessor.GetDatasourceParameterValue(text, report.Datasource),
                     Model.Text.TextTypes.ReportParameter => TextProcessor.GetReportParameterValue(text, report),

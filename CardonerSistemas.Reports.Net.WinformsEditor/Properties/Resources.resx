@@ -421,11 +421,8 @@ Do you want to save them?</value>
   <data name="StringTextSectionRequired" xml:space="preserve">
     <value>Must specify section.</value>
   </data>
-  <data name="StringTextFieldRequired" xml:space="preserve">
-    <value>Must specify field.</value>
-  </data>
-  <data name="StringTextParameterRequired" xml:space="preserve">
-    <value>Must specify parameter.</value>
+  <data name="StringTextFieldParameterFormulaRequired" xml:space="preserve">
+    <value>Must specify {0}.</value>
   </data>
   <data name="StringRectangleBrushRequired" xml:space="preserve">
     <value>Must specify brush.</value>

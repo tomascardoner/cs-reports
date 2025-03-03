@@ -136,6 +136,19 @@ namespace CardonerSistemas.Reports.Net
             };
         }
 
+        public static string GetTextTypeShort(Model.Text.TextTypes type)
+        {
+            return type switch
+            {
+                Model.Text.TextTypes.Static => Properties.Resources.StringTextTypeStatic,
+                Model.Text.TextTypes.DatasourceField => Properties.Resources.StringTextTypeDatasourceFieldShort,
+                Model.Text.TextTypes.DatasourceParameter => Properties.Resources.StringTextTypeDatasourceParameterShort,
+                Model.Text.TextTypes.ReportParameter => Properties.Resources.StringTextTypeReportParameterShort,
+                Model.Text.TextTypes.Formula => Properties.Resources.StringTextTypeFormula,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
+
         public static string GetValueType(Model.Value.Types type)
         {
             return type switch

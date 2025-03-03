@@ -31,10 +31,10 @@
             tableLayoutPanelMain = new TableLayoutPanel();
             labelTextType = new Label();
             comboBoxTextType = new ComboBox();
-            labelFieldOrParameter = new Label();
-            comboBoxFieldOrParameter = new ComboBox();
-            labelValue = new Label();
-            textBoxValue = new TextBox();
+            labelFieldParameterFormula = new Label();
+            comboBoxFieldParameterFormula = new ComboBox();
+            labelStaticText = new Label();
+            textBoxStaticText = new TextBox();
             labelFormat = new Label();
             textBoxFormat = new TextBox();
             labelFont = new Label();
@@ -100,10 +100,10 @@
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             tableLayoutPanelMain.Controls.Add(labelTextType, 1, 1);
             tableLayoutPanelMain.Controls.Add(comboBoxTextType, 2, 1);
-            tableLayoutPanelMain.Controls.Add(labelFieldOrParameter, 1, 2);
-            tableLayoutPanelMain.Controls.Add(comboBoxFieldOrParameter, 2, 2);
-            tableLayoutPanelMain.Controls.Add(labelValue, 1, 3);
-            tableLayoutPanelMain.Controls.Add(textBoxValue, 2, 3);
+            tableLayoutPanelMain.Controls.Add(labelFieldParameterFormula, 1, 2);
+            tableLayoutPanelMain.Controls.Add(comboBoxFieldParameterFormula, 2, 2);
+            tableLayoutPanelMain.Controls.Add(labelStaticText, 1, 3);
+            tableLayoutPanelMain.Controls.Add(textBoxStaticText, 2, 3);
             tableLayoutPanelMain.Controls.Add(labelFormat, 1, 4);
             tableLayoutPanelMain.Controls.Add(textBoxFormat, 2, 4);
             tableLayoutPanelMain.Controls.Add(labelFont, 1, 5);
@@ -177,9 +177,9 @@
             // 
             labelTextType.AutoSize = true;
             labelTextType.Dock = DockStyle.Fill;
-            labelTextType.Location = new Point(57, 24);
+            labelTextType.Location = new Point(53, 24);
             labelTextType.Name = "labelTextType";
-            labelTextType.Size = new Size(153, 34);
+            labelTextType.Size = new Size(193, 34);
             labelTextType.TabIndex = 0;
             labelTextType.Text = "Text type:";
             labelTextType.TextAlign = ContentAlignment.MiddleLeft;
@@ -187,66 +187,66 @@
             // comboBoxTextType
             // 
             comboBoxTextType.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxTextType.Location = new Point(216, 27);
+            comboBoxTextType.Location = new Point(252, 27);
             comboBoxTextType.Name = "comboBoxTextType";
             comboBoxTextType.Size = new Size(200, 28);
             comboBoxTextType.TabIndex = 1;
             comboBoxTextType.SelectedIndexChanged += TextTypeChanged;
             // 
-            // labelFieldOrParameter
+            // labelFieldParameterFormula
             // 
-            labelFieldOrParameter.AutoSize = true;
-            labelFieldOrParameter.Dock = DockStyle.Fill;
-            labelFieldOrParameter.Location = new Point(57, 58);
-            labelFieldOrParameter.Name = "labelFieldOrParameter";
-            labelFieldOrParameter.Size = new Size(153, 34);
-            labelFieldOrParameter.TabIndex = 2;
-            labelFieldOrParameter.Text = "Field / parameter:";
-            labelFieldOrParameter.TextAlign = ContentAlignment.MiddleLeft;
+            labelFieldParameterFormula.AutoSize = true;
+            labelFieldParameterFormula.Dock = DockStyle.Fill;
+            labelFieldParameterFormula.Location = new Point(53, 58);
+            labelFieldParameterFormula.Name = "labelFieldParameterFormula";
+            labelFieldParameterFormula.Size = new Size(193, 34);
+            labelFieldParameterFormula.TabIndex = 2;
+            labelFieldParameterFormula.Text = "Field / parameter / formula:";
+            labelFieldParameterFormula.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // comboBoxFieldOrParameter
+            // comboBoxFieldParameterFormula
             // 
-            comboBoxFieldOrParameter.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxFieldOrParameter.Location = new Point(216, 61);
-            comboBoxFieldOrParameter.Name = "comboBoxFieldOrParameter";
-            comboBoxFieldOrParameter.Size = new Size(200, 28);
-            comboBoxFieldOrParameter.TabIndex = 3;
+            comboBoxFieldParameterFormula.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxFieldParameterFormula.Location = new Point(252, 61);
+            comboBoxFieldParameterFormula.Name = "comboBoxFieldParameterFormula";
+            comboBoxFieldParameterFormula.Size = new Size(200, 28);
+            comboBoxFieldParameterFormula.TabIndex = 3;
             // 
-            // labelValue
+            // labelStaticText
             // 
-            labelValue.AutoSize = true;
-            labelValue.Dock = DockStyle.Fill;
-            labelValue.Location = new Point(57, 92);
-            labelValue.Name = "labelValue";
-            labelValue.Size = new Size(153, 33);
-            labelValue.TabIndex = 4;
-            labelValue.Text = "Value:";
-            labelValue.TextAlign = ContentAlignment.MiddleLeft;
+            labelStaticText.AutoSize = true;
+            labelStaticText.Dock = DockStyle.Fill;
+            labelStaticText.Location = new Point(53, 92);
+            labelStaticText.Name = "labelStaticText";
+            labelStaticText.Size = new Size(193, 33);
+            labelStaticText.TabIndex = 4;
+            labelStaticText.Text = "Value:";
+            labelStaticText.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // textBoxValue
+            // textBoxStaticText
             // 
-            textBoxValue.Dock = DockStyle.Fill;
-            textBoxValue.Location = new Point(216, 95);
-            textBoxValue.MaxLength = 100;
-            textBoxValue.Name = "textBoxValue";
-            textBoxValue.Size = new Size(426, 27);
-            textBoxValue.TabIndex = 5;
-            textBoxValue.Enter += ControlFocusEnter;
+            textBoxStaticText.Dock = DockStyle.Fill;
+            textBoxStaticText.Location = new Point(252, 95);
+            textBoxStaticText.MaxLength = 100;
+            textBoxStaticText.Name = "textBoxStaticText";
+            textBoxStaticText.Size = new Size(394, 27);
+            textBoxStaticText.TabIndex = 5;
+            textBoxStaticText.Enter += ControlFocusEnter;
             // 
             // labelFormat
             // 
             labelFormat.AutoSize = true;
             labelFormat.Dock = DockStyle.Fill;
-            labelFormat.Location = new Point(57, 125);
+            labelFormat.Location = new Point(53, 125);
             labelFormat.Name = "labelFormat";
-            labelFormat.Size = new Size(153, 33);
+            labelFormat.Size = new Size(193, 33);
             labelFormat.TabIndex = 6;
             labelFormat.Text = "Format:";
             labelFormat.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // textBoxFormat
             // 
-            textBoxFormat.Location = new Point(216, 128);
+            textBoxFormat.Location = new Point(252, 128);
             textBoxFormat.MaxLength = 100;
             textBoxFormat.Name = "textBoxFormat";
             textBoxFormat.Size = new Size(200, 27);
@@ -257,9 +257,9 @@
             // 
             labelFont.AutoSize = true;
             labelFont.Dock = DockStyle.Fill;
-            labelFont.Location = new Point(57, 158);
+            labelFont.Location = new Point(53, 158);
             labelFont.Name = "labelFont";
-            labelFont.Size = new Size(153, 34);
+            labelFont.Size = new Size(193, 34);
             labelFont.TabIndex = 8;
             labelFont.Text = "Font:";
             labelFont.TextAlign = ContentAlignment.MiddleLeft;
@@ -267,7 +267,7 @@
             // comboBoxFont
             // 
             comboBoxFont.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxFont.Location = new Point(216, 161);
+            comboBoxFont.Location = new Point(252, 161);
             comboBoxFont.Name = "comboBoxFont";
             comboBoxFont.Size = new Size(200, 28);
             comboBoxFont.TabIndex = 9;
@@ -276,9 +276,9 @@
             // 
             labelBorderColor.AutoSize = true;
             labelBorderColor.Dock = DockStyle.Fill;
-            labelBorderColor.Location = new Point(57, 192);
+            labelBorderColor.Location = new Point(53, 192);
             labelBorderColor.Name = "labelBorderColor";
-            labelBorderColor.Size = new Size(153, 36);
+            labelBorderColor.Size = new Size(193, 36);
             labelBorderColor.TabIndex = 10;
             labelBorderColor.Text = "Border color:";
             labelBorderColor.TextAlign = ContentAlignment.MiddleLeft;
@@ -293,7 +293,7 @@
             tableLayoutPanelBorderColor.Controls.Add(textBoxBorderColor, 0, 0);
             tableLayoutPanelBorderColor.Controls.Add(buttonBorderColor, 1, 0);
             tableLayoutPanelBorderColor.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            tableLayoutPanelBorderColor.Location = new Point(213, 192);
+            tableLayoutPanelBorderColor.Location = new Point(249, 192);
             tableLayoutPanelBorderColor.Margin = new Padding(0);
             tableLayoutPanelBorderColor.Name = "tableLayoutPanelBorderColor";
             tableLayoutPanelBorderColor.RowCount = 1;
@@ -328,9 +328,9 @@
             // 
             labelBorderThickness.AutoSize = true;
             labelBorderThickness.Dock = DockStyle.Fill;
-            labelBorderThickness.Location = new Point(57, 228);
+            labelBorderThickness.Location = new Point(53, 228);
             labelBorderThickness.Name = "labelBorderThickness";
-            labelBorderThickness.Size = new Size(153, 33);
+            labelBorderThickness.Size = new Size(193, 33);
             labelBorderThickness.TabIndex = 12;
             labelBorderThickness.Text = "Border thickness:";
             labelBorderThickness.TextAlign = ContentAlignment.MiddleLeft;
@@ -338,7 +338,7 @@
             // numericUpDownBorderThickness
             // 
             numericUpDownBorderThickness.DecimalPlaces = 1;
-            numericUpDownBorderThickness.Location = new Point(216, 231);
+            numericUpDownBorderThickness.Location = new Point(252, 231);
             numericUpDownBorderThickness.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownBorderThickness.Name = "numericUpDownBorderThickness";
             numericUpDownBorderThickness.Size = new Size(70, 27);
@@ -350,9 +350,9 @@
             // 
             labelBrush.AutoSize = true;
             labelBrush.Dock = DockStyle.Fill;
-            labelBrush.Location = new Point(57, 261);
+            labelBrush.Location = new Point(53, 261);
             labelBrush.Name = "labelBrush";
-            labelBrush.Size = new Size(153, 34);
+            labelBrush.Size = new Size(193, 34);
             labelBrush.TabIndex = 14;
             labelBrush.Text = "Brush:";
             labelBrush.TextAlign = ContentAlignment.MiddleLeft;
@@ -360,7 +360,7 @@
             // comboBoxBrush
             // 
             comboBoxBrush.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxBrush.Location = new Point(216, 264);
+            comboBoxBrush.Location = new Point(252, 264);
             comboBoxBrush.Name = "comboBoxBrush";
             comboBoxBrush.Size = new Size(200, 28);
             comboBoxBrush.TabIndex = 15;
@@ -369,9 +369,9 @@
             // 
             labelSection.AutoSize = true;
             labelSection.Dock = DockStyle.Fill;
-            labelSection.Location = new Point(57, 295);
+            labelSection.Location = new Point(53, 295);
             labelSection.Name = "labelSection";
-            labelSection.Size = new Size(153, 34);
+            labelSection.Size = new Size(193, 34);
             labelSection.TabIndex = 16;
             labelSection.Text = "Section:";
             labelSection.TextAlign = ContentAlignment.MiddleLeft;
@@ -380,7 +380,7 @@
             // 
             comboBoxSection.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxSection.Enabled = false;
-            comboBoxSection.Location = new Point(216, 298);
+            comboBoxSection.Location = new Point(252, 298);
             comboBoxSection.Name = "comboBoxSection";
             comboBoxSection.Size = new Size(200, 28);
             comboBoxSection.TabIndex = 17;
@@ -389,9 +389,9 @@
             // 
             labelPositionX.AutoSize = true;
             labelPositionX.Dock = DockStyle.Fill;
-            labelPositionX.Location = new Point(57, 329);
+            labelPositionX.Location = new Point(53, 329);
             labelPositionX.Name = "labelPositionX";
-            labelPositionX.Size = new Size(153, 33);
+            labelPositionX.Size = new Size(193, 33);
             labelPositionX.TabIndex = 18;
             labelPositionX.Text = "Position X (cm):";
             labelPositionX.TextAlign = ContentAlignment.MiddleLeft;
@@ -399,7 +399,7 @@
             // numericUpDownPositionX
             // 
             numericUpDownPositionX.DecimalPlaces = 2;
-            numericUpDownPositionX.Location = new Point(216, 332);
+            numericUpDownPositionX.Location = new Point(252, 332);
             numericUpDownPositionX.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionX.Name = "numericUpDownPositionX";
             numericUpDownPositionX.Size = new Size(80, 27);
@@ -411,9 +411,9 @@
             // 
             labelPositionY.AutoSize = true;
             labelPositionY.Dock = DockStyle.Fill;
-            labelPositionY.Location = new Point(57, 362);
+            labelPositionY.Location = new Point(53, 362);
             labelPositionY.Name = "labelPositionY";
-            labelPositionY.Size = new Size(153, 33);
+            labelPositionY.Size = new Size(193, 33);
             labelPositionY.TabIndex = 20;
             labelPositionY.Text = "Position Y (cm):";
             labelPositionY.TextAlign = ContentAlignment.MiddleLeft;
@@ -421,7 +421,7 @@
             // numericUpDownPositionY
             // 
             numericUpDownPositionY.DecimalPlaces = 2;
-            numericUpDownPositionY.Location = new Point(216, 365);
+            numericUpDownPositionY.Location = new Point(252, 365);
             numericUpDownPositionY.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionY.Name = "numericUpDownPositionY";
             numericUpDownPositionY.Size = new Size(80, 27);
@@ -433,9 +433,9 @@
             // 
             labelWidth.AutoSize = true;
             labelWidth.Dock = DockStyle.Fill;
-            labelWidth.Location = new Point(57, 395);
+            labelWidth.Location = new Point(53, 395);
             labelWidth.Name = "labelWidth";
-            labelWidth.Size = new Size(153, 33);
+            labelWidth.Size = new Size(193, 33);
             labelWidth.TabIndex = 22;
             labelWidth.Text = "Width (cm):";
             labelWidth.TextAlign = ContentAlignment.MiddleLeft;
@@ -443,7 +443,7 @@
             // numericUpDownWidth
             // 
             numericUpDownWidth.DecimalPlaces = 2;
-            numericUpDownWidth.Location = new Point(216, 398);
+            numericUpDownWidth.Location = new Point(252, 398);
             numericUpDownWidth.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownWidth.Name = "numericUpDownWidth";
             numericUpDownWidth.Size = new Size(80, 27);
@@ -455,9 +455,9 @@
             // 
             labelHeight.AutoSize = true;
             labelHeight.Dock = DockStyle.Fill;
-            labelHeight.Location = new Point(57, 428);
+            labelHeight.Location = new Point(53, 428);
             labelHeight.Name = "labelHeight";
-            labelHeight.Size = new Size(153, 33);
+            labelHeight.Size = new Size(193, 33);
             labelHeight.TabIndex = 24;
             labelHeight.Text = "Height (cm):";
             labelHeight.TextAlign = ContentAlignment.MiddleLeft;
@@ -465,7 +465,7 @@
             // numericUpDownHeight
             // 
             numericUpDownHeight.DecimalPlaces = 2;
-            numericUpDownHeight.Location = new Point(216, 431);
+            numericUpDownHeight.Location = new Point(252, 431);
             numericUpDownHeight.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownHeight.Name = "numericUpDownHeight";
             numericUpDownHeight.Size = new Size(80, 27);
@@ -477,9 +477,9 @@
             // 
             labelHorizontalAlignment.AutoSize = true;
             labelHorizontalAlignment.Dock = DockStyle.Fill;
-            labelHorizontalAlignment.Location = new Point(57, 461);
+            labelHorizontalAlignment.Location = new Point(53, 461);
             labelHorizontalAlignment.Name = "labelHorizontalAlignment";
-            labelHorizontalAlignment.Size = new Size(153, 34);
+            labelHorizontalAlignment.Size = new Size(193, 34);
             labelHorizontalAlignment.TabIndex = 26;
             labelHorizontalAlignment.Text = "Horizontal alignment:";
             labelHorizontalAlignment.TextAlign = ContentAlignment.MiddleLeft;
@@ -487,7 +487,7 @@
             // comboBoxHorizontalAlignment
             // 
             comboBoxHorizontalAlignment.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxHorizontalAlignment.Location = new Point(216, 464);
+            comboBoxHorizontalAlignment.Location = new Point(252, 464);
             comboBoxHorizontalAlignment.Name = "comboBoxHorizontalAlignment";
             comboBoxHorizontalAlignment.Size = new Size(200, 28);
             comboBoxHorizontalAlignment.TabIndex = 27;
@@ -496,9 +496,9 @@
             // 
             labelVerticalAlignment.AutoSize = true;
             labelVerticalAlignment.Dock = DockStyle.Fill;
-            labelVerticalAlignment.Location = new Point(57, 495);
+            labelVerticalAlignment.Location = new Point(53, 495);
             labelVerticalAlignment.Name = "labelVerticalAlignment";
-            labelVerticalAlignment.Size = new Size(153, 34);
+            labelVerticalAlignment.Size = new Size(193, 34);
             labelVerticalAlignment.TabIndex = 28;
             labelVerticalAlignment.Text = "Vertical alignment:";
             labelVerticalAlignment.TextAlign = ContentAlignment.MiddleLeft;
@@ -506,7 +506,7 @@
             // comboBoxVerticalAlignment
             // 
             comboBoxVerticalAlignment.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxVerticalAlignment.Location = new Point(216, 498);
+            comboBoxVerticalAlignment.Location = new Point(252, 498);
             comboBoxVerticalAlignment.Name = "comboBoxVerticalAlignment";
             comboBoxVerticalAlignment.Size = new Size(200, 28);
             comboBoxVerticalAlignment.TabIndex = 29;
@@ -515,9 +515,9 @@
             // 
             labelWordWrapType.AutoSize = true;
             labelWordWrapType.Dock = DockStyle.Fill;
-            labelWordWrapType.Location = new Point(57, 529);
+            labelWordWrapType.Location = new Point(53, 529);
             labelWordWrapType.Name = "labelWordWrapType";
-            labelWordWrapType.Size = new Size(153, 34);
+            labelWordWrapType.Size = new Size(193, 34);
             labelWordWrapType.TabIndex = 30;
             labelWordWrapType.Text = "Word wrap type:";
             labelWordWrapType.TextAlign = ContentAlignment.MiddleLeft;
@@ -525,7 +525,7 @@
             // comboBoxWordWrapType
             // 
             comboBoxWordWrapType.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxWordWrapType.Location = new Point(216, 532);
+            comboBoxWordWrapType.Location = new Point(252, 532);
             comboBoxWordWrapType.Name = "comboBoxWordWrapType";
             comboBoxWordWrapType.Size = new Size(200, 28);
             comboBoxWordWrapType.TabIndex = 31;
@@ -534,9 +534,9 @@
             // 
             labelCharacterSpacing.AutoSize = true;
             labelCharacterSpacing.Dock = DockStyle.Fill;
-            labelCharacterSpacing.Location = new Point(57, 563);
+            labelCharacterSpacing.Location = new Point(53, 563);
             labelCharacterSpacing.Name = "labelCharacterSpacing";
-            labelCharacterSpacing.Size = new Size(153, 33);
+            labelCharacterSpacing.Size = new Size(193, 33);
             labelCharacterSpacing.TabIndex = 32;
             labelCharacterSpacing.Text = "Character spacing:";
             labelCharacterSpacing.TextAlign = ContentAlignment.MiddleLeft;
@@ -544,7 +544,7 @@
             // numericUpDownCharacterSpacing
             // 
             numericUpDownCharacterSpacing.DecimalPlaces = 2;
-            numericUpDownCharacterSpacing.Location = new Point(216, 566);
+            numericUpDownCharacterSpacing.Location = new Point(252, 566);
             numericUpDownCharacterSpacing.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownCharacterSpacing.Name = "numericUpDownCharacterSpacing";
             numericUpDownCharacterSpacing.Size = new Size(80, 27);
@@ -556,9 +556,9 @@
             // 
             labelWordSpacing.AutoSize = true;
             labelWordSpacing.Dock = DockStyle.Fill;
-            labelWordSpacing.Location = new Point(57, 596);
+            labelWordSpacing.Location = new Point(53, 596);
             labelWordSpacing.Name = "labelWordSpacing";
-            labelWordSpacing.Size = new Size(153, 33);
+            labelWordSpacing.Size = new Size(193, 33);
             labelWordSpacing.TabIndex = 34;
             labelWordSpacing.Text = "Word spacing:";
             labelWordSpacing.TextAlign = ContentAlignment.MiddleLeft;
@@ -566,7 +566,7 @@
             // numericUpDownWordSpacing
             // 
             numericUpDownWordSpacing.DecimalPlaces = 2;
-            numericUpDownWordSpacing.Location = new Point(216, 599);
+            numericUpDownWordSpacing.Location = new Point(252, 599);
             numericUpDownWordSpacing.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownWordSpacing.Name = "numericUpDownWordSpacing";
             numericUpDownWordSpacing.Size = new Size(80, 27);
@@ -578,9 +578,9 @@
             // 
             labelLineSpacing.AutoSize = true;
             labelLineSpacing.Dock = DockStyle.Fill;
-            labelLineSpacing.Location = new Point(57, 629);
+            labelLineSpacing.Location = new Point(53, 629);
             labelLineSpacing.Name = "labelLineSpacing";
-            labelLineSpacing.Size = new Size(153, 33);
+            labelLineSpacing.Size = new Size(193, 33);
             labelLineSpacing.TabIndex = 36;
             labelLineSpacing.Text = "Line spacing:";
             labelLineSpacing.TextAlign = ContentAlignment.MiddleLeft;
@@ -588,7 +588,7 @@
             // numericUpDownLineSpacing
             // 
             numericUpDownLineSpacing.DecimalPlaces = 2;
-            numericUpDownLineSpacing.Location = new Point(216, 632);
+            numericUpDownLineSpacing.Location = new Point(252, 632);
             numericUpDownLineSpacing.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownLineSpacing.Name = "numericUpDownLineSpacing";
             numericUpDownLineSpacing.Size = new Size(80, 27);
@@ -600,9 +600,9 @@
             // 
             labelSubSuperScript.AutoSize = true;
             labelSubSuperScript.Dock = DockStyle.Fill;
-            labelSubSuperScript.Location = new Point(57, 662);
+            labelSubSuperScript.Location = new Point(53, 662);
             labelSubSuperScript.Name = "labelSubSuperScript";
-            labelSubSuperScript.Size = new Size(153, 34);
+            labelSubSuperScript.Size = new Size(193, 34);
             labelSubSuperScript.TabIndex = 38;
             labelSubSuperScript.Text = "Sub/Super script:";
             labelSubSuperScript.TextAlign = ContentAlignment.MiddleLeft;
@@ -610,7 +610,7 @@
             // comboBoxSubSuperScript
             // 
             comboBoxSubSuperScript.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxSubSuperScript.Location = new Point(216, 665);
+            comboBoxSubSuperScript.Location = new Point(252, 665);
             comboBoxSubSuperScript.Name = "comboBoxSubSuperScript";
             comboBoxSubSuperScript.Size = new Size(200, 28);
             comboBoxSubSuperScript.TabIndex = 39;
@@ -619,9 +619,9 @@
             // 
             labelParagraphIndent.AutoSize = true;
             labelParagraphIndent.Dock = DockStyle.Fill;
-            labelParagraphIndent.Location = new Point(57, 696);
+            labelParagraphIndent.Location = new Point(53, 696);
             labelParagraphIndent.Name = "labelParagraphIndent";
-            labelParagraphIndent.Size = new Size(153, 33);
+            labelParagraphIndent.Size = new Size(193, 33);
             labelParagraphIndent.TabIndex = 40;
             labelParagraphIndent.Text = "Paragraph indent:";
             labelParagraphIndent.TextAlign = ContentAlignment.MiddleLeft;
@@ -629,7 +629,7 @@
             // numericUpDownParagraphIndent
             // 
             numericUpDownParagraphIndent.DecimalPlaces = 2;
-            numericUpDownParagraphIndent.Location = new Point(216, 699);
+            numericUpDownParagraphIndent.Location = new Point(252, 699);
             numericUpDownParagraphIndent.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownParagraphIndent.Name = "numericUpDownParagraphIndent";
             numericUpDownParagraphIndent.Size = new Size(80, 27);
@@ -649,7 +649,7 @@
             tableLayoutPanelButtons.Controls.Add(buttonReset, 1, 0);
             tableLayoutPanelButtons.Controls.Add(buttonDelete, 2, 0);
             tableLayoutPanelButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            tableLayoutPanelButtons.Location = new Point(216, 732);
+            tableLayoutPanelButtons.Location = new Point(252, 732);
             tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             tableLayoutPanelButtons.RowCount = 1;
             tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
@@ -748,12 +748,12 @@
         private ComboBox comboBoxBrush;
         private Label labelBrush;
         private Label labelTextType;
-        private Label labelFieldOrParameter;
-        private ComboBox comboBoxFieldOrParameter;
+        private Label labelFieldParameterFormula;
+        private ComboBox comboBoxFieldParameterFormula;
         private TextBox textBoxFormat;
         private Label labelFormat;
-        private TextBox textBoxValue;
-        private Label labelValue;
+        private TextBox textBoxStaticText;
+        private Label labelStaticText;
         private ComboBox comboBoxFont;
         private Label labelWordWrapType;
         private Label labelHorizontalAlignment;

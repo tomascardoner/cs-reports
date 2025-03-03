@@ -68,46 +68,58 @@
         {
             if (_report.Datasource is null)
             {
-                comboBoxFieldOrParameter.Items.Clear();
+                comboBoxFieldParameterFormula.Items.Clear();
                 return;
             }
-            comboBoxFieldOrParameter.DisplayMember = "Value";
-            comboBoxFieldOrParameter.ValueMember = "Key";
+            comboBoxFieldParameterFormula.DisplayMember = "Value";
+            comboBoxFieldParameterFormula.ValueMember = "Key";
             ICollection<KeyValuePair<short, string>> items = [];
             foreach (Model.DatasourceField datasourceField in _report.Datasource.Fields.OrderBy(f => f.Name))
             {
                 items.Add(new KeyValuePair<short, string>(datasourceField.FieldId, datasourceField.Name));
             }
-            comboBoxFieldOrParameter.DataSource = items;
+            comboBoxFieldParameterFormula.DataSource = items;
         }
 
         private void FillComboBoxDatasourceParameters()
         {
             if (_report.Datasource is null)
             {
-                comboBoxFieldOrParameter.Items.Clear();
+                comboBoxFieldParameterFormula.Items.Clear();
                 return;
             }
-            comboBoxFieldOrParameter.DisplayMember = "Value";
-            comboBoxFieldOrParameter.ValueMember = "Key";
-            ICollection<KeyValuePair<string, string>> items = [];
-            foreach (string datasourceParameterName in _report.Datasource.Parameters.OrderBy(p => p.Name).Select(p => p.Name))
+            comboBoxFieldParameterFormula.DisplayMember = "Value";
+            comboBoxFieldParameterFormula.ValueMember = "Key";
+            ICollection<KeyValuePair<short, string>> items = [];
+            foreach (Model.DatasourceParameter datasourceParameter in _report.Datasource.Parameters.OrderBy(p => p.Name))
             {
-                items.Add(new KeyValuePair<string, string>(datasourceParameterName, datasourceParameterName));
+                items.Add(new KeyValuePair<short, string>(datasourceParameter.ParameterId, datasourceParameter.Name));
             }
-            comboBoxFieldOrParameter.DataSource = items;
+            comboBoxFieldParameterFormula.DataSource = items;
         }
 
         private void FillComboBoxReportParameters()
         {
-            comboBoxFieldOrParameter.DisplayMember = "Value";
-            comboBoxFieldOrParameter.ValueMember = "Key";
-            ICollection<KeyValuePair<string, string>> items = [];
-            foreach (string reportParameterName in _report.Parameters.OrderBy(p => p.Name).Select(p => p.Name))
+            comboBoxFieldParameterFormula.DisplayMember = "Value";
+            comboBoxFieldParameterFormula.ValueMember = "Key";
+            ICollection<KeyValuePair<short, string>> items = [];
+            foreach (Model.ReportParameter reportParameter in _report.Parameters.OrderBy(p => p.Name))
             {
-                items.Add(new KeyValuePair<string, string>(reportParameterName, reportParameterName));
+                items.Add(new KeyValuePair<short, string>(reportParameter.ParameterId, reportParameter.Name));
             }
-            comboBoxFieldOrParameter.DataSource = items;
+            comboBoxFieldParameterFormula.DataSource = items;
+        }
+
+        private void FillComboBoxFormulas()
+        {
+            comboBoxFieldParameterFormula.DisplayMember = "Value";
+            comboBoxFieldParameterFormula.ValueMember = "Key";
+            ICollection<KeyValuePair<short, string>> items = [];
+            foreach (Model.Formula formula in _report.Formulas.OrderBy(f => f.Name))
+            {
+                items.Add(new KeyValuePair<short, string>(formula.FormulaId, formula.Name));
+            }
+            comboBoxFieldParameterFormula.DataSource = items;
         }
 
         private void FillComboBoxFonts()
@@ -193,26 +205,27 @@
                 return;
             }
             Model.Text.TextTypes textType = (Model.Text.TextTypes)comboBoxTextType.SelectedValue;
-            labelFieldOrParameter.Visible = textType != Model.Text.TextTypes.Static && textType != Model.Text.TextTypes.Formula;
-            comboBoxFieldOrParameter.Visible = textType != Model.Text.TextTypes.Static && textType != Model.Text.TextTypes.Formula;
-            labelValue.Visible = textType == Model.Text.TextTypes.Static || textType == Model.Text.TextTypes.Formula;
-            textBoxValue.Visible = textType == Model.Text.TextTypes.Static || textType == Model.Text.TextTypes.Formula;
-            labelFormat.Visible = textType != Model.Text.TextTypes.Static && textType != Model.Text.TextTypes.Formula;
-            textBoxFormat.Visible = textType != Model.Text.TextTypes.Static && textType != Model.Text.TextTypes.Formula;
+            labelFieldParameterFormula.Text = FriendlyNames.GetTextTypeShort(textType) + ":";
+            labelFieldParameterFormula.Visible = textType != Model.Text.TextTypes.Static;
+            comboBoxFieldParameterFormula.Visible = textType != Model.Text.TextTypes.Static;
+            labelStaticText.Visible = textType == Model.Text.TextTypes.Static;
+            textBoxStaticText.Visible = textType == Model.Text.TextTypes.Static;
+            labelFormat.Visible = textType != Model.Text.TextTypes.Static;
+            textBoxFormat.Visible = textType != Model.Text.TextTypes.Static;
 
             switch (textType)
             {
                 case Model.Text.TextTypes.DatasourceField:
-                    labelFieldOrParameter.Text = "Field:";
                     FillComboBoxDatasourceFields();
                     break;
                 case Model.Text.TextTypes.DatasourceParameter:
-                    labelFieldOrParameter.Text = "Parameter:";
                     FillComboBoxDatasourceParameters();
                     break;
                 case Model.Text.TextTypes.ReportParameter:
-                    labelFieldOrParameter.Text = "Parameter:";
                     FillComboBoxReportParameters();
+                    break;
+                case Model.Text.TextTypes.Formula:
+                    FillComboBoxFormulas();
                     break;
                 default:
                     break;
@@ -240,21 +253,46 @@
                 return;
             }
             comboBoxTextType.SelectedValue = (int)_text.TextType;
-            switch ((Model.Text.TextTypes)comboBoxTextType.SelectedValue)
+
+            if (_text.TextType == Model.Text.TextTypes.Static)
             {
-                case Model.Text.TextTypes.DatasourceField:
-                    comboBoxFieldOrParameter.SelectedValue = _text.DatasourceFieldId;
-                    textBoxFormat.Text = _text.Format;
-                    break;
-                case Model.Text.TextTypes.DatasourceParameter:
-                case Model.Text.TextTypes.ReportParameter:
-                    comboBoxFieldOrParameter.SelectedValue = _text.Value;
-                    textBoxFormat.Text = _text.Format;
-                    break;
-                default:
-                    textBoxValue.Text = _text.Value;
-                    break;
+                textBoxStaticText.Text = _text.StaticText;
             }
+            else
+            {
+                textBoxStaticText.Text = string.Empty;
+            }
+
+            if (_text.TextType == Model.Text.TextTypes.DatasourceField && _text.DatasourceFieldId is not null)
+            {
+                comboBoxFieldParameterFormula.SelectedValue = _text.DatasourceFieldId;
+            }
+            else if (_text.TextType == Model.Text.TextTypes.DatasourceParameter && _text.DatasourceParameterId is not null)
+            {
+                comboBoxFieldParameterFormula.SelectedValue = _text.DatasourceParameterId;
+            }
+            else if (_text.TextType == Model.Text.TextTypes.ReportParameter && _text.ReportParameterId is not null)
+            {
+                comboBoxFieldParameterFormula.SelectedValue = _text.ReportParameterId;
+            }
+            else if (_text.TextType == Model.Text.TextTypes.Formula && _text.FormuladId is not null)
+            {
+                comboBoxFieldParameterFormula.SelectedValue = _text.FormuladId;
+            }
+            else
+            {
+                comboBoxFieldParameterFormula.SelectedIndex = -1;
+            }
+
+            if (_text.TextType == Model.Text.TextTypes.Static)
+            {
+                textBoxFormat.Text = string.Empty;
+            }
+            else
+            {
+                textBoxFormat.Text = _text.Format;
+            }
+
             comboBoxFont.SelectedValue = _text.FontId;
             textBoxBorderColor.Text = _text.BorderColorHex;
             textBoxBorderColor.Tag = Color.FromArgb(_text.BorderColorRed, _text.BorderColorGreen, _text.BorderColorBlue);
@@ -294,10 +332,10 @@
                 return;
             }
             Model.Text.TextTypes textType = (Model.Text.TextTypes)comboBoxTextType.SelectedValue;
-            if ((textType == Model.Text.TextTypes.DatasourceField || textType == Model.Text.TextTypes.DatasourceParameter || textType == Model.Text.TextTypes.ReportParameter) && comboBoxFieldOrParameter.SelectedValue is null)
+            if ((textType == Model.Text.TextTypes.DatasourceField || textType == Model.Text.TextTypes.DatasourceParameter || textType == Model.Text.TextTypes.ReportParameter || textType == Model.Text.TextTypes.Formula) && comboBoxFieldParameterFormula.SelectedValue is null)
             {
-                MessageBox.Show(textType == Model.Text.TextTypes.DatasourceField ? Properties.Resources.StringTextFieldRequired : Properties.Resources.StringTextParameterRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                comboBoxFieldOrParameter.Focus();
+                MessageBox.Show(string.Format(Properties.Resources.StringTextFieldParameterFormulaRequired, FriendlyNames.GetTextTypeShort(textType).ToLower()), _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                comboBoxFieldParameterFormula.Focus();
                 return;
             }
             if (comboBoxFont.SelectedValue is null)
@@ -350,26 +388,54 @@
             }
 
             _text.TextType = textType;
-
-#pragma warning disable CS8605 // Unboxing a possibly null value.
-            switch (textType)
+            if (textType == Model.Text.TextTypes.Static)
             {
-                case Model.Text.TextTypes.DatasourceField:
-                    _text.DatasourceFieldId = (short)comboBoxFieldOrParameter.SelectedValue;
-                    _text.Value = comboBoxFieldOrParameter.Text;
-                    _text.Format = textBoxFormat.Text.Trim();
-                    break;
-                case Model.Text.TextTypes.DatasourceParameter:
-                case Model.Text.TextTypes.ReportParameter:
-                    _text.Value = comboBoxFieldOrParameter.Text;
-                    _text.Format = textBoxFormat.Text.Trim();
-                    break;
-                default:
-                    textBoxValue.Text = _text.Value;
-                    break;
+                _text.StaticText = textBoxStaticText.Text;
             }
-#pragma warning restore CS8605 // Unboxing a possibly null value.
-
+            else
+            {
+                _text.StaticText = null!;
+            }
+            if (textType == Model.Text.TextTypes.DatasourceField)
+            {
+                _text.DatasourceFieldId = (short)comboBoxFieldParameterFormula.SelectedValue!;
+            }
+            else
+            {
+                _text.DatasourceFieldId = null;
+            }
+            if (textType == Model.Text.TextTypes.DatasourceParameter)
+            {
+                _text.DatasourceParameterId = (short)comboBoxFieldParameterFormula.SelectedValue!;
+            }
+            else
+            {
+                _text.DatasourceParameterId = null;
+            }
+            if (textType == Model.Text.TextTypes.ReportParameter)
+            {
+                _text.ReportParameterId = (short)comboBoxFieldParameterFormula.SelectedValue!;
+            }
+            else
+            {
+                _text.ReportParameterId = null;
+            }
+            if (textType == Model.Text.TextTypes.Formula)
+            {
+                _text.FormuladId = (short)comboBoxFieldParameterFormula.SelectedValue!;
+            }
+            else
+            {
+                _text.FormuladId = null;
+            }
+            if (textType == Model.Text.TextTypes.Static)
+            {
+                _text.Format = null!;
+            }
+            else
+            {
+                _text.Format = textBoxFormat.Text.Trim();
+            }
             _text.FontId = (short)comboBoxFont.SelectedValue;
             Color color = (Color)textBoxBorderColor.Tag;
             _text.BorderColorRed = color.R;
@@ -404,7 +470,7 @@
 
         private void Delete(object sender, EventArgs e)
         {
-            if (_text is null || MessageBox.Show(string.Format(Properties.Resources.StringTextDeleteConfirmation, _text.DisplayName), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (_text is null || MessageBox.Show(string.Format(Properties.Resources.StringTextDeleteConfirmation, _text.DisplayName(_report)), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }

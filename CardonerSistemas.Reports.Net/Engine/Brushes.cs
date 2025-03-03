@@ -14,7 +14,7 @@ namespace CardonerSistemas.Reports.Net.Engine
                     XBrush xBrush = brush.Type switch
                     {
                         Model.Brush.BrushTypes.Solid => new XSolidBrush(brush.Color1),
-                        Model.Brush.BrushTypes.LinealGradient => new XLinearGradientBrush(brush.Rectangle, brush.Color1, brush.Color2, brush.LinearGradientMode),
+                        Model.Brush.BrushTypes.LinealGradient => new XLinearGradientBrush(brush.Rectangle, brush.Color1, brush.Color2, brush.LinearGradientMode!.Value),
                         Model.Brush.BrushTypes.RadialGradient => new XRadialGradientBrush(brush.Point1, brush.Point2, (double)(brush.RadiusStart ?? 0), (double)(brush.RadiusEnd ?? 0), brush.Color1, brush.Color2),
                         _ => throw new NotImplementedException($"Brush type {brush.Type} not implemented.")
                     };

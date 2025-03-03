@@ -11,7 +11,7 @@
         private Model.DatasourceParameter? _datasourceParameter;
         private readonly string _applicationTitle;
 
-        public delegate void ParameterHandler(object sender, string parameterName);
+        public delegate void ParameterHandler(object sender, short parameterId);
 
         public event ParameterHandler? ParameterUpdated;
         public event ParameterHandler? ParameterDeleted;
@@ -190,13 +190,13 @@
             }
         }
 
-        internal void ShowProperties(string parameterName)
+        internal void ShowProperties(short parameterId)
         {
             if (_report.Datasource is null)
             {
                 return;
             }
-            _datasourceParameter = _report.Datasource.Parameters.FirstOrDefault(p => p.Name == parameterName);
+            _datasourceParameter = _report.Datasource.Parameters.FirstOrDefault(p => p.ParameterId == parameterId);
             ShowProperties();
         }
 
@@ -223,7 +223,6 @@
                 MessageBox.Show(Properties.Resources.StringDatasourceParameterNameAlreadyExists, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxName.Focus();
             }
-            string originalName = _datasourceParameter.Name;
             _datasourceParameter.Name = textBoxName.Text.Trim();
             _datasourceParameter.Type = (System.Data.DbType)comboBoxType.SelectedValue;
             if (checkBoxValueNull.Checked)
@@ -253,7 +252,7 @@
             }
             if (ParameterUpdated is not null)
             {
-                ParameterUpdated(this, originalName);
+                ParameterUpdated(this, _datasourceParameter.ParameterId);
             }
         }
 
@@ -271,7 +270,7 @@
             _report.Datasource.Parameters.Remove(_datasourceParameter);
             if (ParameterDeleted is not null)
             {
-                ParameterDeleted(this, _datasourceParameter.Name);
+                ParameterDeleted(this, _datasourceParameter.ParameterId);
             }
         }
 

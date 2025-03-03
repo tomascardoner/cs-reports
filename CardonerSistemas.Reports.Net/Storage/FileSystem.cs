@@ -24,6 +24,10 @@
             ArgumentNullException.ThrowIfNull(report);
             ArgumentNullException.ThrowIfNullOrEmpty(filePath);
 
+            if (report.Version < Engine.Version.Report && !Engine.Version.Update(report))
+            {
+                return false;
+            }
             if (!ReportSerializer.Serialize(report, out string reportSerial))
             {
                 return false;

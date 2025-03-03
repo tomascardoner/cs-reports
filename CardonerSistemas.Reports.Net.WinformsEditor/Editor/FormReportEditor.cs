@@ -155,7 +155,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                     DatasourceParametersPanelShow();
                     break;
                 case DatasourceParameterKey:
-                    DatasourceParameterPanelShow(nodeInfo.Item2);
+                    DatasourceParameterPanelShow(short.Parse(nodeInfo.Item2));
                     break;
                 case DatasourceFieldsKey:
                     DatasourceFieldsPanelShow();
@@ -225,14 +225,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 
         private static Tuple<string, string> GetTreeNodeInfoFromTag(TreeNode treeNode)
         {
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-            string nodeTag = treeNode.Tag.ToString();
+            string nodeTag = treeNode.Tag!.ToString()!;
             string nodeType = nodeTag[..nodeTag.IndexOf('@')];
             string nodeId = nodeTag[(nodeType.Length + 1)..];
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
-
             return Tuple.Create(nodeType, nodeId);
         }
 
@@ -323,9 +318,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(_panelReport);
-#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
-                _panelReport.ReportUpdated += ReportUpdated;
-#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+                _panelReport.ReportUpdated += ReportUpdated!;
             }
             _panelReport.ShowProperties();
             _panelReport.Show();
@@ -368,11 +361,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(_panelDatasource);
-#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
-                _panelDatasource.DatasourceUpdated += DatasourceUpdated;
-                _panelDatasource.DatasourceDeleted += DatasourceDeleted;
-                _panelDatasource.FieldsUpdated += DatasourceFieldsUpdated;
-#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+                _panelDatasource.DatasourceUpdated += DatasourceUpdated!;
+                _panelDatasource.DatasourceDeleted += DatasourceDeleted!;
+                _panelDatasource.FieldsUpdated += DatasourceFieldsUpdated!;
             }
             _panelDatasource.ShowProperties();
             _panelDatasource.Show();
@@ -444,14 +435,14 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 
         private TreeNode DatasourceParameterCreateTreeNode(Model.DatasourceParameter parameter)
         {
-            TreeNode treeTreeNodeDatasourceParameter = AddTreeNode(DatasourceParameterTreeNodeGetText(parameter), DatasourceParameterKey, parameter.Name);
+            TreeNode treeTreeNodeDatasourceParameter = AddTreeNode(DatasourceParameterTreeNodeGetText(parameter), DatasourceParameterKey, parameter.ParameterId.ToString());
             treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex].Nodes.Add(treeTreeNodeDatasourceParameter);
             return treeTreeNodeDatasourceParameter;
         }
 
-        private void DatasourceParameterPanelShow(string parameterName)
+        private void DatasourceParameterPanelShow(short parameterId)
         {
-            Model.DatasourceParameter? parameter = _report.Datasource?.Parameters.FirstOrDefault(p => p.Name == parameterName);
+            Model.DatasourceParameter? parameter = _report.Datasource?.Parameters.FirstOrDefault(p => p.ParameterId == parameterId);
             if (parameter is null)
             {
                 return;
@@ -466,19 +457,19 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 _panelDatasourceParameter.ParameterUpdated += DatasourceParameterUpdated;
                 _panelDatasourceParameter.ParameterDeleted += DatasourceParameterDeleted;
             }
-            _panelDatasourceParameter.ShowProperties(parameterName);
+            _panelDatasourceParameter.ShowProperties(parameterId);
             _panelDatasourceParameter.Show();
         }
 
-        private void DatasourceParameterUpdated(object sender, string parameterName)
+        private void DatasourceParameterUpdated(object sender, short parameterId)
         {
-            Model.DatasourceParameter? parameter = _report.Datasource?.Parameters.FirstOrDefault(p => p.Name == parameterName);
+            Model.DatasourceParameter? parameter = _report.Datasource?.Parameters.FirstOrDefault(p => p.ParameterId == parameterId);
             if (parameter is null)
             {
                 return;
             }
             TreeNode treeTreeNodeDatasourceParameters = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex];
-            TreeNode? treeTreeNodeDatasourceParameter = GetTreeNodeByTag(treeTreeNodeDatasourceParameters, DatasourceParameterKey, parameter.Name);
+            TreeNode? treeTreeNodeDatasourceParameter = GetTreeNodeByTag(treeTreeNodeDatasourceParameters, DatasourceParameterKey, parameterId.ToString());
             if (treeTreeNodeDatasourceParameter is null)
             {
                 treeTreeNodeDatasourceParameter = DatasourceParameterCreateTreeNode(parameter);
@@ -496,10 +487,10 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             }
         }
 
-        private void DatasourceParameterDeleted(object sender, string parameterName)
+        private void DatasourceParameterDeleted(object sender, short parameterId)
         {
             TreeNode treeTreeNodeDatasourceParameters = treeViewReport.Nodes[TreeNodeReportIndex].Nodes[TreeNodeDatasourceIndex].Nodes[TreeNodeDatasourceParametersIndex];
-            TreeNode? treeTreeNodeDatasourceParameter = GetTreeNodeByTag(treeTreeNodeDatasourceParameters, DatasourceParameterKey, parameterName);
+            TreeNode? treeTreeNodeDatasourceParameter = GetTreeNodeByTag(treeTreeNodeDatasourceParameters, DatasourceParameterKey, parameterId.ToString());
             if (treeTreeNodeDatasourceParameter is not null)
             {
                 treeTreeNodeDatasourceParameters.Nodes.Remove(treeTreeNodeDatasourceParameter);
@@ -541,10 +532,8 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                     Dock = DockStyle.Fill
                 };
                 splitContainerMain.Panel2.Controls.Add(_panelDatasourceFields);
-#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
                 _panelDatasourceFields.FieldAdded += DatasourceFieldUpdated;
-                _panelDatasourceFields.FieldsUpdated += DatasourceFieldsUpdated;
-#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+                _panelDatasourceFields.FieldsUpdated += DatasourceFieldsUpdated!;
             }
             _panelDatasourceFields.ShowProperties();
             _panelDatasourceFields.Show();
@@ -1248,12 +1237,12 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 
         #region Text
 
-        private static string TextTreeNodeGetText(Model.Text text)
+        private string TextTreeNodeGetText(Model.Text text)
         {
-            return text.DisplayName;
+            return text.DisplayName(_report);
         }
 
-        private static TreeNode TextCreateTreeNode(Model.Text text, TreeNode treeTreeNodeParent)
+        private TreeNode TextCreateTreeNode(Model.Text text, TreeNode treeTreeNodeParent)
         {
             TreeNode treeTreeNodeText = AddTreeNode(TextTreeNodeGetText(text), TextKey, text.TextId.ToString());
             treeTreeNodeParent.Nodes.Add(treeTreeNodeText);

@@ -59,18 +59,20 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public decimal? PositionY1 { get; set; }
 
+        [JsonIgnore]
         public XPoint Point1 => new((double)(PositionX1 ?? 0), (double)(PositionY1 ?? 0));
 
         public decimal? PositionX2 { get; set; }
 
         public decimal? PositionY2 { get; set; }
 
+        [JsonIgnore]
         public XPoint Point2 => new((double)(PositionX2 ?? 0), (double)(PositionY2 ?? 0));
 
         [JsonIgnore]
         public XRect Rectangle => new((double)(PositionX1 ?? 0), (double)(PositionY1 ?? 0), (double)(PositionX2 ?? 0), (double)(PositionY2 ?? 0));
 
-        public XLinearGradientMode LinearGradientMode { get; set; }
+        public XLinearGradientMode? LinearGradientMode { get; set; }
 
         public decimal? RadiusStart { get; set; }
 

@@ -890,11 +890,11 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Must specify field..
+        ///   Looks up a localized string similar to Must specify {0}..
         /// </summary>
-        internal static string StringTextFieldRequired {
+        internal static string StringTextFieldParameterFormulaRequired {
             get {
-                return ResourceManager.GetString("StringTextFieldRequired", resourceCulture);
+                return ResourceManager.GetString("StringTextFieldParameterFormulaRequired", resourceCulture);
             }
         }
         
@@ -913,15 +913,6 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringTextHorizontalAlignmentRequired {
             get {
                 return ResourceManager.GetString("StringTextHorizontalAlignmentRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Must specify parameter..
-        /// </summary>
-        internal static string StringTextParameterRequired {
-            get {
-                return ResourceManager.GetString("StringTextParameterRequired", resourceCulture);
             }
         }
         

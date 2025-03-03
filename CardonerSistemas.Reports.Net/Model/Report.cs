@@ -16,9 +16,9 @@ namespace CardonerSistemas.Reports.Net.Model
             ReportId = reportId;
         }
 
-        public static decimal Version => 1.0m;
-
         public Guid ReportId { get; }
+
+        public decimal Version { get; set; } = Engine.Version.Report;
 
         public string Name { get; set; } = string.Empty;
 
@@ -41,6 +41,8 @@ namespace CardonerSistemas.Reports.Net.Model
         public ICollection<ReportParameter> Parameters { get; set; } = [];
 
         public Datasource? Datasource { get; set; }
+
+        public ICollection<Formula> Formulas { get; set; } = [];
 
         public ICollection<Section> Sections { get; set; } = [];
 

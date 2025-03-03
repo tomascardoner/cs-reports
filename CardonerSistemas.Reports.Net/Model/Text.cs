@@ -37,9 +37,15 @@ namespace CardonerSistemas.Reports.Net.Model
 
         public TextTypes TextType { get; set; }
 
-        public short DatasourceFieldId { get; set; }
+        public short? DatasourceFieldId { get; set; }
 
-        public string Value { get; set; } = string.Empty;
+        public short? DatasourceParameterId { get; set; }
+
+        public short? ReportParameterId { get; set; }
+
+        public short? FormuladId { get; set; }
+
+        public string StaticText { get; set; } = string.Empty;
 
         public string Format { get; set; } = string.Empty;
 
@@ -102,15 +108,52 @@ namespace CardonerSistemas.Reports.Net.Model
         [JsonIgnore]
         public Font? Font => _report.Fonts.FirstOrDefault(f => f.FontId == FontId);
 
-        [JsonIgnore]
-        public string DisplayName => TextType switch
+        public string DisplayName(Report report)
         {
-            TextTypes.Static => $"#{TextId:00} - {FriendlyNames.GetTextType(TextType)} => {Value}",
-            TextTypes.DatasourceField => $"#{TextId:00} - {FriendlyNames.GetTextType(TextType)} => {Value}",
-            TextTypes.DatasourceParameter => $"#{TextId:00} - {FriendlyNames.GetTextType(TextType)} => {Value}",
-            TextTypes.ReportParameter => $"#{TextId:00} - {FriendlyNames.GetTextType(TextType)} => {Value}",
-            TextTypes.Formula => $"#{TextId:00} - {FriendlyNames.GetTextType(TextType)}",
-            _ => string.Empty
-        };
+            string displayNameValue = string.Empty;
+            switch (TextType)
+            {
+                case TextTypes.Static:
+                    displayNameValue = StaticText;
+                    break;
+                case TextTypes.DatasourceField:
+                    if (report.Datasource is not null)
+                    {
+                        DatasourceField? datasourceField = report.Datasource.Fields.FirstOrDefault(f => f.FieldId == DatasourceFieldId);
+                        if (datasourceField is not null)
+                        {
+                            displayNameValue = datasourceField.Name;
+                        }
+                    }
+                    break;
+                case TextTypes.DatasourceParameter:
+                    if (report.Datasource is not null)
+                    {
+                        DatasourceParameter? datasourceParameter = report.Datasource.Parameters.FirstOrDefault(p => p.ParameterId == DatasourceParameterId);
+                        if (datasourceParameter is not null)
+                        {
+                            displayNameValue = datasourceParameter.Name;
+                        }
+                    }
+                    break;
+                case TextTypes.ReportParameter:
+                    ReportParameter? reportParameter = report.Parameters.FirstOrDefault(p => p.ParameterId == ReportParameterId);
+                    if (reportParameter is not null)
+                    {
+                        displayNameValue = reportParameter.Name;
+                    }
+                    break;
+                case TextTypes.Formula:
+                    Formula? formula = report.Formulas.FirstOrDefault(f => f.FormulaId == FormuladId);
+                    if (formula is not null)
+                    {
+                        displayNameValue = formula.Name;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return $"#{TextId:00} - {FriendlyNames.GetTextType(TextType)} => {displayNameValue}";
+        }
     }
 }

@@ -87,7 +87,7 @@ namespace CardonerSistemas.Reports.Net.Engine
         {
             ArgumentNullException.ThrowIfNull(text);
 
-            Model.DatasourceParameter? parameter = datasource.Parameters.FirstOrDefault(p => p.Name == text.Value);
+            Model.DatasourceParameter? parameter = datasource.Parameters.FirstOrDefault(p => p.ParameterId == text.DatasourceParameterId);
             if (parameter is null || parameter.Value is null)
             {
                 return string.Empty;
@@ -95,15 +95,17 @@ namespace CardonerSistemas.Reports.Net.Engine
 
             try
             {
+#pragma warning disable S6580 // Use a format provider when parsing date and time
                 return Value.GetTypeFromDbType(parameter.Type) switch
                 {
                     Model.Value.Types.Text => (string)parameter.Value,
-                    Model.Value.Types.Integer => long.Parse(parameter.Value.ToString()).ToString(text.Format),
-                    Model.Value.Types.Decimal => decimal.Parse(parameter.Value.ToString()).ToString(text.Format),
-                    Model.Value.Types.DateTime => DateTime.Parse(parameter.Value.ToString()).ToString(text.Format),
+                    Model.Value.Types.Integer => long.Parse(parameter.Value.ToString()!).ToString(text.Format),
+                    Model.Value.Types.Decimal => decimal.Parse(parameter.Value.ToString()!).ToString(text.Format),
+                    Model.Value.Types.DateTime => DateTime.Parse(parameter.Value.ToString()!).ToString(text.Format),
                     Model.Value.Types.YesNo => (bool)parameter.Value ? Properties.Resources.StringGeneralYes : Properties.Resources.StringGeneralNo,
                     _ => string.Empty
                 };
+#pragma warning restore S6580 // Use a format provider when parsing date and time
             }
             catch (Exception ex)
             {
@@ -116,7 +118,7 @@ namespace CardonerSistemas.Reports.Net.Engine
         {
             ArgumentNullException.ThrowIfNull(text);
 
-            Model.ReportParameter? parameter = report.Parameters.FirstOrDefault(p => p.Name == text.Value);
+            Model.ReportParameter? parameter = report.Parameters.FirstOrDefault(p => p.ParameterId == text.ReportParameterId);
             if (parameter is null || parameter.Value is null)
             {
                 return string.Empty;
@@ -124,15 +126,17 @@ namespace CardonerSistemas.Reports.Net.Engine
 
             try
             {
+#pragma warning disable S6580 // Use a format provider when parsing date and time
                 return parameter.Type switch
                 {
                     Model.Value.Types.Text => (string)parameter.Value,
-                    Model.Value.Types.Integer => ((int)parameter.Value).ToString(text.Format),
-                    Model.Value.Types.Decimal => ((decimal)parameter.Value).ToString(text.Format),
-                    Model.Value.Types.DateTime => ((DateTime)parameter.Value).ToString(text.Format),
+                    Model.Value.Types.Integer => long.Parse(parameter.Value.ToString()!).ToString(text.Format),
+                    Model.Value.Types.Decimal => decimal.Parse(parameter.Value.ToString()!).ToString(text.Format),
+                    Model.Value.Types.DateTime => DateTime.Parse(parameter.Value.ToString()!).ToString(text.Format),
                     Model.Value.Types.YesNo => (bool)parameter.Value ? Properties.Resources.StringGeneralYes : Properties.Resources.StringGeneralNo,
                     _ => string.Empty
                 };
+#pragma warning restore S6580 // Use a format provider when parsing date and time
             }
             catch (Exception ex)
             {

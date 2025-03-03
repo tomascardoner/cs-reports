@@ -745,11 +745,29 @@ namespace CardonerSistemas.Reports.Net.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Field.
+        /// </summary>
+        internal static string StringTextTypeDatasourceFieldShort {
+            get {
+                return ResourceManager.GetString("StringTextTypeDatasourceFieldShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Datasource parameter.
         /// </summary>
         internal static string StringTextTypeDatasourceParameter {
             get {
                 return ResourceManager.GetString("StringTextTypeDatasourceParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter.
+        /// </summary>
+        internal static string StringTextTypeDatasourceParameterShort {
+            get {
+                return ResourceManager.GetString("StringTextTypeDatasourceParameterShort", resourceCulture);
             }
         }
         
@@ -768,6 +786,15 @@ namespace CardonerSistemas.Reports.Net.Properties {
         internal static string StringTextTypeReportParameter {
             get {
                 return ResourceManager.GetString("StringTextTypeReportParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter.
+        /// </summary>
+        internal static string StringTextTypeReportParameterShort {
+            get {
+                return ResourceManager.GetString("StringTextTypeReportParameterShort", resourceCulture);
             }
         }
         

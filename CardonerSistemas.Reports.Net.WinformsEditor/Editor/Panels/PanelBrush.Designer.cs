@@ -265,6 +265,7 @@
             buttonColor2.TabIndex = 1;
             buttonColor2.Text = "…";
             buttonColor2.UseVisualStyleBackColor = true;
+            buttonColor2.Click += Color2Change;
             // 
             // tableLayoutPanelColor1
             // 

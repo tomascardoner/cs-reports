@@ -148,15 +148,42 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             comboBoxType.SelectedValue = (int)_brush.Type;
             textBoxColor1.Text = _brush.Color1Hex;
             textBoxColor1.Tag = Color.FromArgb(_brush.Color1Red, _brush.Color1Green, _brush.Color1Blue);
-            textBoxColor2.Text = _brush.Color2Hex;
-            textBoxColor2.Tag = _brush.Color2Red.HasValue && _brush.Color2Green.HasValue && _brush.Color2Blue.HasValue ? Color.FromArgb(_brush.Color2Red.Value, _brush.Color2Green.Value, _brush.Color2Blue.Value) : null;
-            numericUpDownPositionX1.Value = _brush.PositionX1 ?? 0;
-            numericUpDownPositionY1.Value = _brush.PositionY1 ?? 0;
-            numericUpDownPositionX2.Value = _brush.PositionX2 ?? 0;
-            numericUpDownPositionY2.Value = _brush.PositionY2 ?? 0;
-            comboBoxLinearGradientMode.SelectedValue = (int)_brush.LinearGradientMode;
-            numericUpDownRadiusStart.Value = _brush.RadiusStart ?? 0;
-            numericUpDownRadiusEnd.Value = _brush.RadiusEnd ?? 0;
+            if (_brush.Type == Model.Brush.BrushTypes.Solid)
+            {
+                textBoxColor2.Text = string.Empty;
+                textBoxColor2.Tag = null;
+                numericUpDownPositionX1.Value = 0;
+                numericUpDownPositionY1.Value = 0;
+                numericUpDownPositionX2.Value = 0;
+                numericUpDownPositionY2.Value = 0;
+            }
+            else
+            {
+                textBoxColor2.Text = _brush.Color2Hex;
+                textBoxColor2.Tag = _brush.Color2Red.HasValue && _brush.Color2Green.HasValue && _brush.Color2Blue.HasValue ? Color.FromArgb(_brush.Color2Red.Value, _brush.Color2Green.Value, _brush.Color2Blue.Value) : null;
+                numericUpDownPositionX1.Value = _brush.PositionX1 ?? 0;
+                numericUpDownPositionY1.Value = _brush.PositionY1 ?? 0;
+                numericUpDownPositionX2.Value = _brush.PositionX2 ?? 0;
+                numericUpDownPositionY2.Value = _brush.PositionY2 ?? 0;
+            }
+            if (_brush.Type == Model.Brush.BrushTypes.LinealGradient && _brush.LinearGradientMode is not null)
+            {
+                comboBoxLinearGradientMode.SelectedValue = (int)_brush.LinearGradientMode;
+            }
+            else
+            {
+                comboBoxLinearGradientMode.SelectedIndex = -1;
+            }
+            if (_brush.Type == Model.Brush.BrushTypes.RadialGradient)
+            {
+                numericUpDownRadiusStart.Value = _brush.RadiusStart ?? 0;
+                numericUpDownRadiusEnd.Value = _brush.RadiusEnd ?? 0;
+            }
+            else
+            {
+                numericUpDownRadiusStart.Value = 0;
+                numericUpDownRadiusEnd.Value = 0;
+            }
         }
 
         internal void ShowProperties(short brushId)
@@ -202,11 +229,19 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
             _brush.Color1Green = color1.G;
             _brush.Color1Blue = color1.B;
 
-            if (((Model.Brush.BrushTypes)comboBoxType.SelectedValue) != Model.Brush.BrushTypes.Solid)
+            if (((Model.Brush.BrushTypes)comboBoxType.SelectedValue) == Model.Brush.BrushTypes.Solid)
             {
-#pragma warning disable CS8605 // Unboxing a possibly null value.
-                Color color2 = (Color)textBoxColor2.Tag;
-#pragma warning restore CS8605 // Unboxing a possibly null value.
+                _brush.Color2Red = null;
+                _brush.Color2Green = null;
+                _brush.Color2Blue = null;
+                _brush.PositionX1 = null;
+                _brush.PositionY1 = null;
+                _brush.PositionX2 = null;
+                _brush.PositionY2 = null;
+            }
+            else
+            {
+                Color color2 = (Color)textBoxColor2.Tag!;
                 _brush.Color2Red = color2.R;
                 _brush.Color2Green = color2.G;
                 _brush.Color2Blue = color2.B;
@@ -219,15 +254,22 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
             if (((Model.Brush.BrushTypes)comboBoxType.SelectedValue) == Model.Brush.BrushTypes.LinealGradient)
             {
-#pragma warning disable CS8605 // Unboxing a possibly null value.
-                _brush.LinearGradientMode = (XLinearGradientMode)comboBoxLinearGradientMode.SelectedValue;
-#pragma warning restore CS8605 // Unboxing a possibly null value.
+                _brush.LinearGradientMode = (XLinearGradientMode)comboBoxLinearGradientMode.SelectedValue!;
+            }
+            else
+            {
+                _brush.LinearGradientMode = null;
             }
 
             if (((Model.Brush.BrushTypes)comboBoxType.SelectedValue) == Model.Brush.BrushTypes.RadialGradient)
             {
                 _brush.RadiusStart = numericUpDownRadiusStart.Value;
                 _brush.RadiusEnd = numericUpDownRadiusEnd.Value;
+            }
+            else
+            {
+                _brush.RadiusStart = null;
+                _brush.RadiusEnd = null;
             }
 
             if (BrushUpdated is not null)
