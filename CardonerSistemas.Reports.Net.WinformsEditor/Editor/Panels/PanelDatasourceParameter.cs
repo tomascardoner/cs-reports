@@ -65,20 +65,6 @@
             }
         }
 
-        private static Model.Value.Types GetValueTypeFromType(System.Data.DbType type)
-        {
-            return type switch
-            {
-                System.Data.DbType.String or System.Data.DbType.AnsiString or System.Data.DbType.AnsiStringFixedLength or System.Data.DbType.StringFixedLength or System.Data.DbType.Xml => Model.Value.Types.Text,
-                System.Data.DbType.Boolean => Model.Value.Types.YesNo,
-                System.Data.DbType.Byte or System.Data.DbType.SByte or System.Data.DbType.Int16 or System.Data.DbType.UInt16 or System.Data.DbType.Int32 or System.Data.DbType.UInt32 or System.Data.DbType.Int64 or System.Data.DbType.UInt64 or System.Data.DbType.VarNumeric => Model.Value.Types.Integer,
-                System.Data.DbType.Single or System.Data.DbType.Double or System.Data.DbType.Decimal or System.Data.DbType.Currency => Model.Value.Types.Decimal,
-                System.Data.DbType.Date or System.Data.DbType.Time or System.Data.DbType.DateTime or System.Data.DbType.DateTime2 or System.Data.DbType.DateTimeOffset => Model.Value.Types.DateTime,
-                System.Data.DbType.Binary or System.Data.DbType.Guid or System.Data.DbType.Object => throw new NotImplementedException("The DbType is not supported."),
-                _ => throw new ArgumentOutOfRangeException(nameof(type), type, "The DbType is not supported."),
-            };
-        }
-
         private void TypeChanged(object sender, EventArgs e)
         {
             if (comboBoxType.SelectedValue is null)
@@ -86,7 +72,7 @@
                 return;
             }
 
-            Model.Value.Types valueType = GetValueTypeFromType((System.Data.DbType)comboBoxType.SelectedValue);
+            Model.Value.Types valueType = Engine.Value.GetTypeFromDbType((System.Data.DbType)comboBoxType.SelectedValue);
 
             // Text value
             labelValueText.Visible = valueType == Model.Value.Types.Text;
@@ -183,7 +169,7 @@
             }
             else
             {
-                switch (GetValueTypeFromType((System.Data.DbType)comboBoxType.SelectedValue))
+                switch (Engine.Value.GetTypeFromDbType((System.Data.DbType)comboBoxType.SelectedValue))
                 {
                     case Model.Value.Types.Text:
                         textBoxValueText.Text = (string)_datasourceParameter.Value;
@@ -246,7 +232,7 @@
             }
             else
             {
-                switch (GetValueTypeFromType((System.Data.DbType)comboBoxType.SelectedValue))
+                switch (Engine.Value.GetTypeFromDbType((System.Data.DbType)comboBoxType.SelectedValue))
                 {
                     case Model.Value.Types.Text:
                         _datasourceParameter.Value = textBoxValueText.Text;

@@ -673,11 +673,263 @@ namespace CardonerSistemas.Reports.Net.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Center.
+        /// </summary>
+        internal static string StringTextHorizontalAlignmentCenter {
+            get {
+                return ResourceManager.GetString("StringTextHorizontalAlignmentCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Justify.
+        /// </summary>
+        internal static string StringTextHorizontalAlignmentJustify {
+            get {
+                return ResourceManager.GetString("StringTextHorizontalAlignmentJustify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Left.
+        /// </summary>
+        internal static string StringTextHorizontalAlignmentLeft {
+            get {
+                return ResourceManager.GetString("StringTextHorizontalAlignmentLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right.
+        /// </summary>
+        internal static string StringTextHorizontalAlignmentRight {
+            get {
+                return ResourceManager.GetString("StringTextHorizontalAlignmentRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string StringTextSubSuperScriptNone {
+            get {
+                return ResourceManager.GetString("StringTextSubSuperScriptNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Super script.
+        /// </summary>
+        internal static string StringTextSubSuperScriptsSubScript {
+            get {
+                return ResourceManager.GetString("StringTextSubSuperScriptsSubScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub script.
+        /// </summary>
+        internal static string StringTextSubSuperScriptsSuperScript {
+            get {
+                return ResourceManager.GetString("StringTextSubSuperScriptsSuperScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datasource field.
+        /// </summary>
+        internal static string StringTextTypeDatasourceField {
+            get {
+                return ResourceManager.GetString("StringTextTypeDatasourceField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datasource parameter.
+        /// </summary>
+        internal static string StringTextTypeDatasourceParameter {
+            get {
+                return ResourceManager.GetString("StringTextTypeDatasourceParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formula.
+        /// </summary>
+        internal static string StringTextTypeFormula {
+            get {
+                return ResourceManager.GetString("StringTextTypeFormula", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report parameter.
+        /// </summary>
+        internal static string StringTextTypeReportParameter {
+            get {
+                return ResourceManager.GetString("StringTextTypeReportParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Static.
+        /// </summary>
+        internal static string StringTextTypeStatic {
+            get {
+                return ResourceManager.GetString("StringTextTypeStatic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bottom.
+        /// </summary>
+        internal static string StringTextVerticalAlignmentBottom {
+            get {
+                return ResourceManager.GetString("StringTextVerticalAlignmentBottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Middle.
+        /// </summary>
+        internal static string StringTextVerticalAlignmentMiddle {
+            get {
+                return ResourceManager.GetString("StringTextVerticalAlignmentMiddle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top.
+        /// </summary>
+        internal static string StringTextVerticalAlignmentTop {
+            get {
+                return ResourceManager.GetString("StringTextVerticalAlignmentTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character.
+        /// </summary>
+        internal static string StringTextWordWrapTypeCharacter {
+            get {
+                return ResourceManager.GetString("StringTextWordWrapTypeCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discretionary hyphen.
+        /// </summary>
+        internal static string StringTextWordWrapTypeDiscretionaryHyphen {
+            get {
+                return ResourceManager.GetString("StringTextWordWrapTypeDiscretionaryHyphen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string StringTextWordWrapTypeNone {
+            get {
+                return ResourceManager.GetString("StringTextWordWrapTypeNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Word.
+        /// </summary>
+        internal static string StringTextWordWrapTypeWord {
+            get {
+                return ResourceManager.GetString("StringTextWordWrapTypeWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Word only.
+        /// </summary>
+        internal static string StringTextWordWrapTypeWordOnly {
+            get {
+                return ResourceManager.GetString("StringTextWordWrapTypeWordOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undefined.
         /// </summary>
         internal static string StringUndefined {
             get {
                 return ResourceManager.GetString("StringUndefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date/Time.
+        /// </summary>
+        internal static string StringValueTypeDateTime {
+            get {
+                return ResourceManager.GetString("StringValueTypeDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decimal.
+        /// </summary>
+        internal static string StringValueTypeDecimal {
+            get {
+                return ResourceManager.GetString("StringValueTypeDecimal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Integer.
+        /// </summary>
+        internal static string StringValueTypeInteger {
+            get {
+                return ResourceManager.GetString("StringValueTypeInteger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        internal static string StringValueTypeText {
+            get {
+                return ResourceManager.GetString("StringValueTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes/No.
+        /// </summary>
+        internal static string StringValueTypeYesNo {
+            get {
+                return ResourceManager.GetString("StringValueTypeYesNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes/No.
+        /// </summary>
+        internal static string StringValueTypeYesNo1 {
+            get {
+                return ResourceManager.GetString("StringValueTypeYesNo1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes/No.
+        /// </summary>
+        internal static string StringValueTypeYesNo2 {
+            get {
+                return ResourceManager.GetString("StringValueTypeYesNo2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes/No.
+        /// </summary>
+        internal static string StringValueTypeYesNo3 {
+            get {
+                return ResourceManager.GetString("StringValueTypeYesNo3", resourceCulture);
             }
         }
     }

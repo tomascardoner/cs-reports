@@ -324,4 +324,88 @@
   <data name="StringSectionTypeReportFooter" xml:space="preserve">
     <value>Report footer</value>
   </data>
+  <data name="StringTextTypeStatic" xml:space="preserve">
+    <value>Static</value>
+  </data>
+  <data name="StringTextTypeDatasourceField" xml:space="preserve">
+    <value>Datasource field</value>
+  </data>
+  <data name="StringTextTypeDatasourceParameter" xml:space="preserve">
+    <value>Datasource parameter</value>
+  </data>
+  <data name="StringTextTypeReportParameter" xml:space="preserve">
+    <value>Report parameter</value>
+  </data>
+  <data name="StringTextTypeFormula" xml:space="preserve">
+    <value>Formula</value>
+  </data>
+  <data name="StringValueTypeText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="StringValueTypeInteger" xml:space="preserve">
+    <value>Integer</value>
+  </data>
+  <data name="StringValueTypeDecimal" xml:space="preserve">
+    <value>Decimal</value>
+  </data>
+  <data name="StringValueTypeDateTime" xml:space="preserve">
+    <value>Date/Time</value>
+  </data>
+  <data name="StringValueTypeYesNo" xml:space="preserve">
+    <value>Yes/No</value>
+  </data>
+  <data name="StringValueTypeYesNo3" xml:space="preserve">
+    <value>Yes/No</value>
+  </data>
+  <data name="StringValueTypeYesNo2" xml:space="preserve">
+    <value>Yes/No</value>
+  </data>
+  <data name="StringValueTypeYesNo1" xml:space="preserve">
+    <value>Yes/No</value>
+  </data>
+  <data name="StringTextHorizontalAlignmentLeft" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="StringTextHorizontalAlignmentJustify" xml:space="preserve">
+    <value>Justify</value>
+  </data>
+  <data name="StringTextHorizontalAlignmentRight" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="StringTextHorizontalAlignmentCenter" xml:space="preserve">
+    <value>Center</value>
+  </data>
+  <data name="StringTextVerticalAlignmentTop" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="StringTextVerticalAlignmentMiddle" xml:space="preserve">
+    <value>Middle</value>
+  </data>
+  <data name="StringTextVerticalAlignmentBottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="StringTextWordWrapTypeNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="StringTextWordWrapTypeWord" xml:space="preserve">
+    <value>Word</value>
+  </data>
+  <data name="StringTextWordWrapTypeWordOnly" xml:space="preserve">
+    <value>Word only</value>
+  </data>
+  <data name="StringTextWordWrapTypeCharacter" xml:space="preserve">
+    <value>Character</value>
+  </data>
+  <data name="StringTextWordWrapTypeDiscretionaryHyphen" xml:space="preserve">
+    <value>Discretionary hyphen</value>
+  </data>
+  <data name="StringTextSubSuperScriptNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="StringTextSubSuperScriptsSuperScript" xml:space="preserve">
+    <value>Sub script</value>
+  </data>
+  <data name="StringTextSubSuperScriptsSubScript" xml:space="preserve">
+    <value>Super script</value>
+  </data>
 </root>

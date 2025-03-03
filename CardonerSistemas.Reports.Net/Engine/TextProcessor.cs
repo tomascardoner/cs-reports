@@ -2,20 +2,24 @@
 
 namespace CardonerSistemas.Reports.Net.Engine
 {
-    internal static class TextFields
+    internal static class TextProcessor
     {
-        internal static string GetValue(Model.Text text, DbDataReader? dbDataReader, Model.Datasource datasource)
+        internal static string GetDatasourceFieldValue(Model.Text text, DbDataReader? dbDataReader, Model.Datasource datasource)
         {
             ArgumentNullException.ThrowIfNull(text);
 
-            if (text.FieldType is null || dbDataReader is null)
+            if (dbDataReader is null)
             {
                 return string.Empty;
             }
-            Model.DatasourceField? field = datasource.Fields.FirstOrDefault(f => f.Name == text.Value);
+            Model.DatasourceField? field = datasource.Fields.FirstOrDefault(f => f.FieldId == text.DatasourceFieldId);
             if (field is null)
             {
                 return string.Empty;
+            }
+            if (dbDataReader.GetOrdinal(field.Name) != field.Position)
+            {
+                field.Position = dbDataReader.GetOrdinal(field.Name);
             }
             if (dbDataReader.IsDBNull(field.Position))
             {
@@ -24,7 +28,7 @@ namespace CardonerSistemas.Reports.Net.Engine
 
             try
             {
-                return text.FieldType switch
+                return Value.GetTypeFromDbType(field.Type) switch
                 {
                     Model.Value.Types.Text => field.Type switch
                     {
@@ -69,6 +73,64 @@ namespace CardonerSistemas.Reports.Net.Engine
                         System.Data.DbType.Boolean => dbDataReader.GetBoolean(field.Position) ? Properties.Resources.StringGeneralYes : Properties.Resources.StringGeneralNo,
                         _ => string.Empty
                     },
+                    _ => string.Empty
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return string.Empty;
+            }
+        }
+
+        internal static string GetDatasourceParameterValue(Model.Text text, Model.Datasource datasource)
+        {
+            ArgumentNullException.ThrowIfNull(text);
+
+            Model.DatasourceParameter? parameter = datasource.Parameters.FirstOrDefault(p => p.Name == text.Value);
+            if (parameter is null || parameter.Value is null)
+            {
+                return string.Empty;
+            }
+
+            try
+            {
+                return Value.GetTypeFromDbType(parameter.Type) switch
+                {
+                    Model.Value.Types.Text => (string)parameter.Value,
+                    Model.Value.Types.Integer => long.Parse(parameter.Value.ToString()).ToString(text.Format),
+                    Model.Value.Types.Decimal => decimal.Parse(parameter.Value.ToString()).ToString(text.Format),
+                    Model.Value.Types.DateTime => DateTime.Parse(parameter.Value.ToString()).ToString(text.Format),
+                    Model.Value.Types.YesNo => (bool)parameter.Value ? Properties.Resources.StringGeneralYes : Properties.Resources.StringGeneralNo,
+                    _ => string.Empty
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return string.Empty;
+            }
+        }
+
+        internal static string GetReportParameterValue(Model.Text text, Model.Report report)
+        {
+            ArgumentNullException.ThrowIfNull(text);
+
+            Model.ReportParameter? parameter = report.Parameters.FirstOrDefault(p => p.Name == text.Value);
+            if (parameter is null || parameter.Value is null)
+            {
+                return string.Empty;
+            }
+
+            try
+            {
+                return parameter.Type switch
+                {
+                    Model.Value.Types.Text => (string)parameter.Value,
+                    Model.Value.Types.Integer => ((int)parameter.Value).ToString(text.Format),
+                    Model.Value.Types.Decimal => ((decimal)parameter.Value).ToString(text.Format),
+                    Model.Value.Types.DateTime => ((DateTime)parameter.Value).ToString(text.Format),
+                    Model.Value.Types.YesNo => (bool)parameter.Value ? Properties.Resources.StringGeneralYes : Properties.Resources.StringGeneralNo,
                     _ => string.Empty
                 };
             }

@@ -30,36 +30,18 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         private void InitializeForm()
         {
-            numericUpDownThickness.Maximum = Engine.Pdf.ThicknessMaxValue;
-            numericUpDownPositionX1.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionX1.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPositionY1.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionY1.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPositionX2.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionX2.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPositionY2.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionY2.Maximum = Engine.Pdf.PositionMaxValue;
+            Common.InitializeNumericUpDownControlForPoints(numericUpDownThickness);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionX1);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionY1);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionX2);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionY2);
 
             buttonApply.Text = Properties.Resources.StringApplyChanges;
             buttonReset.Text = Properties.Resources.StringResetChanges;
             buttonDelete.Text = Properties.Resources.StringLinesDelete;
 
-            FillSections();
-        }
-
-        private void FillSections()
-        {
-            comboBoxSection1.ValueMember = "Key";
-            comboBoxSection1.DisplayMember = "Value";
-            comboBoxSection2.ValueMember = "Key";
-            comboBoxSection2.DisplayMember = "Value";
-            ICollection<KeyValuePair<short, string>> items = [];
-            foreach (Model.Section section in _report.Sections.OrderBy(s => s.Type).ThenBy(s => s.Order))
-            {
-                items.Add(new KeyValuePair<short, string>(section.SectionId, section.DisplayName));
-            }
-            comboBoxSection1.DataSource = items;
-            comboBoxSection2.DataSource = items;
+            Common.FillComboBoxSections(comboBoxSection1, _report);
+            Common.FillComboBoxSections(comboBoxSection2, _report);
         }
 
         #endregion Initialization

@@ -252,6 +252,7 @@
             textBoxColor2.ReadOnly = true;
             textBoxColor2.Size = new Size(120, 27);
             textBoxColor2.TabIndex = 0;
+            textBoxColor2.TabStop = false;
             textBoxColor2.Enter += ControlFocusEnter;
             // 
             // buttonColor2
@@ -291,6 +292,7 @@
             textBoxColor1.ReadOnly = true;
             textBoxColor1.Size = new Size(120, 27);
             textBoxColor1.TabIndex = 0;
+            textBoxColor1.TabStop = false;
             textBoxColor1.Enter += ControlFocusEnter;
             // 
             // buttonColor1

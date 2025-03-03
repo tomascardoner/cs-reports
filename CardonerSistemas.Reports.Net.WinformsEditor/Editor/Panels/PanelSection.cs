@@ -28,7 +28,7 @@
 
         private void InitializeForm()
         {
-            numericUpDownHeight.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
+            Common.InitializeNumericUpDownControlForPoints(numericUpDownHeight);
 
             buttonApply.Text = Properties.Resources.StringApplyChanges;
             buttonReset.Text = Properties.Resources.StringResetChanges;

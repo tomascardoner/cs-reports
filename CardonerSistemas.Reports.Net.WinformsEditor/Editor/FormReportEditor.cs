@@ -60,6 +60,7 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
         private Panels.PanelLine? _panelLine;
         private Panels.PanelRectangles? _panelRectangles;
         private Panels.PanelRectangle? _panelRectangle;
+        private Panels.PanelText? _panelText;
         private Panels.PanelTexts? _panelTexts;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -195,6 +196,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
                 case TextsKey:
                     TextsPanelShow(GetShortIdFromParentNode(e.Node));
                     break;
+                case TextKey:
+                    TextPanelShow(short.Parse(nodeInfo.Item2));
+                    break;
             }
         }
 
@@ -275,7 +279,9 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             _panelLines?.Hide();
             _panelLine?.Hide();
             _panelRectangles?.Hide();
+            _panelRectangle?.Hide();
             _panelTexts?.Hide();
+            _panelText?.Hide();
         }
 
         #endregion Panel controls
@@ -1254,26 +1260,26 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
             return treeTreeNodeText;
         }
 
-        //private void TextPanelShow(short textId)
-        //{
-        //    Model.Text? text = _report.Texts.FirstOrDefault(l => l.TextId == textId);
-        //    if (text is null)
-        //    {
-        //        return;
-        //    }
-        //    if (_panelText is null)
-        //    {
-        //        _panelText = new(_report, _applicationTitle)
-        //        {
-        //            Dock = DockStyle.Fill
-        //        };
-        //        splitContainerMain.Panel2.Controls.Add(_panelText);
-        //        _panelText.TextUpdated += TextUpdated;
-        //        _panelText.TextDeleted += TextDeleted;
-        //    }
-        //    _panelText.ShowProperties(textId);
-        //    _panelText.Show();
-        //}
+        private void TextPanelShow(short textId)
+        {
+            Model.Text? text = _report.Texts.FirstOrDefault(l => l.TextId == textId);
+            if (text is null)
+            {
+                return;
+            }
+            if (_panelText is null)
+            {
+                _panelText = new(_report, _applicationTitle)
+                {
+                    Dock = DockStyle.Fill
+                };
+                splitContainerMain.Panel2.Controls.Add(_panelText);
+                _panelText.TextUpdated += TextUpdated;
+                _panelText.TextDeleted += TextDeleted;
+            }
+            _panelText.ShowProperties(textId);
+            _panelText.Show();
+        }
 
         private void TextUpdated(object sender, short textId, short sectionId)
         {

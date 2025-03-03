@@ -115,7 +115,7 @@
             labelBorderColor.Dock = DockStyle.Fill;
             labelBorderColor.Location = new Point(162, 75);
             labelBorderColor.Name = "labelBorderColor";
-            labelBorderColor.Size = new Size(119, 36);
+            labelBorderColor.Size = new Size(120, 36);
             labelBorderColor.TabIndex = 0;
             labelBorderColor.Text = "Border color:";
             labelBorderColor.TextAlign = ContentAlignment.MiddleLeft;
@@ -130,7 +130,7 @@
             tableLayoutPanelBorderColor.Controls.Add(textBoxBorderColor, 0, 0);
             tableLayoutPanelBorderColor.Controls.Add(buttonBorderColor, 1, 0);
             tableLayoutPanelBorderColor.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            tableLayoutPanelBorderColor.Location = new Point(284, 75);
+            tableLayoutPanelBorderColor.Location = new Point(285, 75);
             tableLayoutPanelBorderColor.Margin = new Padding(0);
             tableLayoutPanelBorderColor.Name = "tableLayoutPanelBorderColor";
             tableLayoutPanelBorderColor.RowCount = 1;
@@ -146,6 +146,7 @@
             textBoxBorderColor.ReadOnly = true;
             textBoxBorderColor.Size = new Size(120, 27);
             textBoxBorderColor.TabIndex = 0;
+            textBoxBorderColor.TabStop = false;
             textBoxBorderColor.Enter += ControlFocusEnter;
             // 
             // buttonBorderColor
@@ -166,15 +167,15 @@
             labelBorderThickness.Dock = DockStyle.Fill;
             labelBorderThickness.Location = new Point(162, 111);
             labelBorderThickness.Name = "labelBorderThickness";
-            labelBorderThickness.Size = new Size(119, 33);
+            labelBorderThickness.Size = new Size(120, 33);
             labelBorderThickness.TabIndex = 2;
-            labelBorderThickness.Text = "Thickness:";
+            labelBorderThickness.Text = "Border thickness:";
             labelBorderThickness.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // numericUpDownBorderThickness
             // 
             numericUpDownBorderThickness.DecimalPlaces = 1;
-            numericUpDownBorderThickness.Location = new Point(287, 114);
+            numericUpDownBorderThickness.Location = new Point(288, 114);
             numericUpDownBorderThickness.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownBorderThickness.Name = "numericUpDownBorderThickness";
             numericUpDownBorderThickness.Size = new Size(70, 27);
@@ -188,7 +189,7 @@
             labelBrush.Dock = DockStyle.Fill;
             labelBrush.Location = new Point(162, 144);
             labelBrush.Name = "labelBrush";
-            labelBrush.Size = new Size(119, 34);
+            labelBrush.Size = new Size(120, 34);
             labelBrush.TabIndex = 4;
             labelBrush.Text = "Brush:";
             labelBrush.TextAlign = ContentAlignment.MiddleLeft;
@@ -196,7 +197,7 @@
             // comboBoxBrush
             // 
             comboBoxBrush.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxBrush.Location = new Point(287, 147);
+            comboBoxBrush.Location = new Point(288, 147);
             comboBoxBrush.Name = "comboBoxBrush";
             comboBoxBrush.Size = new Size(250, 28);
             comboBoxBrush.TabIndex = 5;
@@ -207,7 +208,7 @@
             labelSection1.Dock = DockStyle.Fill;
             labelSection1.Location = new Point(162, 178);
             labelSection1.Name = "labelSection1";
-            labelSection1.Size = new Size(119, 34);
+            labelSection1.Size = new Size(120, 34);
             labelSection1.TabIndex = 6;
             labelSection1.Text = "Section 1:";
             labelSection1.TextAlign = ContentAlignment.MiddleLeft;
@@ -216,7 +217,7 @@
             // 
             comboBoxSection1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxSection1.Enabled = false;
-            comboBoxSection1.Location = new Point(287, 181);
+            comboBoxSection1.Location = new Point(288, 181);
             comboBoxSection1.Name = "comboBoxSection1";
             comboBoxSection1.Size = new Size(250, 28);
             comboBoxSection1.TabIndex = 7;
@@ -227,7 +228,7 @@
             labelPositionX1.Dock = DockStyle.Fill;
             labelPositionX1.Location = new Point(162, 212);
             labelPositionX1.Name = "labelPositionX1";
-            labelPositionX1.Size = new Size(119, 33);
+            labelPositionX1.Size = new Size(120, 33);
             labelPositionX1.TabIndex = 8;
             labelPositionX1.Text = "Position X1 (cm):";
             labelPositionX1.TextAlign = ContentAlignment.MiddleLeft;
@@ -235,7 +236,7 @@
             // numericUpDownPositionX1
             // 
             numericUpDownPositionX1.DecimalPlaces = 2;
-            numericUpDownPositionX1.Location = new Point(287, 215);
+            numericUpDownPositionX1.Location = new Point(288, 215);
             numericUpDownPositionX1.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionX1.Name = "numericUpDownPositionX1";
             numericUpDownPositionX1.Size = new Size(80, 27);
@@ -249,7 +250,7 @@
             labelPositionY1.Dock = DockStyle.Fill;
             labelPositionY1.Location = new Point(162, 245);
             labelPositionY1.Name = "labelPositionY1";
-            labelPositionY1.Size = new Size(119, 33);
+            labelPositionY1.Size = new Size(120, 33);
             labelPositionY1.TabIndex = 10;
             labelPositionY1.Text = "Position Y1 (cm):";
             labelPositionY1.TextAlign = ContentAlignment.MiddleLeft;
@@ -257,7 +258,7 @@
             // numericUpDownPositionY1
             // 
             numericUpDownPositionY1.DecimalPlaces = 2;
-            numericUpDownPositionY1.Location = new Point(287, 248);
+            numericUpDownPositionY1.Location = new Point(288, 248);
             numericUpDownPositionY1.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionY1.Name = "numericUpDownPositionY1";
             numericUpDownPositionY1.Size = new Size(80, 27);
@@ -271,7 +272,7 @@
             labelSection2.Dock = DockStyle.Fill;
             labelSection2.Location = new Point(162, 278);
             labelSection2.Name = "labelSection2";
-            labelSection2.Size = new Size(119, 34);
+            labelSection2.Size = new Size(120, 34);
             labelSection2.TabIndex = 12;
             labelSection2.Text = "Section 2:";
             labelSection2.TextAlign = ContentAlignment.MiddleLeft;
@@ -280,7 +281,7 @@
             // 
             comboBoxSection2.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxSection2.Enabled = false;
-            comboBoxSection2.Location = new Point(287, 281);
+            comboBoxSection2.Location = new Point(288, 281);
             comboBoxSection2.Name = "comboBoxSection2";
             comboBoxSection2.Size = new Size(250, 28);
             comboBoxSection2.TabIndex = 13;
@@ -291,7 +292,7 @@
             labelPositionX2.Dock = DockStyle.Fill;
             labelPositionX2.Location = new Point(162, 312);
             labelPositionX2.Name = "labelPositionX2";
-            labelPositionX2.Size = new Size(119, 33);
+            labelPositionX2.Size = new Size(120, 33);
             labelPositionX2.TabIndex = 14;
             labelPositionX2.Text = "Position X2 (cm):";
             labelPositionX2.TextAlign = ContentAlignment.MiddleLeft;
@@ -299,7 +300,7 @@
             // numericUpDownPositionX2
             // 
             numericUpDownPositionX2.DecimalPlaces = 2;
-            numericUpDownPositionX2.Location = new Point(287, 315);
+            numericUpDownPositionX2.Location = new Point(288, 315);
             numericUpDownPositionX2.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionX2.Name = "numericUpDownPositionX2";
             numericUpDownPositionX2.Size = new Size(80, 27);
@@ -313,7 +314,7 @@
             labelPositionY2.Dock = DockStyle.Fill;
             labelPositionY2.Location = new Point(162, 345);
             labelPositionY2.Name = "labelPositionY2";
-            labelPositionY2.Size = new Size(119, 33);
+            labelPositionY2.Size = new Size(120, 33);
             labelPositionY2.TabIndex = 16;
             labelPositionY2.Text = "Position Y2 (cm):";
             labelPositionY2.TextAlign = ContentAlignment.MiddleLeft;
@@ -321,7 +322,7 @@
             // numericUpDownPositionY2
             // 
             numericUpDownPositionY2.DecimalPlaces = 2;
-            numericUpDownPositionY2.Location = new Point(287, 348);
+            numericUpDownPositionY2.Location = new Point(288, 348);
             numericUpDownPositionY2.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPositionY2.Name = "numericUpDownPositionY2";
             numericUpDownPositionY2.Size = new Size(80, 27);
@@ -341,7 +342,7 @@
             tableLayoutPanelButtons.Controls.Add(buttonReset, 1, 0);
             tableLayoutPanelButtons.Controls.Add(buttonDelete, 2, 0);
             tableLayoutPanelButtons.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            tableLayoutPanelButtons.Location = new Point(287, 381);
+            tableLayoutPanelButtons.Location = new Point(288, 381);
             tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             tableLayoutPanelButtons.RowCount = 1;
             tableLayoutPanelButtons.RowStyles.Add(new RowStyle());
@@ -412,10 +413,7 @@
 
         private TableLayoutPanel tableLayoutPanelMain;
         private NumericUpDown numericUpDownBorderThickness;
-        private NumericUpDown numericUpDownRadiusEnd;
         private ComboBox comboBoxSection2;
-        private Label labelRadiusEnd;
-        private Label labelRadiusStart;
         private Label labelSection2;
         private NumericUpDown numericUpDownPositionY2;
         private NumericUpDown numericUpDownPositionX2;

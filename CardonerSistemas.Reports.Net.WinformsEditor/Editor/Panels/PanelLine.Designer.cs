@@ -143,6 +143,7 @@
             textBoxColor.ReadOnly = true;
             textBoxColor.Size = new Size(120, 27);
             textBoxColor.TabIndex = 0;
+            textBoxColor.TabStop = false;
             textBoxColor.Enter += ControlFocusEnter;
             // 
             // buttonColor
@@ -390,10 +391,7 @@
 
         private TableLayoutPanel tableLayoutPanelMain;
         private NumericUpDown numericUpDownThickness;
-        private NumericUpDown numericUpDownRadiusEnd;
         private ComboBox comboBoxSection2;
-        private Label labelRadiusEnd;
-        private Label labelRadiusStart;
         private Label labelSection2;
         private NumericUpDown numericUpDownPositionY2;
         private NumericUpDown numericUpDownPositionX2;

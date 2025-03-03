@@ -24,14 +24,10 @@
 
         private void InitializeForm()
         {
-            numericUpDownPageMarginTop.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPageMarginTop.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPageMarginLeft.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPageMarginLeft.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPageMarginRight.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPageMarginRight.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPageMarginBottom.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPageMarginBottom.Maximum = Engine.Pdf.PositionMaxValue;
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPageMarginTop);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPageMarginLeft);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPageMarginRight);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPageMarginBottom);
 
             buttonApply.Text = Properties.Resources.StringApplyChanges;
             buttonReset.Text = Properties.Resources.StringResetChanges;

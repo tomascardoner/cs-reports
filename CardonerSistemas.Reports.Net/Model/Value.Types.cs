@@ -1,6 +1,6 @@
 ﻿namespace CardonerSistemas.Reports.Net.Model
 {
-    public partial class Value
+    public class Value
     {
         public enum Types
         {

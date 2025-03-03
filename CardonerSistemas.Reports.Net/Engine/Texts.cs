@@ -5,7 +5,7 @@ namespace CardonerSistemas.Reports.Net.Engine
 {
     internal static class Texts
     {
-        internal static void Create(XGraphics xGraphics, IEnumerable<Model.Text> texts, Dictionary<short, XFont> fonts, Dictionary<short, XBrush> brushes, DbDataReader? dbDataReader, Model.Datasource? datasource, decimal sectionPositionYStart)
+        internal static void Create(XGraphics xGraphics, IEnumerable<Model.Text> texts, Dictionary<short, XFont> fonts, Dictionary<short, XBrush> brushes, DbDataReader? dbDataReader, Model.Report report, decimal sectionPositionYStart)
         {
             // Create texts in type order (Statics -> Fields -> Formulas)
             foreach (Model.Text text in texts.OrderBy(t => t.TextType))
@@ -14,7 +14,9 @@ namespace CardonerSistemas.Reports.Net.Engine
                 string textValue = text.TextType switch
                 {
                     Model.Text.TextTypes.Static => text.Value,
-                    Model.Text.TextTypes.DatasourceField => datasource is null ? string.Empty : TextFields.GetValue(text, dbDataReader, datasource),
+                    Model.Text.TextTypes.DatasourceField => report.Datasource is null ? string.Empty : TextProcessor.GetDatasourceFieldValue(text, dbDataReader, report.Datasource),
+                    Model.Text.TextTypes.DatasourceParameter => report.Datasource is null ? string.Empty : TextProcessor.GetDatasourceParameterValue(text, report.Datasource),
+                    Model.Text.TextTypes.ReportParameter => TextProcessor.GetReportParameterValue(text, report),
                     Model.Text.TextTypes.Formula => string.Empty,
                     _ => string.Empty
                 };

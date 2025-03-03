@@ -122,5 +122,78 @@ namespace CardonerSistemas.Reports.Net
                 _ => Properties.Resources.StringUndefined
             };
         }
+
+        public static string GetTextType(Model.Text.TextTypes type)
+        {
+            return type switch
+            {
+                Model.Text.TextTypes.Static => Properties.Resources.StringTextTypeStatic,
+                Model.Text.TextTypes.DatasourceField => Properties.Resources.StringTextTypeDatasourceField,
+                Model.Text.TextTypes.DatasourceParameter => Properties.Resources.StringTextTypeDatasourceParameter,
+                Model.Text.TextTypes.ReportParameter => Properties.Resources.StringTextTypeReportParameter,
+                Model.Text.TextTypes.Formula => Properties.Resources.StringTextTypeFormula,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
+
+        public static string GetValueType(Model.Value.Types type)
+        {
+            return type switch
+            {
+                Model.Value.Types.Text => Properties.Resources.StringValueTypeText,
+                Model.Value.Types.Integer => Properties.Resources.StringValueTypeInteger,
+                Model.Value.Types.Decimal => Properties.Resources.StringValueTypeDecimal,
+                Model.Value.Types.DateTime => Properties.Resources.StringValueTypeDateTime,
+                Model.Value.Types.YesNo => Properties.Resources.StringValueTypeYesNo,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
+
+        public static string GetTextHorizontalAlignment(Model.Text.HorizontalAlignments horizontalAlignment)
+        {
+            return horizontalAlignment switch
+            {
+                Model.Text.HorizontalAlignments.Left => Properties.Resources.StringTextHorizontalAlignmentLeft,
+                Model.Text.HorizontalAlignments.Center => Properties.Resources.StringTextHorizontalAlignmentCenter,
+                Model.Text.HorizontalAlignments.Right => Properties.Resources.StringTextHorizontalAlignmentRight,
+                Model.Text.HorizontalAlignments.Justify => Properties.Resources.StringTextHorizontalAlignmentJustify,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
+
+        public static string GetTextVerticalAlignment(Model.Text.VerticalAlignments verticalAlignment)
+        {
+            return verticalAlignment switch
+            {
+                Model.Text.VerticalAlignments.Top => Properties.Resources.StringTextVerticalAlignmentTop,
+                Model.Text.VerticalAlignments.Middle => Properties.Resources.StringTextVerticalAlignmentMiddle,
+                Model.Text.VerticalAlignments.Bottom => Properties.Resources.StringTextVerticalAlignmentBottom,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
+
+        public static string GetTextWordWrapType(Model.Text.WordWrapTypes type)
+        {
+            return type switch
+            {
+                Model.Text.WordWrapTypes.None => Properties.Resources.StringTextWordWrapTypeNone,
+                Model.Text.WordWrapTypes.Word => Properties.Resources.StringTextWordWrapTypeWord,
+                Model.Text.WordWrapTypes.WordOnly => Properties.Resources.StringTextWordWrapTypeWordOnly,
+                Model.Text.WordWrapTypes.Character => Properties.Resources.StringTextWordWrapTypeCharacter,
+                Model.Text.WordWrapTypes.DiscretionaryHyphen => Properties.Resources.StringTextWordWrapTypeDiscretionaryHyphen,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
+
+        public static string GetTextSubSuperScript(Model.Text.SubSuperScripts subSuperScript)
+        {
+            return subSuperScript switch
+            {
+                Model.Text.SubSuperScripts.None => Properties.Resources.StringTextSubSuperScriptNone,
+                Model.Text.SubSuperScripts.SuperScript => Properties.Resources.StringTextSubSuperScriptsSuperScript,
+                Model.Text.SubSuperScripts.SubScript => Properties.Resources.StringTextSubSuperScriptsSubScript,
+                _ => Properties.Resources.StringUndefined
+            };
+        }
     }
 }

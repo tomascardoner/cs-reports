@@ -241,6 +241,9 @@ Do you want to save them?</value>
   <data name="StringRectangleDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the rectangle '{0}'?</value>
   </data>
+  <data name="StringTextDeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete the text '{0}'?</value>
+  </data>
   <data name="StringSectionDeleteConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete the section '{0}'?</value>
   </data>
@@ -279,6 +282,24 @@ Do you want to save them?</value>
   </data>
   <data name="StringBrushColor2Required" xml:space="preserve">
     <value>Must specify color.</value>
+  </data>
+  <data name="StringTextTypeRequired" xml:space="preserve">
+    <value>Must specify type.</value>
+  </data>
+  <data name="StringTextSubSuperScriptRequired" xml:space="preserve">
+    <value>Must specify sub/super script.</value>
+  </data>
+  <data name="StringTextWordWrapTypeRequired" xml:space="preserve">
+    <value>Must specify word wrap type.</value>
+  </data>
+  <data name="StringTextHorizontalAlignmentRequired" xml:space="preserve">
+    <value>Must specify horizontal alignment.</value>
+  </data>
+  <data name="StringTextVerticalAlignmentRequired" xml:space="preserve">
+    <value>Must specify vertical alignment.</value>
+  </data>
+  <data name="StringTextFontRequired" xml:space="preserve">
+    <value>Must specify font.</value>
   </data>
   <data name="StringDatasourceFieldsGetConfirmation" xml:space="preserve">
     <value>Do you want to refresh the fields of the datasource?</value>
@@ -397,7 +418,25 @@ Do you want to save them?</value>
   <data name="StringRectangleSectionRequired" xml:space="preserve">
     <value>Must specify section.</value>
   </data>
+  <data name="StringTextSectionRequired" xml:space="preserve">
+    <value>Must specify section.</value>
+  </data>
+  <data name="StringTextFieldRequired" xml:space="preserve">
+    <value>Must specify field.</value>
+  </data>
+  <data name="StringTextParameterRequired" xml:space="preserve">
+    <value>Must specify parameter.</value>
+  </data>
+  <data name="StringRectangleBrushRequired" xml:space="preserve">
+    <value>Must specify brush.</value>
+  </data>
+  <data name="StringTextBrushRequired" xml:space="preserve">
+    <value>Must specify brush.</value>
+  </data>
   <data name="StringRectangleBorderColorRequired" xml:space="preserve">
+    <value>Must specify color.</value>
+  </data>
+  <data name="StringTextBorderColorRequired" xml:space="preserve">
     <value>Must specify color.</value>
   </data>
   <data name="StringBrushNone" xml:space="preserve">

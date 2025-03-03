@@ -28,51 +28,19 @@
 
         private void InitializeForm()
         {
-            numericUpDownBorderThickness.Maximum = Engine.Pdf.ThicknessMaxValue;
-            numericUpDownPositionX1.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionX1.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPositionY1.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionY1.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPositionX2.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionX2.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPositionY2.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionY2.Maximum = Engine.Pdf.PositionMaxValue;
+            Common.InitializeNumericUpDownControlForPoints(numericUpDownBorderThickness);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionX1);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionY1);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionX2);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionY2);
 
             buttonApply.Text = Properties.Resources.StringApplyChanges;
             buttonReset.Text = Properties.Resources.StringResetChanges;
             buttonDelete.Text = Properties.Resources.StringRectanglesDelete;
 
-            FillBrushes();
-            FillSections();
-        }
-
-        private void FillBrushes()
-        {
-            comboBoxBrush.DisplayMember = "Value";
-            comboBoxBrush.ValueMember = "Key";
-            ICollection<KeyValuePair<short, string>> items = [];
-            items.Add(new KeyValuePair<short, string>(0, Properties.Resources.StringBrushNone));
-            foreach (Model.Brush brush in _report.Brushes.OrderBy(b => b.DisplayName))
-            {
-                items.Add(new KeyValuePair<short, string>(brush.BrushId, brush.DisplayName));
-            }
-            comboBoxBrush.DataSource = items;
-            comboBoxBrush.SelectedIndex = 0;
-        }
-
-        private void FillSections()
-        {
-            comboBoxSection1.ValueMember = "Key";
-            comboBoxSection1.DisplayMember = "Value";
-            comboBoxSection2.ValueMember = "Key";
-            comboBoxSection2.DisplayMember = "Value";
-            ICollection<KeyValuePair<short, string>> items = [];
-            foreach (Model.Section section in _report.Sections.OrderBy(s => s.Type).ThenBy(s => s.Order))
-            {
-                items.Add(new KeyValuePair<short, string>(section.SectionId, section.DisplayName));
-            }
-            comboBoxSection1.DataSource = items;
-            comboBoxSection2.DataSource = items;
+            Common.FillComboBoxBrushes(comboBoxBrush, _report, true);
+            Common.FillComboBoxSections(comboBoxSection1, _report);
+            Common.FillComboBoxSections(comboBoxSection2, _report);
         }
 
         #endregion Initialization
@@ -141,6 +109,12 @@
                 buttonBorderColor.Focus();
                 return;
             }
+            if (comboBoxBrush.SelectedValue is null)
+            {
+                MessageBox.Show(Properties.Resources.StringRectangleBrushRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                comboBoxSection1.Focus();
+                return;
+            }
             if (comboBoxSection1.SelectedValue is null)
             {
                 MessageBox.Show(Properties.Resources.StringRectangleSectionRequired, _applicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -158,9 +132,7 @@
             _rectangle.BorderColorGreen = color.G;
             _rectangle.BorderColorBlue = color.B;
             _rectangle.BorderThickness = numericUpDownBorderThickness.Value;
-#pragma warning disable CS8605 // Unboxing a possibly null value.
             _rectangle.BrushId = (short)comboBoxBrush.SelectedValue == 0 ? null : (short)comboBoxBrush.SelectedValue;
-#pragma warning restore CS8605 // Unboxing a possibly null value.
             _rectangle.SectionId1 = (short)comboBoxSection1.SelectedValue;
             _rectangle.PositionX1 = numericUpDownPositionX1.Value;
             _rectangle.PositionY1 = numericUpDownPositionY1.Value;
@@ -181,7 +153,7 @@
 
         private void Delete(object sender, EventArgs e)
         {
-            if (_report.Datasource is null || _rectangle is null || MessageBox.Show(string.Format(Properties.Resources.StringRectangleDeleteConfirmation, _rectangle.DisplayName), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (_rectangle is null || MessageBox.Show(string.Format(Properties.Resources.StringRectangleDeleteConfirmation, _rectangle.DisplayName), _applicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }

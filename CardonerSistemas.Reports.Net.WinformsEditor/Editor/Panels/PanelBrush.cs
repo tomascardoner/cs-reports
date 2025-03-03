@@ -30,18 +30,12 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor.Panels
 
         private void InitializeForm()
         {
-            numericUpDownPositionX1.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionX1.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPositionY1.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionY1.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPositionX2.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionX2.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownPositionY2.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownPositionY2.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownRadiusStart.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownRadiusStart.Maximum = Engine.Pdf.PositionMaxValue;
-            numericUpDownRadiusEnd.DecimalPlaces = Engine.Pdf.UnitsDecimalPlaces;
-            numericUpDownRadiusEnd.Maximum = Engine.Pdf.PositionMaxValue;
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionX1);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionY1);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionX2);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownPositionY2);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownRadiusStart);
+            Common.InitializeNumericUpDownControlForCentimeters(numericUpDownRadiusEnd);
 
             buttonApply.Text = Properties.Resources.StringApplyChanges;
             buttonReset.Text = Properties.Resources.StringResetChanges;

@@ -655,6 +655,15 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must specify brush..
+        /// </summary>
+        internal static string StringRectangleBrushRequired {
+            get {
+                return ResourceManager.GetString("StringRectangleBrushRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the rectangle &apos;{0}&apos;?.
         /// </summary>
         internal static string StringRectangleDeleteConfirmation {
@@ -854,6 +863,69 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must specify color..
+        /// </summary>
+        internal static string StringTextBorderColorRequired {
+            get {
+                return ResourceManager.GetString("StringTextBorderColorRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify brush..
+        /// </summary>
+        internal static string StringTextBrushRequired {
+            get {
+                return ResourceManager.GetString("StringTextBrushRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the text &apos;{0}&apos;?.
+        /// </summary>
+        internal static string StringTextDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("StringTextDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify field..
+        /// </summary>
+        internal static string StringTextFieldRequired {
+            get {
+                return ResourceManager.GetString("StringTextFieldRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify font..
+        /// </summary>
+        internal static string StringTextFontRequired {
+            get {
+                return ResourceManager.GetString("StringTextFontRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify horizontal alignment..
+        /// </summary>
+        internal static string StringTextHorizontalAlignmentRequired {
+            get {
+                return ResourceManager.GetString("StringTextHorizontalAlignmentRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify parameter..
+        /// </summary>
+        internal static string StringTextParameterRequired {
+            get {
+                return ResourceManager.GetString("StringTextParameterRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Texts.
         /// </summary>
         internal static string StringTexts {
@@ -904,6 +976,51 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Properties {
         internal static string StringTextsDelete {
             get {
                 return ResourceManager.GetString("StringTextsDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify section..
+        /// </summary>
+        internal static string StringTextSectionRequired {
+            get {
+                return ResourceManager.GetString("StringTextSectionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify sub/super script..
+        /// </summary>
+        internal static string StringTextSubSuperScriptRequired {
+            get {
+                return ResourceManager.GetString("StringTextSubSuperScriptRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify type..
+        /// </summary>
+        internal static string StringTextTypeRequired {
+            get {
+                return ResourceManager.GetString("StringTextTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify vertical alignment..
+        /// </summary>
+        internal static string StringTextVerticalAlignmentRequired {
+            get {
+                return ResourceManager.GetString("StringTextVerticalAlignmentRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify word wrap type..
+        /// </summary>
+        internal static string StringTextWordWrapTypeRequired {
+            get {
+                return ResourceManager.GetString("StringTextWordWrapTypeRequired", resourceCulture);
             }
         }
         
