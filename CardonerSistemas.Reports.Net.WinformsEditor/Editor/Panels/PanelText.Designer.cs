@@ -189,7 +189,7 @@
             comboBoxTextType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxTextType.Location = new Point(252, 27);
             comboBoxTextType.Name = "comboBoxTextType";
-            comboBoxTextType.Size = new Size(200, 28);
+            comboBoxTextType.Size = new Size(250, 28);
             comboBoxTextType.TabIndex = 1;
             comboBoxTextType.SelectedIndexChanged += TextTypeChanged;
             // 
@@ -209,7 +209,7 @@
             comboBoxFieldParameterFormula.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxFieldParameterFormula.Location = new Point(252, 61);
             comboBoxFieldParameterFormula.Name = "comboBoxFieldParameterFormula";
-            comboBoxFieldParameterFormula.Size = new Size(200, 28);
+            comboBoxFieldParameterFormula.Size = new Size(250, 28);
             comboBoxFieldParameterFormula.TabIndex = 3;
             // 
             // labelStaticText
@@ -269,7 +269,7 @@
             comboBoxFont.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxFont.Location = new Point(252, 161);
             comboBoxFont.Name = "comboBoxFont";
-            comboBoxFont.Size = new Size(200, 28);
+            comboBoxFont.Size = new Size(250, 28);
             comboBoxFont.TabIndex = 9;
             // 
             // labelBorderColor
@@ -362,7 +362,7 @@
             comboBoxBrush.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxBrush.Location = new Point(252, 264);
             comboBoxBrush.Name = "comboBoxBrush";
-            comboBoxBrush.Size = new Size(200, 28);
+            comboBoxBrush.Size = new Size(250, 28);
             comboBoxBrush.TabIndex = 15;
             // 
             // labelSection
@@ -382,7 +382,7 @@
             comboBoxSection.Enabled = false;
             comboBoxSection.Location = new Point(252, 298);
             comboBoxSection.Name = "comboBoxSection";
-            comboBoxSection.Size = new Size(200, 28);
+            comboBoxSection.Size = new Size(250, 28);
             comboBoxSection.TabIndex = 17;
             // 
             // labelPositionX
@@ -489,7 +489,7 @@
             comboBoxHorizontalAlignment.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxHorizontalAlignment.Location = new Point(252, 464);
             comboBoxHorizontalAlignment.Name = "comboBoxHorizontalAlignment";
-            comboBoxHorizontalAlignment.Size = new Size(200, 28);
+            comboBoxHorizontalAlignment.Size = new Size(250, 28);
             comboBoxHorizontalAlignment.TabIndex = 27;
             // 
             // labelVerticalAlignment
@@ -508,7 +508,7 @@
             comboBoxVerticalAlignment.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxVerticalAlignment.Location = new Point(252, 498);
             comboBoxVerticalAlignment.Name = "comboBoxVerticalAlignment";
-            comboBoxVerticalAlignment.Size = new Size(200, 28);
+            comboBoxVerticalAlignment.Size = new Size(250, 28);
             comboBoxVerticalAlignment.TabIndex = 29;
             // 
             // labelWordWrapType
@@ -527,7 +527,7 @@
             comboBoxWordWrapType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxWordWrapType.Location = new Point(252, 532);
             comboBoxWordWrapType.Name = "comboBoxWordWrapType";
-            comboBoxWordWrapType.Size = new Size(200, 28);
+            comboBoxWordWrapType.Size = new Size(250, 28);
             comboBoxWordWrapType.TabIndex = 31;
             // 
             // labelCharacterSpacing
@@ -612,7 +612,7 @@
             comboBoxSubSuperScript.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxSubSuperScript.Location = new Point(252, 665);
             comboBoxSubSuperScript.Name = "comboBoxSubSuperScript";
-            comboBoxSubSuperScript.Size = new Size(200, 28);
+            comboBoxSubSuperScript.Size = new Size(250, 28);
             comboBoxSubSuperScript.TabIndex = 39;
             // 
             // labelParagraphIndent

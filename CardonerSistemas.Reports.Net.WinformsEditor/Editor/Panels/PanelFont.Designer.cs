@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             tableLayoutPanelMain = new TableLayoutPanel();
+            labelFont = new Label();
             tableLayoutPanelName = new TableLayoutPanel();
             textBoxFont = new TextBox();
             buttonFont = new Button();
-            labelFont = new Label();
             tableLayoutPanelButtons = new TableLayoutPanel();
             buttonApply = new Button();
             buttonReset = new Button();
@@ -64,6 +64,17 @@
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanelMain.Size = new Size(700, 500);
             tableLayoutPanelMain.TabIndex = 0;
+            // 
+            // labelFont
+            // 
+            labelFont.AutoSize = true;
+            labelFont.Dock = DockStyle.Fill;
+            labelFont.Location = new Point(103, 209);
+            labelFont.Name = "labelFont";
+            labelFont.Size = new Size(41, 36);
+            labelFont.TabIndex = 0;
+            labelFont.Text = "Font:";
+            labelFont.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanelName
             // 
@@ -106,17 +117,6 @@
             buttonFont.Text = "…";
             buttonFont.UseVisualStyleBackColor = true;
             buttonFont.Click += SelectFont;
-            // 
-            // labelFont
-            // 
-            labelFont.AutoSize = true;
-            labelFont.Dock = DockStyle.Fill;
-            labelFont.Location = new Point(103, 209);
-            labelFont.Name = "labelFont";
-            labelFont.Size = new Size(41, 36);
-            labelFont.TabIndex = 0;
-            labelFont.Text = "Font:";
-            labelFont.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanelButtons
             // 

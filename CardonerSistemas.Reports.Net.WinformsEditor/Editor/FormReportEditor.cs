@@ -70,19 +70,25 @@ namespace CardonerSistemas.Reports.Net.WinformsEditor.Editor
 
         #region Form stuff
 
-        public FormReportEditor(string applicationTitle, Model.Report report, string filePath)
+        public FormReportEditor(string applicationTitle, Model.Report report, string filePath, int treeIconSize, Font treeFont)
         {
             InitializeComponent();
             _applicationTitle = applicationTitle;
             _report = report;
             FilePath = filePath;
-            InitializeForm();
+            InitializeForm(treeIconSize, treeFont);
         }
 
-        private void InitializeForm()
+        private void InitializeForm(int treeIconSize, Font treeFont)
         {
             Text = string.IsNullOrWhiteSpace(_report.Name) ? Properties.Resources.StringReportNameNew : $"{_report.Name} ({FilePath})";
-            treeViewReport.ImageList = imageListMain;
+            treeViewReport.Font = treeFont;
+            treeViewReport.ImageList = new ImageList() { ImageSize = new(treeIconSize, treeIconSize) };
+            treeViewReport.ItemHeight = (int)(treeIconSize * 1.2);
+            for (int i = 0; i < imageListMain.Images.Count; i++)
+            {
+                treeViewReport.ImageList!.Images.Add(imageListMain.Images.Keys[i]!, imageListMain.Images[i]);
+            }
             ReportCreateTreeNode();
         }
 

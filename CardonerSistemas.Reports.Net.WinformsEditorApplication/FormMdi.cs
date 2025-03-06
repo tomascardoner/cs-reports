@@ -9,12 +9,12 @@
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            WinformsEditor.Editor.FormReportEditor for_reportEditor = new(Program.s_applicationInfo.Title, new(), string.Empty)
+            WinformsEditor.Editor.FormReportEditor formReportEditor = new(Program.s_applicationInfo.Title, new(), string.Empty, Program.s_options.TreeIconSize, Program.s_options.TreeFont)
             {
                 MdiParent = this,
                 WindowState = FormWindowState.Maximized
             };
-            for_reportEditor.Show();
+            formReportEditor.Show();
         }
 
         private void OpenFile(object sender, EventArgs e)
@@ -30,12 +30,12 @@
 
             if (openFileDialog.ShowDialog(this) == DialogResult.OK && Storage.FileSystem.Load(openFileDialog.FileName, out Model.Report? report) && report is not null)
             {
-                WinformsEditor.Editor.FormReportEditor for_reportEditor = new(Program.s_applicationInfo.Title, report, openFileDialog.FileName)
+                WinformsEditor.Editor.FormReportEditor formReportEditor = new(Program.s_applicationInfo.Title, report, openFileDialog.FileName, Program.s_options.TreeIconSize, Program.s_options.TreeFont)
                 {
                     MdiParent = this,
                     WindowState = FormWindowState.Maximized
                 };
-                for_reportEditor.Show();
+                formReportEditor.Show();
             }
         }
 
@@ -45,8 +45,8 @@
             {
                 return;
             }
-            WinformsEditor.Editor.FormReportEditor for_reportEditor = (WinformsEditor.Editor.FormReportEditor)ActiveMdiChild;
-            saveToolStripButton.Enabled = !for_reportEditor.SaveReport();
+            WinformsEditor.Editor.FormReportEditor formReportEditor = (WinformsEditor.Editor.FormReportEditor)ActiveMdiChild;
+            formReportEditor.SaveReport();
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -55,8 +55,8 @@
             {
                 return;
             }
-            WinformsEditor.Editor.FormReportEditor for_reportEditor = (WinformsEditor.Editor.FormReportEditor)ActiveMdiChild;
-            saveToolStripButton.Enabled = !for_reportEditor.SaveReportAs();
+            WinformsEditor.Editor.FormReportEditor formReportEditor = (WinformsEditor.Editor.FormReportEditor)ActiveMdiChild;
+            formReportEditor.SaveReportAs();
         }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
@@ -117,5 +117,16 @@
             }
         }
 
+        private void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using FormOptions formOptions = new();
+            if (formOptions.ShowDialog(this) == DialogResult.OK)
+            {
+                foreach (Form childForm in MdiChildren)
+                {
+                    childForm.Close();
+                }
+            }
+        }
     }
 }

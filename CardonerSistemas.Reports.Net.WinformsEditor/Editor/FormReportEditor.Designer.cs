@@ -56,7 +56,6 @@
             // 
             treeViewReport.Dock = DockStyle.Fill;
             treeViewReport.HideSelection = false;
-            treeViewReport.ItemHeight = 55;
             treeViewReport.Location = new Point(0, 0);
             treeViewReport.Name = "treeViewReport";
             treeViewReport.ShowRootLines = false;
@@ -88,13 +87,13 @@
             imageListMain.Images.SetKeyName(16, "Texts");
             imageListMain.Images.SetKeyName(17, "Text");
             // 
-            // For_reportEditor
+            // FormReportEditor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1062, 661);
             Controls.Add(splitContainerMain);
-            Name = "For_reportEditor";
+            Name = "FormReportEditor";
             Text = "Report editor";
             FormClosing += This_FormClosing;
             splitContainerMain.Panel1.ResumeLayout(false);
