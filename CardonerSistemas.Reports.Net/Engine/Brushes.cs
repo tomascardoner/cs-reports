@@ -1,32 +1,32 @@
 ﻿using PdfSharp.Drawing;
 
-namespace CardonerSistemas.Reports.Net.Engine
+namespace CardonerSistemas.Reports.Net.Engine;
+
+internal static class Brushes
 {
-    internal static class Brushes
+    internal static Dictionary<short, XBrush> Create(ICollection<Model.Brush> brushes)
     {
-        internal static Dictionary<short, XBrush> Create(ICollection<Model.Brush> brushes)
+        try
         {
-            try
+            Dictionary<short, XBrush> dictOfBrushes = [];
+            foreach (Model.Brush brush in brushes)
             {
-                Dictionary<short, XBrush> dictOfBrushes = [];
-                foreach (Model.Brush brush in brushes)
+                XBrush xBrush = brush.Type switch
                 {
-                    XBrush xBrush = brush.Type switch
-                    {
-                        Model.Brush.BrushTypes.Solid => new XSolidBrush(brush.Color1),
-                        Model.Brush.BrushTypes.LinealGradient => new XLinearGradientBrush(brush.Rectangle, brush.Color1, brush.Color2, brush.LinearGradientMode!.Value),
-                        Model.Brush.BrushTypes.RadialGradient => new XRadialGradientBrush(brush.Point1, brush.Point2, (double)(brush.RadiusStart ?? 0), (double)(brush.RadiusEnd ?? 0), brush.Color1, brush.Color2),
-                        _ => throw new NotImplementedException($"Brush type {brush.Type} not implemented.")
-                    };
-                    dictOfBrushes.Add(brush.BrushId, xBrush);
-                }
-                return dictOfBrushes;
+                    Model.Brush.BrushTypes.Solid => new XSolidBrush(brush.Color1),
+                    Model.Brush.BrushTypes.LinealGradient => new XLinearGradientBrush(brush.Rectangle, brush.Color1, brush.Color2, brush.LinearGradientMode!.Value),
+                    Model.Brush.BrushTypes.RadialGradient => new XRadialGradientBrush(brush.Point1, brush.Point2, (double)(brush.RadiusStart ?? 0), (double)(brush.RadiusEnd ?? 0), brush.Color1, brush.Color2),
+                    _ => throw new NotImplementedException($"Brush type {brush.Type} not implemented.")
+                };
+                dictOfBrushes.Add(brush.BrushId, xBrush);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return [];
-            }
+
+            return dictOfBrushes;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return [];
         }
     }
 }

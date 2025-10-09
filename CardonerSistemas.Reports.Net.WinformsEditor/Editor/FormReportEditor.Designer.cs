@@ -95,7 +95,6 @@
             Controls.Add(splitContainerMain);
             Name = "FormReportEditor";
             Text = "Report editor";
-            FormClosing += This_FormClosing;
             splitContainerMain.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainerMain).EndInit();
             splitContainerMain.ResumeLayout(false);

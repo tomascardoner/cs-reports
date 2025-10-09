@@ -1,14 +1,13 @@
-﻿namespace CardonerSistemas.Reports.Net.Model
+﻿namespace CardonerSistemas.Reports.Net.Model;
+
+public static class Value
 {
-    public class Value
+    public enum Types
     {
-        public enum Types
-        {
-            Text,
-            Integer,
-            Decimal,
-            DateTime,
-            YesNo
-        }
+        Text,
+        Integer,
+        Decimal,
+        DateTime,
+        YesNo
     }
 }

@@ -1,14 +1,13 @@
-﻿namespace CardonerSistemas.Reports.Net.Model
+﻿namespace CardonerSistemas.Reports.Net.Model;
+
+public partial class Text
 {
-    public partial class Text
+    public enum TextTypes
     {
-        public enum TextTypes
-        {
-            Static,
-            DatasourceField,
-            DatasourceParameter,
-            ReportParameter,
-            Formula
-        }
+        Static,
+        DatasourceField,
+        DatasourceParameter,
+        ReportParameter,
+        Formula
     }
 }

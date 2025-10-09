@@ -20,12 +20,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Workleap.DotNet.CodingStandards" Version="1.1.30">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CardonerSistemas.Reports.Net\CardonerSistemas.Reports.Net.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="CardonerSistemas.Framework.Base">
-      <HintPath>..\..\cs-framework.net\CardonerSistemas.Framework.Base\bin\Debug\net8.0-windows\CardonerSistemas.Framework.Base.dll</HintPath>
+      <HintPath>..\..\cs-framework.net\CardonerSistemas.Framework.Base\bin\Debug\net9.0-windows7.0\CardonerSistemas.Framework.Base.dll</HintPath>
     </Reference>
   </ItemGroup>
 

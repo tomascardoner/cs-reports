@@ -1,14 +1,14 @@
-﻿namespace CardonerSistemas.Reports.Net.Model
+﻿namespace CardonerSistemas.Reports.Net.Model;
+
+public partial class Datasource
 {
-    public partial class Datasource
+    public enum Providers
     {
-        public enum Providers
-        {
-            SqlServer = 1,
-            OleDb = 2,
-            Odbc = 3,
-            Oracle = 4,
-            DataSet = 5
-        }
+        None = 0,
+        SqlServer = 1,
+        OleDb = 2,
+        Odbc = 3,
+        Oracle = 4,
+        DataSet = 5
     }
 }

@@ -1,42 +1,25 @@
-﻿namespace CardonerSistemas.Reports.Net.Storage
+﻿namespace CardonerSistemas.Reports.Net.Storage;
+
+public static class FileSystem
 {
-    public static class FileSystem
+    public static bool Load(string filePath, out Model.Report? report)
     {
-        public static bool Load(string filePath, out Model.Report? report)
-        {
-            ArgumentNullException.ThrowIfNullOrEmpty(filePath);
+        ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
 
-            if (!ReportCompressor.LoadAndDecompressFile(filePath, out string reportSerial))
-            {
-                report = null;
-                return false;
-            }
-            if (!ReportSerializer.Deserialize(reportSerial, out report))
-            {
-                return false;
-            }
-            return true;
+        if (!ReportCompressor.LoadAndDecompressFile(filePath, out string reportSerial))
+        {
+            report = null;
+            return false;
         }
 
+        return ReportSerializer.Deserialize(reportSerial, out report);
+    }
 
-        public static bool Save(Model.Report report, string filePath)
-        {
-            ArgumentNullException.ThrowIfNull(report);
-            ArgumentNullException.ThrowIfNullOrEmpty(filePath);
+    public static bool Save(Model.Report report, string filePath)
+    {
+        ArgumentNullException.ThrowIfNull(report);
+        ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
 
-            if (report.Version < Engine.Version.Report && !Engine.Version.Update(report))
-            {
-                return false;
-            }
-            if (!ReportSerializer.Serialize(report, out string reportSerial))
-            {
-                return false;
-            }
-            if (!ReportCompressor.CompressAndSaveFile(reportSerial, filePath))
-            {
-                return false;
-            }
-            return true;
-        }
+        return (report.Version >= Engine.Version.Report || Engine.Version.Update(report)) && ReportSerializer.Serialize(report, out string reportSerial) && ReportCompressor.CompressAndSaveFile(reportSerial, filePath);
     }
 }

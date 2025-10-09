@@ -1,12 +1,11 @@
-﻿namespace CardonerSistemas.Reports.Net.Model
+﻿namespace CardonerSistemas.Reports.Net.Model;
+
+public partial class Brush
 {
-    public partial class Brush
+    public enum BrushTypes
     {
-        public enum BrushTypes
-        {
-            Solid,
-            LinealGradient,
-            RadialGradient
-        }
+        Solid,
+        LinealGradient,
+        RadialGradient
     }
 }
