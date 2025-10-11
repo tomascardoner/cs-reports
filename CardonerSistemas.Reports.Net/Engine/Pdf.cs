@@ -51,6 +51,10 @@ public static class Pdf
                 }
             }
         }
+        catch (System.IO.FileNotFoundException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
